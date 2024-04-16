@@ -1,10 +1,10 @@
 uuid: 3632d2b9-22c0-4480-9d7e-ec4ef3d84077
-langcode: en
+langcode: es
 status: true
 dependencies: {  }
 _core:
   default_config_hash: EOQltUQPmgc6UQ2rcJ4Xi_leCEJj5ui0TR-12duS-Tk
 id: html_date
-label: 'HTML Date'
+label: 'Fecha HTML'
 locked: true
 pattern: Y-m-d

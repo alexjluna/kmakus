@@ -1,11 +1,11 @@
 uuid: 4bf024db-6d0a-4096-9b97-0a383a244877
-langcode: en
+langcode: es
 status: true
 dependencies: {  }
 _core:
   default_config_hash: 35CefWbnzaiytcg3acexxz_GTvuwIjYd_ZTcmmR-tXA
 id: zxx
-label: 'Not applicable'
+label: 'No aplicable'
 direction: ltr
 weight: 3
 locked: true
