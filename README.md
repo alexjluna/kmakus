@@ -1,2 +1,0 @@
-# kmakus
-kmakus.com
