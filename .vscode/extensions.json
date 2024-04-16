@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ikappas.composer",
+    "marcostazi.vs-code-drupal",
+    "xdebug.php-debug",
+    "bmewburn.vscode-intelephense-client",
+    "shevaua.phpcs",
+    "mblode.twig-language-2"
+  ]
+}
