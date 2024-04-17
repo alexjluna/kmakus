@@ -1,0 +1,22 @@
+uuid: 04ccc3a5-6345-4308-8cc5-a7417d928093
+langcode: es
+status: true
+dependencies:
+  theme:
+    - stark
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: stark_secondary_local_tasks
+theme: stark
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Solapas secundarias'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

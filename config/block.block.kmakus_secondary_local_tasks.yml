@@ -1,0 +1,22 @@
+uuid: 0d155012-9962-490a-ad8e-4cd1095d15f7
+langcode: es
+status: true
+dependencies:
+  theme:
+    - kmakus
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: kmakus_secondary_local_tasks
+theme: kmakus
+region: header
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Solapas secundarias'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: 27c1858e-39df-44b5-b839-e886418c1f4e
+langcode: es
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - kmakus
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: kmakus_help
+theme: kmakus
+region: header
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Ayuda
+  label_display: '0'
+  provider: help
+visibility: {  }

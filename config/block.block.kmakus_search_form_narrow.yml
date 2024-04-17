@@ -1,0 +1,23 @@
+uuid: fb5a271b-5958-4050-ab82-79637a907830
+langcode: es
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - kmakus
+_core:
+  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
+id: kmakus_search_form_narrow
+theme: kmakus
+region: primary_menu
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Formulario de búsqueda (estrecho)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

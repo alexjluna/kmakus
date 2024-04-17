@@ -1,0 +1,22 @@
+uuid: 36c7b7b2-8e69-4c0b-a7c0-abd11a5ad397
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - kmakus
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: kmakus_content
+theme: kmakus
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Contenido principal de la página'
+  label_display: '0'
+  provider: system
+visibility: {  }

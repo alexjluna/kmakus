@@ -1,0 +1,20 @@
+uuid: 75803794-ae0a-4cfd-b338-9509c715ebea
+langcode: es
+status: true
+dependencies:
+  theme:
+    - kmakus
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: kmakus_page_title
+theme: kmakus
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Título de la página'
+  label_display: '0'
+  provider: core
+visibility: {  }
