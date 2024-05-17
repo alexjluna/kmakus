@@ -1,0 +1,11 @@
+uuid: 8f1af1fa-c269-4e7b-b9b9-ae4cb0442bab
+langcode: en
+status: true
+dependencies: {  }
+id: i_v_a
+label: I.V.A
+plugin: european_union_vat
+configuration:
+  display_inclusive: true
+conditions: {  }
+conditionOperator: AND
