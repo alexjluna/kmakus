@@ -1,0 +1,7 @@
+redsys_button_behavior:
+  version: 1.x
+  js:
+    js/redsys_button.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

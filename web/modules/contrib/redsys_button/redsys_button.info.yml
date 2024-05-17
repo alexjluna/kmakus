@@ -1,0 +1,11 @@
+name: 'Redsys Button to Drupal'
+type: module
+description: 'Provides a Redsys payment button form for Drupal.'
+core_version_requirement: ^9 || ^10 || ^11
+package: Moon
+configure: redsys_button.redsys_config_form
+
+# Information added by Drupal.org packaging script on 2024-05-09
+version: '1.0.1'
+project: 'redsys_button'
+datestamp: 1715239793

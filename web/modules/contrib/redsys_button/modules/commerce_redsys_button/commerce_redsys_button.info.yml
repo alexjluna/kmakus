@@ -1,0 +1,13 @@
+name: Commerce Redsys Button
+description: 'Redsys payment gateway for Commerce Module'
+package: Commerce
+type: module
+core_version_requirement: ^9 || ^10 || ^11
+dependencies:
+  - drupal:redsys_button
+  - commerce:commerce_payment
+
+# Information added by Drupal.org packaging script on 2024-05-09
+version: '1.0.1'
+project: 'redsys_button'
+datestamp: 1715239793

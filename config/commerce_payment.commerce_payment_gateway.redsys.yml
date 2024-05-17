@@ -1,0 +1,18 @@
+uuid: 5ef30a6d-2394-4992-b617-b5497cb03169
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_redsys_button
+id: redsys
+label: Redsys
+weight: null
+plugin: redsys_redirect_payment_checkout
+configuration:
+  display_label: Redsys
+  mode: test
+  payment_method_types:
+    - credit_card
+  collect_billing_information: true
+conditions: {  }
+conditionOperator: AND

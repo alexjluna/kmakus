@@ -1,0 +1,6 @@
+redsys_button.admin_settings:
+  title: 'Configuración de RedSys'
+  description: 'Administrar la configuración de RedSys.'
+  parent: system.admin_config_system
+  route_name: redsys_button.redsys_config_form
+  weight: 100

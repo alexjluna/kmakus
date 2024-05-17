@@ -1,0 +1,7 @@
+redsys_button.redsys_config_form:
+  path: '/admin/config/system/redsys-settings'
+  defaults:
+    _form: '\Drupal\redsys_button\Form\RedsysButtonConfigForm'
+    _title: 'Configuración de RedSys'
+  requirements:
+    _permission: 'administer site configuration'

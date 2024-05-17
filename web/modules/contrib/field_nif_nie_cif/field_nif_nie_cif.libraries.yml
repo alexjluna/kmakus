@@ -1,0 +1,9 @@
+input_filter:
+  js:
+    js/field_nif_nie_cif_input.js: {}
+  css:
+    theme:
+      css/identification_number_styles.css: {}
+  dependencies:
+    - core/drupal
+    - core/once

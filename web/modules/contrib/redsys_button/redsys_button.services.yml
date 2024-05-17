@@ -1,0 +1,4 @@
+services:
+  redsys_button.redsys:
+    class: Drupal\redsys_button\lib\redsys\RedSys
+    arguments: ['@config.factory']

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function redsys_button_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'payment_notification':
+      $message['subject'] = t('Payment Notification');
+      $message['body'][] = t('Hello, a payment has been initiated for: @description, with the email @email and an amount of @amount. Please check your bank for confirmation.', [
+        '@description' => $params['description'],
+        '@email' => $params['email'],
+        '@amount' => $params['amount'],
+      ]);
+      break;
+  }
+}

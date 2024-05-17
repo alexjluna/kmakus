@@ -1,0 +1,13 @@
+_core:
+  default_config_hash: F0IjLN-8qiAZBnaLuMms9zQffRep9m0izAZTQHQPrjc
+environment: test
+merchant_code: '999008881'
+merchant_key: sq7HjrUOBfKmC576ILgskD5srU870gJ7
+terminal: '001'
+currency: '978'
+transaction_type: '0'
+notification_email: alejolumend@gmail.com
+url_test: 'https://sis-t.redsys.es:25443/sis/realizarPago/utf-8'
+url_live: 'https://sis.redsys.es/sis/realizarPago/utf-8'
+signatureversion: HMAC_SHA256_V1
+language: '001'

@@ -22,8 +22,10 @@
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-project-message": "^10.2",
         "drupal/core-recommended": "^10.2",
+        "drupal/field_nif_nie_cif": "^1.0",
         "drupal/inline_entity_form": "^3.0@RC",
         "drupal/paragraphs": "^1.17",
+        "drupal/redsys_button": "^1.0",
         "drush/drush": "^12.5",
         "vlucas/phpdotenv": "^5.6"
     },

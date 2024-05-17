@@ -1,0 +1,12 @@
+name: 'Spain NIF, NIE and CIF Field'
+type: module
+description: 'This module validate the Spain NIF, NIE and CIF'
+package: Moon
+core_version_requirement: ^9.4 || ^10
+dependencies:
+  - drupal:field
+
+# Information added by Drupal.org packaging script on 2024-04-10
+version: '1.0.3'
+project: 'field_nif_nie_cif'
+datestamp: 1712764691
