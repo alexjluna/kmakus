@@ -58,6 +58,7 @@ trait RecipeTestTrait {
    */
   protected function applyRecipe(string $path, int $expected_exit_code = 0): Process {
     assert($this instanceof BrowserTestBase);
+    $this->assertDirectoryExists($path);
 
     $arguments = [
       (new PhpExecutableFinder())->find(),

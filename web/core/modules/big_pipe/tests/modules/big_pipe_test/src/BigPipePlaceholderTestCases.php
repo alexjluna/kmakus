@@ -4,7 +4,7 @@
  * @file
  */
 
-// cspell:ignore divpiggydiv timecurrent timetime
+// cspell:ignore divpiggydiv yarhar timecurrent timetime
 
 namespace Drupal\big_pipe_test;
 
@@ -171,7 +171,7 @@ class BigPipePlaceholderTestCases {
         '#markup' => BigPipeMarkup::create('<hello'),
         '#attached' => [
           'placeholders' => [
-            '<hello' => ['#lazy_builder' => ['\Drupal\big_pipe_test\BigPipeTestController::helloOrHi', []]],
+            '<hello' => ['#lazy_builder' => ['\Drupal\big_pipe_test\BigPipeTestController::helloOrYarhar', []]],
           ],
         ],
       ],
@@ -181,7 +181,7 @@ class BigPipePlaceholderTestCases {
           // We specifically test an invalid callback here. We need to let
           // PHPStan ignore it.
           // @phpstan-ignore-next-line
-          'hello_or_hi',
+          'hello_or_yarhar',
           [],
         ],
       ]
@@ -196,7 +196,7 @@ class BigPipePlaceholderTestCases {
         ],
       ],
     ];
-    $hello->embeddedHtmlResponse = '<marquee>Llamas forever!</marquee>';
+    $hello->embeddedHtmlResponse = '<marquee>Yarhar llamas forever!</marquee>';
 
     // 5. Edge case: non-#lazy_builder placeholder that calls Fiber::suspend().
     $piggy = new BigPipePlaceholderTestCase(

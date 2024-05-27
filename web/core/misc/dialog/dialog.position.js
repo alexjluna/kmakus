@@ -108,13 +108,9 @@
     if (!event.data.settings.modal) {
       adjustedOptions = resetPosition(adjustedOptions);
     }
-    event.data.$element.dialog('option', adjustedOptions);
-
     event.data.$element
-      ?.get(0)
-      ?.dispatchEvent(
-        new CustomEvent('dialogContentResize', { bubbles: true }),
-      );
+      .dialog('option', adjustedOptions)
+      .trigger('dialogContentResize');
   }
 
   window.addEventListener('dialog:aftercreate', (e) => {

@@ -139,16 +139,16 @@
     }
 
     /**
-     * Removes a message element from the message area.
+     * Removes messages from the message area.
      *
      * @name Drupal.Message~messageDefinition.remove
      *
      * @param {string} id
-     *   The unique identifier of the message to remove, as returned by
+     *   Index of the message to remove, as returned by
      *   {@link Drupal.Message~messageDefinition.add}.
      *
-     * @return {Element}
-     *   Returns the removed message element.
+     * @return {number}
+     *   Number of removed messages.
      */
     remove(id) {
       return this.messageWrapper.removeChild(this.select(id));

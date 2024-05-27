@@ -76,7 +76,7 @@ display:
         options:
           offset: 0
           pagination_heading_level: h4
-          items_per_page: 12
+          items_per_page: 9
           total_pages: null
           id: 0
           tags:
@@ -213,13 +213,7 @@ display:
         groups:
           1: AND
       style:
-        type: grid_responsive
-        options:
-          uses_fields: false
-          columns: 3
-          cell_min_width: 240
-          grid_gutter: 14
-          alignment: horizontal
+        type: default
       row:
         type: 'entity:node'
         options:
@@ -234,7 +228,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: ''
+      css_class: grid--3
       header: {  }
       footer: {  }
       display_extenders: {  }

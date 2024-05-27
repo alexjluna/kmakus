@@ -11,7 +11,6 @@ use Symfony\Component\Finder\Finder;
  * Tests applying all core-provided recipes on top of the Empty profile.
  *
  * @group Recipe
- * @group #slow
  */
 class CoreRecipesTest extends BrowserTestBase {
 

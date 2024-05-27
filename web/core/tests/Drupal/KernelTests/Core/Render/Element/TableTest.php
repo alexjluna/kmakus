@@ -21,7 +21,7 @@ class TableTest extends KernelTestBase {
   protected static $modules = ['system', 'form_test'];
 
   /**
-   * If $sticky is TRUE, `sticky-header` class should be included.
+   * Tableheader.js provides 'sticky' table headers, and is included by default.
    */
   public function testThemeTableStickyHeaders() {
     $header = ['one', 'two', 'three'];
@@ -33,11 +33,14 @@ class TableTest extends KernelTestBase {
       '#sticky' => TRUE,
     ];
     $this->render($table);
-    $this->assertRaw('sticky-header');
+    // Make sure tableheader.js was attached.
+    $tableheader = $this->xpath("//script[contains(@src, 'tableheader.js')]");
+    $this->assertCount(1, $tableheader);
+    $this->assertRaw('sticky-enabled');
   }
 
   /**
-   * If $sticky is FALSE, `sticky-header` class should not be included.
+   * If $sticky is FALSE, no tableheader.js should be included.
    */
   public function testThemeTableNoStickyHeaders() {
     $header = ['one', 'two', 'three'];
@@ -55,7 +58,10 @@ class TableTest extends KernelTestBase {
       '#sticky' => FALSE,
     ];
     $this->render($table);
-    $this->assertNoRaw('sticky-header');
+    // Make sure tableheader.js was not attached.
+    $tableheader = $this->xpath("//script[contains(@src, 'tableheader.js')]");
+    $this->assertCount(0, $tableheader);
+    $this->assertNoRaw('sticky-enabled');
   }
 
   /**

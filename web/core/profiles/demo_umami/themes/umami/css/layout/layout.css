@@ -13,18 +13,12 @@
 
 /* Add responsive side gutters to the outer layout container 'main' at smaller sizes */
 .main {
-  padding-inline: 4%;
-  padding-block: 0 2.37rem;
+  padding: 0 4%;
 }
 /* Extra large + side margins */
 @media screen and (min-width: 80rem) {
   /* 1200px (large) + 80px (side margins) = 1280px */
   .main {
-    padding-inline: 0;
+    padding: 0;
   }
-}
-
-.views-view-responsive-grid__item .views-view-responsive-grid__item-inner,
-.views-view-responsive-grid__item .views-view-responsive-grid__item-inner .umami-card {
-  height: 100%;
 }

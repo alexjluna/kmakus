@@ -266,12 +266,11 @@ class SessionConfigurationTest extends UnitTestCase {
    *
    * @dataProvider providerTestConstructorDefaultSettings
    */
-  public function testConstructorDefaultSettings(array $options, int $expected_sid_length, int $expected_sid_bits_per_character, string $expected_name_suffix) {
+  public function testConstructorDefaultSettings(array $options, int $expected_sid_length, int $expected_sid_bits_per_character) {
     $config = $this->createSessionConfiguration($options);
     $options = $config->getOptions(Request::createFromGlobals());
     $this->assertSame($expected_sid_length, $options['sid_length']);
     $this->assertSame($expected_sid_bits_per_character, $options['sid_bits_per_character']);
-    $this->assertSame($expected_name_suffix, $options['name_suffix']);
   }
 
   /**
@@ -282,11 +281,10 @@ class SessionConfigurationTest extends UnitTestCase {
    */
   public static function providerTestConstructorDefaultSettings() {
     return [
-      [[], 48, 6, ''],
-      [['sid_length' => 100], 100, 6, ''],
-      [['sid_bits_per_character' => 5], 48, 5, ''],
-      [['name_suffix' => 'some-suffix'], 48, 6, 'some-suffix'],
-      [['sid_length' => 100, 'sid_bits_per_character' => 5, 'name_suffix' => 'some-suffix'], 100, 5, 'some-suffix'],
+      [[], 48, 6],
+      [['sid_length' => 100], 100, 6],
+      [['sid_bits_per_character' => 5], 48, 5],
+      [['sid_length' => 100, 'sid_bits_per_character' => 5], 100, 5],
     ];
   }
 

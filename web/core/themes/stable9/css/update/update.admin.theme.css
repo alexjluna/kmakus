@@ -15,10 +15,10 @@
   float: left;
 }
 .project-update__status--not-supported {
-  float: right; /* LTR */
+  float: left; /* LTR */
 }
 [dir="rtl"] .project-update__status--not-supported {
-  float: left;
+  float: right;
 }
 .project-update__status--security-error {
   color: #970f00;

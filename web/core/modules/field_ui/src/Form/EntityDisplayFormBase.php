@@ -579,12 +579,7 @@ abstract class EntityDisplayFormBase extends EntityForm {
       $this->saveDisplayStatuses($statuses);
     }
 
-    // The saved message may not be needed in some cases. An example of
-    // this is in LayoutBuilderEntityViewDisplayForm which can redirect
-    // the user to a confirmation form before the settings are saved.
-    if (!$form_state->getRedirect()) {
-      $this->messenger()->addStatus($this->t('Your settings have been saved.'));
-    }
+    $this->messenger()->addStatus($this->t('Your settings have been saved.'));
   }
 
   /**

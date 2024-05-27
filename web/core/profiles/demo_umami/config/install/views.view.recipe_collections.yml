@@ -169,13 +169,16 @@ display:
         groups:
           1: AND
       style:
-        type: grid_responsive
+        type: grid
         options:
           grouping: {  }
           columns: 4
-          cell_min_width: 100
-          grid_gutter: 14
+          automatic_width: false
           alignment: vertical
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
       row:
         type: fields
       query:

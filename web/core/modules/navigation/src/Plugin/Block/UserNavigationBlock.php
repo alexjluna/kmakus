@@ -4,31 +4,26 @@ declare(strict_types=1);
 
 namespace Drupal\navigation\Plugin\Block;
 
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines a shortcuts navigation block class.
+ * Defines a user navigation block.
  *
  * @internal
- *
- * @todo Move to Shortcut module as part of the core MR process.
  */
 #[Block(
-  id: 'navigation_shortcuts',
-  admin_label: new TranslatableMarkup('Navigation Shortcuts'),
+  id: 'navigation_user',
+  admin_label: new TranslatableMarkup('User'),
 )]
-final class NavigationShortcutsBlock extends BlockBase implements ContainerFactoryPluginInterface {
+final class UserNavigationBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Constructs a new ShortcutsNavigationBlock.
+   * Constructs the plugin instance.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -37,9 +32,14 @@ final class NavigationShortcutsBlock extends BlockBase implements ContainerFacto
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
-   *   The module handler service.
+   *   The module handler.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected ModuleHandlerInterface $moduleHandler) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    protected readonly ModuleHandlerInterface $moduleHandler,
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
@@ -51,21 +51,8 @@ final class NavigationShortcutsBlock extends BlockBase implements ContainerFacto
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('module_handler')
+      $container->get('module_handler'),
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function blockAccess(AccountInterface $account): AccessResultInterface {
-    // This navigation block requires shortcut module. Once the plugin is moved
-    // to the module, this should not be necessary.
-    if (!$this->moduleHandler->moduleExists('shortcut')) {
-      return AccessResult::forbidden();
-    }
-
-    return AccessResult::allowedIfHasPermission($account, 'access shortcuts');
   }
 
   /**
@@ -73,12 +60,14 @@ final class NavigationShortcutsBlock extends BlockBase implements ContainerFacto
    */
   public function build(): array {
     return [
-      'shortcuts' => [
-        // @phpstan-ignore-next-line
-        '#lazy_builder' => ['navigation.shortcut_lazy_builder:lazyLinks', [$this->configuration['label']]],
+      'user' => [
+        '#lazy_builder' => [
+          'navigation.user_lazy_builder:renderNavigationLinks',
+          [],
+        ],
         '#create_placeholder' => TRUE,
         '#cache' => [
-          'keys' => ['shortcut_set_navigation_links'],
+          'keys' => ['user_set_navigation_links'],
           'contexts' => ['user'],
         ],
         '#lazy_builder_preview' => [

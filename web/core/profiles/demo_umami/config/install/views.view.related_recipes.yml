@@ -253,13 +253,11 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: grid_responsive
+        type: default
         options:
+          row_class: ''
+          default_row_class: true
           uses_fields: false
-          columns: 4
-          cell_min_width: 240
-          grid_gutter: 14
-          alignment: horizontal
       row:
         type: 'entity:node'
         options:
@@ -274,7 +272,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: ''
+      css_class: grid--4
       header: {  }
       footer: {  }
       display_extenders: {  }

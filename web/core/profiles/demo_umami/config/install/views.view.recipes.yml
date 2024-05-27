@@ -213,13 +213,7 @@ display:
         groups:
           1: AND
       style:
-        type: grid_responsive
-        options:
-          uses_fields: false
-          columns: 4
-          cell_min_width: 240
-          grid_gutter: 14
-          alignment: horizontal
+        type: default
       row:
         type: 'entity:node'
         options:
@@ -234,7 +228,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: ''
+      css_class: grid--4
       header: {  }
       footer: {  }
       display_extenders: {  }

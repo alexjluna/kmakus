@@ -60,9 +60,7 @@
         'click',
         'summary',
         (e) => {
-          e.currentTarget?.dispatchEvent(
-            new CustomEvent('dialogContentResize', { bubbles: true }),
-          );
+          $(e.currentTarget).trigger('dialogContentResize');
         },
       );
     },
