@@ -66,7 +66,7 @@ class BlockPageVariantTest extends UnitTestCase {
     return new BlockPageVariant($configuration, 'test', $definition, $this->blockRepository, $this->blockViewBuilder, ['config:block_list']);
   }
 
-  public function providerBuild() {
+  public static function providerBuild() {
     $blocks_config = [
       'block1' => [
         // region, is main content block, is messages block, is title block

@@ -180,7 +180,7 @@ class ContentLanguageSettingsUnitTest extends UnitTestCase {
     $this->assertSame($expected, $config->isLanguageAlterable());
   }
 
-  public function providerLanguageAlterable() {
+  public static function providerLanguageAlterable() {
     $alterableConfig = new ContentLanguageSettings([
       'target_entity_type_id' => 'test_entity_type',
       'target_bundle' => 'test_bundle',
@@ -244,7 +244,7 @@ class ContentLanguageSettingsUnitTest extends UnitTestCase {
    *
    * @dataProvider providerLoadByEntityTypeBundle
    */
-  public function testLoadByEntityTypeBundle($config_id, ContentLanguageSettings $existing_config = NULL, $expected_langcode, $expected_language_alterable) {
+  public function testLoadByEntityTypeBundle($config_id, ?ContentLanguageSettings $existing_config, $expected_langcode, $expected_language_alterable) {
     [$type, $bundle] = explode('.', $config_id);
 
     $nullConfig = new ContentLanguageSettings([

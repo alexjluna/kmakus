@@ -45,7 +45,7 @@ class StaticDiscoveryDecoratorTest extends TestCase {
    *   - A plugin definition.
    *   - Base plugin ID.
    */
-  public function providerGetDefinition() {
+  public static function providerGetDefinition() {
     return [
       ['is_defined', TRUE, FALSE, ['plugin-definition' => 'is_defined'], 'plugin-definition'],
       // Make sure we don't call the decorated method if we shouldn't.
@@ -115,7 +115,7 @@ class StaticDiscoveryDecoratorTest extends TestCase {
    *   - bool Whether the test mock has a callback.
    *   - array Plugin definitions.
    */
-  public function providerGetDefinitions() {
+  public static function providerGetDefinitions() {
     return [
       [TRUE, ['definition' => 'is_fake']],
       [FALSE, ['definition' => 'array_of_stuff']],
@@ -178,7 +178,7 @@ class StaticDiscoveryDecoratorTest extends TestCase {
    *   - Array of arguments to pass to the method, with the expectation that our
    *     mocked __call() will return them.
    */
-  public function providerCall() {
+  public static function providerCall() {
     return [
       ['complexArguments', ['1', 2.0, 3, ['4' => 'five']]],
       ['noArguments', []],
