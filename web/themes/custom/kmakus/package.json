@@ -1,10 +1,16 @@
 {
   "name": "kmakus",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Custom theme for Drupal 10",
+  "main": "index.js",
   "scripts": {
-    "livereload": "livereload --exclusions node_modules/ --exts 'css,js,twig,theme,apng,avif,gif,jpg,jpeg,jfif,pjpeg,pjp,png,svg,webp'"
+    "build:css": "sass --no-source-map scss/style.scss css/style.css",
+    "watch:css": "nodemon -e scss -x 'sass scss/style.scss css/style.css'"
   },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "livereload": "^0.9.3"
+    "nodemon": "^2.0.0",
+    "sass": "^1.32.0"
   }
 }
