@@ -5,9 +5,9 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Aplicar
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
       fields:
@@ -20,4 +20,4 @@ display:
       arguments:
         order_id:
           exception:
-            title: Todo(s)
+            title: All

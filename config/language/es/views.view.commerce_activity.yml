@@ -5,26 +5,26 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Aplicar
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
       fields:
         created:
-          label: Fecha
+          label: Date
           separator: ', '
         rendered_entity:
-          label: Mensaje
+          label: Message
         uid:
-          label: Usuario
+          label: User
           separator: ', '
       arguments:
         source_entity_id:
           exception:
-            title: Todo(s)
+            title: All
         source_entity_type:
           exception:
-            title: Todo(s)
+            title: All
   block_1:
-    display_title: Bloque
+    display_title: Block

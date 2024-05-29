@@ -5,21 +5,21 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Aplicar
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
       arguments:
         uid:
           exception:
-            title: Todo(s)
+            title: All
         type:
           exception:
-            title: Todo(s)
+            title: All
         status:
           exception:
-            title: Todo(s)
+            title: All
       title: Perfiles
   user_page:
     display_title: 'Página del usuario'

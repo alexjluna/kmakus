@@ -5,14 +5,14 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Aplicar
-          reset_button_label: Restablecer
-          exposed_sorts_label: 'Ordenar por'
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
       fields:
         title:
-          label: Título
+          label: Title
           separator: ', '
         unit_price__number:
           label: 'Precio unitario'
@@ -26,4 +26,4 @@ display:
       arguments:
         order_item_id:
           exception:
-            title: Todo(s)
+            title: All
