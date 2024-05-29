@@ -27,7 +27,8 @@ class FileWidgetAjaxController {
       'percentage' => -1,
     ];
 
-    if (extension_loaded('uploadprogress')) {
+    $implementation = file_progress_implementation();
+    if ($implementation == 'uploadprogress') {
       $status = uploadprogress_get_info($key);
       if (isset($status['bytes_uploaded']) && !empty($status['bytes_total'])) {
         $progress['message'] = t('Uploading... (@current of @total)', [

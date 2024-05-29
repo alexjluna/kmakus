@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\process;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;

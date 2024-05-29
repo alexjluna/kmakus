@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\File;
 
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\Exception\FileNotExistsException;
-use Drupal\Core\File\FileExists;
-use Drupal\Core\File\FileSystem;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\File\FileSystem;
 
 /**
  * Tests the unmanaged file move function.
@@ -28,7 +26,7 @@ class FileMoveTest extends FileTestBase {
     $desired_filepath = 'public://' . $this->randomMachineName();
     /** @var \Drupal\Core\File\FileSystemInterface $file_system */
     $file_system = \Drupal::service('file_system');
-    $new_filepath = $file_system->move($uri, $desired_filepath, FileExists::Error);
+    $new_filepath = $file_system->move($uri, $desired_filepath, FileSystemInterface::EXISTS_ERROR);
     $this->assertNotFalse($new_filepath, 'Move was successful.');
     $this->assertEquals($desired_filepath, $new_filepath, 'Returned expected filepath.');
     $this->assertFileExists($new_filepath);
@@ -39,7 +37,7 @@ class FileMoveTest extends FileTestBase {
     $desired_filepath = 'public://' . $this->randomMachineName();
     $this->assertFileExists($new_filepath);
     $this->assertNotFalse(file_put_contents($desired_filepath, ' '), 'Created a file so a rename will have to happen.');
-    $newer_filepath = $file_system->move($new_filepath, $desired_filepath, FileExists::Rename);
+    $newer_filepath = $file_system->move($new_filepath, $desired_filepath, FileSystemInterface::EXISTS_RENAME);
     $this->assertNotFalse($newer_filepath, 'Move was successful.');
     $this->assertNotEquals($desired_filepath, $newer_filepath, 'Returned expected filepath.');
     $this->assertFileExists($newer_filepath);
@@ -70,12 +68,12 @@ class FileMoveTest extends FileTestBase {
     /** @var \Drupal\Core\File\FileSystemInterface $file_system */
     $file_system = \Drupal::service('file_system');
     $this->expectException(FileException::class);
-    $new_filepath = $file_system->move($uri, $uri, FileExists::Replace);
+    $new_filepath = $file_system->move($uri, $uri, FileSystemInterface::EXISTS_REPLACE);
     $this->assertFalse($new_filepath, 'Moving onto itself without renaming fails.');
     $this->assertFileExists($uri);
 
     // Move the file onto itself with renaming will result in a new filename.
-    $new_filepath = $file_system->move($uri, $uri, FileExists::Rename);
+    $new_filepath = $file_system->move($uri, $uri, FileSystemInterface::EXISTS_RENAME);
     $this->assertNotFalse($new_filepath, 'Moving onto itself with renaming works.');
     $this->assertFileDoesNotExist($uri);
     $this->assertFileExists($new_filepath);

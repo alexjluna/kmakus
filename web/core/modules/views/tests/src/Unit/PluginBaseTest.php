@@ -74,7 +74,7 @@ class PluginBaseTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestUnpackOptions() {
+  public function providerTestUnpackOptions() {
     $test_parameters = [];
     // Set a storage but no value, so the storage value should be kept.
     $test_parameters[] = [
@@ -223,7 +223,7 @@ class PluginBaseTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestSetOptionDefault() {
+  public function providerTestSetOptionDefault() {
     $test_parameters = [];
     // No definition should change anything on the storage.
     $test_parameters[] = [
@@ -289,7 +289,7 @@ class PluginBaseTest extends UnitTestCase {
     $this->assertEquals($expected_storage, $storage);
   }
 
-  public static function providerTestFilterByDefinedOptions() {
+  public function providerTestFilterByDefinedOptions() {
     $data = [];
 
     // A simple defined option.

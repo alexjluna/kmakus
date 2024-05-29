@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\tracker\Kernel\Migrate\d7;
 
 use Drupal\migrate_drupal\NodeMigrateType;

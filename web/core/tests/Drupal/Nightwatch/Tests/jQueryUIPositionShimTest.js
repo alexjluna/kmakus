@@ -820,6 +820,7 @@ module.exports = {
             const regexVertical = /top|center|bottom/;
             const regexOffset = /[+-]\d+(\.[\d]+)?%?/;
             const regexPosition = /^\w+/;
+            const regexPercent = /%$/;
             let positions = offset.split(' ');
             if (positions.length === 1) {
               if (regexHorizontal.test(positions[0])) {
@@ -836,13 +837,13 @@ module.exports = {
             return {
               horizontalOffset: horizontalOffset
                 ? parseFloat(horizontalOffset[0]) *
-                  (horizontalOffset[0].endsWith('%')
+                  (regexPercent.test(horizontalOffset[0])
                     ? element.offsetWidth / 100
                     : 1)
                 : 0,
               verticalOffset: verticalOffset
                 ? parseFloat(verticalOffset[0]) *
-                  (verticalOffset[0].endsWith('%')
+                  (regexPercent.test(verticalOffset[0])
                     ? element.offsetWidth / 100
                     : 1)
                 : 0,

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Functional;
 
 use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
@@ -263,7 +261,7 @@ class ViewsModerationStateFilterTest extends ViewTestBase {
    * @return string[]
    *   An array of view IDs.
    */
-  public static function providerTestWorkflowChanges() {
+  public function providerTestWorkflowChanges() {
     return [
       'view on base table, filter on base table' => [
         'test_content_moderation_state_filter_base_table',

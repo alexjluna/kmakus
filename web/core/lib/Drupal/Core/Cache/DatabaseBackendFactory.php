@@ -2,8 +2,6 @@
 
 namespace Drupal\Core\Cache;
 
-use Drupal\Component\Datetime\TimeInterface;
-use Drupal\Component\Serialization\ObjectAwareSerializationInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Site\Settings;
 
@@ -24,6 +22,13 @@ class DatabaseBackendFactory implements CacheFactoryInterface {
   protected $checksumProvider;
 
   /**
+   * The site settings.
+   *
+   * @var \Drupal\Core\Site\Settings
+   */
+  protected $settings;
+
+  /**
    * Constructs the DatabaseBackendFactory object.
    *
    * @param \Drupal\Core\Database\Connection $connection
@@ -32,34 +37,13 @@ class DatabaseBackendFactory implements CacheFactoryInterface {
    *   The cache tags checksum provider.
    * @param \Drupal\Core\Site\Settings $settings
    *   (optional) The site settings.
-   * @param \Drupal\Component\Serialization\ObjectAwareSerializationInterface|null $serializer
-   *   (optional) The serializer to use.
-   * @param \Drupal\Component\Datetime\TimeInterface|null $time
-   *   The time service.
    *
    * @throws \BadMethodCallException
    */
-  public function __construct(
-    Connection $connection,
-    CacheTagsChecksumInterface $checksum_provider,
-    protected ?Settings $settings = NULL,
-    protected ?ObjectAwareSerializationInterface $serializer = NULL,
-    protected ?TimeInterface $time = NULL,
-  ) {
+  public function __construct(Connection $connection, CacheTagsChecksumInterface $checksum_provider, Settings $settings = NULL) {
     $this->connection = $connection;
     $this->checksumProvider = $checksum_provider;
-    if ($this->settings === NULL) {
-      @trigger_error('Calling ' . __METHOD__ . ' without the $settings argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3014684', E_USER_DEPRECATED);
-      $this->settings = Settings::getInstance();
-    }
-    if ($this->serializer === NULL) {
-      @trigger_error('Calling ' . __METHOD__ . ' without the $serializer argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3014684', E_USER_DEPRECATED);
-      $this->serializer = \Drupal::service('serialization.phpserialize');
-    }
-    if ($this->time === NULL) {
-      @trigger_error('Calling ' . __METHOD__ . '() without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3387233', E_USER_DEPRECATED);
-      $this->time = \Drupal::service(TimeInterface::class);
-    }
+    $this->settings = $settings ?: Settings::getInstance();
   }
 
   /**
@@ -73,7 +57,7 @@ class DatabaseBackendFactory implements CacheFactoryInterface {
    */
   public function get($bin) {
     $max_rows = $this->getMaxRowsForBin($bin);
-    return new DatabaseBackend($this->connection, $this->checksumProvider, $bin, $this->serializer, $this->time, $max_rows);
+    return new DatabaseBackend($this->connection, $this->checksumProvider, $bin, $max_rows);
   }
 
   /**

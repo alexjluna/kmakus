@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\comment\Functional\Views;
 
 use Drupal\comment\CommentInterface;
@@ -101,7 +99,7 @@ class DefaultViewRecentCommentsTest extends ViewTestBase {
       $comment->comment_body->format = 'full_html';
 
       // Ensure comments are sorted in ascending order.
-      $time = \Drupal::time()->getRequestTime() + ($this->defaultDisplayResults - $i);
+      $time = REQUEST_TIME + ($this->defaultDisplayResults - $i);
       $comment->setCreatedTime($time);
       $comment->changed->value = $time;
 

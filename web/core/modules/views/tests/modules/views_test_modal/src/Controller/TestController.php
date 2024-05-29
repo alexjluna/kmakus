@@ -22,9 +22,7 @@ class TestController extends ControllerBase {
         'class' => ['use-ajax'],
         'data-dialog-type' => 'modal',
         'data-dialog-options' => Json::encode([
-          'classes' => [
-            'ui-dialog' => 'views-test-modal',
-          ],
+          'dialogClass' => 'views-test-modal',
           'height' => '50%',
           'width' => '50%',
           'title' => $this->t('Administer content'),

@@ -34,7 +34,7 @@ class HeadersCacheContextTest extends UnitTestCase {
   /**
    * Provides a list of headers and expected cache contexts.
    */
-  public static function providerTestGetContext() {
+  public function providerTestGetContext() {
     return [
       [[], NULL, ''],
       [[], 'foo', ''],

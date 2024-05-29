@@ -11,7 +11,6 @@ use Drupal\Core\Form\BaseFormIdInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
-use Drupal\Core\Form\WorkspaceDynamicSafeFormInterface;
 use Drupal\Core\Plugin\Context\ContextRepositoryInterface;
 use Drupal\Core\Plugin\ContextAwarePluginAssignmentTrait;
 use Drupal\Core\Plugin\ContextAwarePluginInterface;
@@ -30,13 +29,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @internal
  *   Form classes are internal.
  */
-abstract class ConfigureBlockFormBase extends FormBase implements BaseFormIdInterface, WorkspaceDynamicSafeFormInterface {
+abstract class ConfigureBlockFormBase extends FormBase implements BaseFormIdInterface {
 
   use AjaxFormHelperTrait;
   use ContextAwarePluginAssignmentTrait;
   use LayoutBuilderContextTrait;
   use LayoutRebuildTrait;
-  use WorkspaceSafeFormTrait;
 
   /**
    * The plugin being configured.

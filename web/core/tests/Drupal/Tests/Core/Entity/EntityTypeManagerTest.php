@@ -20,7 +20,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Tests\UnitTestCase;
 use Prophecy\Argument;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -82,9 +81,8 @@ class EntityTypeManagerTest extends UnitTestCase {
     $this->cacheBackend = $this->prophesize(CacheBackendInterface::class);
     $this->translationManager = $this->prophesize(TranslationInterface::class);
     $this->entityLastInstalledSchemaRepository = $this->prophesize(EntityLastInstalledSchemaRepositoryInterface::class);
-    $container = $this->prophesize(Container::class);
 
-    $this->entityTypeManager = new TestEntityTypeManager(new \ArrayObject(), $this->moduleHandler->reveal(), $this->cacheBackend->reveal(), $this->translationManager->reveal(), $this->getClassResolverStub(), $this->entityLastInstalledSchemaRepository->reveal(), $container->reveal());
+    $this->entityTypeManager = new TestEntityTypeManager(new \ArrayObject(), $this->moduleHandler->reveal(), $this->cacheBackend->reveal(), $this->translationManager->reveal(), $this->getClassResolverStub(), $this->entityLastInstalledSchemaRepository->reveal());
     $this->discovery = $this->prophesize(DiscoveryInterface::class);
     $this->entityTypeManager->setDiscovery($this->discovery->reveal());
   }
@@ -157,7 +155,7 @@ class EntityTypeManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestHasHandler() {
+  public function providerTestHasHandler() {
     return [
       ['apple', TRUE],
       ['banana', FALSE],
@@ -254,7 +252,7 @@ class EntityTypeManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function provideFormObjectInvalidOperationData(): array {
+  public function provideFormObjectInvalidOperationData(): array {
     return [
       'missing_form_handler' => [
         'test_entity_type',
@@ -322,7 +320,7 @@ class EntityTypeManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function provideMissingHandlerData() : array {
+  public function provideMissingHandlerData() : array {
     return [
       'missing_handler' => [
         'test_entity_type',
@@ -425,7 +423,7 @@ class EntityTypeManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestGetDefinition() {
+  public function providerTestGetDefinition() {
     return [
       ['apple', TRUE],
       ['banana', TRUE],

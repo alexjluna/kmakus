@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests\Theme;
 
 use Drupal\Tests\BrowserTestBase;
@@ -47,10 +45,7 @@ class ClaroTest extends BrowserTestBase {
    * Tests Claro's configuration schema.
    */
   public function testConfigSchema() {
-    $permissions = [
-      'administer modules',
-    ];
-    $this->drupalLogin($this->drupalCreateUser($permissions));
+    $this->drupalLogin($this->rootUser);
     $this->drupalGet('admin/modules');
     $this->assertSession()->elementNotExists('css', '#block-claro-help');
 

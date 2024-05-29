@@ -148,7 +148,7 @@ class DefaultsSectionStorageTest extends UnitTestCase {
   /**
    * Provides data for ::testExtractEntityFromRoute().
    */
-  public static function providerTestExtractEntityFromRoute() {
+  public function providerTestExtractEntityFromRoute() {
     // Data provider values are:
     // - whether a successful result is expected
     // - the expected entity ID

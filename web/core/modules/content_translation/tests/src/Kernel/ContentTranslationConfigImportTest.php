@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_translation\Kernel;
 
 use Drupal\Core\Config\ConfigImporter;

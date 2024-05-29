@@ -72,14 +72,14 @@
  * following to a module_name.links.task.yml file (in the top-level directory
  * for your module):
  * @code
- * my_module.admin:
- *   route_name: my_module.admin
+ * book.admin:
+ *   route_name: book.admin
  *   title: 'List'
- *   base_route: my_module.admin
- * my_module.settings:
- *   route_name: my_module.settings
+ *   base_route: book.admin
+ * book.settings:
+ *   route_name: book.settings
  *   title: 'Settings'
- *   base_route: my_module.admin
+ *   base_route: book.admin
  *   weight: 100
  * @endcode
  * Some notes:

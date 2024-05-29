@@ -43,7 +43,7 @@ class AjaxCommandsTest extends UnitTestCase {
    *   - Array of css elements
    *   - Expected value
    */
-  public static function providerCss() {
+  public function providerCss() {
     return [
       'empty' => [
         [],
@@ -196,7 +196,7 @@ class AjaxCommandsTest extends UnitTestCase {
   /**
    * Data provider for testAnnounceCommand().
    */
-  public static function announceCommandProvider() {
+  public function announceCommandProvider() {
     return [
       'no priority' => [
         'Things are going to change!',

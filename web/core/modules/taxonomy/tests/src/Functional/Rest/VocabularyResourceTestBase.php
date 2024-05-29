@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\taxonomy\Functional\Rest;
 
 use Drupal\taxonomy\Entity\Vocabulary;
@@ -57,7 +55,6 @@ abstract class VocabularyResourceTestBase extends ConfigEntityResourceTestBase {
       'name' => 'Llama',
       'description' => NULL,
       'weight' => 0,
-      'new_revision' => FALSE,
     ];
   }
 

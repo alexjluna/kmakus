@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Plugin;
 
 use Drupal\Core\Plugin\Context\Context;
@@ -65,7 +63,7 @@ class ContextTypedDataTest extends KernelTestBase {
   /**
    * Data provider for testHasContextValue.
    */
-  public static function providerHasContextValue() {
+  public function providerHasContextValue() {
     return [
       [TRUE, FALSE],
       [TRUE, 0],

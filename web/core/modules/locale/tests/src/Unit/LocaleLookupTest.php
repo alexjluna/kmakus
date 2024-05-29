@@ -195,7 +195,7 @@ class LocaleLookupTest extends UnitTestCase {
   /**
    * Provides test data for testResolveCacheMissWithFallback().
    */
-  public static function resolveCacheMissWithFallbackProvider() {
+  public function resolveCacheMissWithFallbackProvider() {
     // cSpell:disable
     return [
       ['cs', 'test', 'irrelevant', 'test v české'],
@@ -255,7 +255,7 @@ class LocaleLookupTest extends UnitTestCase {
     $string = $this->createMock('Drupal\locale\StringInterface');
     $string->expects($this->once())
       ->method('addLocation')
-      ->willReturnSelf();
+      ->will($this->returnSelf());
     $this->storage->expects($this->once())
       ->method('findTranslation')
       ->willReturn(NULL);
@@ -325,7 +325,7 @@ class LocaleLookupTest extends UnitTestCase {
   /**
    * Provides test data for testResolveCacheMissWithFallback().
    */
-  public static function providerFixOldPluralTranslationProvider() {
+  public function providerFixOldPluralTranslationProvider() {
     $translations = [
       'by' => [
         'word1' => '@count[2] word-by',
@@ -373,7 +373,7 @@ class LocaleLookupTest extends UnitTestCase {
   /**
    * Provides test data for testGetCid().
    */
-  public static function getCidProvider() {
+  public function getCidProvider() {
     return [
       [
         ['a'], 'locale:en:irrelevant:a',

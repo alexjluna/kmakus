@@ -297,7 +297,7 @@ class SqlTest extends UnitTestCase {
       'id' => 1,
     ]);
     // Note: Let the same entity be returned multiple times, for example to
-    // support the translation use case.
+    // support the translation usecase.
     $result[] = new ResultRow([
       'id' => 2,
     ]);

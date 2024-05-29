@@ -21,7 +21,7 @@ use Drupal\views\Views;
  * more information.
  *
  * Row plugins extend \Drupal\views\Plugin\views\row\RowPluginBase. They must
- * be attributed with \Drupal\views\Attribute\ViewsRow attribute, and
+ * be annotated with \Drupal\views\Annotation\ViewsRow annotation, and
  * they must be in namespace directory Plugin\views\row.
  *
  * @ingroup views_plugins
@@ -52,13 +52,11 @@ abstract class RowPluginBase extends PluginBase {
   /**
    * The actual field used.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $base_field;
 
   /**
    * The field alias.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $field_alias;
 
   /**

@@ -96,6 +96,10 @@ class PlaceholderingRenderCache extends RenderCache {
    * {@inheritdoc}
    */
   public function get(array $elements) {
+    // @todo remove this check when https://www.drupal.org/node/2367555 lands.
+    if (!$this->requestStack->getCurrentRequest()->isMethodCacheable()) {
+      return FALSE;
+    }
 
     // When rendering placeholders, special case auto-placeholdered elements:
     // avoid retrieving them from cache again, or rendering them again.
@@ -126,9 +130,7 @@ class PlaceholderingRenderCache extends RenderCache {
   public function set(array &$elements, array $pre_bubbling_elements) {
     $result = parent::set($elements, $pre_bubbling_elements);
 
-    // Writes to the render cache are disabled on uncacheable HTTP requests, to
-    // prevent very low hit rate items from being written. If we're not writing
-    // to the cache, there's also no benefit to placeholdering either.
+    // @todo remove this check when https://www.drupal.org/node/2367555 lands.
     if (!$this->requestStack->getCurrentRequest()->isMethodCacheable()) {
       return FALSE;
     }

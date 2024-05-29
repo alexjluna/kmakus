@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\ckeditor5\Kernel;
 
 use Drupal\ckeditor5\Plugin\Editor\CKEditor5;
@@ -101,7 +99,7 @@ class WildcardHtmlSupportTest extends KernelTestBase {
     $this->assertEquals($expected_ghs_configuration, $ghs_configuration);
   }
 
-  public static function providerGhsConfiguration(): array {
+  public function providerGhsConfiguration(): array {
     return [
       'empty source editing' => [
         '<p> <br>',

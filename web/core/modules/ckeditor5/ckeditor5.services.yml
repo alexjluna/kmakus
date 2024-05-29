@@ -1,6 +1,4 @@
 services:
-  _defaults:
-    autoconfigure: true
   plugin.manager.ckeditor5.plugin:
     class: Drupal\ckeditor5\Plugin\CKEditor5PluginManager
     parent: default_plugin_manager
@@ -28,6 +26,8 @@ services:
   ckeditor5.ckeditor5_cache_tag:
     class: Drupal\ckeditor5\EventSubscriber\CKEditor5CacheTag
     arguments: ['@cache_tags.invalidator']
+    tags:
+      - { name: event_subscriber }
   logger.channel.ckeditor5:
     parent: logger.channel_base
     arguments: [ 'ckeditor5' ]

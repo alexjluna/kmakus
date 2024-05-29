@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\update\Functional;
 
 use Drupal\Core\Url;
@@ -26,11 +24,6 @@ use Drupal\Tests\BrowserTestBase;
  */
 abstract class UpdateTestBase extends BrowserTestBase {
   use UpdateTestTrait;
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $modules = ['update', 'update_test'];
 
   /**
    * Denotes a security update will be required in the test case.
@@ -169,11 +162,9 @@ abstract class UpdateTestBase extends BrowserTestBase {
    *   The label for the update.
    * @param string $version
    *   The project version.
-   * @param int $index
-   *   (optional) The index of the link.
    */
-  protected function assertVersionUpdateLinks($label, $version, int $index = 0) {
-    $update_element = $this->findUpdateElementByLabel($label, $index);
+  protected function assertVersionUpdateLinks($label, $version) {
+    $update_element = $this->findUpdateElementByLabel($label);
     // In the release notes URL the periods are replaced with dashes.
     $url_version = str_replace('.', '-', $version);
 
@@ -200,7 +191,7 @@ abstract class UpdateTestBase extends BrowserTestBase {
     $this->assertUpdateTableTextContains('Revoked!');
     $this->assertUpdateTableTextContains($revoked_version);
     $this->assertUpdateTableElementContains('error.svg');
-    $this->assertUpdateTableTextContains('Release revoked: Your currently installed release has been revoked, and is no longer available for download. Uninstalling everything included in this release or upgrading is strongly recommended!');
+    $this->assertUpdateTableTextContains('Release revoked: Your currently installed release has been revoked, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!');
     $this->assertVersionUpdateLinks($new_version_label, $newer_version);
   }
 
@@ -209,28 +200,21 @@ abstract class UpdateTestBase extends BrowserTestBase {
    *
    * @param string $unsupported_version
    *   The unsupported version that is currently installed.
-   * @param string|null $newer_version
-   *   (optional) The expected newer version to recommend.
-   * @param string|null $new_version_label
-   *   (optional) The expected label for the newer version. For example
-   *   'Recommended version:' or 'Also available:'.
+   * @param string $newer_version
+   *   The expected newer version to recommend.
+   * @param string $new_version_label
+   *   The expected label for the newer version (for example 'Recommended
+   *   version:' or 'Also available:').
    */
-  protected function confirmUnsupportedStatus(string $unsupported_version, string $newer_version = NULL, string $new_version_label = NULL) {
+  protected function confirmUnsupportedStatus($unsupported_version, $newer_version, $new_version_label) {
     $this->drupalGet('admin/reports/updates');
     $this->clickLink('Check manually');
     $this->checkForMetaRefresh();
     $this->assertUpdateTableTextContains('Not supported!');
     $this->assertUpdateTableTextContains($unsupported_version);
     $this->assertUpdateTableElementContains('error.svg');
-    if ($newer_version === NULL) {
-      $this->assertUpdateTableTextContains('Release not supported: Your currently installed release is now unsupported, is no longer available for download and no update is available. Uninstalling everything included in this release is strongly recommended!');
-      $this->assertUpdateTableTextNotContains('Recommended version');
-    }
-    else {
-      $this->assertNotEmpty($newer_version);
-      $this->assertUpdateTableTextContains('Release not supported: Your currently installed release is now unsupported, and is no longer available for download. Uninstalling everything included in this release or upgrading is strongly recommended!');
-      $this->assertVersionUpdateLinks($new_version_label, $newer_version);
-    }
+    $this->assertUpdateTableTextContains('Release not supported: Your currently installed release is now unsupported, and is no longer available for download. Disabling everything included in this release or upgrading is strongly recommended!');
+    $this->assertVersionUpdateLinks($new_version_label, $newer_version);
   }
 
   /**
@@ -288,17 +272,15 @@ abstract class UpdateTestBase extends BrowserTestBase {
    * @param string $label
    *   The label for the update, for example "Recommended version:" or
    *   "Latest version:".
-   * @param int $index
-   *   (optional) The index of the element.
    *
    * @return \Behat\Mink\Element\NodeElement
    *   The update element.
    */
-  protected function findUpdateElementByLabel($label, int $index = 0) {
+  protected function findUpdateElementByLabel($label) {
     $update_elements = $this->getSession()->getPage()
       ->findAll('css', $this->updateTableLocator . " .project-update__version:contains(\"$label\")");
-    $this->assertGreaterThanOrEqual($index, count($update_elements));
-    return $update_elements[$index];
+    $this->assertCount(1, $update_elements);
+    return $update_elements[0];
   }
 
 }

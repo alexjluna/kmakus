@@ -35,7 +35,7 @@ display:
           id: name
           relationship: none
           table: views_test_data
-          plugin_id: standard
+          plugin_id: string
       pager:
         options:
           offset: 0
@@ -47,7 +47,7 @@ display:
           order: ASC
           relationship: none
           table: views_test_data
-          plugin_id: standard
+          plugin_id: numeric
     display_plugin: default
     display_title: Default
     id: default

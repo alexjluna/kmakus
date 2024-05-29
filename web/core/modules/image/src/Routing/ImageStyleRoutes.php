@@ -56,7 +56,6 @@ class ImageStyleRoutes implements ContainerInjectionInterface {
       '/' . $directory_path . '/styles/{image_style}/{scheme}',
       [
         '_controller' => 'Drupal\image\Controller\ImageStyleDownloadController::deliver',
-        'required_derivative_scheme' => 'public',
       ],
       [
         '_access' => 'TRUE',

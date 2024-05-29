@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -215,7 +213,7 @@ class ModerationStateFieldItemListTest extends KernelTestBase {
   /**
    * Data provider for ::testModerationStateChanges.
    */
-  public static function moderationStateChangesTestCases() {
+  public function moderationStateChangesTestCases() {
     return [
       'Draft to draft' => [
         'draft',
@@ -300,7 +298,7 @@ class ModerationStateFieldItemListTest extends KernelTestBase {
   /**
    * Test cases for ::testEntityUnserialize.
    */
-  public static function entityUnserializeTestCases() {
+  public function entityUnserializeTestCases() {
     return [
       'Default draft state' => [
         'draft',
@@ -334,7 +332,7 @@ class ModerationStateFieldItemListTest extends KernelTestBase {
   /**
    * Tests cases for ::testModeratedEntityWithExistingId.
    */
-  public static function moderatedEntityWithExistingIdTestCases() {
+  public function moderatedEntityWithExistingIdTestCases() {
     return [
       'Draft non-default state' => [
         'draft',

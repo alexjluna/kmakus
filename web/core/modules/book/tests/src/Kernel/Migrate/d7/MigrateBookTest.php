@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\book\Kernel\Migrate\d7;
 
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
@@ -11,7 +9,6 @@ use Drupal\node\Entity\Node;
  * Tests migration of book structures from Drupal 7.
  *
  * @group book
- * @group legacy
  */
 class MigrateBookTest extends MigrateDrupal7TestBase {
 

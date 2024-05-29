@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block_content\Kernel\Plugin\migrate\source\d6;
 
 use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
-// cspell:ignore objectid objectindex plid
+// cspell:ignore objectid objectindex
 
 /**
  * Tests i18n content block translations source plugin.
@@ -25,11 +23,11 @@ class BoxTranslationTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     $tests = [];
 
     // The source data.
-    $tests[0]['source_data']['boxes'] = [
+    $tests[0]['database']['boxes'] = [
       [
         'bid' => 1,
         'body' => 'box 1 body',
@@ -44,7 +42,7 @@ class BoxTranslationTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $tests[0]['source_data']['i18n_strings'] = [
+    $tests[0]['database']['i18n_strings'] = [
       [
         'lid' => 1,
         'objectid' => 1,
@@ -71,7 +69,7 @@ class BoxTranslationTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $tests[0]['source_data']['locales_target'] = [
+    $tests[0]['database']['locales_target'] = [
       [
         'lid' => 1,
         'language' => 'fr',
@@ -98,7 +96,7 @@ class BoxTranslationTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $tests[0]['expected_data'] = [
+    $tests[0]['expected_results'] = [
       [
         'lid' => '1',
         'property' => 'title',

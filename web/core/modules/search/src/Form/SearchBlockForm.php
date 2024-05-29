@@ -5,7 +5,6 @@ namespace Drupal\search\Form;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\WorkspaceSafeFormInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Url;
 use Drupal\search\SearchPageRepositoryInterface;
@@ -16,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @internal
  */
-class SearchBlockForm extends FormBase implements WorkspaceSafeFormInterface {
+class SearchBlockForm extends FormBase {
 
   /**
    * The search page repository.

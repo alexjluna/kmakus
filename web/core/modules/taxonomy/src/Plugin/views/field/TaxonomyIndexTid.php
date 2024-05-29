@@ -3,7 +3,6 @@
 namespace Drupal\taxonomy\Plugin\views\field;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\field\PrerenderList;
@@ -14,8 +13,9 @@ use Drupal\taxonomy\VocabularyStorageInterface;
  * Field handler to display all taxonomy terms of a node.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("taxonomy_index_tid")
  */
-#[ViewsField("taxonomy_index_tid")]
 class TaxonomyIndexTid extends PrerenderList {
 
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\layout_builder\Functional;
 
 use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
@@ -77,9 +75,9 @@ class LayoutBuilderOverridesTest extends LayoutBuilderTestBase {
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
 
-    $this->drupalLogin($this->drupalCreateUser([
-      'configure any layout',
-    ]));
+    // @todo In https://www.drupal.org/node/540008 switch this to logging in as
+    //   a user with the 'configure any layout' permission.
+    $this->drupalLogin($this->rootUser);
 
     LayoutBuilderEntityViewDisplay::load('node.bundle_with_section_field.default')
       ->enableLayoutBuilder()
@@ -129,7 +127,8 @@ class LayoutBuilderOverridesTest extends LayoutBuilderTestBase {
 
     // Get the UUID of the component.
     $components = Node::load(1)->get('layout_builder__layout')->getSection(0)->getComponents();
-    $uuid = array_key_last($components);
+    end($components);
+    $uuid = key($components);
 
     $this->drupalGet('layout_builder/update/block/overrides/node.1/0/content/' . $uuid);
     $page->uncheckField('settings[label_display]');

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\Plugin\id_map;
 
 use Drupal\Core\Database\Database;
@@ -10,6 +8,8 @@ use Drupal\Tests\migrate\Kernel\MigrateTestBase;
 use Drupal\Tests\migrate\Unit\TestSqlIdMap;
 use Drupal\migrate\MigrateException;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+
+// cspell:ignore sourceid
 
 /**
  * Tests that the migrate map table is created.
@@ -98,7 +98,7 @@ class SqlTest extends MigrateTestBase {
   /**
    * Provides data for testEnsureTables.
    */
-  public static function providerTestEnsureTables() {
+  public function providerTestEnsureTables() {
     return [
       'no ids' => [
         [],
@@ -158,7 +158,7 @@ class SqlTest extends MigrateTestBase {
   /**
    * Provides data for testFailEnsureTables.
    */
-  public static function providerTestFailEnsureTables() {
+  public function providerTestFailEnsureTables() {
     return [
       'one id' => [
         [

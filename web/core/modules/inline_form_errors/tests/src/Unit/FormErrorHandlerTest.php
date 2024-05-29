@@ -120,24 +120,17 @@ class FormErrorHandlerTest extends UnitTestCase {
    * @covers ::setElementErrorsFromFormState
    */
   public function testErrorMessagesInline() {
-    $messages = [
-      'no title given',
-      'element is invisible',
-      'this missing element is invalid',
-      '3 errors have been found: <ul-comma-list-mock><li-mock>Test 1</li-mock><li-mock>Test 2 &amp; a half</li-mock><li-mock>Test 3</li-mock></ul-comma-list-mock>',
-    ];
-
-    $this->messenger->expects($this->exactly(count($messages)))
+    $this->messenger->expects($this->exactly(4))
       ->method('addError')
-      ->with(
-        $this->callback(function (string $message) use (&$messages): bool {
-          return array_shift($messages) === $message;
-        }),
-        FALSE
+      ->withConsecutive(
+        ['no title given', FALSE],
+        ['element is invisible', FALSE],
+        ['this missing element is invalid', FALSE],
+        ['3 errors have been found: <ul-comma-list-mock><li-mock>Test 1</li-mock><li-mock>Test 2 &amp; a half</li-mock><li-mock>Test 3</li-mock></ul-comma-list-mock>', FALSE],
       );
 
     $this->renderer->expects($this->once())
-      ->method('renderInIsolation')
+      ->method('renderPlain')
       ->willReturnCallback(function ($render_array) {
         $links = [];
         foreach ($render_array[1]['#items'] as $item) {
@@ -171,28 +164,20 @@ class FormErrorHandlerTest extends UnitTestCase {
    */
   public function testErrorMessagesNotInline() {
     // Asserts all messages are summarized.
-    $messages = [
-      'invalid',
-      'invalid',
-      'invalid',
-      'no error message',
-      'no title given',
-      'element is invisible',
-      'this missing element is invalid',
-    ];
-
-    $this->messenger->expects($this->exactly(count($messages)))
+    $this->messenger->expects($this->exactly(7))
       ->method('addMessage')
-      ->with(
-        $this->callback(function (string $message) use (&$messages): bool {
-          return array_shift($messages) === $message;
-        }),
-        'error',
-        FALSE
+      ->withConsecutive(
+        ['invalid', 'error', FALSE],
+        ['invalid', 'error', FALSE],
+        ['invalid', 'error', FALSE],
+        ['no error message', 'error', FALSE],
+        ['no title given', 'error', FALSE],
+        ['element is invisible', 'error', FALSE],
+        ['this missing element is invalid', 'error', FALSE],
       );
 
     $this->renderer->expects($this->never())
-      ->method('renderInIsolation');
+      ->method('renderPlain');
 
     $this->testForm['#disable_inline_form_errors'] = TRUE;
 

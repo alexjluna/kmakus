@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Functional\Views;
 
 use Drupal\Tests\views\Functional\ViewTestBase;
@@ -51,7 +49,7 @@ class UserChangedTest extends ViewTestBase {
 
     $this->drupalGet($path, $options);
 
-    $this->assertSession()->pageTextContains('Updated date: ' . date('Y-m-d', \Drupal::time()->getRequestTime()));
+    $this->assertSession()->pageTextContains('Updated date: ' . date('Y-m-d', REQUEST_TIME));
   }
 
 }

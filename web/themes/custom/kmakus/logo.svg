@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60">
-  <rect x="3" y="3" rx="10" ry="10" width="94" height="54" style="stroke: #187bb8; fill: #f5f5ff;"/>
-  <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" style="font-family: Arial, 'Helvetica Neue', Helvetica; fill: #187bb8;">kmakus logo</text>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M100,20 Q140,40 140,80 Q140,120 100,140 Q60,120 60,80 Q60,40 100,20" fill="#0077C0"/>
+  <circle cx="70" cy="70" r="12" stroke="black" stroke-width="2" fill="none"/>
+  <circle cx="130" cy="70" r="12" stroke="black" stroke-width="2" fill="none"/>
+  <line x1="82" y1="82" x2="92" y2="92" stroke="black" stroke-width="2"/>
+  <line x1="142" y1="82" x2="152" y2="92" stroke="black" stroke-width="2"/>
+  <line x1="82" y1="70" x2="118" y2="70" stroke="black" stroke-width="2"/>
+  <path d="M85,90 Q100,110 115,90" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M130,130 L130,110 L120,110 L140,90 L160,110 L150,110 L150,130 Z" fill="green"/>
+  <path d="M50,150 Q70,160 90,150 T130,150 Q150,160 170,150" stroke="orange" stroke-width="3" fill="none"/>
+  <circle cx="50" cy="50" r="10" fill="white" stroke="black" stroke-width="2"/>
+  <path d="M45,50 Q50,45 55,50 Q50,55 45,50 Z" fill="black"/>
+  <path d="M80,160 Q100,170 120,160" stroke="purple" stroke-width="3" fill="none"/>
 </svg>

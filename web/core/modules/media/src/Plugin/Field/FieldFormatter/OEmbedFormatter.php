@@ -4,14 +4,12 @@ namespace Drupal\media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\media\Entity\MediaType;
 use Drupal\media\IFrameUrlHelper;
@@ -22,22 +20,24 @@ use Drupal\media\OEmbed\UrlResolverInterface;
 use Drupal\media\Plugin\media\Source\OEmbedInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+// cspell:ignore allowtransparency
 /**
  * Plugin implementation of the 'oembed' formatter.
  *
  * @internal
  *   This is an internal part of the oEmbed system and should only be used by
  *   oEmbed-related code in Drupal core.
+ *
+ * @FieldFormatter(
+ *   id = "oembed",
+ *   label = @Translation("oEmbed content"),
+ *   field_types = {
+ *     "link",
+ *     "string",
+ *     "string_long",
+ *   },
+ * )
  */
-#[FieldFormatter(
-  id: 'oembed',
-  label: new TranslatableMarkup('oEmbed content'),
-  field_types: [
-    'link',
-    'string',
-    'string_long',
-  ],
-)]
 class OEmbedFormatter extends FormatterBase {
 
   /**
@@ -177,11 +177,7 @@ class OEmbedFormatter extends FormatterBase {
         $resource = $this->resourceFetcher->fetchResource($resource_url);
       }
       catch (ResourceException $exception) {
-        $this->logger->error("Could not retrieve the remote URL (@url): %error", [
-          '@url' => $value,
-          '%error' => $exception->getPrevious() ? $exception->getPrevious()->getMessage() : $exception->getMessage(),
-          'exception' => $exception,
-        ]);
+        $this->logger->error("Could not retrieve the remote URL (@url).", ['@url' => $value]);
         continue;
       }
 
@@ -196,8 +192,8 @@ class OEmbedFormatter extends FormatterBase {
         $element[$delta] = [
           '#theme' => 'image',
           '#uri' => $resource->getUrl()->toString(),
-          '#width' => $resource->getWidth(),
-          '#height' => $resource->getHeight(),
+          '#width' => $max_width ?: $resource->getWidth(),
+          '#height' => $max_height ?: $resource->getHeight(),
           '#attributes' => [
             'loading' => $this->getSetting('loading')['attribute'],
           ],
@@ -226,11 +222,11 @@ class OEmbedFormatter extends FormatterBase {
           '#tag' => 'iframe',
           '#attributes' => [
             'src' => $url->toString(),
+            'frameborder' => 0,
             'scrolling' => FALSE,
-            // External service is not supposed to send something larger
-            // than the max width or max height, so those values should be used.
-            'width' => $resource->getWidth() ?: $max_width,
-            'height' => $resource->getHeight() ?: $max_height,
+            'allowtransparency' => TRUE,
+            'width' => $max_width ?: $resource->getWidth(),
+            'height' => $max_height ?: $resource->getHeight(),
             'class' => ['media-oembed-content'],
             'loading' => $this->getSetting('loading')['attribute'],
           ],

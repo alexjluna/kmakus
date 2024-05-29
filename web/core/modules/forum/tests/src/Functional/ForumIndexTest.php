@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\forum\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -10,7 +8,6 @@ use Drupal\Tests\BrowserTestBase;
  * Tests the forum index listing.
  *
  * @group forum
- * @group legacy
  */
 class ForumIndexTest extends BrowserTestBase {
 

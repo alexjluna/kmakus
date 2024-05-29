@@ -2,18 +2,17 @@
 
 namespace Drupal\entity_test\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validates referenced entities.
+ *
+ * @Constraint(
+ *   id = "TestValidatedReferenceConstraint",
+ *   label = @Translation("Test validated reference constraint.")
+ * )
  */
-#[Constraint(
-  id: 'TestValidatedReferenceConstraint',
-  label: new TranslatableMarkup('Test validated reference constraint.')
-)]
-class TestValidatedReferenceConstraint extends SymfonyConstraint {
+class TestValidatedReferenceConstraint extends Constraint {
 
   /**
    * The default violation message.

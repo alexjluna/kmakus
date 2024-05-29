@@ -141,7 +141,7 @@ class SettingsTest extends WebDriverTestBase {
   /**
    * Data provider for testCredentialForm.
    */
-  public static function providerTestCredentialForm() {
+  public function providerTestCredentialForm() {
     return [
       'no values in settings.php' => [
         'source_connection' => "",

@@ -5,6 +5,7 @@ namespace Drupal\shortcut\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\shortcut\ShortcutSetInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -28,6 +29,13 @@ class ShortcutSetController extends ControllerBase {
    */
   public function __construct(PathValidatorInterface $path_validator) {
     $this->pathValidator = $path_validator;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('path.validator'));
   }
 
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\shortcut\Functional;
 
 use Drupal\shortcut\Entity\ShortcutSet;
@@ -114,8 +112,7 @@ class ShortcutSetsTest extends ShortcutTestBase {
     $this->drupalGet('user/' . $this->adminUser->id() . '/shortcuts');
     $this->submitForm(['set' => $new_set->id()], 'Change set');
     $this->assertSession()->statusCodeEquals(200);
-    $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->adminUser);
+    $current_set = shortcut_current_displayed_set($this->adminUser);
     $this->assertSame($current_set->id(), $new_set->id(), 'Successfully switched own shortcut set.');
   }
 
@@ -125,9 +122,8 @@ class ShortcutSetsTest extends ShortcutTestBase {
   public function testShortcutSetAssign() {
     $new_set = $this->generateShortcutSet($this->randomMachineName());
 
-    $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
-    $shortcut_set_storage->assignUser($new_set, $this->shortcutUser);
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->shortcutUser);
+    \Drupal::entityTypeManager()->getStorage('shortcut_set')->assignUser($new_set, $this->shortcutUser);
+    $current_set = shortcut_current_displayed_set($this->shortcutUser);
     $this->assertSame($current_set->id(), $new_set->id(), "Successfully switched another user's shortcut set.");
   }
 
@@ -142,8 +138,7 @@ class ShortcutSetsTest extends ShortcutTestBase {
     ];
     $this->drupalGet('user/' . $this->adminUser->id() . '/shortcuts');
     $this->submitForm($edit, 'Change set');
-    $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->adminUser);
+    $current_set = shortcut_current_displayed_set($this->adminUser);
     $this->assertNotEquals($this->set->id(), $current_set->id(), 'A shortcut set can be switched to at the same time as it is created.');
     $this->assertEquals($edit['label'], $current_set->label(), 'The new set is correctly assigned to the user.');
   }
@@ -156,8 +151,7 @@ class ShortcutSetsTest extends ShortcutTestBase {
     $this->drupalGet('user/' . $this->adminUser->id() . '/shortcuts');
     $this->submitForm($edit, 'Change set');
     $this->assertSession()->pageTextContains('The new set label is required.');
-    $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->adminUser);
+    $current_set = shortcut_current_displayed_set($this->adminUser);
     $this->assertEquals($this->set->id(), $current_set->id(), 'Attempting to switch to a new shortcut set without providing a set name does not succeed.');
     $field = $this->assertSession()->fieldExists('label');
     $this->assertTrue($field->hasClass('error'));
@@ -186,8 +180,8 @@ class ShortcutSetsTest extends ShortcutTestBase {
     $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
     $shortcut_set_storage->assignUser($new_set, $this->shortcutUser);
     $shortcut_set_storage->unassignUser($this->shortcutUser);
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->shortcutUser);
-    $default_set = $shortcut_set_storage->getDefaultSet($this->shortcutUser);
+    $current_set = shortcut_current_displayed_set($this->shortcutUser);
+    $default_set = shortcut_default_set($this->shortcutUser);
     $this->assertSame($default_set->id(), $current_set->id(), "Successfully unassigned another user's shortcut set.");
   }
 
@@ -200,8 +194,8 @@ class ShortcutSetsTest extends ShortcutTestBase {
     $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
     $shortcut_set_storage->assignUser($new_set, $this->shortcutUser);
     $this->shortcutUser->delete();
-    $current_set = $shortcut_set_storage->getDisplayedToUser($this->shortcutUser);
-    $default_set = $shortcut_set_storage->getDefaultSet($this->shortcutUser);
+    $current_set = shortcut_current_displayed_set($this->shortcutUser);
+    $default_set = shortcut_default_set($this->shortcutUser);
     $this->assertSame($default_set->id(), $current_set->id(), "Successfully cleared assigned shortcut set for removed user.");
   }
 

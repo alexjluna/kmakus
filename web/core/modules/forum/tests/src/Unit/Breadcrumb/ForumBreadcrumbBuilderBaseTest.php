@@ -13,7 +13,6 @@ use Symfony\Component\DependencyInjection\Container;
 /**
  * @coversDefaultClass \Drupal\forum\Breadcrumb\ForumBreadcrumbBuilderBase
  * @group forum
- * @group legacy
  */
 class ForumBreadcrumbBuilderBaseTest extends UnitTestCase {
 

@@ -2,19 +2,18 @@
 
 namespace Drupal\Core\TypedData\Plugin\DataType;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\TypedData\Attribute\DataType;
 use Drupal\Core\TypedData\Type\DurationInterface;
 
 /**
  * The duration ISO8601 data type.
  *
  * The plain value of this data type is an ISO8601 duration string.
+ *
+ * @DataType(
+ *   id = "duration_iso8601",
+ *   label = @Translation("Duration")
+ * )
  */
-#[DataType(
-  id: "duration_iso8601",
-  label: new TranslatableMarkup("Duration")
-)]
 class DurationIso8601 extends StringData implements DurationInterface {
 
   /**

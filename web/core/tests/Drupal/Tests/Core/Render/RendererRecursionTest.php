@@ -93,14 +93,14 @@ class RendererRecursionTest extends RendererTestBase {
   }
 
   /**
-   * ::renderInIsolation() may be called from anywhere.
+   * ::renderPlain() may be called from anywhere.
    *
    * Including from inside of another ::renderRoot() call.
    *
    * @covers ::renderRoot
-   * @covers ::renderInIsolation
+   * @covers ::renderPlain
    */
-  public function testRenderRecursionWithNestedRenderInIsolation() {
+  public function testRenderRecursionWithNestedRenderPlain() {
     [$complex_child_markup, $parent_markup, $complex_child_template] = $this->setUpRenderRecursionComplexElements();
     $renderer = $this->renderer;
     $this->setUpRequest();
@@ -108,7 +108,7 @@ class RendererRecursionTest extends RendererTestBase {
     $complex_child = $complex_child_template;
 
     $callable = function ($elements) use ($renderer, $complex_child) {
-      $elements['#markup'] = $renderer->renderInIsolation($complex_child);
+      $elements['#markup'] = $renderer->renderPlain($complex_child);
       $this->assertEquals('<p>This is a rendered placeholder!</p>', $elements['#markup'], 'Rendered complex child output as expected, with the placeholder replaced.');
       return $elements;
     };

@@ -202,7 +202,7 @@ class FieldStorageConfigEntityUnitTest extends UnitTestCase {
    * @return array
    *   Test cases.
    */
-  public static function providerInvalidEnforcedCardinality() {
+  public function providerInvalidEnforcedCardinality() {
     return [
       'zero' => [0],
       'negative_other_than_-1' => [-70],

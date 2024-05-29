@@ -182,7 +182,7 @@ display:
           admin_label: ''
           entity_type: comment
           entity_field: cid
-          plugin_id: standard
+          plugin_id: field
           order: DESC
           expose:
             label: ''

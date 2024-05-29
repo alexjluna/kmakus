@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\dblog\Functional;
 
 use Drupal\Core\Logger\RfcLogLevel;
@@ -52,7 +50,7 @@ trait FakeLogEntries {
       'request_uri' => $base_root . \Drupal::request()->getRequestUri(),
       'referer'     => \Drupal::request()->server->get('HTTP_REFERER'),
       'ip'          => '127.0.0.1',
-      'timestamp'   => \Drupal::time()->getRequestTime(),
+      'timestamp'   => REQUEST_TIME,
     ];
 
     $logger = $this->container->get('logger.dblog');

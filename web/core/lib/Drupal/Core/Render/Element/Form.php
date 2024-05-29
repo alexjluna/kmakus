@@ -2,13 +2,12 @@
 
 namespace Drupal\Core\Render\Element;
 
-use Drupal\Core\Render\Attribute\RenderElement;
-
 /**
  * Provides a render element for a form.
+ *
+ * @RenderElement("form")
  */
-#[RenderElement('form')]
-class Form extends RenderElementBase {
+class Form extends RenderElement {
 
   /**
    * {@inheritdoc}

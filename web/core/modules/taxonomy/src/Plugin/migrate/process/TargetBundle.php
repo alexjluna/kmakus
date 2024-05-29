@@ -2,15 +2,17 @@
 
 namespace Drupal\taxonomy\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
 /**
  * Converts a Drupal 6 vocabulary ID to a target bundle array.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "target_bundle"
+ * )
  */
-#[MigrateProcess('target_bundle')]
 class TargetBundle extends ProcessPluginBase {
 
   /**

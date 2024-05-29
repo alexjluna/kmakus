@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Datetime\Element;
 
 use Drupal\Core\Datetime\DrupalDateTime;

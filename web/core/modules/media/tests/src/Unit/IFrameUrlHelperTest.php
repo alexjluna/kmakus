@@ -23,7 +23,7 @@ class IFrameUrlHelperTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerIsSecure() {
+  public function providerIsSecure() {
     return [
       'no domain' => [
         '/path/to/media.php',

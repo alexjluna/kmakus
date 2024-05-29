@@ -28,7 +28,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Arguments to pass to Connection::setPrefix().
    *   - Expected result from Connection::tablePrefix().
    */
-  public static function providerPrefixRoundTrip() {
+  public function providerPrefixRoundTrip() {
     return [
       [
         [
@@ -77,7 +77,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Query to be prefixed.
    *   - Quote identifier.
    */
-  public static function providerTestPrefixTables() {
+  public function providerTestPrefixTables() {
     return [
       [
         'SELECT * FROM test_table',
@@ -126,7 +126,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Namespace.
    *   - Class name without namespace.
    */
-  public static function providerGetDriverClass() {
+  public function providerGetDriverClass() {
     return [
       [
         'nonexistent_class',
@@ -355,7 +355,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Driver for PDO connection.
    *   - Namespace for connection.
    */
-  public static function providerSchema() {
+  public function providerSchema() {
     return [
       [
         'Drupal\\Tests\\Core\\Database\\Stub\\Driver\\Schema',
@@ -385,7 +385,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Expected filtered comment.
    *   - Arguments for Connection::makeComment().
    */
-  public static function providerMakeComments() {
+  public function providerMakeComments() {
     return [
       [
         '/*  */ ',
@@ -421,7 +421,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Expected filtered comment.
    *   - Comment to filter.
    */
-  public static function providerFilterComments() {
+  public function providerFilterComments() {
     return [
       ['', ''],
       ['Exploit  *  / DROP TABLE node. --', 'Exploit * / DROP TABLE node; --'],
@@ -456,7 +456,7 @@ class ConnectionTest extends UnitTestCase {
    *   testEscapeField. The first value is the expected value, and the second
    *   value is the value to test.
    */
-  public static function providerEscapeTables() {
+  public function providerEscapeTables() {
     return [
       ['nocase', 'nocase'],
       ['camelCase', 'camelCase'],
@@ -491,7 +491,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Expected escaped string.
    *   - String to escape.
    */
-  public static function providerEscapeAlias() {
+  public function providerEscapeAlias() {
     return [
       ['!nocase!', 'nocase', ['!', '!']],
       ['`backtick`', 'backtick', ['`', '`']],
@@ -522,7 +522,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Expected escaped string.
    *   - String to escape.
    */
-  public static function providerEscapeFields() {
+  public function providerEscapeFields() {
     return [
       ['/title/', 'title', ['/', '/']],
       ['`backtick`', 'backtick', ['`', '`']],
@@ -556,7 +556,7 @@ class ConnectionTest extends UnitTestCase {
    *   testEscapeField. The first value is the expected value, and the second
    *   value is the value to test.
    */
-  public static function providerEscapeDatabase() {
+  public function providerEscapeDatabase() {
     return [
       ['/name/', 'name', ['/', '/']],
       ['`backtick`', 'backtick', ['`', '`']],
@@ -628,7 +628,7 @@ class ConnectionTest extends UnitTestCase {
    *   - Padded query.
    *   - Query options.
    */
-  public static function provideQueriesToTrim() {
+  public function provideQueriesToTrim() {
     return [
       'remove_non_breaking_space' => [
         'SELECT * FROM test',
@@ -735,7 +735,7 @@ class ConnectionTest extends UnitTestCase {
    *
    * @see ::testFindCallerFromDebugBacktraceWithMockedBacktrace()
    */
-  public static function providerMockedBacktrace(): array {
+  public function providerMockedBacktrace(): array {
     $stack = [
       [
         'file' => '/var/www/core/lib/Drupal/Core/Database/Log.php',

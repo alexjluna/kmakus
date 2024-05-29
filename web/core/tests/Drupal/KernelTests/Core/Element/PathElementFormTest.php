@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Element;
 
 use Drupal\Core\Form\FormInterface;
@@ -51,7 +49,8 @@ class PathElementFormTest extends KernelTestBase implements FormInterface {
       'name' => 'foobar',
       'mail' => 'foobar@example.com',
     ]);
-    $this->testUser->addRole($role->id())->save();
+    $this->testUser->addRole($role->id());
+    $this->testUser->save();
     \Drupal::service('current_user')->setAccount($this->testUser);
   }
 

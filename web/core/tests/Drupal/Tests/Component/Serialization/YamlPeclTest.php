@@ -24,7 +24,7 @@ class YamlPeclTest extends YamlTestBase {
    * @covers ::decode
    * @dataProvider providerEncodeDecodeTests
    */
-  public function testEncodeDecode(array $data): void {
+  public function testEncodeDecode($data) {
     $this->assertEquals($data, YamlPecl::decode(YamlPecl::encode($data)));
   }
 

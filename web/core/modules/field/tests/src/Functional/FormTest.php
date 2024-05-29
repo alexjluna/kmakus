@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Functional;
 
 use Drupal\Component\Utility\Html;
@@ -373,8 +371,7 @@ class FormTest extends FieldTestBase {
 
     // Display creation form -> 1 widget.
     $this->drupalGet('entity_test/add');
-    // Check that the Required symbol is present for the label of the field
-    // with unlimited cardinality.
+    // Check that the Required symbol is present for the multifield label.
     $this->assertSession()->elementAttributeContains('xpath', "//h4[contains(@class, 'label') and contains(text(), '{$this->field['label']}')]", 'class', 'js-form-required');
     // Check that the label of the field input is visually hidden and contains
     // the field title and an indication of the delta for a11y.
@@ -671,9 +668,6 @@ class FormTest extends FieldTestBase {
   public function testLabelOnMultiValueFields() {
     $user = $this->drupalCreateUser(['administer entity_test content']);
     $this->drupalLogin($user);
-
-    // Ensure that the 'bar' bundle exists, to avoid config validation errors.
-    entity_test_create_bundle('bar', entity_type: 'entity_test_base_field_display');
 
     FieldStorageConfig::create([
       'entity_type' => 'entity_test_base_field_display',

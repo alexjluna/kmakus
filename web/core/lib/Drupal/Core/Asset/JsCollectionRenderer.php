@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\Asset;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\DependencyInjection\DeprecatedServicePropertyTrait;
 use Drupal\Core\File\FileUrlGeneratorInterface;
@@ -41,24 +40,14 @@ class JsCollectionRenderer implements AssetCollectionRendererInterface {
    *   The asset query string.
    * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
    *   The file URL generator.
-   * @param \Drupal\Component\Datetime\TimeInterface|null $time
-   *   The time service.
    */
-  public function __construct(
-    AssetQueryStringInterface|StateInterface $asset_query_string,
-    FileUrlGeneratorInterface $file_url_generator,
-    protected ?TimeInterface $time = NULL,
-  ) {
+  public function __construct(AssetQueryStringInterface|StateInterface $asset_query_string, FileUrlGeneratorInterface $file_url_generator) {
     if ($asset_query_string instanceof StateInterface) {
       @trigger_error('Calling ' . __METHOD__ . '() with the $asset_query_string argument as \Drupal\Core\State\StateInterface instead of \Drupal\Core\Asset\AssetQueryStringInterface is deprecated in drupal:10.2.0 and will be required in drupal:11.0.0. See https://www.drupal.org/node/3358337', E_USER_DEPRECATED);
       $asset_query_string = \Drupal::service('asset.query_string');
     }
     $this->assetQueryString = $asset_query_string;
     $this->fileUrlGenerator = $file_url_generator;
-    if (!$time) {
-      @trigger_error('Calling ' . __METHOD__ . '() without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3387233', E_USER_DEPRECATED);
-      $this->time = \Drupal::service(TimeInterface::class);
-    }
   }
 
   /**
@@ -76,7 +65,7 @@ class JsCollectionRenderer implements AssetCollectionRendererInterface {
     // A dummy query-string is added to filenames, to gain control over
     // browser-caching. The string changes on every update or full cache
     // flush, forcing browsers to load a new copy of the files, as the
-    // URL changed. Files that should not be cached get the request time as a
+    // URL changed. Files that should not be cached get REQUEST_TIME as
     // query-string instead, to enforce reload on every page request.
     $default_query_string = $this->assetQueryString->get();
 
@@ -110,7 +99,7 @@ class JsCollectionRenderer implements AssetCollectionRendererInterface {
           // Only add the cache-busting query string if this isn't an aggregate
           // file.
           if (!isset($js_asset['preprocessed'])) {
-            $element['#attributes']['src'] .= $query_string_separator . ($js_asset['cache'] ? $query_string : $this->time->getRequestTime());
+            $element['#attributes']['src'] .= $query_string_separator . ($js_asset['cache'] ? $query_string : REQUEST_TIME);
           }
           break;
 

@@ -5,7 +5,7 @@ namespace Drupal\Component\Serialization;
 /**
  * Default serialization for serialized PHP.
  */
-class PhpSerialize implements ObjectAwareSerializationInterface {
+class PhpSerialize implements SerializationInterface {
 
   /**
    * {@inheritdoc}

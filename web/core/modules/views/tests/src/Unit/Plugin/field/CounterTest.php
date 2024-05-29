@@ -73,10 +73,7 @@ class CounterTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $route_provider = $this->createMock('Drupal\Core\Routing\RouteProviderInterface');
-    $display_plugin_manager = $this->getMockBuilder('\Drupal\views\Plugin\ViewsPluginManager')
-      ->disableOriginalConstructor()
-      ->getMock();
-    $this->view = new ViewExecutable($storage, $user, $views_data, $route_provider, $display_plugin_manager);
+    $this->view = new ViewExecutable($storage, $user, $views_data, $route_provider);
 
     $this->display = $this->getMockBuilder('Drupal\views\Plugin\views\display\DisplayPluginBase')
       ->disableOriginalConstructor()
@@ -103,7 +100,7 @@ class CounterTest extends UnitTestCase {
    * @return array
    *   Returns an array of row index to test.
    */
-  public static function providerRowIndexes() {
+  public function providerRowIndexes() {
     return [
       [0],
       [1],

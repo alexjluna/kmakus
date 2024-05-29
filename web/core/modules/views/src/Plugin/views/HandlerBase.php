@@ -85,7 +85,6 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   /**
    * Tracks whether the plugin is a handler.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public bool $is_handler;
 
   /**

@@ -7,8 +7,6 @@ namespace Drupal\Tests\jsonapi\Unit;
 use Drupal\jsonapi\JsonApiSpec;
 use Drupal\Tests\UnitTestCase;
 
-// cspell:ignore kitt
-
 /**
  * @coversDefaultClass \Drupal\jsonapi\JsonApiSpec
  * @group jsonapi
@@ -40,9 +38,9 @@ class JsonApiSpecTest extends UnitTestCase {
     $data['hyphen-start'] = ['-kittens', FALSE];
     $data['hyphen-middle'] = ['kitt-ens', TRUE];
     $data['hyphen-end'] = ['kittens-', FALSE];
-    $data['low-line-start'] = ['_kittens', FALSE];
-    $data['low-line-middle'] = ['kitt_ens', TRUE];
-    $data['low-line-end'] = ['kittens_', FALSE];
+    $data['lowline-start'] = ['_kittens', FALSE];
+    $data['lowline-middle'] = ['kitt_ens', TRUE];
+    $data['lowline-end'] = ['kittens_', FALSE];
     $data['space-start'] = [' kittens', FALSE];
     $data['space-middle'] = ['kitt ens', TRUE];
     $data['space-end'] = ['kittens ', FALSE];

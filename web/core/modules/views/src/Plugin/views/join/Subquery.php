@@ -2,8 +2,6 @@
 
 namespace Drupal\views\Plugin\views\join;
 
-use Drupal\views\Attribute\ViewsJoin;
-
 /**
  * Join handler for relationships that join with a subquery as the left field.
  *
@@ -17,14 +15,13 @@ use Drupal\views\Attribute\ViewsJoin;
  * - left_query: The subquery to use in the left side of the join clause.
  *
  * @ingroup views_join_handlers
+ * @ViewsJoin("subquery")
  */
-#[ViewsJoin("subquery")]
 class Subquery extends JoinPluginBase {
 
   /**
    * The left join query.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $left_query;
 
   /**

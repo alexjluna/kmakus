@@ -279,7 +279,7 @@ class TokenTest extends UnitTestCase {
     $this->assertEquals($expected, $result);
   }
 
-  public static function providerTestReplaceEscaping() {
+  public function providerTestReplaceEscaping() {
     $data = [];
 
     // No tokens. The first argument to Token::replace() should not be escaped.

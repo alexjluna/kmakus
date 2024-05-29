@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\process;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -51,7 +49,7 @@ class RouteTest extends KernelTestBase {
    *   An array of arrays, where the first element is the input to the Route
    *   process plugin, and the second is the expected results.
    */
-  public static function providerTestRoute() {
+  public function providerTestRoute() {
     // Internal link tests.
     // Valid link path and options.
     $values[0] = [
@@ -216,7 +214,7 @@ class RouteTest extends KernelTestBase {
    *   An array of arrays, where the first element is the input to the Route
    *   process plugin, and the second is the expected results.
    */
-  public static function providerTestRouteWithParamQuery() {
+  public function providerTestRouteWithParamQuery() {
     $values = [];
     $expected = [];
     // Valid link path with query options and parameters.

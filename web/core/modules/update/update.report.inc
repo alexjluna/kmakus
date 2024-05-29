@@ -88,8 +88,8 @@ function template_preprocess_update_report(&$variables) {
     'core' => t('Drupal core'),
     'module' => t('Modules'),
     'theme' => t('Themes'),
-    'module-uninstalled' => t('Uninstalled modules'),
-    'theme-uninstalled' => t('Uninstalled themes'),
+    'module-disabled' => t('Uninstalled modules'),
+    'theme-disabled' => t('Uninstalled themes'),
   ];
 
   $variables['project_types'] = [];

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Kernel;
 
 use Drupal\entity_test\Entity\EntityTestRev;
@@ -117,7 +115,7 @@ class FieldDisplayTest extends KernelTestBase {
 
     $build = $this->display->build($entity);
     $renderer = \Drupal::service('renderer');
-    $content = (string) $renderer->renderInIsolation($build);
+    $content = (string) $renderer->renderPlain($build);
     $this->setRawContent($content);
 
     $css_selector_converter = new CssSelectorConverter();

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Component\Render;
 
 use Drupal\Component\Render\FormattableMarkup;
@@ -52,7 +50,7 @@ class FormattableMarkupKernelTest extends KernelTestBase {
   /**
    * @return array
    */
-  public static function providerTestFormattableMarkupUri() {
+  public function providerTestFormattableMarkupUri() {
     $data = [];
     $data['routed-url'] = [
       'Hey giraffe <a href=":url">MUUUH</a>',
@@ -114,7 +112,7 @@ class FormattableMarkupKernelTest extends KernelTestBase {
   /**
    * @return array
    */
-  public static function providerTestFormattableMarkupUriWithException() {
+  public function providerTestFormattableMarkupUriWithException() {
     $data = [];
     $data['js-protocol'] = [
       'Hey giraffe <a href=":url">MUUUH</a>',

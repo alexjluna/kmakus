@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media_library\Kernel;
 
 use Drupal\Core\Cache\Cache;
@@ -120,7 +118,7 @@ class MediaLibraryStateTest extends KernelTestBase {
    * @return array
    *   The data sets to test.
    */
-  public static function providerCreate() {
+  public function providerCreate() {
     $test_data = [];
 
     // Assert no exception is thrown when we add the parameters as expected.
@@ -308,7 +306,7 @@ class MediaLibraryStateTest extends KernelTestBase {
    * @return array
    *   The data sets to test.
    */
-  public static function providerFromRequest() {
+  public function providerFromRequest() {
     $test_data = [];
 
     // Assert no exception is thrown when we use valid state parameters.

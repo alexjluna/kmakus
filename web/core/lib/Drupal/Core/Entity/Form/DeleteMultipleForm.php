@@ -5,7 +5,6 @@ namespace Drupal\Core\Entity\Form;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\BaseFormIdInterface;
 use Drupal\Core\Form\ConfirmFormBase;
-use Drupal\Core\Form\WorkspaceDynamicSafeFormInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\TypedData\TranslatableInterface;
 use Drupal\Core\Url;
@@ -18,9 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides an entities deletion confirmation form.
  */
-class DeleteMultipleForm extends ConfirmFormBase implements BaseFormIdInterface, WorkspaceDynamicSafeFormInterface {
-
-  use WorkspaceSafeFormTrait;
+class DeleteMultipleForm extends ConfirmFormBase implements BaseFormIdInterface {
 
   /**
    * The current user.
@@ -321,13 +318,6 @@ class DeleteMultipleForm extends ConfirmFormBase implements BaseFormIdInterface,
    */
   protected function getInaccessibleMessage($count) {
     return $this->formatPlural($count, "@count item has not been deleted because you do not have the necessary permissions.", "@count items have not been deleted because you do not have the necessary permissions.");
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function isWorkspaceSafeForm(array $form, FormStateInterface $form_state): bool {
-    return $this->isWorkspaceSafeEntityType($this->entityType);
   }
 
 }

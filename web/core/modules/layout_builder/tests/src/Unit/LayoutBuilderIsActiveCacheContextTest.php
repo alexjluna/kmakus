@@ -96,7 +96,7 @@ class LayoutBuilderIsActiveCacheContextTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetContext().
    */
-  public static function providerTestGetContext() {
+  public function providerTestGetContext() {
     $data = [];
     $data['overridden'] = [
       TRUE,

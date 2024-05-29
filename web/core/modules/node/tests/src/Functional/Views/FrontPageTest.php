@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional\Views;
 
 use Drupal\Core\Cache\Cache;
@@ -94,7 +92,7 @@ class FrontPageTest extends ViewTestBase {
       $values['promote'] = TRUE;
       $values['status'] = TRUE;
       // Test descending sort order.
-      $values['created'] = \Drupal::time()->getRequestTime() - $i;
+      $values['created'] = REQUEST_TIME - $i;
       // Test the sticky order.
       if ($i == 5) {
         $values['sticky'] = TRUE;

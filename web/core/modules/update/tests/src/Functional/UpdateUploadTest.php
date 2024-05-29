@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\update\Functional;
 
 use Drupal\Core\Extension\InfoParserDynamic;
@@ -25,7 +23,7 @@ class UpdateUploadTest extends UpdateUploaderTestBase {
    *
    * @var array
    */
-  protected static $modules = ['file'];
+  protected static $modules = ['update', 'update_test', 'file'];
 
   /**
    * {@inheritdoc}
@@ -102,7 +100,7 @@ class UpdateUploadTest extends UpdateUploaderTestBase {
     // core/authorize.php.
     $this->assertSession()->linkExists('Add another module');
     $this->assertSession()->linkByHrefExists(Url::fromRoute('update.module_install')->toString());
-    $this->assertSession()->linkExists('Install newly added modules');
+    $this->assertSession()->linkExists('Enable newly added modules');
     $this->assertSession()->linkByHrefExists(Url::fromRoute('system.modules_list')->toString());
     $this->assertSession()->linkExists('Administration pages');
     $this->assertSession()->linkByHrefExists(Url::fromRoute('system.admin')->toString());
@@ -120,7 +118,7 @@ class UpdateUploadTest extends UpdateUploaderTestBase {
     $info = $info_parser->parse($installedInfoFilePath);
     $this->assertEquals('8.x-1.0', $info['version']);
 
-    // Install the module.
+    // Enable the module.
     $this->drupalGet('admin/modules');
     $this->submitForm(['modules[update_test_new_module][enable]' => TRUE], 'Install');
 

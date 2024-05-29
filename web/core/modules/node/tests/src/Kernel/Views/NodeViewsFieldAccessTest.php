@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Kernel\Views;
 
-use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
 use Drupal\user\Entity\User;
@@ -24,21 +21,11 @@ class NodeViewsFieldAccessTest extends FieldFieldAccessTestBase {
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Remove and fix test to not rely on super user.
-   * @see https://www.drupal.org/project/drupal/issues/3437620
-   */
-  protected bool $usesSuperUserAccessPolicy = TRUE;
-
-  /**
-   * {@inheritdoc}
    */
   protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
     $this->installEntitySchema('node');
-    // Make the site multilingual to have a working language field handler.
-    ConfigurableLanguage::create(['id' => 'es', 'title' => 'Spanish title', 'label' => 'Spanish label'])->save();
   }
 
   /**
@@ -81,7 +68,7 @@ class NodeViewsFieldAccessTest extends FieldFieldAccessTestBase {
     $this->assertFieldAccess('node', 'sticky', 'Off');
 
     // $this->assertFieldAccess('node', 'created', \Drupal::service('date.formatter')->format(123456));
-    // $this->assertFieldAccess('node', 'changed', \Drupal::service('date.formatter')->format(\Drupal::time()->getRequestTime()));
+    // $this->assertFieldAccess('node', 'changed', \Drupal::service('date.formatter')->format(REQUEST_TIME));
   }
 
 }

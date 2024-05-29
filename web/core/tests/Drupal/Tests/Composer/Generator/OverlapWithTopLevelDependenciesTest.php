@@ -16,7 +16,7 @@ class OverlapWithTopLevelDependenciesTest extends TestCase {
   /**
    * Provides data for testOverlapWithTemplateProject().
    */
-  public static function templateProjectPathProvider() {
+  public function templateProjectPathProvider() {
     return [
       [
         'composer/Template/RecommendedProject',

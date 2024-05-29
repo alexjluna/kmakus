@@ -18,7 +18,7 @@ class MigrationConfigurationTraitTest extends UnitTestCase {
    * @covers ::getLegacyDrupalVersion
    * @dataProvider providerTestGetLegacyDrupalVersion
    */
-  public function testGetLegacyDrupalVersion($expected_version_string, $schema_version, $exception, $system_table_exists) {
+  public function testGetLegacyDrupalVersion($expected_version_string, $schema_version, $exception, $table_map) {
     if ($schema_version) {
       $statement = $this->createMock('\Drupal\Core\Database\StatementInterface');
       $statement->expects($this->any())
@@ -27,9 +27,9 @@ class MigrationConfigurationTraitTest extends UnitTestCase {
     }
 
     $schema = $this->createMock('\Drupal\Core\Database\Schema');
-    $schema->expects($this->once())
+    $schema->expects($this->any())
       ->method('tableExists')
-      ->willReturn($system_table_exists);
+      ->willReturnMap($table_map);
 
     $connection = $this->getMockBuilder('Drupal\Core\Database\Connection')
       ->disableOriginalConstructor()
@@ -57,67 +57,88 @@ class MigrationConfigurationTraitTest extends UnitTestCase {
   /**
    * Provides data for testGetLegacyDrupalVersion.
    */
-  public static function providerTestGetLegacyDrupalVersion() {
+  public function providerTestGetLegacyDrupalVersion() {
     return [
       'D5' => [
         'expected_version_string' => '5',
         'schema_version' => '1678',
         'exception' => NULL,
-        'system_table_exists' => TRUE,
+        'table_map' => [
+          ['system', TRUE],
+          ['key_value', FALSE],
+        ],
       ],
       'D6' => [
         'expected_version_string' => '6',
         'schema_version' => '6057',
         'exception' => NULL,
-        'system_table_exists' => TRUE,
+        'table_map' => [
+          ['system', TRUE],
+          ['key_value', FALSE],
+        ],
       ],
       'D7' => [
         'expected_version_string' => '7',
         'schema_version' => '7065',
         'exception' => NULL,
-        'system_table_exists' => TRUE,
+        'table_map' => [
+          ['system', TRUE],
+          ['key_value', FALSE],
+        ],
       ],
       'D8' => [
-        'expected_version_string' => FALSE,
+        'expected_version_string' => '8',
         'schema_version' => serialize('8976'),
         'exception' => NULL,
-        'system_table_exists' => FALSE,
+        'table_map' => [
+          ['system', FALSE],
+          ['key_value', TRUE],
+        ],
       ],
       'D9' => [
-        'expected_version_string' => FALSE,
+        'expected_version_string' => '9',
         'schema_version' => serialize('9270'),
         'exception' => NULL,
-        'system_table_exists' => FALSE,
-      ],
-      'D10' => [
-        'expected_version_string' => FALSE,
-        'schema_version' => serialize('10101'),
-        'exception' => NULL,
-        'system_table_exists' => FALSE,
+        'table_map' => [
+          ['system', FALSE],
+          ['key_value', TRUE],
+        ],
       ],
       'Not drupal' => [
         'expected_version_string' => FALSE,
         'schema_version' => "not drupal I guess",
         'exception' => NULL,
-        'system_table_exists' => FALSE,
+        'table_map' => [
+          ['system', FALSE],
+          ['key_value', FALSE],
+        ],
       ],
       'D5 almost' => [
         'expected_version_string' => FALSE,
         'schema_version' => '123',
         'exception' => NULL,
-        'system_table_exists' => TRUE,
+        'table_map' => [
+          ['system', TRUE],
+          ['key_value', FALSE],
+        ],
       ],
       'D5/6/7 Exception' => [
         'expected_version_string' => FALSE,
         'schema_version' => NULL,
         'exception' => new DatabaseExceptionWrapper(),
-        'system_table_exists' => TRUE,
+        'table_map' => [
+          ['system', TRUE],
+          ['key_value', FALSE],
+        ],
       ],
       'D8/9 Exception' => [
         'expected_version_string' => FALSE,
         'schema_version' => NULL,
         'exception' => new DatabaseExceptionWrapper(),
-        'system_table_exists' => FALSE,
+        'table_map' => [
+          ['system', FALSE],
+          ['key_value', TRUE],
+        ],
       ],
     ];
   }

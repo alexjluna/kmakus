@@ -2,10 +2,8 @@
 
 namespace Drupal\user\Entity;
 
-use Drupal\Core\Config\Action\Attribute\ActionMethod;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\user\RoleInterface;
 
 /**
@@ -128,7 +126,6 @@ class Role extends ConfigEntityBase implements RoleInterface {
   /**
    * {@inheritdoc}
    */
-  #[ActionMethod(adminLabel: new TranslatableMarkup('Add permission to role'))]
   public function grantPermission($permission) {
     if ($this->isAdmin()) {
       return $this;

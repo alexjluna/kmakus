@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\forum\Functional\migrate_drupal\d7;
 
 use Drupal\Tests\migrate_drupal_ui\Functional\MigrateUpgradeExecuteTestBase;
@@ -13,7 +11,6 @@ use Drupal\Tests\migrate_drupal_ui\Functional\MigrateUpgradeExecuteTestBase;
  *
  * @group forum
  * @group #slow
- * @group legacy
  */
 class Upgrade7Test extends MigrateUpgradeExecuteTestBase {
 
@@ -63,7 +60,7 @@ class Upgrade7Test extends MigrateUpgradeExecuteTestBase {
    */
   protected function getEntityCounts() {
     return [
-      'action' => 24,
+      'action' => 27,
       'base_field_override' => 3,
       'block' => 26,
       'block_content' => 1,

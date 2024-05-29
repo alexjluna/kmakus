@@ -2,7 +2,6 @@
 
 namespace Drupal\language\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -15,8 +14,11 @@ use Drupal\migrate\Row;
  * - The language content type, e.g. '1'
  * - The entity_translation_entity_types, an array of entity types.
  * - An entity type used with entity translation, e.g. comment.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "content_translation_enabled_setting"
+ * )
  */
-#[MigrateProcess('content_translation_enabled_setting')]
 class ContentTranslationEnabledSetting extends ProcessPluginBase {
 
   /**

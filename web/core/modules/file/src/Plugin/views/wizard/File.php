@@ -2,18 +2,17 @@
 
 namespace Drupal\file\Plugin\views\wizard;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\views\Attribute\ViewsWizard;
 use Drupal\views\Plugin\views\wizard\WizardPluginBase;
 
 /**
  * Tests creating managed files views with the wizard.
+ *
+ * @ViewsWizard(
+ *   id = "file_managed",
+ *   base_table = "file_managed",
+ *   title = @Translation("Files")
+ * )
  */
-#[ViewsWizard(
-  id: 'file_managed',
-  title: new TranslatableMarkup('Files'),
-  base_table: 'file_managed'
-)]
 class File extends WizardPluginBase {
 
   /**

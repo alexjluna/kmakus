@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media\Kernel;
 
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\content_translation\ContentTranslationHandler;
 
 /**
- * Tests multilingual fields logic.
+ * Tests multilanguage fields logic.
  *
  * @group media
  */

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\workspaces\Kernel;
 
 use Drupal\Core\Entity\EntityTypeManager;
@@ -28,6 +26,7 @@ class EntityReferenceSupportedNewEntitiesConstraintValidatorTest extends KernelT
     'user',
     'workspaces',
     'entity_test',
+    'path_alias',
   ];
 
   /**

@@ -89,7 +89,7 @@ class UnroutedUrlAssemblerTest extends UnitTestCase {
   /**
    * Provides test data for testAssembleWithExternalUrl.
    */
-  public static function providerTestAssembleWithExternalUrl() {
+  public function providerTestAssembleWithExternalUrl() {
     return [
       ['http://example.com/test', [], 'http://example.com/test'],
       ['http://example.com/test', ['fragment' => 'example'], 'http://example.com/test#example'],
@@ -122,7 +122,7 @@ class UnroutedUrlAssemblerTest extends UnitTestCase {
   /**
    * @return array
    */
-  public static function providerTestAssembleWithLocalUri() {
+  public function providerTestAssembleWithLocalUri() {
     return [
       ['base:example', [], FALSE, '/example'],
       ['base:example', ['query' => ['foo' => 'bar']], FALSE, '/example?foo=bar'],

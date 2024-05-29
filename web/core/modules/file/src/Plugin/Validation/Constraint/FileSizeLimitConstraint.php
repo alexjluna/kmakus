@@ -2,19 +2,18 @@
 
 namespace Drupal\file\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * File size max constraint.
+ *
+ * @Constraint(
+ *   id = "FileSizeLimit",
+ *   label = @Translation("File Size Limit", context = "Validation"),
+ *   type = "file"
+ * )
  */
-#[Constraint(
-  id: 'FileSizeLimit',
-  label: new TranslatableMarkup('File Size Limit', [], ['context' => 'Validation']),
-  type: 'file'
-)]
-class FileSizeLimitConstraint extends SymfonyConstraint {
+class FileSizeLimitConstraint extends Constraint {
 
   /**
    * The message for when file size limit is exceeded.

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\help\Functional\Update;
 
 use Drupal\FunctionalTests\Update\UpdatePathTestBase;
@@ -12,7 +10,6 @@ use Drupal\search\Entity\SearchPage;
  * Tests merging help topics module when the module is not installed.
  *
  * @group Update
- * @group #slow
  */
 class HelpTopicsMerge extends UpdatePathTestBase {
 

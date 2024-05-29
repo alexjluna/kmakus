@@ -25,10 +25,25 @@ interface WorkspaceNegotiatorInterface {
   public function applies(Request $request);
 
   /**
-   * Notifies the negotiator that the workspace ID returned has been accepted.
+   * Gets the negotiated workspace, if any.
+   *
+   * Note that it is the responsibility of each implementation to check whether
+   * the negotiated workspace actually exists in the storage.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The HTTP request.
+   *
+   * @return \Drupal\workspaces\WorkspaceInterface|null
+   *   The negotiated workspace or NULL if the negotiator could not determine a
+   *   valid workspace.
+   */
+  public function getActiveWorkspace(Request $request);
+
+  /**
+   * Sets the negotiated workspace.
    *
    * @param \Drupal\workspaces\WorkspaceInterface $workspace
-   *   The negotiated workspace entity.
+   *   The workspace entity.
    */
   public function setActiveWorkspace(WorkspaceInterface $workspace);
 

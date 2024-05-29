@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\process;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -82,7 +80,7 @@ class ExtractTest extends KernelTestBase {
   /**
    * Provides multiple source data for "extract" process plugin test.
    */
-  public static function multipleValueProviderSource() {
+  public function multipleValueProviderSource() {
     $tests = [
       [
         'source_data' => [

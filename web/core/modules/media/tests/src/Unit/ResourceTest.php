@@ -16,7 +16,7 @@ class ResourceTest extends UnitTestCase {
   /**
    * Test cases for ::testSetDimensions.
    */
-  public static function setDimensionsTestCases() {
+  public function setDimensionsTestCases() {
     return [
       'Standard rich dimensions' => [
         'rich',

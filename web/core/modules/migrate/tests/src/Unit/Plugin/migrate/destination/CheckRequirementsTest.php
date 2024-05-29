@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\Tests\migrate\Unit\Plugin\migrate\destination;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\migrate\Exception\RequirementsException;
@@ -29,8 +28,7 @@ class CheckRequirementsTest extends UnitTestCase {
       [],
       $this->prophesize(MigrationInterface::class)->reveal(),
       $this->prophesize(ConfigFactoryInterface::class)->reveal(),
-      $this->prophesize(LanguageManagerInterface::class)->reveal(),
-      $this->prophesize(TypedConfigManagerInterface::class)->reveal(),
+      $this->prophesize(LanguageManagerInterface::class)->reveal()
     );
     $this->expectException(RequirementsException::class);
     $this->expectExceptionMessage("Destination plugin 'test' did not meet the requirements");

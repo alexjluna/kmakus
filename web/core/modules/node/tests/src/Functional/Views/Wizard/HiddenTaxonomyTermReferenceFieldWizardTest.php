@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional\Views\Wizard;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;

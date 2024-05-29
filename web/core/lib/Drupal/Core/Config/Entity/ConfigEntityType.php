@@ -18,13 +18,11 @@ class ConfigEntityType extends EntityType implements ConfigEntityTypeInterface {
    *
    * @see \Drupal\Core\Config\Entity\ConfigEntityTypeInterface::getConfigPrefix()
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $config_prefix;
 
   /**
    * {@inheritdoc}
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $static_cache = FALSE;
 
   /**
@@ -32,7 +30,6 @@ class ConfigEntityType extends EntityType implements ConfigEntityTypeInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $lookup_keys = [];
 
   /**
@@ -40,7 +37,6 @@ class ConfigEntityType extends EntityType implements ConfigEntityTypeInterface {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $config_export = [];
 
   /**
@@ -99,28 +95,28 @@ class ConfigEntityType extends EntityType implements ConfigEntityTypeInterface {
    * {@inheritdoc}
    */
   public function getBaseTable() {
-    return NULL;
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getRevisionDataTable() {
-    return NULL;
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getRevisionTable() {
-    return NULL;
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getDataTable() {
-    return NULL;
+    return FALSE;
   }
 
   /**

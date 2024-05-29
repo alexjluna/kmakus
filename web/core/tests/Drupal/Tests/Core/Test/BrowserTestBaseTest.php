@@ -26,10 +26,10 @@ class BrowserTestBaseTest extends UnitTestCase {
       ->method('getDriver')
       ->willReturn($driver);
 
-    $btb = $this->getMockBuilder(BrowserTestBaseMockableClass::class)
+    $btb = $this->getMockBuilder(BrowserTestBase::class)
       ->disableOriginalConstructor()
       ->onlyMethods(['getSession'])
-      ->getMock();
+      ->getMockForAbstractClass();
     $btb->expects($this->any())
       ->method('getSession')
       ->willReturn($session);
@@ -46,7 +46,7 @@ class BrowserTestBaseTest extends UnitTestCase {
 
     $browserkit_client = $this->getMockBuilder(DrupalTestBrowser::class)
       ->onlyMethods(['getClient'])
-      ->getMock();
+      ->getMockForAbstractClass();
     $browserkit_client->expects($this->once())
       ->method('getClient')
       ->willReturn($expected);
@@ -83,10 +83,10 @@ class BrowserTestBaseTest extends UnitTestCase {
   public function testTearDownWithoutSetUp() {
     $method = 'cleanupEnvironment';
     $this->assertTrue(method_exists(BrowserTestBase::class, $method));
-    $btb = $this->getMockBuilder(BrowserTestBaseMockableClass::class)
+    $btb = $this->getMockBuilder(BrowserTestBase::class)
       ->disableOriginalConstructor()
       ->onlyMethods([$method])
-      ->getMock();
+      ->getMockForAbstractClass();
     $btb->expects($this->never())->method($method);
     $ref_tearDown = new \ReflectionMethod($btb, 'tearDown');
     $ref_tearDown->invoke($btb);
@@ -104,12 +104,5 @@ class BrowserTestBaseTest extends UnitTestCase {
     // @phpstan-ignore-next-line
     $this->assertInstanceOf(Random::class, $this->randomGenerator);
   }
-
-}
-
-/**
- * A class extending BrowserTestBase for testing purposes.
- */
-class BrowserTestBaseMockableClass extends BrowserTestBase {
 
 }

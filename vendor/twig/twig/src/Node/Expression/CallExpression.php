@@ -61,15 +61,7 @@ abstract class CallExpression extends AbstractExpression
 
         $first = true;
 
-        if ($this->hasAttribute('needs_charset') && $this->getAttribute('needs_charset')) {
-            $compiler->raw('$this->env->getCharset()');
-            $first = false;
-        }
-
         if ($this->hasAttribute('needs_environment') && $this->getAttribute('needs_environment')) {
-            if (!$first) {
-                $compiler->raw(', ');
-            }
             $compiler->raw('$this->env');
             $first = false;
         }
@@ -148,7 +140,7 @@ abstract class CallExpression extends AbstractExpression
             throw new \LogicException($message);
         }
 
-        [$callableParameters, $isPhpVariadic] = $this->getCallableParameters($callable, $isVariadic);
+        list($callableParameters, $isPhpVariadic) = $this->getCallableParameters($callable, $isVariadic);
         $arguments = [];
         $names = [];
         $missingArguments = [];
@@ -253,9 +245,6 @@ abstract class CallExpression extends AbstractExpression
         if ($this->hasNode('node')) {
             array_shift($parameters);
         }
-        if ($this->hasAttribute('needs_charset') && $this->getAttribute('needs_charset')) {
-            array_shift($parameters);
-        }
         if ($this->hasAttribute('needs_environment') && $this->getAttribute('needs_environment')) {
             array_shift($parameters);
         }
@@ -308,7 +297,7 @@ abstract class CallExpression extends AbstractExpression
         }
         $r = new \ReflectionFunction($closure);
 
-        if (str_contains($r->name, '{closure')) {
+        if (str_contains($r->name, '{closure}')) {
             return $this->reflector = [$r, $callable, 'Closure'];
         }
 

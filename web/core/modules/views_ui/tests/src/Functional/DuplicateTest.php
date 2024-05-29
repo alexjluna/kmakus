@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views_ui\Functional;
-
-use Drupal\language\Entity\ConfigurableLanguage;
 
 /**
  * Tests the UI for view duplicate tool.
@@ -12,11 +8,6 @@ use Drupal\language\Entity\ConfigurableLanguage;
  * @group views_ui
  */
 class DuplicateTest extends UITestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $modules = ['config_translation', 'locale', 'language'];
 
   /**
    * {@inheritdoc}
@@ -36,16 +27,9 @@ class DuplicateTest extends UITestBase {
    * Checks if duplicated view exists and has correct label.
    */
   public function testDuplicateView() {
-    $language_manager = $this->container->get('language_manager');
-    ConfigurableLanguage::createFromLangcode('nl')->save();
 
     // Create random view.
     $random_view = $this->randomView();
-
-    // Add a translation to the View.
-    $translation = $language_manager->getLanguageConfigOverride('nl', 'views.view.' . $random_view['id']);
-    $translation->setData(['label' => 'NL label']);
-    $translation->save();
 
     // Initialize array for duplicated view.
     $view = [];
@@ -63,9 +47,6 @@ class DuplicateTest extends UITestBase {
 
     // Assert that the page title is correctly displayed.
     $this->assertSession()->pageTextContains($view['label']);
-
-    $copy_translation = $language_manager->getLanguageConfigOverride('nl', 'views.view.' . $view['id']);
-    $this->assertEquals(['label' => 'NL label'], $copy_translation->get());
   }
 
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views_ui\Functional;
 
 use Drupal\field\Entity\FieldConfig;
@@ -13,7 +11,6 @@ use Drupal\views\ViewExecutable;
  * Tests handler UI for views.
  *
  * @group views_ui
- * @group #slow
  * @see \Drupal\views\Plugin\views\HandlerBase
  */
 class HandlerTest extends UITestBase {

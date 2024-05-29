@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\filter\Kernel\Migrate\d6;
 
 use Drupal\filter\Plugin\migrate\process\d6\FilterFormatPermission;

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Extension;
 
 use Drupal\Core\Database\Database;
@@ -104,7 +102,7 @@ class ModuleInstallerTest extends KernelTestBase {
   /**
    * Data provider for testInvalidCoreInstall().
    */
-  public static function providerTestInvalidCoreInstall() {
+  public function providerTestInvalidCoreInstall() {
     return [
       'no dependencies system_core_incompatible_semver_test' => [
         'system_core_incompatible_semver_test',

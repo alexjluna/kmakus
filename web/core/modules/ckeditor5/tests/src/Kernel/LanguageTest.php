@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Drupal\Tests\ckeditor5\Kernel;
 
@@ -102,19 +102,19 @@ class LanguageTest extends KernelTestBase {
     return [
       'Language code transformed from browser mappings' => [
         'drupal_langcode' => 'pt-pt',
-        'cke5_langcode' => 'pt',
+        'cke_langcode' => 'pt',
       ],
       'Language code transformed from browser mappings 2' => [
         'drupal_langcode' => 'zh-hans',
-        'cke5_langcode' => 'zh-cn',
+        'cke_langcode' => 'zh-cn',
       ],
       'Language code both in Drupal and CKEditor' => [
         'drupal_langcode' => 'fi',
-        'cke5_langcode' => 'fi',
+        'cke_langcode' => 'fi',
       ],
       'Language code not in Drupal but in CKEditor 5 requires new language.mappings entry' => [
         'drupal_langcode' => $random_langcode,
-        'cke5_langcode' => 'de-ch',
+        'cke_langcode' => 'de-ch',
         'is_missing_mapping' => TRUE,
       ],
     ];

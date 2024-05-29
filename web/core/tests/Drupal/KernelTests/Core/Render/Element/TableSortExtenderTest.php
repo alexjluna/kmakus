@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Render\Element;
 
 use Drupal\Core\Utility\TableSort;
 use Drupal\KernelTests\KernelTestBase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 /**
  * Tests table sorting.
@@ -35,7 +31,6 @@ class TableSortExtenderTest extends KernelTestBase {
     ];
     $request = Request::createFromGlobals();
     $request->query->replace([]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $this->assertEquals($expected_ts, $ts, 'Simple table headers sorted correctly.');
@@ -48,7 +43,6 @@ class TableSortExtenderTest extends KernelTestBase {
       // headers are overridable.
       'order' => 'bar',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $this->assertEquals($expected_ts, $ts, 'Simple table headers plus non-overriding $_GET parameters sorted correctly.');
@@ -62,7 +56,6 @@ class TableSortExtenderTest extends KernelTestBase {
       // it in the links that it creates.
       'alpha' => 'beta',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $expected_ts['sort'] = 'desc';
     $expected_ts['query'] = ['alpha' => 'beta'];
@@ -90,7 +83,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '2',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -109,7 +101,6 @@ class TableSortExtenderTest extends KernelTestBase {
       // exist.
       'order' => 'bar',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -130,7 +121,6 @@ class TableSortExtenderTest extends KernelTestBase {
       // it in the links that it creates.
       'alpha' => 'beta',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $expected_ts = [
       'name' => '1',
@@ -175,7 +165,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '1',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -192,7 +181,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '2',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -209,7 +197,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '3',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -226,7 +213,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '4',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [
@@ -243,7 +229,6 @@ class TableSortExtenderTest extends KernelTestBase {
     $request->query->replace([
       'order' => '5',
     ]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     \Drupal::getContainer()->get('request_stack')->push($request);
     $ts = TableSort::getContextFromRequest($headers, $request);
     $expected_ts = [

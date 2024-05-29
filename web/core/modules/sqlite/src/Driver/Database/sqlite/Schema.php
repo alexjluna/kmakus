@@ -28,8 +28,8 @@ class Schema extends DatabaseSchema {
   /**
    * {@inheritdoc}
    */
-  public function tableExists($table, $add_prefix = TRUE) {
-    $info = $this->getPrefixInfo($table, $add_prefix);
+  public function tableExists($table) {
+    $info = $this->getPrefixInfo($table);
 
     // Don't use {} around sqlite_master table.
     return (bool) $this->connection->query('SELECT 1 FROM [' . $info['schema'] . '].sqlite_master WHERE type = :type AND name = :name', [':type' => 'table', ':name' => $info['table']])->fetchField();

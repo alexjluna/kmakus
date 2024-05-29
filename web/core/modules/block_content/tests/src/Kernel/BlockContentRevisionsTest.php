@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block_content\Kernel;
 
 use Drupal\block_content\Entity\BlockContent;

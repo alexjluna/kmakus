@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Lock;
 
 use Drupal\Core\Lock\DatabaseLockBackend;

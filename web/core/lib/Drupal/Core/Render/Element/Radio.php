@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\Render\Element;
 
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -13,9 +12,10 @@ use Drupal\Core\Render\Element;
  *
  * @see \Drupal\Core\Render\Element\Radios
  * @see \Drupal\Core\Render\Element\Checkbox
+ *
+ * @FormElement("radio")
  */
-#[FormElement('radio')]
-class Radio extends FormElementBase {
+class Radio extends FormElement {
 
   /**
    * {@inheritdoc}

@@ -29,6 +29,7 @@
   font-family: var(--font-sans);
   font-size: var(--font-size-l);
   font-weight: 700;
+  -webkit-appearance: none;
   appearance: none;
   -webkit-font-smoothing: antialiased;
 }

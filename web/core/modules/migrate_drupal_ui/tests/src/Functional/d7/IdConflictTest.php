@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d7;
 
 use Drupal\Tests\migrate_drupal_ui\Functional\MigrateUpgradeExecuteTestBase;
@@ -21,6 +19,7 @@ class IdConflictTest extends MigrateUpgradeExecuteTestBase {
     'content_translation',
     'language',
     'migrate_drupal_ui',
+    'statistics',
     'telephone',
   ];
 

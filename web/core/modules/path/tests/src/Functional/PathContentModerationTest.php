@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\path\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -55,30 +53,7 @@ class PathContentModerationTest extends BrowserTestBase {
     $workflow->getTypePlugin()->addEntityTypeAndBundle('node', 'moderated');
     $workflow->save();
 
-    $this->drupalLogin($this->drupalCreateUser([
-      'administer workflows',
-      'access administration pages',
-      'administer content types',
-      'administer content translation',
-      'administer nodes',
-      'view latest version',
-      'view any unpublished content',
-      'access content overview',
-      'use editorial transition create_new_draft',
-      'use editorial transition publish',
-      'use editorial transition archive',
-      'use editorial transition archived_draft',
-      'use editorial transition archived_published',
-      'administer languages',
-      'administer site configuration',
-      'administer url aliases',
-      'create url aliases',
-      'view the administration theme',
-      'translate any entity',
-      'create content translations',
-      'create moderated content',
-      'edit own moderated content',
-    ]));
+    $this->drupalLogin($this->rootUser);
 
     // Enable URL language detection and selection.
     $edit = ['language_interface[enabled][language-url]' => 1];

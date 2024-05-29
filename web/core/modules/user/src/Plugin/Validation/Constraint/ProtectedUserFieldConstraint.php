@@ -2,18 +2,17 @@
 
 namespace Drupal\user\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Checks if the plain text password is provided for editing a protected field.
+ *
+ * @Constraint(
+ *   id = "ProtectedUserField",
+ *   label = @Translation("Password required for protected field change", context = "Validation")
+ * )
  */
-#[Constraint(
-  id: 'ProtectedUserField',
-  label: new TranslatableMarkup('Password required for protected field change', [], ['context' => 'Validation'])
-)]
-class ProtectedUserFieldConstraint extends SymfonyConstraint {
+class ProtectedUserFieldConstraint extends Constraint {
 
   /**
    * Violation message.

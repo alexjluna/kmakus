@@ -3,7 +3,6 @@
 namespace Drupal\big_pipe\Render;
 
 use Drupal\Core\Render\HtmlResponse;
-use Drupal\Core\Session\ResponseKeepSessionOpenInterface;
 
 /**
  * A response that is sent in chunks by the BigPipe service.
@@ -19,7 +18,7 @@ use Drupal\Core\Session\ResponseKeepSessionOpenInterface;
  *   created in https://www.drupal.org/node/2577631. Only code internal to
  *   BigPipe should instantiate or type hint to this class.
  */
-class BigPipeResponse extends HtmlResponse implements ResponseKeepSessionOpenInterface {
+class BigPipeResponse extends HtmlResponse {
 
   /**
    * The BigPipe service.

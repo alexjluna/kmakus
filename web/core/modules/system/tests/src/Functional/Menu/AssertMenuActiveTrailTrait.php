@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\Menu;
 
 use Drupal\Core\Url;
@@ -28,7 +26,8 @@ trait AssertMenuActiveTrailTrait {
    *   (optional) The class of the active element. Defaults to 'is-active'.
    */
   protected function assertMenuActiveTrail($tree, $last_active, $active_trail_class = 'menu-item--active-trail', $active_class = 'is-active') {
-    $active_link_path = array_key_last($tree);
+    end($tree);
+    $active_link_path = key($tree);
     $active_link_title = array_pop($tree);
     $xpath = '';
     if ($tree) {

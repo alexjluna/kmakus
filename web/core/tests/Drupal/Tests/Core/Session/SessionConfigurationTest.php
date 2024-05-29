@@ -47,7 +47,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestGeneratedCookieDomain() {
+  public function providerTestGeneratedCookieDomain() {
     return [
       ['http://example.com/path/index.php', '.example.com'],
       ['http://www.example.com/path/index.php', '.www.example.com'],
@@ -86,7 +86,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestEnforcedCookieDomain() {
+  public function providerTestEnforcedCookieDomain() {
     return [
       ['http://example.com/path/index.php', '.example.com'],
       ['http://www.example.com/path/index.php', '.example.com'],
@@ -152,7 +152,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestCookieSecure() {
+  public function providerTestCookieSecure() {
     return [
       ['http://example.com/path/index.php', FALSE],
       ['https://www.example.com/path/index.php', TRUE],
@@ -185,7 +185,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestGeneratedSessionName() {
+  public function providerTestGeneratedSessionName() {
     $data = [
       ['http://example.com/path/index.php', 'SESS', 'example.com'],
       ['http://www.example.com/path/index.php', 'SESS', 'www.example.com'],
@@ -233,7 +233,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestEnforcedSessionName() {
+  public function providerTestEnforcedSessionName() {
     $data = [
       ['http://example.com/path/index.php', 'SESS', '.example.com'],
       ['http://www.example.com/path/index.php', 'SESS', '.example.com'],
@@ -279,7 +279,7 @@ class SessionConfigurationTest extends UnitTestCase {
    * @return array
    *   Test data
    */
-  public static function providerTestConstructorDefaultSettings() {
+  public function providerTestConstructorDefaultSettings() {
     return [
       [[], 48, 6],
       [['sid_length' => 100], 100, 6],

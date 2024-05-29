@@ -3,7 +3,7 @@
 namespace Drupal\Component\Utility;
 
 /**
- * Wraps __toString in a trait to avoid some fatal errors.
+ * Wraps __toString in a trait to avoid some fatals.
  */
 trait ToStringTrait {
 

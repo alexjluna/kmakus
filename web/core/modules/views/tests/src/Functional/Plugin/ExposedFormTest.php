@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Functional\Plugin;
 
 use Drupal\Component\Utility\Html;
@@ -324,7 +322,7 @@ class ExposedFormTest extends ViewTestBase {
    * @return array
    *   Array of display names to test.
    */
-  public static function providerTestExposedBlock() {
+  public function providerTestExposedBlock() {
     return [
       'page_display' => ['page_1'],
       'block_display' => ['block_1'],

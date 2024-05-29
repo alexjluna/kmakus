@@ -13,8 +13,6 @@ use GuzzleHttp\Psr7\Request;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-// cspell:ignore htkey
-
 /**
  * Tests core/scripts/test-site.php.
  *

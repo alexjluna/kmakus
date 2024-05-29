@@ -86,7 +86,7 @@ class PhpRequirementsTest extends UnitTestCase {
    * @return \Generator
    *   Test scenarios.
    */
-  public static function providerMinimumSupportedPhp(): \Generator {
+  public function providerMinimumSupportedPhp(): \Generator {
     $eol_lists = [];
 
     // Test against the known valid data from 9.0.0 to 9.3.0.

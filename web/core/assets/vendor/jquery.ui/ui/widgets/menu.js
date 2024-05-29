@@ -1,17 +1,17 @@
 /*!
- * jQuery UI Menu 1.13.3
- * https://jqueryui.com
+ * jQuery UI Menu 1.13.2
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: Menu
 //>>group: Widgets
 //>>description: Creates nestable menus.
-//>>docs: https://api.jqueryui.com/menu/
-//>>demos: https://jqueryui.com/menu/
+//>>docs: http://api.jqueryui.com/menu/
+//>>demos: http://jqueryui.com/menu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/menu.css
 //>>css.theme: ../../themes/base/theme.css
@@ -40,7 +40,7 @@
 "use strict";
 
 return $.widget( "ui.menu", {
-	version: "1.13.3",
+	version: "1.13.2",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {

@@ -387,7 +387,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function lookupDestinationIdMappingDataProvider() {
+  public function lookupDestinationIdMappingDataProvider() {
     return [
       [1, 1],
       [2, 2],
@@ -605,7 +605,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function lookupSourceIdMappingDataProvider() {
+  public function lookupSourceIdMappingDataProvider() {
     return [
       [1, 1],
       [2, 2],
@@ -798,7 +798,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function updateCountDataProvider() {
+  public function updateCountDataProvider() {
     return [
       [0],
       [1],
@@ -846,7 +846,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function errorCountDataProvider() {
+  public function errorCountDataProvider() {
     return [
       [0],
       [1],
@@ -1132,10 +1132,10 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function getHighestIdDataProvider() {
+  public function getHighestIdDataProvider() {
     return [
       'Destination ID type integer' => [
-        'destination_ids' => [
+        'dest_ids' => [
           'nid' => [
             'type' => 'integer',
           ],
@@ -1149,7 +1149,7 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
         'expected' => 5,
       ],
       'Destination ID types integer and string' => [
-        'destination_ids' => [
+        'dest_ids' => [
           'nid' => [
             'type' => 'integer',
           ],
@@ -1197,17 +1197,17 @@ class MigrateSqlIdMapTest extends MigrateTestCase {
    * @return array
    *   An array of data values.
    */
-  public static function getHighestIdInvalidDataProvider() {
+  public function getHighestIdInvalidDataProvider() {
     return [
       'Destination ID type string' => [
-        'destination_ids' => [
+        'ids' => [
           'language' => [
             'type' => 'string',
           ],
         ],
       ],
       'Destination ID types int (not integer) and string' => [
-        'destination_ids' => [
+        'ids' => [
           'nid' => [
             'type' => 'int',
           ],

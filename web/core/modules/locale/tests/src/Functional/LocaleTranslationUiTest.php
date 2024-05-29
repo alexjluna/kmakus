@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\locale\Functional;
 
 use Drupal\Core\Site\Settings;
@@ -15,7 +13,6 @@ use Drupal\Core\Language\LanguageInterface;
  * Tests the validation of translation strings and search results.
  *
  * @group locale
- * @group #slow
  */
 class LocaleTranslationUiTest extends BrowserTestBase {
 

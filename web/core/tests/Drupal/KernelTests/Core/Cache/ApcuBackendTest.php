@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Cache;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Cache\ApcuBackend;
 
 /**
@@ -19,15 +16,15 @@ class ApcuBackendTest extends GenericCacheBackendUnitTestBase {
    * {@inheritdoc}
    */
   protected function createCacheBackend($bin) {
-    return new ApcuBackend($bin, $this->databasePrefix, \Drupal::service('cache_tags.invalidator.checksum'), \Drupal::service(TimeInterface::class));
+    return new ApcuBackend($bin, $this->databasePrefix, \Drupal::service('cache_tags.invalidator.checksum'));
   }
 
   /**
    * {@inheritdoc}
    */
   protected function tearDown(): void {
-    foreach ($this->cacheBackends as $bin => $cache_backend) {
-      $this->cacheBackends[$bin]->removeBin();
+    foreach ($this->cachebackends as $bin => $cachebackend) {
+      $this->cachebackends[$bin]->removeBin();
     }
     parent::tearDown();
   }

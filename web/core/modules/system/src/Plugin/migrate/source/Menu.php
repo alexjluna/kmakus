@@ -36,19 +36,12 @@ class Menu extends DrupalSqlBase {
       'description' => $this->t('A description of the menu'),
     ];
 
-    // The database connection may not exist, for example, when building
-    // the Migrate Message form.
-    if ($source_database = $this->database) {
-      if ($source_database
-        ->schema()
-        ->fieldExists('menu_custom', 'language')) {
-        $fields += [
-          'language' => $this->t('Menu language.'),
-          'i8n_mode' => $this->t('Menu i18n mode.'),
-        ];
-      }
+    if ($this->database->schema()->fieldExists('menu_custom', 'language')) {
+      $fields += [
+        'language' => $this->t('Menu language.'),
+        'i8n_mode' => $this->t('Menu i18n mode.'),
+      ];
     }
-
     return $fields;
   }
 

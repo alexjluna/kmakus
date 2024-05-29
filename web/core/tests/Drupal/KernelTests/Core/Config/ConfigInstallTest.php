@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Config;
 
-use Drupal\Core\Config\ConfigCollectionEvents;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Config\PreExistingConfigException;
 use Drupal\Core\Config\UnmetDependenciesException;
@@ -21,7 +18,7 @@ class ConfigInstallTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system', 'config_events_test'];
+  protected static $modules = ['system'];
 
   /**
    * {@inheritdoc}
@@ -149,25 +146,10 @@ class ConfigInstallTest extends KernelTestBase {
 
     // Test that the config manager uninstalls configuration from collections
     // as expected.
-    \Drupal::state()->set('config_events_test.all_events', []);
-    $this->container->get('config.manager')->uninstall('module', 'config_collection_install_test');
-    $all_events = \Drupal::state()->get('config_events_test.all_events');
-    $this->assertArrayHasKey(ConfigCollectionEvents::DELETE_IN_COLLECTION, $all_events);
-    // The delete-in-collection event has been triggered 3 times.
-    $this->assertCount(3, $all_events[ConfigCollectionEvents::DELETE_IN_COLLECTION]['config_collection_install_test.test']);
-    $event_collections = [];
-    foreach ($all_events[ConfigCollectionEvents::DELETE_IN_COLLECTION]['config_collection_install_test.test'] as $event) {
-      $event_collections[] = $event['original_config_data']['collection'];
-    }
-    $this->assertSame(['another_collection', 'collection.test1', 'collection.test2'], $event_collections);
+    \Drupal::service('config.manager')->uninstall('module', 'config_collection_install_test');
     $this->assertEquals(['entity'], $active_storage->getAllCollectionNames());
-
-    \Drupal::state()->set('config_events_test.all_events', []);
-    $this->container->get('config.manager')->uninstall('module', 'config_test');
+    \Drupal::service('config.manager')->uninstall('module', 'config_test');
     $this->assertEquals([], $active_storage->getAllCollectionNames());
-    $all_events = \Drupal::state()->get('config_events_test.all_events');
-    $this->assertArrayHasKey(ConfigCollectionEvents::DELETE_IN_COLLECTION, $all_events);
-    $this->assertCount(1, $all_events[ConfigCollectionEvents::DELETE_IN_COLLECTION]['config_test.dynamic.dotted.default']);
   }
 
   /**

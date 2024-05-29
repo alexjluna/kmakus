@@ -18,14 +18,14 @@ class TestExtension extends AbstractExtension {
    *   A key/value array that defines custom Twig functions. The key denotes the
    *   function name used in the tag, e.g.:
    *   @code
-   *   {{ custom_function() }}
+   *   {{ testfunc() }}
    *   @endcode
    *
    *   The value is a standard PHP callback that defines what the function does.
    */
   public function getFunctions() {
     return [
-      'custom_function' => new TwigFunction('custom_function', ['Drupal\twig_extension_test\TwigExtension\TestExtension', 'testFunction']),
+      'testfunc' => new TwigFunction('testfunc', ['Drupal\twig_extension_test\TwigExtension\TestExtension', 'testFunction']),
     ];
   }
 
@@ -36,14 +36,14 @@ class TestExtension extends AbstractExtension {
    *   A key/value array that defines custom Twig filters. The key denotes the
    *   filter name used in the tag, e.g.:
    *   @code
-   *   {{ foo|test_filter }}
+   *   {{ foo|testfilter }}
    *   @endcode
    *
    *   The value is a standard PHP callback that defines what the filter does.
    */
   public function getFilters() {
     return [
-      'test_filter' => new TwigFilter('test_filter', ['Drupal\twig_extension_test\TwigExtension\TestExtension', 'testFilter']),
+      'testfilter' => new TwigFilter('testfilter', ['Drupal\twig_extension_test\TwigExtension\TestExtension', 'testFilter']),
     ];
   }
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\book\Kernel\Migrate\d7;
 
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
@@ -11,7 +9,6 @@ use Drupal\Tests\SchemaCheckTestTrait;
  * Tests the migration of Book settings.
  *
  * @group book
- * @group legacy
  */
 class MigrateBookConfigsTest extends MigrateDrupal7TestBase {
 

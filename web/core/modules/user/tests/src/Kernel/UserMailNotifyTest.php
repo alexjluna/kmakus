@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Kernel;
 
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
+use Drupal\locale\Locale;
 
 /**
  * Tests _user_mail_notify() use of user.settings.notify.*.
@@ -34,7 +33,7 @@ class UserMailNotifyTest extends EntityKernelTestBase {
    *
    * @return array
    */
-  public static function userMailsProvider() {
+  public function userMailsProvider() {
     return [
       'cancel confirm notification' => [
         'cancel_confirm',
@@ -130,9 +129,8 @@ class UserMailNotifyTest extends EntityKernelTestBase {
 
     locale_system_set_config_langcodes();
     $langcodes = array_keys(\Drupal::languageManager()->getLanguages());
-    $locale_config_manager = \Drupal::service('locale.config_manager');
-    $names = $locale_config_manager->getComponentNames();
-    $locale_config_manager->updateConfigTranslations($names, $langcodes);
+    $names = Locale::config()->getComponentNames();
+    Locale::config()->updateConfigTranslations($names, $langcodes);
 
     $this->config('user.settings')->set('notify.password_reset', TRUE)->save();
 

@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\Form;
 
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests the menu_linkset_settings form.
+ * Tests the the menu_linkset_settings form.
  *
  * @group Form
  */

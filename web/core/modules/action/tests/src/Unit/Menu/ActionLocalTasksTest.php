@@ -10,7 +10,6 @@ use Drupal\Tests\Core\Menu\LocalTaskIntegrationTestBase;
  * Tests action local tasks.
  *
  * @group action
- * @group legacy
  */
 class ActionLocalTasksTest extends LocalTaskIntegrationTestBase {
 

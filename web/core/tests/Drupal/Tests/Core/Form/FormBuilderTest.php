@@ -22,8 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 /**
  * @coversDefaultClass \Drupal\Core\Form\FormBuilder
@@ -177,7 +175,7 @@ class FormBuilderTest extends FormTestBase {
   /**
    * Provides test data for testHandleFormStateResponse().
    */
-  public static function formStateResponseProvider() {
+  public function formStateResponseProvider() {
     return [
       ['Symfony\Component\HttpFoundation\Response', 'response'],
       ['Symfony\Component\HttpFoundation\RedirectResponse', 'redirect'],
@@ -337,7 +335,7 @@ class FormBuilderTest extends FormTestBase {
   /**
    * Data provider for ::testBuildFormWithTriggeringElement().
    */
-  public static function providerTestBuildFormWithTriggeringElement() {
+  public function providerTestBuildFormWithTriggeringElement() {
     $plain_text = 'Other submit value';
     $markup = 'Other submit <input> value';
     return [
@@ -577,7 +575,6 @@ class FormBuilderTest extends FormTestBase {
    */
   public function testExceededFileSize() {
     $request = new Request([FormBuilderInterface::AJAX_FORM_REQUEST => TRUE]);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     $request_stack = new RequestStack();
     $request_stack->push($request);
     $this->formBuilder = $this->getMockBuilder('\Drupal\Core\Form\FormBuilder')
@@ -601,7 +598,6 @@ class FormBuilderTest extends FormTestBase {
   public function testPostAjaxRequest(): void {
     $request = new Request([FormBuilderInterface::AJAX_FORM_REQUEST => TRUE], ['form_id' => 'different_form_id']);
     $request->setMethod('POST');
-    $request->setSession(new Session(new MockArraySessionStorage()));
     $this->requestStack->push($request);
 
     $form_state = (new FormState())
@@ -626,7 +622,6 @@ class FormBuilderTest extends FormTestBase {
     $request = new Request([FormBuilderInterface::AJAX_FORM_REQUEST => TRUE]);
     $request->query->set('form_id', 'different_form_id');
     $request->setMethod('GET');
-    $request->setSession(new Session(new MockArraySessionStorage()));
     $this->requestStack->push($request);
 
     $form_state = (new FormState())
@@ -678,7 +673,7 @@ class FormBuilderTest extends FormTestBase {
    *
    * @return array
    */
-  public static function providerTestChildAccessInheritance() {
+  public function providerTestChildAccessInheritance() {
     $data = [];
 
     $element = [
@@ -818,7 +813,7 @@ class FormBuilderTest extends FormTestBase {
     $this->assertSame($expected, $is_safe);
   }
 
-  public static function providerTestValueCallableIsSafe() {
+  public function providerTestValueCallableIsSafe() {
     $data = [];
     $data['string_no_slash'] = [
       'Drupal\Core\Render\Element\Token::valueCallback',
@@ -895,7 +890,7 @@ class FormBuilderTest extends FormTestBase {
     }
   }
 
-  public static function providerTestInvalidToken() {
+  public function providerTestInvalidToken() {
     $data = [];
     $data['authenticated_invalid'] = [TRUE, FALSE, TRUE];
     $data['authenticated_valid'] = [FALSE, TRUE, TRUE];
@@ -935,7 +930,7 @@ class FormBuilderTest extends FormTestBase {
     $form_state = new FormState();
     $built_form = $this->formBuilder->buildForm($form_arg, $form_state);
     if (!isset($expected_form_cacheability) || ($method == 'get' && !is_string($token))) {
-      $this->assertEquals($built_form['#cache'], ['tags' => ['CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form']]);
+      $this->assertFalse(isset($built_form['#cache']));
     }
     else {
       $this->assertTrue(isset($built_form['#cache']));
@@ -955,14 +950,14 @@ class FormBuilderTest extends FormTestBase {
    *
    * @return array
    */
-  public static function providerTestFormTokenCacheability() {
+  public function providerTestFormTokenCacheability() {
     return [
-      'token:none,authenticated:true' => [NULL, TRUE, ['contexts' => ['user.roles:authenticated'], 'tags' => ['CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form']], ['max-age' => 0], 'post'],
-      'token:none,authenticated:false' => [NULL, FALSE, ['contexts' => ['user.roles:authenticated'], 'tags' => ['CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form']], NULL, 'post'],
+      'token:none,authenticated:true' => [NULL, TRUE, ['contexts' => ['user.roles:authenticated']], ['max-age' => 0], 'post'],
+      'token:none,authenticated:false' => [NULL, FALSE, ['contexts' => ['user.roles:authenticated']], NULL, 'post'],
       'token:false,authenticated:false' => [FALSE, FALSE, NULL, NULL, 'post'],
       'token:false,authenticated:true' => [FALSE, TRUE, NULL, NULL, 'post'],
-      'token:none,authenticated:false,method:get' => [NULL, FALSE, ['contexts' => ['user.roles:authenticated'], 'tags' => ['CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form']], NULL, 'get'],
-      'token:test_form_id,authenticated:false,method:get' => ['test_form_id', TRUE, ['contexts' => ['user.roles:authenticated'], 'tags' => ['CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form']], ['max-age' => 0], 'get'],
+      'token:none,authenticated:false,method:get' => [NULL, FALSE, ['contexts' => ['user.roles:authenticated']], NULL, 'get'],
+      'token:test_form_id,authenticated:false,method:get' => ['test_form_id', TRUE, ['contexts' => ['user.roles:authenticated']], ['max-age' => 0], 'get'],
     ];
   }
 

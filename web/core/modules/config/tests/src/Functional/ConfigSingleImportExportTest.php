@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\config\Functional;
 
 use Drupal\Core\Serialization\Yaml;
@@ -192,9 +190,21 @@ EOD;
     ];
     $this->drupalGet('admin/config/development/configuration/single/import');
     $this->submitForm($edit, 'Import');
-    // @see \Drupal\Tests\Component\Serialization\YamlSymfonyTest:: testDecodeObjectSupportDisabled()
-    $this->assertSession()->responseContains('The import failed with the following message:');
-    $this->assertSession()->responseContains('Object support when parsing a YAML file has been disabled');
+    if (extension_loaded('yaml')) {
+      // If the yaml extension is loaded it will work but not create the PHP
+      // object.
+      $this->assertSession()->pageTextContains('Are you sure you want to update the second test configuration?');
+      $this->submitForm([], 'Confirm');
+      $entity = $storage->load('second');
+      $this->assertSession()->pageTextContains('The configuration was imported successfully.');
+      $this->assertIsString($entity->label());
+      $this->assertStringContainsString('ObjectSerialization', $entity->label(), 'Label contains serialized object');
+    }
+    else {
+      // If the Symfony parser is used there will be an error.
+      $this->assertSession()->responseContains('The import failed with the following message:');
+      $this->assertSession()->responseContains('Object support when parsing a YAML file has been disabled');
+    }
   }
 
   /**
@@ -268,7 +278,7 @@ EOD;
     // Verify that the fallback date format config entity is selected when
     // specified in the URL.
     $this->drupalGet('admin/config/development/configuration/single/export/date_format/fallback');
-    $option_node = $this->assertSession()->optionExists("config_name", 'fallback (Fallback date format)');
+    $option_node = $this->assertSession()->optionExists("config_name", 'Fallback date format (fallback)');
     $this->assertTrue($option_node->isSelected());
     $fallback_date = \Drupal::entityTypeManager()->getStorage('date_format')->load('fallback');
     $yaml_text = $this->assertSession()->fieldExists('export')->getValue();

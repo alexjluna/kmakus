@@ -2,26 +2,25 @@
 
 namespace Drupal\Core\Field\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
+ *
+ * @FieldWidget(
+ *   id = "options_buttons",
+ *   label = @Translation("Check boxes/radio buttons"),
+ *   field_types = {
+ *     "boolean",
+ *     "entity_reference",
+ *     "list_integer",
+ *     "list_float",
+ *     "list_string",
+ *   },
+ *   multiple_values = TRUE
+ * )
  */
-#[FieldWidget(
-  id: 'options_buttons',
-  label: new TranslatableMarkup('Check boxes/radio buttons'),
-  field_types: [
-    'boolean',
-    'entity_reference',
-    'list_integer',
-    'list_float',
-    'list_string',
-  ],
-  multiple_values: TRUE,
-)]
 class OptionsButtonsWidget extends OptionsWidgetBase {
 
   /**
@@ -35,7 +34,8 @@ class OptionsButtonsWidget extends OptionsWidgetBase {
 
     // If required and there is one single option, preselect it.
     if ($this->required && count($options) == 1) {
-      $selected = [array_key_first($options)];
+      reset($options);
+      $selected = [key($options)];
     }
 
     if ($this->multiple) {

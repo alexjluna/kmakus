@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\locale\Kernel;
 
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
+use Drupal\locale\Locale;
 use Drupal\locale\StringInterface;
 use Drupal\locale\TranslationString;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Tests that shipped configuration translations are updated correctly.
@@ -68,9 +67,8 @@ class LocaleConfigSubscriberTest extends KernelTestBase {
     // @see locale_system_update()
     locale_system_set_config_langcodes();
     $langcodes = array_keys(\Drupal::languageManager()->getLanguages());
-    $locale_config_manager = \Drupal::service('locale.config_manager');
-    $names = $locale_config_manager->getComponentNames();
-    $locale_config_manager->updateConfigTranslations($names, $langcodes);
+    $names = Locale::config()->getComponentNames();
+    Locale::config()->updateConfigTranslations($names, $langcodes);
 
     $this->configFactory = $this->container->get('config.factory');
     $this->stringStorage = $this->container->get('locale.storage');

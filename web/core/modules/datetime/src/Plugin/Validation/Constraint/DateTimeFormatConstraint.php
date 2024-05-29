@@ -2,18 +2,17 @@
 
 namespace Drupal\datetime\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validation constraint for DateTime items to ensure the format is correct.
+ *
+ * @Constraint(
+ *   id = "DateTimeFormat",
+ *   label = @Translation("Datetime format valid for datetime type.", context = "Validation"),
+ * )
  */
-#[Constraint(
-  id: 'DateTimeFormat',
-  label: new TranslatableMarkup('Datetime format valid for datetime type.', [], ['context' => 'Validation'])
-)]
-class DateTimeFormatConstraint extends SymfonyConstraint {
+class DateTimeFormatConstraint extends Constraint {
 
   /**
    * Message for when the value isn't a string.

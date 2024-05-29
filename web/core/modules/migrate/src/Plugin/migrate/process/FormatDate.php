@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
@@ -86,8 +85,11 @@ use Drupal\migrate\Row;
  * @see \Drupal\Component\Datetime\DateTimePlus::__construct()
  * @see \Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "format_date"
+ * )
  */
-#[MigrateProcess('format_date')]
 class FormatDate extends ProcessPluginBase {
 
   /**

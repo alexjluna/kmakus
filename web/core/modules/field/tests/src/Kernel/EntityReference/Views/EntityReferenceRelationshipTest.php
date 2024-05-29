@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Kernel\EntityReference\Views;
 
 use Drupal\entity_test\Entity\EntityTestMulChanged;

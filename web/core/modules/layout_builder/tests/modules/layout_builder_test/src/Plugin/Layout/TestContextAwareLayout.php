@@ -2,26 +2,22 @@
 
 namespace Drupal\layout_builder_test\Plugin\Layout;
 
-use Drupal\Core\Layout\Attribute\Layout;
 use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\Plugin\Context\EntityContextDefinition;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * The TestContextAwareLayout Class.
+ * @Layout(
+ *   id = "layout_builder_test_context_aware",
+ *   label = @Translation("Layout Builder Test: Context Aware"),
+ *   regions = {
+ *     "main" = {
+ *       "label" = @Translation("Main Region")
+ *     }
+ *   },
+ *   context_definitions = {
+ *     "user" = @ContextDefinition("entity:user")
+ *   }
+ * )
  */
-#[Layout(
-  id: 'layout_builder_test_context_aware',
-  label: new TranslatableMarkup('Layout Builder Test: Context Aware'),
-  regions: [
-    "main" => [
-      "label" => new TranslatableMarkup("Main Region"),
-    ],
-  ],
-  context_definitions: [
-    "user" => new EntityContextDefinition("entity:user"),
-  ],
-)]
 class TestContextAwareLayout extends LayoutDefault {
 
   /**

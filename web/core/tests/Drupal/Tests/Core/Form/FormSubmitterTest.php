@@ -105,7 +105,7 @@ class FormSubmitterTest extends UnitTestCase {
     $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $return);
   }
 
-  public static function providerTestHandleFormSubmissionWithResponses() {
+  public function providerTestHandleFormSubmissionWithResponses() {
     return [
       ['Symfony\Component\HttpFoundation\Response', 'response'],
       ['Symfony\Component\HttpFoundation\RedirectResponse', 'redirect'],
@@ -178,7 +178,7 @@ class FormSubmitterTest extends UnitTestCase {
    * @return array
    *   Returns some test data.
    */
-  public static function providerTestRedirectWithUrl() {
+  public function providerTestRedirectWithUrl() {
     return [
       [new Url('test_route_a', [], ['absolute' => TRUE]), 'test-route'],
       [new Url('test_route_b', ['key' => 'value'], ['absolute' => TRUE]), 'test-route/value'],

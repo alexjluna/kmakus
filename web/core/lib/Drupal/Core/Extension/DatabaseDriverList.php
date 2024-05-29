@@ -204,14 +204,14 @@ class DatabaseDriverList extends ExtensionList {
   /**
    * {@inheritdoc}
    */
-  public function getPathNames() {
+  public function getPathnames() {
     throw new \LogicException(__METHOD__ . '() is not implemented');
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function recalculatePathNames() {
+  protected function recalculatePathnames() {
     throw new \LogicException(__METHOD__ . '() is not implemented');
   }
 

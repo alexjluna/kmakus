@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Core\Cache\Cache;
@@ -20,8 +18,6 @@ use Drupal\Core\Language\LanguageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\language\LanguageNegotiatorInterface;
 use Drupal\block\Entity\Block;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 /**
  * Tests the language UI for language switching.
@@ -567,7 +563,6 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
 
     // Test HTTPS via current URL scheme.
     $request = Request::create('', 'GET', [], [], [], ['HTTPS' => 'on']);
-    $request->setSession(new Session(new MockArraySessionStorage()));
     $this->container->get('request_stack')->push($request);
     $italian_url = Url::fromRoute('system.admin', [], ['language' => $languages['it']])->toString();
     $correct_link = 'https://' . $link;

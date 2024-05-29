@@ -2,14 +2,14 @@
 
 namespace Drupal\responsive_image\Element;
 
-use Drupal\Core\Render\Attribute\RenderElement;
-use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Render\Element\RenderElement;
 
 /**
  * Provides a responsive image element.
+ *
+ * @RenderElement("responsive_image")
  */
-#[RenderElement('responsive_image')]
-class ResponsiveImage extends RenderElementBase {
+class ResponsiveImage extends RenderElement {
 
   /**
    * {@inheritdoc}

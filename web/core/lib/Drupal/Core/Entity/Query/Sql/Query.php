@@ -77,7 +77,6 @@ class Query extends QueryBase implements QueryInterface {
    */
   public function execute() {
     return $this
-      ->alter()
       ->prepare()
       ->compile()
       ->addSort()

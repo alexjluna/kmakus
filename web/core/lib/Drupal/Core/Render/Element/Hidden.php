@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\Render\Element;
 
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -22,9 +21,10 @@ use Drupal\Core\Render\Element;
  * @endcode
  *
  * @see \Drupal\Core\Render\Element\Value
+ *
+ * @FormElement("hidden")
  */
-#[FormElement('hidden')]
-class Hidden extends FormElementBase {
+class Hidden extends FormElement {
 
   /**
    * {@inheritdoc}

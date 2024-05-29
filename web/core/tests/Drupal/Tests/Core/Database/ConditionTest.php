@@ -27,7 +27,7 @@ class ConditionTest extends UnitTestCase {
    *   - Expected result for the string version of the condition.
    *   - The field name to input in the condition.
    */
-  public static function providerSimpleCondition() {
+  public function providerSimpleCondition() {
     return [
       ['name = :db_condition_placeholder_0', 'name'],
       ['name123 = :db_condition_placeholder_0', 'name-123'],
@@ -113,7 +113,7 @@ class ConditionTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function dataProviderTestCompileWithKnownOperators() {
+  public function dataProviderTestCompileWithKnownOperators() {
     // Below are a list of commented out test cases, which should work but
     // aren't directly supported by core, but instead need manual handling with
     // prefix/suffix at the moment.
@@ -173,7 +173,7 @@ class ConditionTest extends UnitTestCase {
     $condition->compile($connection, $query_placeholder);
   }
 
-  public static function providerTestCompileWithSqlInjectionForOperator() {
+  public function providerTestCompileWithSqlInjectionForOperator() {
     $data = [];
     $data[] = ["IS NOT NULL) ;INSERT INTO {test} (name) VALUES ('test12345678'); -- "];
     $data[] = ["IS NOT NULL) UNION ALL SELECT name, pass FROM {users_field_data} -- "];

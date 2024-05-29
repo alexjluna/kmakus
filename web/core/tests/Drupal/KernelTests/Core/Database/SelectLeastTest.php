@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Database;
 
 /**
@@ -21,7 +19,7 @@ class SelectLeastTest extends DatabaseTestBase {
     $this->assertEquals($expected, $least);
   }
 
-  public static function selectLeastProvider() {
+  public function selectLeastProvider() {
     return [
       [[1, 2, 3, 4, 5, 6], 1],
       [['A', 'B', 'C', 'NULL', 'F'], 'A'],

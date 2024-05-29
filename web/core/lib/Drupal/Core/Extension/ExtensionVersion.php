@@ -119,7 +119,7 @@ final class ExtensionVersion {
    *   The ExtensionVersion instance.
    */
   public static function createFromSupportBranch(string $branch): ExtensionVersion {
-    if (!str_ends_with($branch, '.')) {
+    if (substr($branch, -1) !== '.') {
       throw new \UnexpectedValueException("Invalid support branch: $branch");
     }
     return static::createFromVersionString($branch . '0');

@@ -300,7 +300,7 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\system\Unit\Breadcrumbs\PathBasedBreadcrumbBuilderTest::testBuildWithException()
    */
-  public static function providerTestBuildWithException() {
+  public function providerTestBuildWithException() {
     return [
       ['Drupal\Core\ParamConverter\ParamNotConvertedException', ''],
       ['Symfony\Component\Routing\Exception\MethodNotAllowedException', []],
@@ -400,7 +400,7 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
   protected function setupStubPathProcessor() {
     $this->pathProcessor->expects($this->any())
       ->method('processInbound')
-      ->willReturnArgument(0);
+      ->will($this->returnArgument(0));
   }
 
 }

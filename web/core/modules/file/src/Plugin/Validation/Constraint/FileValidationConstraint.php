@@ -2,17 +2,16 @@
 
 namespace Drupal\file\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validation File constraint.
+ *
+ * @Constraint(
+ *   id = "FileValidation",
+ *   label = @Translation("File Validation", context = "Validation")
+ * )
  */
-#[Constraint(
-  id: 'FileValidation',
-  label: new TranslatableMarkup('File Validation', [], ['context' => 'Validation'])
-)]
-class FileValidationConstraint extends SymfonyConstraint {
+class FileValidationConstraint extends Constraint {
 
 }

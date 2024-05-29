@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Component\Serialization\Json;
@@ -282,7 +280,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         $this->userCanViewProfiles->pass_raw,
       ],
     ]);
-    $single_output = $this->getDocumentFromResponse($response);
+    $single_output = Json::decode($response->getBody()->__toString());
     $this->assertEquals(200, $response->getStatusCode());
     $this->assertEquals('user--user', $single_output['data']['type']);
     $this->assertEquals($this->user->get('name')->value, $single_output['data']['attributes']['name']);
@@ -538,7 +536,6 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
     $this->drupalGet('/some/normal/route');
     $this->assertFalse($this->drupalUserIsLoggedIn($this->userCanViewProfiles));
     $this->container->get('state')->set('system.maintenance_mode', FALSE);
-    $this->drupalResetSession();
 
     // Test that admin user can bypass maintenance mode.
     $admin_user = $this->drupalCreateUser([], NULL, TRUE);
@@ -608,22 +605,22 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
       'auth' => [$this->user->getAccountName(), $this->user->pass_raw],
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $document = $this->getDocumentFromResponse($response);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(201, $response->getStatusCode());
-    $this->assertArrayNotHasKey('uuid', $document['data']['attributes']);
-    $uuid = $document['data']['id'];
-    $this->assertCount(2, $document['data']['relationships']['field_tags']['data']);
-    $this->assertEquals($document['data']['links']['self']['href'], $response->getHeader('Location')[0]);
+    $this->assertArrayNotHasKey('uuid', $created_response['data']['attributes']);
+    $uuid = $created_response['data']['id'];
+    $this->assertCount(2, $created_response['data']['relationships']['field_tags']['data']);
+    $this->assertEquals($created_response['data']['links']['self']['href'], $response->getHeader('Location')[0]);
 
     // 2. Authorization error.
     $response = $this->request('POST', $collection_url, [
       'body' => Json::encode($body),
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(401, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertEquals('Unauthorized', $document['errors'][0]['title']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertEquals('Unauthorized', $created_response['errors'][0]['title']);
 
     // 2.1 Authorization error with a user without create permissions.
     $response = $this->request('POST', $collection_url, [
@@ -631,10 +628,10 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
       'auth' => [$this->userCanViewProfiles->getAccountName(), $this->userCanViewProfiles->pass_raw],
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(403, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertEquals('Forbidden', $document['errors'][0]['title']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertEquals('Forbidden', $created_response['errors'][0]['title']);
 
     // 3. Missing Content-Type error.
     $response = $this->request('POST', $collection_url, [
@@ -655,10 +652,10 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Content-Type' => 'application/vnd.api+json',
       ],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(409, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertEquals('Conflict', $document['errors'][0]['title']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertEquals('Conflict', $created_response['errors'][0]['title']);
     // 5. Article with wrong reference UUIDs for tags.
     $body_invalid_tags = $body;
     $body_invalid_tags['data']['relationships']['field_tags']['data'][0]['id'] = 'lorem';
@@ -678,10 +675,10 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Accept' => 'application/vnd.api+json',
       ],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(400, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertEquals('Bad Request', $document['errors'][0]['title']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertEquals('Bad Request', $created_response['errors'][0]['title']);
     // 6.1 Denormalizing error.
     $response = $this->request('POST', $collection_url, [
       'body' => '{"data":{"type":"something"},"valid yet nonsensical json":[]}',
@@ -691,10 +688,10 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Accept' => 'application/vnd.api+json',
       ],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(422, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertStringStartsWith('Unprocessable', $document['errors'][0]['title']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertStringStartsWith('Unprocessable', $created_response['errors'][0]['title']);
     // 6.2 Relationships are not included in "data".
     $malformed_body = $body;
     unset($malformed_body['data']['relationships']);
@@ -707,11 +704,11 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Content-Type' => 'application/vnd.api+json',
       ],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode((string) $response->getBody());
     $this->assertSame(400, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertSame("Bad Request", $document['errors'][0]['title']);
-    $this->assertSame("Found \"relationships\" within the document's top level. The \"relationships\" key must be within resource object.", $document['errors'][0]['detail']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertSame("Bad Request", $created_response['errors'][0]['title']);
+    $this->assertSame("Found \"relationships\" within the document's top level. The \"relationships\" key must be within resource object.", $created_response['errors'][0]['detail']);
     // 6.2 "type" not included in "data".
     $missing_type = $body;
     unset($missing_type['data']['type']);
@@ -723,11 +720,11 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Content-Type' => 'application/vnd.api+json',
       ],
     ]);
-    $document = $this->getDocumentFromResponse($response, FALSE);
+    $created_response = Json::decode((string) $response->getBody());
     $this->assertSame(400, $response->getStatusCode());
-    $this->assertNotEmpty($document['errors']);
-    $this->assertSame("Bad Request", $document['errors'][0]['title']);
-    $this->assertSame("Resource object must include a \"type\".", $document['errors'][0]['detail']);
+    $this->assertNotEmpty($created_response['errors']);
+    $this->assertSame("Bad Request", $created_response['errors'][0]['title']);
+    $this->assertSame("Resource object must include a \"type\".", $created_response['errors'][0]['detail']);
     // 7. Successful PATCH.
     $body = [
       'data' => [
@@ -744,7 +741,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
       'auth' => [$this->user->getAccountName(), $this->user->pass_raw],
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(200, $response->getStatusCode());
     $this->assertEquals('My updated title', $updated_response['data']['attributes']['title']);
 
@@ -782,7 +779,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
       'auth' => [$this->user->getAccountName(), $this->user->pass_raw],
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response, FALSE);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(403, $response->getStatusCode());
     $this->assertEquals("The current user is not allowed to PATCH the selected field (status). The 'administer nodes' permission is required.",
       $updated_response['errors'][0]['detail']);
@@ -806,7 +803,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
       'auth' => [$this->user->getAccountName(), $this->user->pass_raw],
       'headers' => ['Content-Type' => 'application/vnd.api+json'],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(200, $response->getStatusCode());
     $this->assertCount(3, $updated_response['data']);
     $this->assertEquals('taxonomy_term--tags', $updated_response['data'][2]['type']);
@@ -836,7 +833,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Accept' => 'application/vnd.api+json',
       ],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response, FALSE);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(
       'You need to provide a body for DELETE operations on a relationship (field_tags).',
       $updated_response['errors'][0]['detail']
@@ -879,7 +876,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Accept' => 'application/vnd.api+json',
       ],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response, FALSE);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(422, $response->getStatusCode());
     $this->assertCount(2, $updated_response['errors']);
     for ($i = 0; $i < 2; $i++) {
@@ -908,7 +905,7 @@ class JsonApiFunctionalTest extends JsonApiFunctionalTestBase {
         'Accept' => 'application/vnd.api+json',
       ],
     ]);
-    $updated_response = $this->getDocumentFromResponse($response, FALSE);
+    $updated_response = Json::decode($response->getBody()->__toString());
     $this->assertEquals(422, $response->getStatusCode());
     $this->assertEquals("The attribute field_that_does_not_exist does not exist on the node--article resource type.",
       $updated_response['errors']['0']['detail']);

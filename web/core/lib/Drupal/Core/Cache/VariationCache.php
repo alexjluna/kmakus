@@ -25,7 +25,7 @@ class VariationCache implements VariationCacheInterface {
   public function __construct(
     protected RequestStack $requestStack,
     protected CacheBackendInterface $cacheBackend,
-    protected CacheContextsManager $cacheContextsManager,
+    protected CacheContextsManager $cacheContextsManager
   ) {}
 
   /**
@@ -141,7 +141,8 @@ class VariationCache implements VariationCacheInterface {
    */
   public function delete(array $keys, CacheableDependencyInterface $initial_cacheability): void {
     $chain = $this->getRedirectChain($keys, $initial_cacheability);
-    $this->cacheBackend->delete(array_key_last($chain));
+    end($chain);
+    $this->cacheBackend->delete(key($chain));
   }
 
   /**
@@ -149,7 +150,8 @@ class VariationCache implements VariationCacheInterface {
    */
   public function invalidate(array $keys, CacheableDependencyInterface $initial_cacheability): void {
     $chain = $this->getRedirectChain($keys, $initial_cacheability);
-    $this->cacheBackend->invalidate(array_key_last($chain));
+    end($chain);
+    $this->cacheBackend->invalidate(key($chain));
   }
 
   /**

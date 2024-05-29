@@ -13,8 +13,7 @@
   background: #fff;
 }
 
-@media all and (max-width: 48em) {
-  /* 768px */
+@media all and (max-width: 48em) { /* 768px */
   .ui-dialog {
     width: 92% !important;
   }

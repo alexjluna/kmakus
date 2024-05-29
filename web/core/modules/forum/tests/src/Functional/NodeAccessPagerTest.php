@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\forum\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -10,7 +8,6 @@ use Drupal\Tests\BrowserTestBase;
  * Tests access controlled node views have the right amount of comment pages.
  *
  * @group form
- * @group legacy
  */
 class NodeAccessPagerTest extends BrowserTestBase {
 

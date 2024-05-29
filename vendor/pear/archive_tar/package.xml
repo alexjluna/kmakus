@@ -24,12 +24,6 @@ Also Lzma2 compressed archives are supported with xz extension.</description>
   <name>Michiel Rook</name>
   <user>mrook</user>
   <email>mrook@php.net</email>
-  <active>no</active>
- </lead>
- <lead>
-  <name>Drew Webber</name>
-  <user>mcdruid</user>
-  <email>drew@mcdruid.co.uk</email>
   <active>yes</active>
  </lead>
  <helper>
@@ -38,10 +32,11 @@ Also Lzma2 compressed archives are supported with xz extension.</description>
   <email>stig@php.net</email>
   <active>no</active>
  </helper>
- <date>2024-03-16</date>
+ <date>2021-07-20</date>
+ <time>18:00:00</time>
  <version>
-  <release>1.5.0</release>
-  <api>1.5.0</api>
+  <release>1.4.14</release>
+  <api>1.4.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -49,8 +44,7 @@ Also Lzma2 compressed archives are supported with xz extension.</description>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-* PR #42: fix @return true... to @return bool true... on some functions
-* PR #46: use 775 default for mkdirs, to avoid world-write
+* Properly fix symbolic link path traversal (CVE-2021-32610)
  </notes>
  <contents>
   <dir name="/">
@@ -80,37 +74,6 @@ Also Lzma2 compressed archives are supported with xz extension.</description>
  </dependencies>
  <phprelease />
  <changelog>
-  <release>
-   <version>
-    <release>1.5.0</release>
-    <api>1.5.0</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2024-03-16</date>
-   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
-   <notes>
-    * PR #42: fix @return true... to @return bool true... on some functions
-    * PR #46: use 775 default for mkdirs, to avoid world-write
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.4.14</release>
-    <api>1.4.0</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2021-02-16</date>
-   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
-   <notes>
-    * Properly fix symbolic link path traversal (CVE-2021-32610)
-   </notes>
-  </release>
   <release>
    <version>
     <release>1.4.13</release>

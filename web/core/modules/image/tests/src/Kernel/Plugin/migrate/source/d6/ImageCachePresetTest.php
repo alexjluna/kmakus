@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\image\Kernel\Plugin\migrate\source\d6;
 
 use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
-// cspell:ignore actionid imagecache presetid presetname
+// cspell:ignore actionid
 
 /**
  * Tests the d6_imagecache_presets source plugin.
@@ -25,7 +23,7 @@ class ImageCachePresetTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     $tests = [];
 
     // The source data.

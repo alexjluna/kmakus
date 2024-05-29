@@ -2,9 +2,7 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\Core\File\Exception\FileException;
-use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\StreamWrapper\LocalStream;
@@ -48,8 +46,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @endcode
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "file_copy"
+ * )
  */
-#[MigrateProcess('file_copy')]
 class FileCopy extends FileProcessBase implements ContainerFactoryPluginInterface {
 
   /**
@@ -165,30 +166,26 @@ class FileCopy extends FileProcessBase implements ContainerFactoryPluginInterfac
    *   The source path or URI.
    * @param string $destination
    *   The destination path or URI.
-   * @param \Drupal\Core\File\FileExists|int $fileExists
-   *   (optional) FileExists::Replace (default) or
-   *   FileExists::Rename.
+   * @param int $replace
+   *   (optional) FileSystemInterface::EXISTS_REPLACE (default) or
+   *   FileSystemInterface::EXISTS_RENAME.
    *
    * @return string|bool
    *   File destination on success, FALSE on failure.
    */
-  protected function writeFile($source, $destination, FileExists|int $fileExists = FileExists::Replace) {
-    if (!$fileExists instanceof FileExists) {
-      // @phpstan-ignore-next-line
-      $fileExists = FileExists::fromLegacyInt($fileExists, __METHOD__);
-    }
+  protected function writeFile($source, $destination, $replace = FileSystemInterface::EXISTS_REPLACE) {
     // Check if there is a destination available for copying. If there isn't,
     // it already exists at the destination and the replace flag tells us to not
     // replace it. In that case, return the original destination.
-    if ($this->fileSystem->getDestinationFilename($destination, $fileExists) === FALSE) {
+    if ($this->fileSystem->getDestinationFilename($destination, $replace) === FALSE) {
       return $destination;
     }
     try {
       if ($this->configuration['move']) {
-        return $this->fileSystem->move($source, $destination, $fileExists);
+        return $this->fileSystem->move($source, $destination, $replace);
       }
       else {
-        return $this->fileSystem->copy($source, $destination, $fileExists);
+        return $this->fileSystem->copy($source, $destination, $replace);
       }
     }
     catch (FileException $e) {
@@ -213,7 +210,7 @@ class FileCopy extends FileProcessBase implements ContainerFactoryPluginInterfac
    */
   protected function getDirectory($uri) {
     $dir = $this->fileSystem->dirname($uri);
-    if (str_ends_with($dir, '://')) {
+    if (substr($dir, -3) == '://') {
       return $this->fileSystem->realpath($dir);
     }
     return $dir;

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\System;
 
 use Drupal\Core\Menu\MenuTreeParameters;
@@ -67,14 +65,7 @@ class AdminTest extends BrowserTestBase {
 
     // Verify that all visible, top-level administration links are listed on
     // the main administration page.
-    foreach ($this->getTopLevelMenuLinks() as $element) {
-      $item = $element->link;
-      if (!$element->access->isAllowed()) {
-        // If the link is not accessible, it should not be rendered.
-        // @see \Drupal\Core\Menu\MenuLinkTree::buildItems().
-        $this->assertSession()->linkNotExists($item->getTitle());
-        continue;
-      }
+    foreach ($this->getTopLevelMenuLinks() as $item) {
       $this->assertSession()->linkExists($item->getTitle());
       $this->assertSession()->linkByHrefExists($item->getUrlObject()->toString());
       // The description should appear below the link.
@@ -133,7 +124,7 @@ class AdminTest extends BrowserTestBase {
   /**
    * Returns all top level menu links.
    *
-   * @return \Drupal\Core\Menu\MenuLinkTreeElement[]
+   * @return \Drupal\Core\Menu\MenuLinkInterface[]
    */
   protected function getTopLevelMenuLinks() {
     $menu_tree = \Drupal::menuTree();
@@ -146,7 +137,15 @@ class AdminTest extends BrowserTestBase {
       ['callable' => 'menu.default_tree_manipulators:checkAccess'],
       ['callable' => 'menu.default_tree_manipulators:flatten'],
     ];
-    return $menu_tree->transform($tree, $manipulators);
+    $tree = $menu_tree->transform($tree, $manipulators);
+
+    // Transform the tree to a list of menu links.
+    $menu_links = [];
+    foreach ($tree as $element) {
+      $menu_links[] = $element->link;
+    }
+
+    return $menu_links;
   }
 
   /**

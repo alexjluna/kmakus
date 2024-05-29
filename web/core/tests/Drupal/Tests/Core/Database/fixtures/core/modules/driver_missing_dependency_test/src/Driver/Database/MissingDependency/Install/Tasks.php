@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\driver_missing_dependency_test\Driver\Database\MissingDependency\Install;
 
 use Drupal\Core\Database\Install\Tasks as CoreTasks;

@@ -35,7 +35,7 @@ class FlattenTest extends MigrateProcessTestCase {
   /**
    * Provides data for the testFlatten.
    */
-  public static function providerTestFlatten() {
+  public function providerTestFlatten() {
     $object = (object) [
       'a' => 'test',
       'b' => '1.2',
@@ -68,7 +68,7 @@ class FlattenTest extends MigrateProcessTestCase {
   /**
    * Provides data for the testFlattenInvalid.
    */
-  public static function providerTestFlattenInvalid() {
+  public function providerTestFlattenInvalid() {
     $xml_str = <<<XML
 <xml version='1.0'?>
 <authors>

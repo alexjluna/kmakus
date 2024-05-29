@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Plugin;
 
 use Drupal\Core\Database\Database;
@@ -45,7 +43,7 @@ class CacheTest extends ViewsKernelTestBase {
     $this->installEntitySchema('user');
 
     // Setup the current time properly.
-    \Drupal::request()->server->set('REQUEST_TIME', \Drupal::time()->getCurrentTime());
+    \Drupal::request()->server->set('REQUEST_TIME', time());
   }
 
   /**
@@ -408,7 +406,7 @@ class CacheTest extends ViewsKernelTestBase {
     /** @var \Drupal\Core\Render\RendererInterface $renderer */
     $renderer = \Drupal::service('renderer');
 
-    $renderer->renderInIsolation($output);
+    $renderer->renderPlain($output);
     $this->assertEquals(['config:views.view.test_view', 'example_tag'], $output['#cache']['tags']);
   }
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\process;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -138,7 +136,7 @@ class HandleMultiplesTest extends KernelTestBase {
    *
    * @return array
    */
-  public static function scalarAndMultipleValuesProviderSource() {
+  public function scalarAndMultipleValuesProviderSource() {
     return [
       [
         'source_data' => [

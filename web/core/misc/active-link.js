@@ -55,7 +55,6 @@
       const il = activeLinks.length;
       for (let i = 0; i < il; i++) {
         activeLinks[i].classList.add('is-active');
-        activeLinks[i].setAttribute('aria-current', 'page');
       }
     },
     detach(context, settings, trigger) {
@@ -66,7 +65,6 @@
         const il = activeLinks.length;
         for (let i = 0; i < il; i++) {
           activeLinks[i].classList.remove('is-active');
-          activeLinks[i].removeAttribute('aria-current');
         }
       }
     },

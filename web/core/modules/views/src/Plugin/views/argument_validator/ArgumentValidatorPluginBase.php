@@ -43,7 +43,6 @@ abstract class ArgumentValidatorPluginBase extends PluginBase {
   /**
    * The option name.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $option_name;
 
   /**

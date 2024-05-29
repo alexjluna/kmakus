@@ -10,9 +10,9 @@ use Drupal\Core\TypedData\DataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 use Drupal\Core\TypedData\TypedData as TypedDataBase;
 use Drupal\Core\TypedData\TypedDataManager;
+use Drupal\Core\TypedData\Validation\ExecutionContextFactory;
 use Drupal\Core\TypedData\Validation\RecursiveValidator;
 use Drupal\Core\Validation\ConstraintManager;
-use Drupal\Core\Validation\ExecutionContextFactory;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Validator\ConstraintValidatorFactory;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -47,7 +47,7 @@ class RecursiveContextualValidatorTest extends UnitTestCase {
   /**
    * The execution context factory.
    *
-   * @var \Drupal\Core\Validation\ExecutionContextFactory
+   * @var \Drupal\Core\TypedData\Validation\ExecutionContextFactory
    */
   protected $contextFactory;
 

@@ -1,13 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\file\Functional;
 
 use Drupal\file\Entity\File;
 use Drupal\Tests\content_translation\Traits\ContentTranslationTestTrait;
-
-// cspell:ignore Scarlett Johansson
 
 /**
  * Uploads files to translated nodes.

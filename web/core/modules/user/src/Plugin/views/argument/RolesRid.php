@@ -3,7 +3,6 @@
 namespace Drupal\user\Plugin\views\argument;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\views\Attribute\ViewsArgument;
 use Drupal\views\Plugin\views\argument\ManyToOne;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -11,10 +10,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Allow role ID(s) as argument.
  *
  * @ingroup views_argument_handlers
+ *
+ * @ViewsArgument("user__roles_rid")
  */
-#[ViewsArgument(
- id: 'user__roles_rid'
-)]
 class RolesRid extends ManyToOne {
 
   /**

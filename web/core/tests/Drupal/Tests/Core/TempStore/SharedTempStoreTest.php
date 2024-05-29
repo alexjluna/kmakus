@@ -101,12 +101,12 @@ class SharedTempStoreTest extends UnitTestCase {
    * @covers ::get
    */
   public function testGet() {
-    $calls = ['test_2', 'test'];
-    $this->keyValue->expects($this->exactly(count($calls)))
+    $this->keyValue->expects($this->exactly(2))
       ->method('get')
-      ->with($this->callback(function (string $key) use (&$calls): bool {
-        return array_shift($calls) == $key;
-      }))
+      ->withConsecutive(
+        ['test_2'],
+        ['test'],
+      )
       ->willReturnOnConsecutiveCalls(
         FALSE,
         $this->ownObject,
@@ -122,12 +122,13 @@ class SharedTempStoreTest extends UnitTestCase {
    * @covers ::getIfOwner
    */
   public function testGetIfOwner() {
-    $calls = ['test_2', 'test', 'test'];
-    $this->keyValue->expects($this->exactly(count($calls)))
+    $this->keyValue->expects($this->exactly(3))
       ->method('get')
-      ->with($this->callback(function (string $key) use (&$calls): bool {
-        return array_shift($calls) == $key;
-      }))
+      ->withConsecutive(
+        ['test_2'],
+        ['test'],
+        ['test'],
+      )
       ->willReturnOnConsecutiveCalls(
         FALSE,
         $this->ownObject,
@@ -246,7 +247,7 @@ class SharedTempStoreTest extends UnitTestCase {
     $this->keyValue->expects($this->exactly(2))
       ->method('get')
       ->with('test')
-      ->willReturn($this->ownObject, $this->otherObject);
+      ->will($this->onConsecutiveCalls($this->ownObject, $this->otherObject));
 
     $this->assertTrue($this->tempStore->setIfOwner('test', 'test_data'));
     $this->assertFalse($this->tempStore->setIfOwner('test', 'test_data'));
@@ -327,12 +328,13 @@ class SharedTempStoreTest extends UnitTestCase {
       ->with('test_2')
       ->willReturn(TRUE);
 
-    $calls = ['test_1', 'test_2', 'test_3'];
-    $this->keyValue->expects($this->exactly(count($calls)))
+    $this->keyValue->expects($this->exactly(3))
       ->method('get')
-      ->with($this->callback(function (string $key) use (&$calls): bool {
-        return array_shift($calls) == $key;
-      }))
+      ->withConsecutive(
+        ['test_1'],
+        ['test_2'],
+        ['test_3'],
+      )
       ->willReturnOnConsecutiveCalls(
         FALSE,
         $this->ownObject,

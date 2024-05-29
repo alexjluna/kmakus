@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel;
 
 use Drupal\views\Views;
@@ -13,13 +11,6 @@ use Drupal\views\Plugin\views\PluginBase;
  * @group views
  */
 class PluginInstanceTest extends ViewsKernelTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $modules = [
-    'path_alias',
-  ];
 
   /**
    * All views plugin types.

@@ -25,7 +25,7 @@ class FieldUiTableTest extends UnitTestCase {
   /**
    * Provides test data for testReduceOrder().
    */
-  public static function providerTestReduceOrder() {
+  public function providerTestReduceOrder() {
     return [
       'Flat' => [
         'array' => [

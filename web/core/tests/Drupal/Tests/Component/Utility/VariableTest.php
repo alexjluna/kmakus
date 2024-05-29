@@ -23,7 +23,7 @@ class VariableTest extends TestCase {
    * @return array[]
    *   Sets of arguments to pass to the test method.
    */
-  public static function providerCallableToString(): array {
+  public function providerCallableToString(): array {
     $mock = VariableTestMock::class;
     return [
       'string' => [
@@ -91,7 +91,7 @@ class VariableTest extends TestCase {
    *     - The expected export string.
    *     - The variable to export.
    */
-  public static function providerTestExport() {
+  public function providerTestExport() {
     return [
       // Array.
       [

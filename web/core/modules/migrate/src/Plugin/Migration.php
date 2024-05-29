@@ -218,7 +218,6 @@ class Migration extends PluginBase implements MigrationInterface, RequirementsIn
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $migration_tags = [];
 
   /**
@@ -253,7 +252,6 @@ class Migration extends PluginBase implements MigrationInterface, RequirementsIn
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $migration_dependencies = [];
 
   /**

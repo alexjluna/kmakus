@@ -2,18 +2,17 @@
 
 namespace Drupal\entity_test\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Supports validating widget constraints.
+ *
+ * @Constraint(
+ *   id = "FieldWidgetConstraint",
+ *   label = @Translation("Field widget constraint.")
+ * )
  */
-#[Constraint(
-  id: 'FieldWidgetConstraint',
-  label: new TranslatableMarkup('Field widget constraint.')
-)]
-class FieldWidgetConstraint extends SymfonyConstraint {
+class FieldWidgetConstraint extends Constraint {
 
   public $message = 'Widget constraint has failed.';
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\tour\Functional;
 
 use Drupal\Core\Url;
@@ -14,7 +12,6 @@ use Drupal\tour\Entity\Tour;
  * Tests the functionality of tour tips.
  *
  * @group tour
- * @group legacy
  */
 class TourTest extends TourTestBasic {
 

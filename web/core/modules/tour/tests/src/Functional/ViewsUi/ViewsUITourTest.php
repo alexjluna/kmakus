@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\tour\Functional\ViewsUi;
 
 use Drupal\Tests\tour\Functional\TourTestBase;
@@ -11,7 +9,6 @@ use Drupal\language\Entity\ConfigurableLanguage;
  * Tests the Views UI tour.
  *
  * @group tour
- * @group legacy
  */
 class ViewsUITourTest extends TourTestBase {
 

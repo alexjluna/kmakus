@@ -11,7 +11,6 @@ use Drupal\Tests\UnitTestCase;
 /**
  * @coversDefaultClass \Drupal\forum\ForumManager
  * @group forum
- * @group legacy
  */
 class ForumManagerTest extends UnitTestCase {
 

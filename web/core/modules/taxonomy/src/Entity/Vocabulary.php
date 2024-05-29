@@ -57,7 +57,6 @@ use Drupal\taxonomy\VocabularyInterface;
  *     "vid",
  *     "description",
  *     "weight",
- *     "new_revision",
  *   }
  * )
  */
@@ -80,9 +79,9 @@ class Vocabulary extends ConfigEntityBundleBase implements VocabularyInterface {
   /**
    * Description of the vocabulary.
    *
-   * @var string|null
+   * @var string
    */
-  protected $description = NULL;
+  protected $description;
 
   /**
    * The weight of this vocabulary in relation to other vocabularies.
@@ -102,15 +101,8 @@ class Vocabulary extends ConfigEntityBundleBase implements VocabularyInterface {
    * {@inheritdoc}
    */
   public function getDescription() {
-    return $this->description ?? '';
+    return $this->description;
   }
-
-  /**
-   * The default revision setting for a vocabulary.
-   *
-   * @var bool
-   */
-  protected $new_revision = FALSE;
 
   /**
    * {@inheritdoc}
@@ -167,20 +159,6 @@ class Vocabulary extends ConfigEntityBundleBase implements VocabularyInterface {
         }
       }
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setNewRevision($new_revision) {
-    $this->new_revision = $new_revision;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function shouldCreateNewRevision() {
-    return $this->new_revision;
   }
 
 }

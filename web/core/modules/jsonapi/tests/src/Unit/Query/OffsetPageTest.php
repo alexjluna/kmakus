@@ -46,7 +46,7 @@ class OffsetPageTest extends UnitTestCase {
   /**
    * Data provider for testCreateFromQueryParameter.
    */
-  public static function parameterProvider() {
+  public function parameterProvider() {
     return [
       [['offset' => 12, 'limit' => 20], ['offset' => 12, 'limit' => 20]],
       [['offset' => 12, 'limit' => 60], ['offset' => 12, 'limit' => 50]],

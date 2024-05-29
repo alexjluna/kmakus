@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
@@ -671,7 +669,7 @@ class EntityDefinitionUpdateTest extends EntityKernelTestBase {
   /**
    * Test cases for ::testBaseFieldDeleteWithExistingData.
    */
-  public static function baseFieldDeleteWithExistingDataTestCases() {
+  public function baseFieldDeleteWithExistingDataTestCases() {
     return [
       'Non-revisionable, non-translatable entity type' => [
         'entity_test_update',
@@ -1298,7 +1296,7 @@ class EntityDefinitionUpdateTest extends EntityKernelTestBase {
   /**
    * Test cases for ::testInitialValueFromField.
    */
-  public static function initialValueFromFieldTestCases() {
+  public function initialValueFromFieldTestCases() {
     return [
       'literal value' => [
         'test initial value',

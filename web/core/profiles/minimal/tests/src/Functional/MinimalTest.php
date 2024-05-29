@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\minimal\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -47,9 +45,7 @@ class MinimalTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Administration');
 
     // Ensure that there are no pending updates after installation.
-    $this->drupalLogin($this->drupalCreateUser([
-      'administer software updates',
-    ]));
+    $this->drupalLogin($this->rootUser);
     $this->drupalGet('update.php/selection');
     $this->updateRequirementsProblem();
     $this->drupalGet('update.php/selection');

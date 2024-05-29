@@ -7,16 +7,16 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\State\StateInterface;
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
 use Drupal\migrate\Row;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Comment entity destination.
+ * @MigrateDestination(
+ *   id = "entity:comment"
+ * )
  */
-#[MigrateDestination('entity:comment')]
 class EntityComment extends EntityContentBase {
 
   /**

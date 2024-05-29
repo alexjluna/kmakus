@@ -4,20 +4,19 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * For disallowing Source Editing configuration that allows self-XSS.
  *
+ * @Constraint(
+ *   id = "SourceEditingPreventSelfXssConstraint",
+ *   label = @Translation("Source Editing should never allow self-XSS.", context = "Validation"),
+ * )
+ *
  * @internal
  */
-#[Constraint(
-  id: 'SourceEditingPreventSelfXssConstraint',
-  label: new TranslatableMarkup('Source Editing should never allow self-XSS.', [], ['context' => 'Validation'])
-)]
-class SourceEditingPreventSelfXssConstraint extends SymfonyConstraint {
+class SourceEditingPreventSelfXssConstraint extends Constraint {
 
   /**
    * When Source Editing is configured to allow self-XSS.

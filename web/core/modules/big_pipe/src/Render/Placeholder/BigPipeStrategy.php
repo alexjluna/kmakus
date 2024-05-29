@@ -108,11 +108,7 @@ class BigPipeStrategy implements PlaceholderStrategyInterface {
   public function processPlaceholders(array $placeholders) {
     $request = $this->requestStack->getCurrentRequest();
 
-    // Prevent placeholders from being processed by BigPipe on uncacheable
-    // request methods. For example, a form rendered inside a placeholder will
-    // be rendered as soon as possible before any headers are sent, so that it
-    // can be detected, submitted, and redirected immediately.
-    // @todo https://www.drupal.org/node/2367555
+    // @todo remove this check when https://www.drupal.org/node/2367555 lands.
     if (!$request->isMethodCacheable()) {
       return [];
     }

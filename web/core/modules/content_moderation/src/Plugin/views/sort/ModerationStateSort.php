@@ -4,7 +4,6 @@ namespace Drupal\content_moderation\Plugin\views\sort;
 
 use Drupal\content_moderation\Plugin\views\ModerationStateJoinViewsHandlerTrait;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\views\Attribute\ViewsSort;
 use Drupal\views\Plugin\views\sort\SortPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -12,8 +11,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Enables sorting for the computed moderation_state field.
  *
  * @ingroup views_sort_handlers
+ *
+ * @ViewsSort("moderation_state_sort")
  */
-#[ViewsSort("moderation_state_sort")]
 class ModerationStateSort extends SortPluginBase {
 
   use ModerationStateJoinViewsHandlerTrait;

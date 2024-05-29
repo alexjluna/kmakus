@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\search\Functional;
 
 use Drupal\Core\Link;
@@ -13,7 +11,6 @@ use Drupal\Tests\BrowserTestBase;
  * Verify the search config settings form.
  *
  * @group search
- * @group #slow
  */
 class SearchConfigSettingsFormTest extends BrowserTestBase {
 

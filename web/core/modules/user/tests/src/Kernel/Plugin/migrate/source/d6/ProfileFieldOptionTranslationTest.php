@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Kernel\Plugin\migrate\source\d6;
 
 use Drupal\Tests\user\Kernel\Plugin\migrate\source\ProfileFieldTest;
@@ -24,7 +22,7 @@ class ProfileFieldOptionTranslationTest extends ProfileFieldTest {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
 
     $test = parent::providerSource();
     // The source data.

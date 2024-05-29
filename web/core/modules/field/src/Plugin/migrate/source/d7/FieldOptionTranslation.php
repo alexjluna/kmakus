@@ -2,7 +2,7 @@
 
 namespace Drupal\field\Plugin\migrate\source\d7;
 
-// cspell:ignore objectid objectindex plid textgroup
+// cspell:ignore objectid objectindex
 
 /**
  * Drupal 7 i18n field option label source from database.

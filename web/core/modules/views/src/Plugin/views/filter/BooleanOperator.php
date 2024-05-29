@@ -3,7 +3,6 @@
 namespace Drupal\views\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 
@@ -22,9 +21,10 @@ use Drupal\views\ViewExecutable;
  *   This might be helpful for performance reasons.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("boolean")
  */
-#[ViewsFilter("boolean")]
-class BooleanOperator extends FilterPluginBase implements FilterOperatorsInterface {
+class BooleanOperator extends FilterPluginBase {
 
   /**
    * The equal query operator.
@@ -52,13 +52,11 @@ class BooleanOperator extends FilterPluginBase implements FilterOperatorsInterfa
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $accept_null = FALSE;
 
   /**
    * The value title.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $value_value;
 
   /**
@@ -79,9 +77,11 @@ class BooleanOperator extends FilterPluginBase implements FilterOperatorsInterfa
   }
 
   /**
-   * {@inheritdoc}
+   * Returns an array of operator information.
+   *
+   * @return array
    */
-  public function operators() {
+  protected function operators() {
     return [
       '=' => [
         'title' => $this->t('Is equal to'),
@@ -153,8 +153,6 @@ class BooleanOperator extends FilterPluginBase implements FilterOperatorsInterfa
     if (!isset($this->valueOptions)) {
       $this->valueOptions = [1 => $this->t('True'), 0 => $this->t('False')];
     }
-
-    return $this->valueOptions;
   }
 
   protected function defineOptions() {

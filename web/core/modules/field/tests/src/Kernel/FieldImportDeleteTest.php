@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Kernel;
 
 use Drupal\entity_test\Entity\EntityTest;
@@ -30,8 +28,6 @@ class FieldImportDeleteTest extends FieldKernelTestBase {
    * Tests deleting field storages and fields as part of config import.
    */
   public function testImportDelete() {
-    entity_test_create_bundle('test_bundle');
-
     $this->installConfig(['field_test_config']);
     // At this point there are 5 field configuration objects in the active
     // storage.

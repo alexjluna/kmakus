@@ -271,7 +271,7 @@ class FieldPluginBaseTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestRenderTrimmedWithMoreLinkAndPath() {
+  public function providerTestRenderTrimmedWithMoreLinkAndPath() {
     $data = [];
     // Simple path with default options.
     $data[] = ['test-path', '/test-path'];
@@ -337,7 +337,7 @@ class FieldPluginBaseTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestRenderAsLinkWithPathAndOptions() {
+  public function providerTestRenderAsLinkWithPathAndOptions() {
     $data = [];
     // Simple path with default options.
     $data[] = ['test-path', [], '<a href="/test-path">value</a>'];
@@ -363,7 +363,8 @@ class FieldPluginBaseTest extends UnitTestCase {
     // executed for paths which aren't routed.
 
     // Entity flag.
-    $data[] = ['test-path', ['entity' => new \stdClass()], '<a href="/test-path">value</a>'];
+    $entity = $this->createMock('Drupal\Core\Entity\EntityInterface');
+    $data[] = ['test-path', ['entity' => $entity], '<a href="/test-path">value</a>'];
     // entity_type flag.
     $entity_type_id = 'node';
     $data[] = ['test-path', ['entity_type' => $entity_type_id], '<a href="/test-path">value</a>'];
@@ -547,7 +548,7 @@ class FieldPluginBaseTest extends UnitTestCase {
     ];
 
     $this->renderer->expects($this->once())
-      ->method('renderInIsolation')
+      ->method('renderPlain')
       ->with($build)
       ->willReturn('base:test-path/123');
 
@@ -561,7 +562,7 @@ class FieldPluginBaseTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestRenderAsLinkWithPathAndTokens() {
+  public function providerTestRenderAsLinkWithPathAndTokens() {
     $tokens = ['{{ foo }}' => 123];
     $link_html = '<a href="/test-path/123">value</a>';
 
@@ -611,7 +612,7 @@ class FieldPluginBaseTest extends UnitTestCase {
     ];
 
     $this->renderer->expects($this->once())
-      ->method('renderInIsolation')
+      ->method('renderPlain')
       ->with($build)
       ->willReturn($context['context_path']);
 
@@ -625,7 +626,7 @@ class FieldPluginBaseTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestRenderAsExternalLinkWithPathAndTokens() {
+  public function providerTestRenderAsExternalLinkWithPathAndTokens() {
     $data = [];
 
     $data[] = ['{{ foo }}', ['{{ foo }}' => 'http://www.example.com'], '<a href="http://www.example.com">value</a>', ['context_path' => 'http://www.example.com']];
@@ -739,7 +740,7 @@ class FieldPluginBaseTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestGetRenderTokensWithQuery(): array {
+  public function providerTestGetRenderTokensWithQuery(): array {
     $data = [];
     // No query parameters.
     $data[] = [
@@ -840,7 +841,7 @@ class FieldPluginBaseTest extends UnitTestCase {
     // being tested correctly handles tokens when generating the element's class
     // attribute.
     $this->renderer->expects($this->any())
-      ->method('renderInIsolation')
+      ->method('renderPlain')
       ->with($build)
       ->willReturn($expected_result);
 

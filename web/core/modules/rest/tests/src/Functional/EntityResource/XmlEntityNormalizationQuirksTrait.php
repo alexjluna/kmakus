@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\rest\Functional\EntityResource;
 
 use Drupal\Core\Entity\FieldableEntityInterface;

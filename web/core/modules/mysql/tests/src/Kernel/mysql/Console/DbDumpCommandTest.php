@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\mysql\Kernel\mysql\Console;
 
 use Drupal\Core\Command\DbDumpCommand;

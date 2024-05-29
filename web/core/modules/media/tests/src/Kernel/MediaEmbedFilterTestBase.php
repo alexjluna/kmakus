@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media\Kernel;
 
 use Drupal\Component\Utility\Html;
@@ -164,7 +162,7 @@ abstract class MediaEmbedFilterTestBase extends KernelTestBase {
   }
 
   /**
-   * Applies the `media_embed` filter to text, pipes to raw content.
+   * Applies the `@Filter=media_embed` filter to text, pipes to raw content.
    *
    * @param string $text
    *   The text string to be filtered.

@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\KeyValueStore;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Core\Database\Connection;
 
@@ -23,27 +22,10 @@ class DatabaseStorageExpirable extends DatabaseStorage implements KeyValueStoreE
    *   The serialization class to use.
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection to use.
-   * @param \Drupal\Component\Datetime\TimeInterface|string|null $time
-   *   The time service.
    * @param string $table
    *   The name of the SQL table to use, defaults to key_value_expire.
    */
-  public function __construct(
-    $collection,
-    SerializationInterface $serializer,
-    Connection $connection,
-    protected TimeInterface|string|null $time = NULL,
-    $table = 'key_value_expire',
-  ) {
-    if (is_null($time)) {
-      @trigger_error('Calling ' . __METHOD__ . ' without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3387233', E_USER_DEPRECATED);
-      $this->time = \Drupal::time();
-    }
-    elseif (is_string($time)) {
-      @trigger_error('Calling ' . __METHOD__ . ' with the $table as 4th argument is deprecated in drupal:10.3.0 and it will be the 5th argument in drupal:11.0.0. See https://www.drupal.org/node/3387233', E_USER_DEPRECATED);
-      $table = $time;
-      $this->time = \Drupal::time();
-    }
+  public function __construct($collection, SerializationInterface $serializer, Connection $connection, $table = 'key_value_expire') {
     parent::__construct($collection, $serializer, $connection, $table);
   }
 
@@ -55,7 +37,7 @@ class DatabaseStorageExpirable extends DatabaseStorage implements KeyValueStoreE
       return (bool) $this->connection->query('SELECT 1 FROM {' . $this->connection->escapeTable($this->table) . '} WHERE [collection] = :collection AND [name] = :key AND [expire] > :now', [
         ':collection' => $this->collection,
         ':key' => $key,
-        ':now' => $this->time->getRequestTime(),
+        ':now' => REQUEST_TIME,
       ])->fetchField();
     }
     catch (\Exception $e) {
@@ -72,7 +54,7 @@ class DatabaseStorageExpirable extends DatabaseStorage implements KeyValueStoreE
       $values = $this->connection->query(
         'SELECT [name], [value] FROM {' . $this->connection->escapeTable($this->table) . '} WHERE [expire] > :now AND [name] IN ( :keys[] ) AND [collection] = :collection',
         [
-          ':now' => $this->time->getRequestTime(),
+          ':now' => REQUEST_TIME,
           ':keys[]' => $keys,
           ':collection' => $this->collection,
         ])->fetchAllKeyed();
@@ -97,7 +79,7 @@ class DatabaseStorageExpirable extends DatabaseStorage implements KeyValueStoreE
         'SELECT [name], [value] FROM {' . $this->connection->escapeTable($this->table) . '} WHERE [collection] = :collection AND [expire] > :now',
         [
           ':collection' => $this->collection,
-          ':now' => $this->time->getRequestTime(),
+          ':now' => REQUEST_TIME,
         ])->fetchAllKeyed();
       return array_map([$this->serializer, 'decode'], $values);
     }
@@ -127,7 +109,7 @@ class DatabaseStorageExpirable extends DatabaseStorage implements KeyValueStoreE
       ])
       ->fields([
         'value' => $this->serializer->encode($value),
-        'expire' => $this->time->getRequestTime() + $expire,
+        'expire' => REQUEST_TIME + $expire,
       ])
       ->execute();
   }

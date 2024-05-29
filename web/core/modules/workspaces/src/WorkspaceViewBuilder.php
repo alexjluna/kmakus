@@ -43,11 +43,6 @@ class WorkspaceViewBuilder extends EntityViewBuilder {
   protected $bundleInfo;
 
   /**
-   * The number of entities to display on the workspace manage page.
-   */
-  protected int|false $limit = 50;
-
-  /**
    * {@inheritdoc}
    */
   public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
@@ -74,13 +69,7 @@ class WorkspaceViewBuilder extends EntityViewBuilder {
       'operations' => $this->t('Operations'),
     ];
     foreach ($entities as $build_id => $entity) {
-      // Display the number of entities changed in the workspace regardless of
-      // how many of them are listed on each page.
-      $changes_count = [];
       $all_tracked_entities = $this->workspaceAssociation->getTrackedEntities($entity->id());
-      foreach ($all_tracked_entities as $entity_type_id => $tracked_entity_ids) {
-        $changes_count[$entity_type_id] = $this->entityTypeManager->getDefinition($entity_type_id)->getCountLabel(count($tracked_entity_ids));
-      }
 
       $build[$build_id]['changes']['overview'] = [
         '#type' => 'item',
@@ -93,8 +82,13 @@ class WorkspaceViewBuilder extends EntityViewBuilder {
         '#empty' => $this->t('This workspace has no changes.'),
       ];
 
-      $paged_tracked_entities = $this->workspaceAssociation->getTrackedEntitiesForListing($entity->id(), $build_id, $this->limit);
-      foreach ($paged_tracked_entities as $entity_type_id => $tracked_entities) {
+      $changes_count = [];
+      foreach ($all_tracked_entities as $entity_type_id => $tracked_entities) {
+        // Ensure that newest revisions are displayed at the top.
+        krsort($tracked_entities);
+
+        $changes_count[$entity_type_id] = $this->entityTypeManager->getDefinition($entity_type_id)->getCountLabel(count($tracked_entities));
+
         $entity_type = $this->entityTypeManager->getDefinition($entity_type_id);
         if ($this->entityTypeManager->hasHandler($entity_type_id, 'list_builder')) {
           $list_builder = $this->entityTypeManager->getListBuilder($entity_type_id);
@@ -172,11 +166,6 @@ class WorkspaceViewBuilder extends EntityViewBuilder {
       if ($changes_count) {
         $build[$build_id]['changes']['overview']['#markup'] = implode(', ', $changes_count);
       }
-
-      $build[$build_id]['pager'] = [
-        '#type' => 'pager',
-        '#element' => $build_id,
-      ];
     }
   }
 

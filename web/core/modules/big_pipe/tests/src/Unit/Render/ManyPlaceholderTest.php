@@ -7,7 +7,6 @@ namespace Drupal\Tests\big_pipe\Unit\Render;
 use Drupal\big_pipe\Render\BigPipe;
 use Drupal\big_pipe\Render\BigPipeResponse;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\HtmlResponse;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Tests\UnitTestCase;
@@ -35,8 +34,7 @@ class ManyPlaceholderTest extends UnitTestCase {
       $this->prophesize(RequestStack::class)->reveal(),
       $this->prophesize(HttpKernelInterface::class)->reveal(),
       $this->prophesize(EventDispatcherInterface::class)->reveal(),
-      $this->prophesize(ConfigFactoryInterface::class)->reveal(),
-      $this->prophesize(MessengerInterface::class)->reveal()
+      $this->prophesize(ConfigFactoryInterface::class)->reveal()
     );
     $response = new BigPipeResponse(new HtmlResponse());
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\book\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -10,7 +8,6 @@ use Drupal\Tests\BrowserTestBase;
  * Create a book, add pages, and test book interface.
  *
  * @group book
- * @group legacy
  */
 class BookBreadcrumbTest extends BrowserTestBase {
 

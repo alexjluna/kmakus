@@ -107,7 +107,7 @@ abstract class OffCanvasTestBase extends WebDriverTestBase {
    * @return string[]
    *   Theme names to test.
    */
-  protected static function getTestThemes() {
+  protected function getTestThemes() {
     return ['claro', 'olivero', 'stable9', 'stark'];
   }
 
@@ -130,8 +130,8 @@ abstract class OffCanvasTestBase extends WebDriverTestBase {
   /**
    * Data provider that returns theme name as the sole argument.
    */
-  public static function themeDataProvider() {
-    $themes = static::getTestThemes();
+  public function themeDataProvider() {
+    $themes = $this->getTestThemes();
     $data = [];
     foreach ($themes as $theme) {
       $data[$theme] = [

@@ -3,20 +3,19 @@
 namespace Drupal\datetime\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Plugin implementation of the 'Default' formatter for 'datetime' fields.
+ *
+ * @FieldFormatter(
+ *   id = "datetime_default",
+ *   label = @Translation("Default"),
+ *   field_types = {
+ *     "datetime"
+ *   }
+ * )
  */
-#[FieldFormatter(
-  id: 'datetime_default',
-  label: new TranslatableMarkup('Default'),
-  field_types: [
-    'datetime',
-  ],
-)]
 class DateTimeDefaultFormatter extends DateTimeFormatterBase {
 
   /**

@@ -41,10 +41,7 @@ class ViewsTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $route_provider = $this->createMock('Drupal\Core\Routing\RouteProviderInterface');
-    $display_plugin_manager = $this->getMockBuilder('\Drupal\views\Plugin\ViewsPluginManager')
-      ->disableOriginalConstructor()
-      ->getMock();
-    $this->container->set('views.executable', new ViewExecutableFactory($user, $request_stack, $views_data, $route_provider, $display_plugin_manager));
+    $this->container->set('views.executable', new ViewExecutableFactory($user, $request_stack, $views_data, $route_provider));
 
     \Drupal::setContainer($this->container);
   }
@@ -212,7 +209,7 @@ class ViewsTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestGetApplicableViews() {
+  public function providerTestGetApplicableViews() {
     return [
       ['type_a', [['test_view_1', 'type_a']]],
       ['type_b', [['test_view_2', 'type_b']]],

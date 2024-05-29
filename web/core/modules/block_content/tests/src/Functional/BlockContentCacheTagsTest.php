@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block_content\Functional;
 
 use Drupal\block_content\Entity\BlockContent;
@@ -10,6 +8,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Tests\system\Functional\Entity\EntityCacheTagsTestBase;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Tests the Content Block entity's cache tags.
@@ -80,7 +79,14 @@ class BlockContentCacheTagsTest extends EntityCacheTagsTestBase {
     $build = $this->container->get('entity_type.manager')->getViewBuilder('block')->view($block, 'block');
 
     // Render the block.
+    // @todo The request stack manipulation won't be necessary once
+    //   https://www.drupal.org/node/2367555 is fixed and the
+    //   corresponding $request->isMethodCacheable() checks are removed from
+    //   Drupal\Core\Render\Renderer.
+    $request_stack = $this->container->get('request_stack');
+    $request_stack->push(new Request());
     $this->container->get('renderer')->renderRoot($build);
+    $request_stack->pop();
 
     // Expected keys, contexts, and tags for the block.
     // @see \Drupal\block\BlockViewBuilder::viewMultiple()

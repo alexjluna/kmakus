@@ -474,14 +474,11 @@ function _batch_finished() {
       }
     }
     // Clean-up the session. Not needed for CLI updates.
-    $session = \Drupal::request()->getSession();
-    $batches = $session->get('batches', []);
-    unset($batches[$batch['id']]);
-    if (empty($batches)) {
-      $session->remove('batches');
-    }
-    else {
-      $session->set('batches', $batches);
+    if (isset($_SESSION)) {
+      unset($_SESSION['batches'][$batch['id']]);
+      if (empty($_SESSION['batches'])) {
+        unset($_SESSION['batches']);
+      }
     }
   }
   $_batch = $batch;
@@ -534,8 +531,7 @@ function _batch_finished() {
     // form needs to be rebuilt, save the final $form_state for
     // \Drupal\Core\Form\FormBuilderInterface::buildForm().
     if ($_batch['form_state']->isRebuilding()) {
-      $session = \Drupal::request()->getSession();
-      $session->set('batch_form_state', $_batch['form_state']);
+      $_SESSION['batch_form_state'] = $_batch['form_state'];
     }
     $callback = $_batch['redirect_callback'];
     $_batch['source_url']->mergeOptions(['query' => ['op' => 'finish', 'id' => $_batch['id']]]);

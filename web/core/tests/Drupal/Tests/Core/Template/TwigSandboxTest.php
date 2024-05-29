@@ -7,7 +7,6 @@ namespace Drupal\Tests\Core\Template;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Template\TwigSandboxPolicy;
 use Drupal\Core\Template\Loader\StringLoader;
-use Drupal\Tests\Core\Entity\ContentEntityBaseMockableClass;
 use Drupal\Tests\UnitTestCase;
 use Twig\Environment;
 use Twig\Extension\SandboxExtension;
@@ -58,7 +57,7 @@ class TwigSandboxTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function getTwigEntityDangerousMethods() {
+  public function getTwigEntityDangerousMethods() {
     return [
       ['{{ entity.delete }}'],
       ['{{ entity.save }}'],
@@ -109,7 +108,7 @@ class TwigSandboxTest extends UnitTestCase {
    * get.
    */
   public function testEntitySafeMethods() {
-    $entity = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $entity = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
       ->getMock();
     $entity->expects($this->atLeastOnce())

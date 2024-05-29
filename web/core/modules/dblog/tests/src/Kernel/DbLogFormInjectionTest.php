@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\dblog\Kernel;
 
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;

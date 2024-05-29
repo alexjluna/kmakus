@@ -6,9 +6,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\taxonomy\TermInterface;
-use Drupal\views\Attribute\ViewsArgumentDefault;
 use Drupal\views\Plugin\views\argument_default\ArgumentDefaultPluginBase;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,11 +14,12 @@ use Drupal\taxonomy\VocabularyStorageInterface;
 
 /**
  * Taxonomy tid default argument.
+ *
+ * @ViewsArgumentDefault(
+ *   id = "taxonomy_tid",
+ *   title = @Translation("Taxonomy term ID from URL")
+ * )
  */
-#[ViewsArgumentDefault(
-  id: 'taxonomy_tid',
-  title: new TranslatableMarkup('Taxonomy term ID from URL'),
-)]
 class Tid extends ArgumentDefaultPluginBase implements CacheableDependencyInterface {
 
   /**
@@ -195,19 +194,6 @@ class Tid extends ArgumentDefaultPluginBase implements CacheableDependencyInterf
         }
       }
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags() {
-    $tags = parent::getCacheTags();
-    if (!empty($this->options['node'])) {
-      if (($node = $this->routeMatch->getParameter('node')) && $node instanceof NodeInterface) {
-        $tags = Cache::mergeTags($tags, $node->getCacheTags());
-      }
-    }
-    return $tags;
   }
 
   /**

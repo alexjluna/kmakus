@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -40,9 +39,10 @@ use Drupal\Core\Render\Element;
  * @see \Drupal\Core\Render\Element\Range
  * @see \Drupal\Core\Render\Element\Tel
  * @see \Drupal\Core\Render\Element\Url
+ *
+ * @FormElement("textfield")
  */
-#[FormElement('textfield')]
-class Textfield extends FormElementBase {
+class Textfield extends FormElement {
 
   /**
    * {@inheritdoc}

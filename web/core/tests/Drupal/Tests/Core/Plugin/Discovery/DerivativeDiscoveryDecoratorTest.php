@@ -243,15 +243,12 @@ class DerivativeDiscoveryDecoratorTest extends UnitTestCase {
       'null_value' => NULL,
     ];
 
-    $ids = [
-      $derivative_definition['id'],
-      $base_definition['id'],
-    ];
-    $this->discoveryMain->expects($this->exactly(count($ids)))
+    $this->discoveryMain->expects($this->exactly(2))
       ->method('getDefinition')
-      ->with($this->callback(function (string $id) use (&$ids): bool {
-        return array_shift($ids) === $id;
-      }))
+      ->withConsecutive(
+        ['non_container_aware_discovery:test_discovery_1'],
+        ['non_container_aware_discovery'],
+      )
       ->willReturnOnConsecutiveCalls(
         $derivative_definition,
         $base_definition,

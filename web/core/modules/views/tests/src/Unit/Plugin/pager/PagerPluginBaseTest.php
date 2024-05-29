@@ -185,7 +185,7 @@ class PagerPluginBaseTest extends UnitTestCase {
    *
    * @see self::testHasMoreRecords
    */
-  public static function providerTestHasMoreRecords() {
+  public function providerTestHasMoreRecords() {
     return [
       // No items per page, so there can't be more available records.
       [0, 0, 0, FALSE],

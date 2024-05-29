@@ -1,15 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Image;
 
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\KernelTests\KernelTestBase;
-
-// cspell:ignore imagecreatefrom
 
 /**
  * Tests for the GD image toolkit.
@@ -109,7 +105,7 @@ class ToolkitGdTest extends KernelTestBase {
   /**
    * Data provider for ::testManipulations().
    */
-  public static function providerTestImageFiles(): array {
+  public function providerTestImageFiles(): array {
     // Typically the corner colors will be unchanged. These colors are in the
     // order of top-left, top-right, bottom-right, bottom-left.
     $default_corners = [static::RED, static::GREEN, static::BLUE, static::TRANSPARENT];
@@ -327,13 +323,27 @@ class ToolkitGdTest extends KernelTestBase {
       }
 
       // Get the location of the corner.
-      [$x, $y] = match ($key) {
-        0 => [0, 0],
-        1 => [$image->getWidth() - 1, 0],
-        2 => [$image->getWidth() - 1, $image->getHeight() - 1],
-        3 => [0, $image->getHeight() - 1],
-      };
+      switch ($key) {
+        case 0:
+          $x = 0;
+          $y = 0;
+          break;
 
+        case 1:
+          $x = $image->getWidth() - 1;
+          $y = 0;
+          break;
+
+        case 2:
+          $x = $image->getWidth() - 1;
+          $y = $image->getHeight() - 1;
+          break;
+
+        case 3:
+          $x = 0;
+          $y = $image->getHeight() - 1;
+          break;
+      }
       $actual_color = $this->getPixelColor($image, $x, $y);
 
       // If image cannot handle transparent colors, skip the pixel color test.
@@ -380,7 +390,7 @@ class ToolkitGdTest extends KernelTestBase {
   /**
    * Data provider for ::testCreateImageFromScratch().
    */
-  public static function providerSupportedImageTypes(): array {
+  public function providerSupportedImageTypes(): array {
     return [
       [IMAGETYPE_PNG],
       [IMAGETYPE_GIF],

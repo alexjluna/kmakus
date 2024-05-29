@@ -162,7 +162,7 @@ class WriteSafeSessionHandlerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestOtherMethods() {
+  public function providerTestOtherMethods() {
     return [
       ['open', TRUE, ['/some/path', 'some-session-id']],
       ['read', 'some-session-data', ['a-session-id']],

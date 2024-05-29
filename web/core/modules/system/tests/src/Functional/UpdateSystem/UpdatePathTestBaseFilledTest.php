@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\UpdateSystem;
 
 use Drupal\FunctionalTests\Update\UpdatePathTestBase;
@@ -384,6 +382,7 @@ class UpdatePathTestBaseFilledTest extends UpdatePathTestBase {
       'telephone',
       'text',
       'toolbar',
+      'tour',
       'tracker',
       'update',
       'user',

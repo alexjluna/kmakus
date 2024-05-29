@@ -4,7 +4,6 @@ namespace Drupal\views\Plugin\views\field;
 
 use Drupal\Component\Utility\Xss as UtilityXss;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Render\ViewsRenderPipelineMarkup;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
@@ -25,8 +24,9 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
  *      @endcode
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("boolean")
  */
-#[ViewsField("boolean")]
 class Boolean extends FieldPluginBase {
 
   /**

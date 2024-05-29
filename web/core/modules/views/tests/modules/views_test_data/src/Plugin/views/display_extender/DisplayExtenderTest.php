@@ -2,19 +2,17 @@
 
 namespace Drupal\views_test_data\Plugin\views\display_extender;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\views\Attribute\ViewsDisplayExtender;
 use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
 
 /**
  * Defines a display extender test plugin.
+ *
+ * @ViewsDisplayExtender(
+ *   id = "display_extender_test",
+ *   title = @Translation("Display extender test")
+ * )
  */
-#[ViewsDisplayExtender(
-  id: 'display_extender_test',
-  title: new TranslatableMarkup('Display extender test'),
-)]
 class DisplayExtenderTest extends DisplayExtenderPluginBase {
 
   /**
@@ -52,7 +50,7 @@ class DisplayExtenderTest extends DisplayExtenderPluginBase {
     $options['test_extender_test_option'] = [
       'category' => 'display_extender_test',
       'title' => $this->t('Test option'),
-      'value' => Unicode::truncate($this->options['test_extender_test_option'], 24, FALSE, TRUE),
+      'value' => views_ui_truncate($this->options['test_extender_test_option'], 24),
     ];
   }
 

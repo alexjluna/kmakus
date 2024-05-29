@@ -7,7 +7,6 @@ use Drupal\Core\Ajax\AjaxFormHelperTrait;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
-use Drupal\Core\Form\WorkspaceDynamicSafeFormInterface;
 use Drupal\Core\Layout\LayoutInterface;
 use Drupal\Core\Plugin\ContextAwarePluginInterface;
 use Drupal\Core\Plugin\PluginFormFactoryInterface;
@@ -27,13 +26,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @internal
  *   Form classes are internal.
  */
-class ConfigureSectionForm extends FormBase implements WorkspaceDynamicSafeFormInterface {
+class ConfigureSectionForm extends FormBase {
 
   use AjaxFormHelperTrait;
   use LayoutBuilderContextTrait;
   use LayoutBuilderHighlightTrait;
   use LayoutRebuildTrait;
-  use WorkspaceSafeFormTrait;
 
   /**
    * The layout tempstore repository.

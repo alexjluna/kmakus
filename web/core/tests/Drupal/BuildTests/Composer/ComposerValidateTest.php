@@ -14,9 +14,9 @@ class ComposerValidateTest extends BuildTestBase {
 
   use ComposerIntegrationTrait;
 
-  public static function provideComposerJson() {
+  public function provideComposerJson() {
     $data = [];
-    $composer_json_finder = self::getComposerJsonFinder(self::getDrupalRootStatic());
+    $composer_json_finder = $this->getComposerJsonFinder($this->getDrupalRoot());
     foreach ($composer_json_finder->getIterator() as $composer_json) {
       $data[] = [$composer_json->getPathname()];
     }

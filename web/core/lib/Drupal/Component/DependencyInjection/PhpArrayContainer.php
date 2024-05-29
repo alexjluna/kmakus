@@ -2,7 +2,6 @@
 
 namespace Drupal\Component\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -39,6 +38,9 @@ class PhpArrayContainer extends Container {
     $this->parameters = $container_definition['parameters'] ?? [];
     $this->serviceDefinitions = $container_definition['services'] ?? [];
     $this->frozen = $container_definition['frozen'] ?? FALSE;
+
+    // Register the service_container with itself.
+    $this->services['service_container'] = $this;
   }
 
   /**
@@ -173,15 +175,6 @@ class PhpArrayContainer extends Container {
         elseif ($type == 'raw') {
           $arguments[$key] = $argument->value;
 
-          continue;
-        }
-        elseif ($type == 'iterator') {
-          $services = $argument->value;
-          $arguments[$key] = new RewindableGenerator(function () use ($services) {
-            foreach ($services as $key => $service) {
-              yield $key => $this->resolveServicesAndParameters([$service])[0];
-            }
-          }, count($services));
           continue;
         }
 

@@ -2,22 +2,19 @@
 
 namespace Drupal\layout_builder_test\Plugin\Layout;
 
-use Drupal\Core\Layout\Attribute\Layout;
 use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * The Layout Builder Test Plugin.
+ * @Layout(
+ *   id = "layout_builder_test_plugin",
+ *   label = @Translation("Layout Builder Test Plugin"),
+ *   regions = {
+ *     "main" = {
+ *       "label" = @Translation("Main Region")
+ *     }
+ *   },
+ * )
  */
-#[Layout(
-  id: 'layout_builder_test_plugin',
-  label: new TranslatableMarkup('Layout Builder Test Plugin'),
-  regions: [
-    "main" => [
-      "label" => new TranslatableMarkup("Main Region"),
-    ],
-  ],
-)]
 class LayoutBuilderTestPlugin extends LayoutDefault {
 
   /**

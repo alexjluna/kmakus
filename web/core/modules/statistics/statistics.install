@@ -5,8 +5,6 @@
  * Install and update functions for the Statistics module.
  */
 
-// cspell:ignore daycount totalcount
-
 /**
  * Implements hook_uninstall().
  */

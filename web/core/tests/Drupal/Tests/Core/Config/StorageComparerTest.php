@@ -51,10 +51,10 @@ class StorageComparerTest extends UnitTestCase {
 
     $this->sourceStorage->expects($this->atLeastOnce())
       ->method('getCollectionName')
-      ->willReturn(StorageInterface::DEFAULT_COLLECTION);
+      ->will($this->returnValue(StorageInterface::DEFAULT_COLLECTION));
     $this->targetStorage->expects($this->atLeastOnce())
       ->method('getCollectionName')
-      ->willReturn(StorageInterface::DEFAULT_COLLECTION);
+      ->will($this->returnValue(StorageInterface::DEFAULT_COLLECTION));
 
     $this->storageComparer = new StorageComparer($this->sourceStorage, $this->targetStorage);
   }

@@ -2,10 +2,9 @@
 
 namespace Drupal\Core\Flood;
 
-use Drupal\Component\Datetime\TimeInterface;
-use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\DatabaseException;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Database\Connection;
 
 /**
  * Defines the database flood backend. This is the default Drupal backend.
@@ -39,16 +38,10 @@ class DatabaseBackend implements FloodInterface, PrefixFloodInterface {
    *   information.
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack used to retrieve the current request.
-   * @param \Drupal\Component\Datetime\TimeInterface|null $time
-   *   The time service.
    */
-  public function __construct(Connection $connection, RequestStack $request_stack, protected ?TimeInterface $time = NULL) {
+  public function __construct(Connection $connection, RequestStack $request_stack) {
     $this->connection = $connection;
     $this->requestStack = $request_stack;
-    if (!$time) {
-      @trigger_error('Calling ' . __METHOD__ . '() without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3387233', E_USER_DEPRECATED);
-      $this->time = \Drupal::service(TimeInterface::class);
-    }
   }
 
   /**
@@ -90,8 +83,8 @@ class DatabaseBackend implements FloodInterface, PrefixFloodInterface {
       ->fields([
         'event' => $name,
         'identifier' => $identifier,
-        'timestamp' => $this->time->getRequestTime(),
-        'expiration' => $this->time->getRequestTime() + $window,
+        'timestamp' => REQUEST_TIME,
+        'expiration' => REQUEST_TIME + $window,
       ])
       ->execute();
   }
@@ -140,7 +133,7 @@ class DatabaseBackend implements FloodInterface, PrefixFloodInterface {
       $number = $this->connection->select(static::TABLE_NAME, 'f')
         ->condition('event', $name)
         ->condition('identifier', $identifier)
-        ->condition('timestamp', $this->time->getRequestTime() - $window, '>')
+        ->condition('timestamp', REQUEST_TIME - $window, '>')
         ->countQuery()
         ->execute()
         ->fetchField();
@@ -160,7 +153,7 @@ class DatabaseBackend implements FloodInterface, PrefixFloodInterface {
   public function garbageCollection() {
     try {
       $this->connection->delete(static::TABLE_NAME)
-        ->condition('expiration', $this->time->getRequestTime(), '<')
+        ->condition('expiration', REQUEST_TIME, '<')
         ->execute();
     }
     catch (\Exception $e) {

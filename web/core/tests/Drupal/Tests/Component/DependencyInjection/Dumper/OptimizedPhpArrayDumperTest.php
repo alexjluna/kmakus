@@ -9,7 +9,6 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
   use Prophecy\PhpUnit\ProphecyTrait;
   use Prophecy\Prophet;
   use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
-  use Symfony\Component\DependencyInjection\Argument\IteratorArgument;
   use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
   use Symfony\Component\DependencyInjection\Definition;
   use Symfony\Component\DependencyInjection\Reference;
@@ -121,7 +120,7 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
      *     - aliases as returned by ContainerBuilder.
      *     - aliases as expected in the container definition.
      */
-    public static function getAliasesDataProvider() {
+    public function getAliasesDataProvider() {
       return [
         [[], []],
         [
@@ -166,7 +165,7 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
      *     - parameters as expected in the container definition.
      *     - frozen value
      */
-    public static function getParametersDataProvider() {
+    public function getParametersDataProvider() {
       return [
         [[], [], TRUE],
         [
@@ -348,13 +347,6 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
         'arguments' => [[new Reference('bar')]],
         'arguments_count' => 1,
         'arguments_expected' => static::getCollection([static::getCollection([static::getServiceCall('bar')])]),
-      ] + $base_service_definition;
-
-      // Test an IteratorArgument collection with a reference to resolve.
-      $service_definitions[] = [
-        'arguments' => [new IteratorArgument([new Reference('bar')])],
-        'arguments_count' => 1,
-        'arguments_expected' => static::getCollection([static::getIterator([static::getServiceCall('bar')])]),
       ] + $base_service_definition;
 
       // Test a collection with a variable to resolve.
@@ -546,7 +538,7 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
       $this->assertEquals(static::serializeDefinition($data), $dump['services']['foo'], 'Expected definition matches dump.');
     }
 
-    public static function publicPrivateDataProvider() {
+    public function publicPrivateDataProvider() {
       return [
         [TRUE],
         [FALSE],
@@ -688,7 +680,7 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
      *     - expected final value.
      *     - escaped value in service definition.
      */
-    public static function percentsEscapeProvider() {
+    public function percentsEscapeProvider() {
       return [
         ['%foo%', '%%foo%%'],
         ['foo%bar%', 'foo%%bar%%'],
@@ -719,20 +711,11 @@ namespace Drupal\Tests\Component\DependencyInjection\Dumper {
     /**
      * Helper function to return a machine-optimized collection.
      */
-    protected static function getCollection($collection) {
+    protected static function getCollection($collection, $resolve = TRUE) {
       return (object) [
         'type' => 'collection',
         'value' => $collection,
-      ];
-    }
-
-    /**
-     * Helper function to return a machine-optimized iterator.
-     */
-    protected static function getIterator($collection) {
-      return (object) [
-        'type' => 'iterator',
-        'value' => $collection,
+        'resolve' => $resolve,
       ];
     }
 

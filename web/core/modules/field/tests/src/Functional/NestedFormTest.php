@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Functional;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -219,11 +217,11 @@ class NestedFormTest extends FieldTestBase {
 
     // Display the 'combined form'.
     $this->drupalGet("test-entity-constraints/nested/{$entity_1->id()}/{$entity_2->id()}");
-    $assert_session->hiddenFieldValueEquals('entity_2[changed]', (string) \Drupal::time()->getRequestTime());
+    $assert_session->hiddenFieldValueEquals('entity_2[changed]', (string) REQUEST_TIME);
 
     // Submit the form and check that the entities are updated accordingly.
     $assert_session->hiddenFieldExists('entity_2[changed]')
-      ->setValue(\Drupal::time()->getRequestTime() - 86400);
+      ->setValue(REQUEST_TIME - 86400);
     $page->pressButton('Save');
 
     $elements = $this->cssSelect('.entity-2.error');

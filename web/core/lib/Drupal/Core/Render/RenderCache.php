@@ -59,17 +59,16 @@ class RenderCache implements RenderCacheInterface {
    * {@inheritdoc}
    */
   public function get(array $elements) {
-    if (!$this->isElementCacheable($elements)) {
+    // Form submissions rely on the form being built during the POST request,
+    // and render caching of forms prevents this from happening.
+    // @todo remove the isMethodCacheable() check when
+    //   https://www.drupal.org/node/2367555 lands.
+    if (!$this->requestStack->getCurrentRequest()->isMethodCacheable() || !$this->isElementCacheable($elements)) {
       return FALSE;
     }
 
-    $bin = $elements['#cache']['bin'] ?? 'render';
+    $bin = isset($elements['#cache']['bin']) ? $elements['#cache']['bin'] : 'render';
     if (($cache_bin = $this->cacheFactory->get($bin)) && $cache = $cache_bin->get($elements['#cache']['keys'], CacheableMetadata::createFromRenderArray($elements))) {
-      if (!$this->requestStack->getCurrentRequest()->isMethodCacheable()) {
-        if (!empty(array_filter($cache->tags, fn (string $tag) => str_starts_with($tag, 'CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:')))) {
-          return FALSE;
-        }
-      }
       return $cache->data;
     }
     return FALSE;
@@ -79,9 +78,10 @@ class RenderCache implements RenderCacheInterface {
    * {@inheritdoc}
    */
   public function set(array &$elements, array $pre_bubbling_elements) {
-    // Avoid setting cache items on POST requests, this ensures that cache items
-    // with a very low hit rate won't enter the cache. All render elements
-    // except forms will still be retrieved from cache when available.
+    // Form submissions rely on the form being built during the POST request,
+    // and render caching of forms prevents this from happening.
+    // @todo remove the isMethodCacheable() check when
+    //   https://www.drupal.org/node/2367555 lands.
     if (!$this->requestStack->getCurrentRequest()->isMethodCacheable() || !$this->isElementCacheable($elements)) {
       return FALSE;
     }

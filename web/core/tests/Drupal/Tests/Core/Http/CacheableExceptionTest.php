@@ -59,7 +59,7 @@ class CacheableExceptionTest extends UnitTestCase {
     $this->assertSame(123, $exception->getCode());
   }
 
-  public static function providerTestExceptions() {
+  public function providerTestExceptions() {
     return [
       [400, CacheableBadRequestHttpException::class],
       [401, CacheableUnauthorizedHttpException::class, 'test challenge', ['WWW-Authenticate' => 'test challenge']],

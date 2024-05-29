@@ -78,7 +78,7 @@ class ElementInfoManagerTest extends UnitTestCase {
     $this->moduleHandler->expects($this->once())
       ->method('alter')
       ->with('element_info', $this->anything())
-      ->willReturnArgument(0);
+      ->will($this->returnArgument(0));
 
     $plugin = $this->createMock($plugin_class);
     $plugin->expects($this->once())
@@ -114,7 +114,7 @@ class ElementInfoManagerTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestGetInfoElementPlugin() {
+  public function providerTestGetInfoElementPlugin() {
     $data = [];
     $data[] = [
       'Drupal\Core\Render\Element\ElementInterface',

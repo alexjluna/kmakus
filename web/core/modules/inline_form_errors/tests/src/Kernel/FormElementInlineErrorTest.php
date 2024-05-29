@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\inline_form_errors\Kernel;
 
 use Drupal\Core\Form\FormState;

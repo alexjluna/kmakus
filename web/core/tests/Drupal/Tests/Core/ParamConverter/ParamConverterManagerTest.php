@@ -112,7 +112,7 @@ class ParamConverterManagerTest extends UnitTestCase {
    *
    * @see ParamConverterManagerTest::testGetConverter()
    */
-  public static function providerTestGetConverter() {
+  public function providerTestGetConverter() {
     return [
       ['ape', 'ApeConverterClass'],
       ['cat', 'CatConverterClass'],
@@ -159,7 +159,7 @@ class ParamConverterManagerTest extends UnitTestCase {
   /**
    * Provides data for testSetRouteParameterConverters().
    */
-  public static function providerTestSetRouteParameterConverters() {
+  public function providerTestSetRouteParameterConverters() {
     return [
       ['/test'],
       ['/test/{id}', ['id' => []], 'applied'],

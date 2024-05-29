@@ -37,7 +37,7 @@ class FormStateTest extends UnitTestCase {
    * @return array
    *   Returns some test data.
    */
-  public static function providerTestGetRedirect() {
+  public function providerTestGetRedirect() {
     $data = [];
     $data[] = [[], NULL];
 
@@ -80,7 +80,7 @@ class FormStateTest extends UnitTestCase {
     $this->assertSame($error, $form_state->getError($element));
   }
 
-  public static function providerTestGetError() {
+  public function providerTestGetError() {
     return [
       [[], ['foo']],
       [['foo][bar' => 'Fail'], []],
@@ -113,7 +113,7 @@ class FormStateTest extends UnitTestCase {
     $this->assertSame($expected_errors, $form_state->getErrors());
   }
 
-  public static function providerTestSetErrorByName() {
+  public function providerTestSetErrorByName() {
     return [
       // Only validate the 'options' element.
       [[['options']], ['options' => '']],
@@ -264,7 +264,7 @@ class FormStateTest extends UnitTestCase {
   /**
    * Provides test data for testIsCached().
    */
-  public static function providerTestIsCached() {
+  public function providerTestIsCached() {
     $data = [];
     $data[] = [
       TRUE,
@@ -335,7 +335,7 @@ class FormStateTest extends UnitTestCase {
   /**
    * Provides test data for testIsMethodType().
    */
-  public static function providerTestIsMethodType() {
+  public function providerTestIsMethodType() {
     $data = [];
     $data[] = [
       'get',

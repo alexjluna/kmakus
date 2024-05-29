@@ -86,7 +86,7 @@ class UserAgentTest extends TestCase {
    *   - An accept-language string.
    *   - Expected best matching language code.
    */
-  public static function providerTestGetBestMatchingLangcode() {
+  public function providerTestGetBestMatchingLangcode() {
     // Random generator.
     $random = new Random();
 

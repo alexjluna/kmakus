@@ -50,22 +50,15 @@ class FormErrorHandlerTest extends UnitTestCase {
    * @covers ::displayErrorMessages
    */
   public function testDisplayErrorMessages() {
-    $messages = [
-      'invalid',
-      'invalid',
-      'invalid',
-      'no title given',
-      'element is invisible',
-      'this missing element is invalid',
-    ];
-
-    $this->messenger->expects($this->exactly(count($messages)))
+    $this->messenger->expects($this->exactly(6))
       ->method('addMessage')
-      ->with(
-        $this->callback(function (string $message) use (&$messages): bool {
-          return array_shift($messages) === $message;
-        }),
-        'error',
+      ->withConsecutive(
+        ['invalid', 'error'],
+        ['invalid', 'error'],
+        ['invalid', 'error'],
+        ['no title given', 'error'],
+        ['element is invisible', 'error'],
+        ['this missing element is invalid', 'error'],
       );
 
     $form = [

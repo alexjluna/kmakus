@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Drupal\file\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * File is image constraint.
+ *
+ * @Constraint(
+ *   id = "FileIsImage",
+ *   label = @Translation("File Is Image", context = "Validation"),
+ *   type = "file"
+ * )
  */
-#[Constraint(
-  id: 'FileIsImage',
-  label: new TranslatableMarkup('File Is Image', [], ['context' => 'Validation']),
-  type: 'file'
-)]
-class FileIsImageConstraint extends SymfonyConstraint {
+class FileIsImageConstraint extends Constraint {
 
   /**
    * The error message.

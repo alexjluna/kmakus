@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests;
 
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -11,12 +9,8 @@ use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\StreamCapturer;
 use Drupal\Tests\Traits\Core\CronRunTrait;
-use Drupal\Tests\Traits\Core\PathAliasTestTrait;
 use Drupal\user\Entity\Role;
 use PHPUnit\Framework\ExpectationFailedException;
-use Symfony\Component\HttpFoundation\Request;
-
-// cspell:ignore htkey
 
 /**
  * Tests BrowserTestBase functionality.
@@ -25,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @group #slow
  */
 class BrowserTestBaseTest extends BrowserTestBase {
-  use PathAliasTestTrait;
+
   use CronRunTrait;
 
   /**
@@ -124,19 +118,6 @@ class BrowserTestBaseTest extends BrowserTestBase {
     $this->drupalGet('/test-page/');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->addressEquals('/test-page/');
-    // Test alias handling.
-    $this->createPathAlias('/test-page', '/test-alias');
-    $this->rebuildAll();
-    $this->drupalGet('test-page');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->addressEquals('test-alias');
-    $this->drupalGet('/test-page');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->addressEquals('test-alias');
-    $this->drupalGet('/test-page/');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->addressEquals('/test-page/');
-
   }
 
   /**
@@ -542,7 +523,7 @@ class BrowserTestBaseTest extends BrowserTestBase {
   /**
    * Tests the protections provided by .htkey.
    */
-  public function testHtKey() {
+  public function testHtkey() {
     // Remove the Simpletest private key file so we can test the protection
     // against requests that forge a valid testing user agent to gain access
     // to the installer.
@@ -554,30 +535,6 @@ class BrowserTestBaseTest extends BrowserTestBase {
     unlink($this->siteDirectory . '/.htkey');
     $this->drupalGet($install_url);
     $this->assertSession()->statusCodeEquals(403);
-  }
-
-  /**
-   * Tests that a usable session is on the request in test-runner.
-   */
-  public function testSessionOnRequest(): void {
-    /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
-    $session = $this->container->get('request_stack')->getSession();
-
-    $session->set('some-val', 'do-not-cleanup');
-    $this->assertEquals('do-not-cleanup', $session->get('some-val'));
-
-    $session->set('some-other-val', 'do-cleanup');
-    $this->assertEquals('do-cleanup', $session->remove('some-other-val'));
-  }
-
-  /**
-   * Tests deprecation of modified request stack lacking a session.
-   *
-   * @group legacy
-   */
-  public function testDeprecatedSessionMissing(): void {
-    $this->expectDeprecation('Pushing requests without a session onto the request_stack is deprecated in drupal:10.3.0 and an error will be thrown from drupal:11.0.0. See https://www.drupal.org/node/3337193');
-    $this->container->get('request_stack')->push(Request::create('/'));
   }
 
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel;
 
 use Drupal\field\Entity\FieldConfig;
@@ -181,7 +179,8 @@ class MigrateEntityContentValidationTest extends KernelTestBase {
       'name' => 'foobar',
       'mail' => 'foobar@example.com',
     ]);
-    $admin_user->addRole($role->id())->save();
+    $admin_user->addRole($role->id());
+    $admin_user->save();
     $normal_user = User::create([
       'name' => 'normal user',
       'mail' => 'normal@example.com',

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Database;
 
 use Drupal\Core\Database\Database;
@@ -127,7 +125,7 @@ class ConnectionTest extends DatabaseTestBase {
       'test_table' => $connection_info['default']['prefix'] . '_bar',
     ];
     Database::addConnectionInfo('default', 'foo', $new_connection_info);
-    $this->expectException(\AssertionError::class);
+    $this->expectError();
     $foo_connection = Database::getConnection('foo', 'default');
   }
 
@@ -141,7 +139,7 @@ class ConnectionTest extends DatabaseTestBase {
       'default' => $connection_info['default']['prefix'],
     ];
     Database::addConnectionInfo('default', 'foo', $new_connection_info);
-    $this->expectException(\AssertionError::class);
+    $this->expectError();
     $foo_connection = Database::getConnection('foo', 'default');
   }
 

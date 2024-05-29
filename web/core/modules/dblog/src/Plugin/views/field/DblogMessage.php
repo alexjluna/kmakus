@@ -4,7 +4,6 @@ namespace Drupal\dblog\Plugin\views\field;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
@@ -14,8 +13,9 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
  * Provides a field handler that renders a log event with replaced variables.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("dblog_message")
  */
-#[ViewsField("dblog_message")]
 class DblogMessage extends FieldPluginBase {
 
   /**

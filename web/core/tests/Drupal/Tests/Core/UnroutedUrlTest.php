@@ -53,7 +53,7 @@ class UnroutedUrlTest extends UnitTestCase {
     $this->urlAssembler = $this->createMock('Drupal\Core\Utility\UnroutedUrlAssemblerInterface');
     $this->urlAssembler->expects($this->any())
       ->method('assemble')
-      ->willReturnArgument(0);
+      ->will($this->returnArgument(0));
 
     $this->router = $this->createMock('Drupal\Tests\Core\Routing\TestRouterInterface');
     $container = new ContainerBuilder();
@@ -78,7 +78,7 @@ class UnroutedUrlTest extends UnitTestCase {
   /**
    * Data provider for testFromUri().
    */
-  public static function providerFromUri() {
+  public function providerFromUri() {
     return [
       // [$uri, $is_external]
       // An external URI.
@@ -112,7 +112,7 @@ class UnroutedUrlTest extends UnitTestCase {
   /**
    * Data provider for testFromInvalidUri().
    */
-  public static function providerFromInvalidUri() {
+  public function providerFromInvalidUri() {
     return [
       // Schemeless paths.
       ['test'],

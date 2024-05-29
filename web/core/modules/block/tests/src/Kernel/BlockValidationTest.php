@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block\Kernel;
 
 use Drupal\block\Entity\Block;
@@ -57,11 +55,11 @@ class BlockValidationTest extends ConfigEntityValidationTestBase {
   /**
    * Block names are atypical in that they allow periods in the machine name.
    */
-  public static function providerInvalidMachineNameCharacters(): array {
+  public function providerInvalidMachineNameCharacters(): array {
     $cases = parent::providerInvalidMachineNameCharacters();
     // Remove the existing test case that verifies a machine name containing
     // periods is invalid.
-    self::assertSame(['period.separated', FALSE], $cases['INVALID: period separated']);
+    $this->assertSame(['period.separated', FALSE], $cases['INVALID: period separated']);
     unset($cases['INVALID: period separated']);
     // And instead add a test case that verifies it is allowed for blocks.
     $cases['VALID: period separated'] = ['period.separated', TRUE];

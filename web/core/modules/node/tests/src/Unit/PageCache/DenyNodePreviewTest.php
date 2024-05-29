@@ -77,7 +77,7 @@ class DenyNodePreviewTest extends UnitTestCase {
    * @return array
    *   Data and expected results.
    */
-  public static function providerPrivateImageStyleDownloadPolicy() {
+  public function providerPrivateImageStyleDownloadPolicy() {
     return [
       [ResponsePolicyInterface::DENY, 'entity.node.preview'],
       [NULL, 'some.other.route'],

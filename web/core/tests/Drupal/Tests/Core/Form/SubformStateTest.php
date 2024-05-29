@@ -24,7 +24,7 @@ class SubformStateTest extends UnitTestCase {
    *
    * @var mixed[]
    */
-  protected static $formStateValues = [
+  protected $formStateValues = [
     'foo' => 'bar',
     'dog' => [
       'breed' => 'Pit bull',
@@ -70,7 +70,7 @@ class SubformStateTest extends UnitTestCase {
    */
   public function testGetValues(array $parents, $expected) {
     $parent_form_state = new FormState();
-    $parent_form_state->setValues(static::$formStateValues);
+    $parent_form_state->setValues($this->formStateValues);
 
     $subform = NestedArray::getValue($this->parentForm, $parents);
     $subform_state = SubformState::createForSubform($subform, $this->parentForm, $parent_form_state);
@@ -86,11 +86,11 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testGetValues().
    */
-  public static function providerGetValues(): array {
+  public function providerGetValues() {
     $data = [];
     $data['exist'] = [
       ['dog'],
-      static::$formStateValues['dog'],
+      $this->formStateValues['dog'],
     ];
 
     return $data;
@@ -115,11 +115,11 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testGetValuesBroken().
    */
-  public static function providerGetValuesBroken(): array {
+  public function providerGetValuesBroken() {
     $data = [];
     $data['exist'] = [
       ['foo'],
-      static::$formStateValues['foo'],
+      $this->formStateValues['foo'],
     ];
     $data['nested'] = [
       ['dog', 'name'],
@@ -136,7 +136,7 @@ class SubformStateTest extends UnitTestCase {
    */
   public function testGetValue($parents, $key, $expected, $default = NULL) {
     $parent_form_state = new FormState();
-    $parent_form_state->setValues(static::$formStateValues);
+    $parent_form_state->setValues($this->formStateValues);
 
     $subform = NestedArray::getValue($this->parentForm, $parents);
     $subform_state = SubformState::createForSubform($subform, $this->parentForm, $parent_form_state);
@@ -152,7 +152,7 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testGetValue().
    */
-  public static function providerTestGetValue() {
+  public function providerTestGetValue() {
     $data = [];
     $data['exist'] = [
       ['dog'],
@@ -176,7 +176,7 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testGetValueBroken().
    */
-  public static function providerTestGetValueBroken() {
+  public function providerTestGetValueBroken() {
     $data = [];
     $data['nested'] = [
       ['dog', 'name'],
@@ -194,7 +194,7 @@ class SubformStateTest extends UnitTestCase {
    */
   public function testSetValues($parents, $new_values, $expected) {
     $parent_form_state = new FormState();
-    $parent_form_state->setValues(static::$formStateValues);
+    $parent_form_state->setValues($this->formStateValues);
 
     $subform = NestedArray::getValue($this->parentForm, $parents);
     $subform_state = SubformState::createForSubform($subform, $this->parentForm, $parent_form_state);
@@ -205,7 +205,7 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testSetValues().
    */
-  public static function providerTestSetValues() {
+  public function providerTestSetValues() {
     $data = [];
     $data['exist'] = [
       ['dog'],
@@ -231,14 +231,14 @@ class SubformStateTest extends UnitTestCase {
   /**
    * Provides data to self::testSetValuesBroken().
    */
-  public static function providerTestSetValuesBroken(): array {
+  public function providerTestSetValuesBroken() {
     $data = [];
     $data['exist'] = [
       ['foo'],
       [],
       [
         'foo' => [],
-        'dog' => static::$formStateValues['dog'],
+        'dog' => $this->formStateValues['dog'],
       ],
     ];
     return $data;

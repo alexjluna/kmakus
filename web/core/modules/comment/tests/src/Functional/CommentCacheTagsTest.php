@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\comment\Functional;
 
 use Drupal\comment\CommentInterface;
@@ -15,8 +13,6 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\Tests\system\Functional\Entity\EntityWithUriCacheTagsTestBase;
 use Drupal\user\Entity\Role;
 use Drupal\user\RoleInterface;
-
-// cspell:ignore amphibius Hippopotamidae
 
 /**
  * Tests the Comment entity's cache tags.

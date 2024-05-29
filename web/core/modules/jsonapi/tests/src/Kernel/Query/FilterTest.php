@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Kernel\Query;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -297,7 +295,7 @@ class FilterTest extends JsonapiKernelTestBase {
       'shapes', 'Shapes',
       FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED
     );
-    $this->createImageField('photo', 'node', 'painting');
+    $this->createImageField('photo', 'painting');
   }
 
   /**
@@ -329,7 +327,7 @@ class FilterTest extends JsonapiKernelTestBase {
   /**
    * Data provider for testCreateFromQueryParameter.
    */
-  public static function parameterProvider() {
+  public function parameterProvider() {
     return [
       'shorthand' => [
         ['uid' => ['value' => 1]],

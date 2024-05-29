@@ -15,8 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\statistics\StatisticsStorageInterface;
 
-// cspell:ignore daycount totalcount
-
 /**
  * Provides a 'Popular content' block.
  */

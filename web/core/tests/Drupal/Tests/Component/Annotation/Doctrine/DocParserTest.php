@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\Component\Annotation\Doctrine;
 
 use Drupal\Component\Annotation\Doctrine\DocParser;
@@ -398,7 +396,7 @@ DOCBLOCK;
 
     }
 
-    public static function getAnnotationVarTypeProviderValid()
+    public function getAnnotationVarTypeProviderValid()
     {
         //({attribute name}, {attribute value})
          return array(
@@ -451,7 +449,7 @@ DOCBLOCK;
         );
     }
 
-    public static function getAnnotationVarTypeProviderInvalid()
+    public function getAnnotationVarTypeProviderInvalid()
     {
          //({attribute name}, {type declared type}, {attribute value} , {given type or class})
          return array(
@@ -504,7 +502,7 @@ DOCBLOCK;
         );
     }
 
-    public static function getAnnotationVarTypeArrayProviderInvalid()
+    public function getAnnotationVarTypeArrayProviderInvalid()
     {
          //({attribute name}, {type declared type}, {attribute value} , {given type or class})
          return array(
@@ -760,7 +758,7 @@ DOCBLOCK;
         $parser->parse($docblock);
     }
 
-    public static function getConstantsProvider()
+    public function getConstantsProvider()
     {
         $provider[] = array(
             '@AnnotationWithConstants(PHP_EOL)',

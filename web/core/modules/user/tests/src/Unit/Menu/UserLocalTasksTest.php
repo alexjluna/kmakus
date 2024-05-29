@@ -42,7 +42,7 @@ class UserLocalTasksTest extends LocalTaskIntegrationTestBase {
   /**
    * Provides a list of routes to test.
    */
-  public static function getUserAdminRoutes() {
+  public function getUserAdminRoutes() {
     return [
       ['entity.user.collection', [['entity.user.collection', 'user.admin_permissions', 'entity.user_role.collection', 'user.role.settings']]],
       ['user.admin_permissions', [['entity.user.collection', 'user.admin_permissions', 'entity.user_role.collection', 'user.role.settings']]],
@@ -66,7 +66,7 @@ class UserLocalTasksTest extends LocalTaskIntegrationTestBase {
   /**
    * Provides a list of routes to test.
    */
-  public static function getUserLoginRoutes() {
+  public function getUserLoginRoutes() {
     return [
       ['user.login'],
       ['user.register'],
@@ -92,7 +92,7 @@ class UserLocalTasksTest extends LocalTaskIntegrationTestBase {
   /**
    * Provides a list of routes to test.
    */
-  public static function getUserPageRoutes() {
+  public function getUserPageRoutes() {
     return [
       ['entity.user.canonical'],
       ['entity.user.edit_form'],

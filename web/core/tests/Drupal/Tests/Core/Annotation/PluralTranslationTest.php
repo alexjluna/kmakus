@@ -58,7 +58,7 @@ class PluralTranslationTest extends UnitTestCase {
     new PluralTranslation($data);
   }
 
-  public static function providerTestMissingData() {
+  public function providerTestMissingData() {
     $data = [];
     $data['all-missing'] = [[]];
     $data['singular-missing'] = [['plural' => 'muh']];

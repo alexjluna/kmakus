@@ -11,10 +11,6 @@ workflows.workflow.*:
     type:
       type: string
       label: 'Workflow type'
-      constraints:
-        PluginExists:
-          manager: plugin.manager.workflows.type
-          interface: 'Drupal\workflows\WorkflowTypeInterface'
     type_settings:
       type: workflow.type_settings.[%parent.type]
 
@@ -26,7 +22,7 @@ workflows.state:
       label: 'Label'
       translation context: 'Workflow state label'
     weight:
-      type: weight
+      type: integer
       label: 'Weight'
 
 workflows.transition:
@@ -46,5 +42,5 @@ workflows.transition:
       type: string
       label: 'To state ID'
     weight:
-      type: weight
+      type: integer
       label: 'Weight'

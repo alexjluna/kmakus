@@ -4,7 +4,6 @@ namespace Drupal\file\Plugin\views\field;
 
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
@@ -15,8 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Field handler to provide simple renderer that allows linking to a file.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("file")
  */
-#[ViewsField("file")]
 class File extends FieldPluginBase {
 
   /**

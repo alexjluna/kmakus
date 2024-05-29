@@ -6,7 +6,6 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
@@ -42,7 +41,7 @@ class UpdateManager implements UpdateManagerInterface {
   protected $updateProcessor;
 
   /**
-   * An array of installed projects.
+   * An array of installed and enabled projects.
    *
    * @var array
    */
@@ -77,13 +76,6 @@ class UpdateManager implements UpdateManagerInterface {
   protected $moduleExtensionList;
 
   /**
-   * The theme extension list.
-   *
-   * @var \Drupal\Core\Extension\ThemeExtensionList
-   */
-  protected ThemeExtensionList $themeExtensionList;
-
-  /**
    * Constructs an UpdateManager.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -98,12 +90,10 @@ class UpdateManager implements UpdateManagerInterface {
    *   The expirable key/value factory.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $extension_list_module
+   * @param \Drupal\Core\Extension\ModuleExtensionList|null $extension_list_module
    *   The module extension list.
-   * @param \Drupal\Core\Extension\ThemeExtensionList $extension_list_theme
-   *   The theme extension list.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, UpdateProcessorInterface $update_processor, TranslationInterface $translation, KeyValueFactoryInterface $key_value_expirable_factory, ThemeHandlerInterface $theme_handler, ModuleExtensionList $extension_list_module, ThemeExtensionList $extension_list_theme) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, UpdateProcessorInterface $update_processor, TranslationInterface $translation, KeyValueFactoryInterface $key_value_expirable_factory, ThemeHandlerInterface $theme_handler, ModuleExtensionList $extension_list_module) {
     $this->updateSettings = $config_factory->get('update.settings');
     $this->moduleHandler = $module_handler;
     $this->updateProcessor = $update_processor;
@@ -113,7 +103,6 @@ class UpdateManager implements UpdateManagerInterface {
     $this->availableReleasesTempStore = $key_value_expirable_factory->get('update_available_releases');
     $this->projects = [];
     $this->moduleExtensionList = $extension_list_module;
-    $this->themeExtensionList = $extension_list_theme;
   }
 
   /**
@@ -152,7 +141,7 @@ class UpdateManager implements UpdateManagerInterface {
       if (empty($this->projects)) {
         // Still empty, so we have to rebuild.
         $module_data = $this->moduleExtensionList->reset()->getList();
-        $theme_data = $this->themeExtensionList->reset()->getList();
+        $theme_data = $this->themeHandler->rebuildThemeData();
         $project_info = new ProjectInfo();
         $project_info->processInfoList($this->projects, $module_data, 'module', TRUE);
         $project_info->processInfoList($this->projects, $theme_data, 'theme', TRUE);

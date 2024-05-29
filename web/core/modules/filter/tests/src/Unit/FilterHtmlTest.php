@@ -42,17 +42,17 @@ class FilterHtmlTest extends UnitTestCase {
    * @param string $expected
    *   The expected output string.
    */
-  public function testFilterAttributes($html, $expected) {
+  public function testfilterAttributes($html, $expected) {
     $this->assertSame($expected, $this->filter->filterAttributes($html));
   }
 
   /**
-   * Provides data for testFilterAttributes.
+   * Provides data for testfilterAttributes.
    *
    * @return array
    *   An array of test data.
    */
-  public static function providerFilterAttributes() {
+  public function providerFilterAttributes() {
     return [
       ['<a href="/blog" title="Blog">Blog</a>', '<a href="/blog">Blog</a>'],
       ['<p dir="rtl" />', '<p dir="rtl"></p>'],

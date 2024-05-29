@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Test;
 
 use Drupal\FunctionalTests\BrowserMissingDependentModuleMethodTest;
@@ -12,7 +10,6 @@ use PHPUnit\Framework\SkippedTestError;
 /**
  * @group Test
  * @group FunctionalTests
- * @group legacy
  *
  * @coversDefaultClass \Drupal\Tests\BrowserTestBase
  */
@@ -28,7 +25,6 @@ class BrowserTestBaseTest extends KernelTestBase {
    * @covers ::checkModuleRequirements
    */
   public function testMethodRequiresModule() {
-    $this->expectDeprecation('Drupal\Tests\TestRequirementsTrait::checkModuleRequirements() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3418480');
     require __DIR__ . '/../../../../fixtures/BrowserMissingDependentModuleMethodTest.php';
 
     // @phpstan-ignore-next-line
@@ -57,7 +53,6 @@ class BrowserTestBaseTest extends KernelTestBase {
    * @covers ::checkModuleRequirements
    */
   public function testRequiresModule() {
-    $this->expectDeprecation('Drupal\Tests\TestRequirementsTrait::checkModuleRequirements() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3418480');
     require __DIR__ . '/../../../../fixtures/BrowserMissingDependentModuleTest.php';
 
     // @phpstan-ignore-next-line

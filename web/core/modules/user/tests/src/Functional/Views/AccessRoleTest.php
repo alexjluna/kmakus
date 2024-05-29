@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Functional\Views;
 
 use Drupal\Core\Cache\Cache;
@@ -132,7 +130,7 @@ class AccessRoleTest extends AccessTestBase {
     // First access as user with access.
     $build = DisplayPluginBase::buildBasicRenderable('test_access_role', 'default');
     $account_switcher->switchTo($this->normalUser);
-    $result = $renderer->renderInIsolation($build);
+    $result = $renderer->renderPlain($build);
     $this->assertContains('user.roles', $build['#cache']['contexts']);
     $this->assertEquals(['config:views.view.test_access_role'], $build['#cache']['tags']);
     $this->assertEquals(Cache::PERMANENT, $build['#cache']['max-age']);
@@ -141,7 +139,7 @@ class AccessRoleTest extends AccessTestBase {
     // Then without access.
     $build = DisplayPluginBase::buildBasicRenderable('test_access_role', 'default');
     $account_switcher->switchTo($this->webUser);
-    $result = $renderer->renderInIsolation($build);
+    $result = $renderer->renderPlain($build);
     // @todo Fix this in https://www.drupal.org/node/2551037,
     // DisplayPluginBase::applyDisplayCacheabilityMetadata() is not invoked when
     // using buildBasicRenderable() and a Views access plugin returns FALSE.

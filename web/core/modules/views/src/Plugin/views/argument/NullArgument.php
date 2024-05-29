@@ -3,16 +3,14 @@
 namespace Drupal\views\Plugin\views\argument;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsArgument;
 
 /**
  * Argument handler that ignores the argument.
  *
  * @ingroup views_argument_handlers
-  */
-#[ViewsArgument(
-  id: 'null',
-)]
+ *
+ * @ViewsArgument("null")
+ */
 class NullArgument extends ArgumentPluginBase {
 
   protected function defineOptions() {

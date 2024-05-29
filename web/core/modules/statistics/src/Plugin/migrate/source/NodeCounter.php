@@ -4,8 +4,6 @@ namespace Drupal\statistics\Plugin\migrate\source;
 
 use Drupal\migrate_drupal\Plugin\migrate\source\DrupalSqlBase;
 
-// cspell:ignore daycount totalcount
-
 /**
  * Drupal 6/7 node counter source from database.
  *

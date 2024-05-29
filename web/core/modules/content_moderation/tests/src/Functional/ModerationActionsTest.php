@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Functional;
 
 use Drupal\node\Entity\Node;
@@ -104,7 +102,7 @@ class ModerationActionsTest extends BrowserTestBase {
    * @return array
    *   An array of test cases.
    */
-  public static function nodeStatusActionsTestCases() {
+  public function nodeStatusActionsTestCases() {
     return [
       'Moderated bundle shows warning (publish action)' => [
         'node_publish_action',

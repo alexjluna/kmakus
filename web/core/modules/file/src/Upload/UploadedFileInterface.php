@@ -2,9 +2,6 @@
 
 namespace Drupal\file\Upload;
 
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-
 /**
  * Provides an interface for uploaded files.
  */
@@ -26,11 +23,6 @@ interface UploadedFileInterface {
    *
    * @return bool
    *   TRUE if the file has been uploaded with HTTP and no error occurred.
-   *
-   * @deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use
-   *   \Drupal\file\Validation\UploadedFileValidatorInterface::validate()
-   *   instead.
-   * @see https://www.drupal.org/node/3375456
    */
   public function isValid(): bool;
 
@@ -39,12 +31,6 @@ interface UploadedFileInterface {
    *
    * @return string
    *   The error message regarding a failed upload.
-   *
-   * @deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use
-   *   \Drupal\file\Validation\UploadedFileValidatorInterface::validate()
-   *   instead.
-   *
-   * @see https://www.drupal.org/node/3375456
    */
   public function getErrorMessage(): string;
 
@@ -56,12 +42,6 @@ interface UploadedFileInterface {
    *
    * @return int
    *   The upload error code.
-   *
-   * @deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use
-   *   \Drupal\file\Validation\UploadedFileValidatorInterface::validate()
-   *   instead.
-   *
-   * @see https://www.drupal.org/node/3375456
    */
   public function getError(): int;
 
@@ -104,18 +84,5 @@ interface UploadedFileInterface {
    * @see https://php.net/manual/en/splfileinfo.getfilename.php
    */
   public function getFilename(): string;
-
-  /**
-   * Validates the uploaded file information.
-   *
-   * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
-   *   A validator object.
-   * @param array $options
-   *   Options to pass to a constraint.
-   *
-   * @return \Symfony\Component\Validator\ConstraintViolationListInterface
-   *   The list of violations.
-   */
-  public function validate(ValidatorInterface $validator, array $options = []): ConstraintViolationListInterface;
 
 }

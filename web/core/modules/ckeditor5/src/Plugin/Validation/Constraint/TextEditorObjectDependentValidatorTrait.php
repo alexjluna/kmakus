@@ -29,13 +29,8 @@ trait TextEditorObjectDependentValidatorTrait {
       ]);
     }
     else {
-      assert(in_array($this->context->getRoot()->getDataDefinition()->getDataType(), ['editor.editor.*', 'entity:editor'], TRUE));
+      assert($this->context->getRoot()->getDataDefinition()->getDataType() === 'editor.editor.*');
       $text_format = FilterFormat::load($this->context->getRoot()->get('format')->getValue());
-      // This validator must not complain about a missing text format.
-      // @see \Drupal\Tests\editor\Kernel\EditorValidationTest::testInvalidFormat()
-      if ($text_format === NULL) {
-        $text_format = FilterFormat::create([]);
-      }
     }
     assert($text_format instanceof FilterFormatInterface);
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\Theme;
 
 use Drupal\comment\Tests\CommentTestTrait;
@@ -88,7 +86,7 @@ class EntityFilteringThemeTest extends BrowserTestBase {
     $listing = new ExtensionDiscovery(\Drupal::root());
     $this->themes = $listing->scan('theme', FALSE);
     /** @var \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler */
-    $theme_data = \Drupal::service('extension.list.theme')->reset()->getList();
+    $theme_data = \Drupal::service('theme_handler')->rebuildThemeData();
     foreach (array_keys($this->themes) as $theme) {
       // Skip obsolete and deprecated themes.
       $info = $theme_data[$theme]->info;

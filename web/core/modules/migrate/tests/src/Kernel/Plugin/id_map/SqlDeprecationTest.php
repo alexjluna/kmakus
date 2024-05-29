@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\Plugin\id_map;
 
 use Drupal\KernelTests\KernelTestBase;

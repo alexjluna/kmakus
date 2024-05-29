@@ -2,18 +2,17 @@
 
 namespace Drupal\Core\Path\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validation constraint for valid system paths.
+ *
+ * @Constraint(
+ *   id = "ValidPath",
+ *   label = @Translation("Valid path.", context = "Validation"),
+ * )
  */
-#[Constraint(
-  id: 'ValidPath',
-  label: new TranslatableMarkup('Valid path.', [], ['context' => 'Validation'])
-)]
-class ValidPathConstraint extends SymfonyConstraint {
+class ValidPathConstraint extends Constraint {
 
   /**
    * The default violation message.

@@ -205,35 +205,34 @@
           });
         }
 
-        window.addEventListener('dialog:aftercreate', (e) => {
-          const $element = $(e.target);
-          const { settings } = e;
-          const toolbarBar = document.getElementById('toolbar-bar');
-          if (toolbarBar) {
-            toolbarBar.style.marginTop = '0';
+        $(window).on({
+          'dialog:aftercreate': (event, dialog, $element, settings) => {
+            const toolbarBar = document.getElementById('toolbar-bar');
+            if (toolbarBar) {
+              toolbarBar.style.marginTop = '0';
 
-            // When off-canvas is positioned in top, toolbar has to be moved down.
-            if (settings.drupalOffCanvasPosition === 'top') {
-              const height = Drupal.offCanvas
-                .getContainer($element)
-                .outerHeight();
-              toolbarBar.style.marginTop = `${height}px`;
-
-              $element.on('dialogContentResize.off-canvas', () => {
-                const newHeight = Drupal.offCanvas
+              // When off-canvas is positioned in top, toolbar has to be moved down.
+              if (settings.drupalOffCanvasPosition === 'top') {
+                const height = Drupal.offCanvas
                   .getContainer($element)
                   .outerHeight();
-                toolbarBar.style.marginTop = `${newHeight}px`;
-              });
-            }
-          }
-        });
+                toolbarBar.style.marginTop = `${height}px`;
 
-        window.addEventListener('dialog:beforeclose', () => {
-          const toolbarBar = document.getElementById('toolbar-bar');
-          if (toolbarBar) {
-            toolbarBar.style.marginTop = '0';
-          }
+                $element.on('dialogContentResize.off-canvas', () => {
+                  const newHeight = Drupal.offCanvas
+                    .getContainer($element)
+                    .outerHeight();
+                  toolbarBar.style.marginTop = `${newHeight}px`;
+                });
+              }
+            }
+          },
+          'dialog:beforeclose': () => {
+            const toolbarBar = document.getElementById('toolbar-bar');
+            if (toolbarBar) {
+              toolbarBar.style.marginTop = '0';
+            }
+          },
         });
       });
 

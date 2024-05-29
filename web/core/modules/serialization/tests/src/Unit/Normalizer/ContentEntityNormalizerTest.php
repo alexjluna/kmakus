@@ -12,7 +12,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TypedData\ComplexDataInterface;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\serialization\Normalizer\ContentEntityNormalizer;
-use Drupal\Tests\Core\Entity\ContentEntityBaseMockableClass;
 use Drupal\Tests\UnitTestCase;
 use Prophecy\Argument;
 use Symfony\Component\Serializer\Serializer;
@@ -128,10 +127,10 @@ class ContentEntityNormalizerTest extends UnitTestCase {
    * @return \PHPUnit\Framework\MockObject\MockObject
    */
   public function createMockForContentEntity($definitions) {
-    $content_entity_mock = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $content_entity_mock = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
       ->onlyMethods(['getTypedData'])
-      ->getMock();
+      ->getMockForAbstractClass();
     $typed_data = $this->prophesize(ComplexDataInterface::class);
     $typed_data->getProperties(TRUE)
       ->willReturn($definitions)

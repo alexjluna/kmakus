@@ -13,7 +13,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeEngineExtensionList;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\KeyValueStore\KeyValueMemoryFactory;
-use Drupal\Core\Lock\NullLockBackend;
 use Drupal\Core\State\State;
 use Drupal\Tests\UnitTestCase;
 use Prophecy\Argument;
@@ -66,7 +65,7 @@ class ThemeExtensionListTest extends UnitTestCase {
       ->alter('system_info', Argument::type('array'), Argument::type(Extension::class), Argument::any())
       ->shouldBeCalled();
 
-    $state = new State(new KeyValueMemoryFactory(), new NullBackend('bin'), new NullLockBackend());
+    $state = new State(new KeyValueMemoryFactory());
 
     $config_factory = $this->getConfigFactoryStub([
       'core.extension' => [
@@ -117,57 +116,28 @@ class ThemeExtensionListTest extends UnitTestCase {
    * @param array $expected
    *   The expected base themes.
    *
-   * @dataProvider providerTestDoGetBaseThemes
-   *
-   * @group legacy
+   * @dataProvider providerTestGetBaseThemes
    */
   public function testGetBaseThemes(array $themes, $theme, array $expected) {
     // Mocks and stubs.
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
-    $state = new State(new KeyValueMemoryFactory(), new NullBackend('bin'), new NullLockBackend());
+    $state = new State(new KeyValueMemoryFactory());
     $config_factory = $this->getConfigFactoryStub([]);
     $theme_engine_list = $this->prophesize(ThemeEngineExtensionList::class);
     $theme_listing = new ThemeExtensionList($this->root, 'theme', new NullBackend('test'), new InfoParser($this->root), $module_handler->reveal(), $state, $config_factory, $theme_engine_list->reveal(), 'test');
 
-    $this->expectDeprecation("\Drupal\Core\Extension\ThemeExtensionList::getBaseThemes() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. There is no direct replacement. See https://www.drupal.org/node/3413187");
     $base_themes = $theme_listing->getBaseThemes($themes, $theme);
 
     $this->assertEquals($expected, $base_themes);
   }
 
   /**
-   * Tests getting the base themes for a set of defined themes.
-   *
-   * @param array $themes
-   *   An array of available themes, keyed by the theme name.
-   * @param string $theme
-   *   The theme name to find all its base themes.
-   * @param array $expected
-   *   The expected base themes.
-   *
-   * @dataProvider providerTestDoGetBaseThemes
-   */
-  public function testDoGetBaseThemes(array $themes, $theme, array $expected): void {
-    // Mocks and stubs.
-    $module_handler = $this->prophesize(ModuleHandlerInterface::class);
-    $state = new State(new KeyValueMemoryFactory(), new NullBackend('bin'), new NullLockBackend());
-    $config_factory = $this->getConfigFactoryStub([]);
-    $theme_engine_list = $this->prophesize(ThemeEngineExtensionList::class);
-    $theme_listing = new ThemeExtensionList($this->root, 'theme', new NullBackend('test'), new InfoParser($this->root), $module_handler->reveal(), $state, $config_factory, $theme_engine_list->reveal(), 'test');
-
-    $method_to_test = (new \ReflectionObject($theme_listing))->getMethod('doGetBaseThemes');
-    $base_themes = $method_to_test->invoke($theme_listing, $themes, $theme);
-
-    $this->assertEquals($expected, $base_themes);
-  }
-
-  /**
-   * Provides test data for testDoGetBaseThemes.
+   * Provides test data for testGetBaseThemes.
    *
    * @return array
    *   An array of theme test data.
    */
-  public static function providerTestDoGetBaseThemes() {
+  public function providerTestGetBaseThemes() {
     $data = [];
 
     // Tests a theme without any base theme.

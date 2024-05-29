@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Database\Database;
@@ -203,7 +201,7 @@ class NodeRevisionsTest extends NodeTestBase {
 
     // Set the revision timestamp to an older date to make sure that the
     // confirmation message correctly displays the stored revision date.
-    $old_revision_date = \Drupal::time()->getRequestTime() - 86400;
+    $old_revision_date = REQUEST_TIME - 86400;
     $connection->update('node_revision')
       ->condition('vid', $nodes[2]->getRevisionId())
       ->fields([

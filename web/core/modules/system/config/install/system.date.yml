@@ -1,8 +1,8 @@
 first_day: 0
 country:
-  default: null
+  default: ''
 timezone:
-  default: null
+  default: ''
   user:
     configurable: true
     default: 0

@@ -1,14 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal_ui\Functional;
 
 /**
  * Tests that a missing source provider error message is displayed.
  *
  * @group migrate_drupal_ui
- * @group #slow
  */
 class SourceProviderTest extends MigrateUpgradeTestBase {
 
@@ -57,7 +54,7 @@ class SourceProviderTest extends MigrateUpgradeTestBase {
   /**
    * Data provider for testSourceProvider.
    */
-  public static function providerSourceProvider() {
+  public function providerSourceProvider() {
     return [
       [
         'path_to_database' => '/tests/fixtures/drupal6.php',

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\search\Kernel\Migrate\d6;
 
 use Drupal\Tests\SchemaCheckTestTrait;
@@ -26,7 +24,6 @@ class MigrateSearchSettingsTest extends MigrateDrupal6TestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installConfig(['search']);
     $this->executeMigration('d6_search_settings');
   }
 

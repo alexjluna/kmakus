@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\forum\Functional\Views;
 
 use Drupal\node\NodeInterface;
@@ -12,7 +10,6 @@ use Drupal\Tests\views\Functional\ViewTestBase;
  * Tests the forum integration into views.
  *
  * @group forum
- * @group legacy
  */
 class ForumIntegrationTest extends ViewTestBase {
 

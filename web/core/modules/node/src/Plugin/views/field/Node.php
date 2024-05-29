@@ -4,7 +4,6 @@ namespace Drupal\node\Plugin\views\field;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
@@ -18,8 +17,9 @@ use Drupal\views\Plugin\views\field\FieldPluginBase;
  *   enabled by default.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("node")
  */
-#[ViewsField("node")]
 class Node extends FieldPluginBase {
 
   /**

@@ -2,14 +2,13 @@
 
 namespace Drupal\views\Plugin\views\filter;
 
-use Drupal\views\Attribute\ViewsFilter;
-
 /**
  * Simple filter to handle greater than/less than filters.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("groupby_numeric")
  */
-#[ViewsFilter("groupby_numeric")]
 class GroupByNumeric extends NumericFilter {
 
   public function query() {

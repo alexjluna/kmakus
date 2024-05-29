@@ -1,4 +1,3 @@
-# cspell:ignore imagecache presetname
 id: d6_imagecache_presets
 label: ImageCache Presets
 migration_tags:

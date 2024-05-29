@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\book\Kernel;
 
 use Drupal\book\Form\BookSettingsForm;
@@ -12,7 +10,6 @@ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 /**
  * @covers \Drupal\book\Form\BookSettingsForm
  * @group book
- * @group legacy
  */
 class BookSettingsFormTest extends KernelTestBase {
 

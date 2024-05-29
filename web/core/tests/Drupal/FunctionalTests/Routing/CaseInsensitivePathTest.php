@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests\Routing;
 
 use Drupal\Tests\BrowserTestBase;
 
-// cspell:ignore ȅchȏ foobarbaz meΦω
+// cspell:ignore ȅchȏ meΦω
 
 /**
  * Tests incoming path case insensitivity.

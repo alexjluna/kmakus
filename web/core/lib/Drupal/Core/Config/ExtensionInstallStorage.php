@@ -31,7 +31,7 @@ class ExtensionInstallStorage extends InstallStorage {
    *
    * In the early installer this value can be NULL.
    *
-   * @var string|false|null
+   * @var string|null
    */
   protected $installProfile;
 

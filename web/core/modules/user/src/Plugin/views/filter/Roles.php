@@ -4,18 +4,24 @@ namespace Drupal\user\Plugin\views\filter;
 
 use Drupal\user\RoleInterface;
 use Drupal\user\RoleStorageInterface;
-use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\Plugin\views\filter\ManyToOne;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Filter handler for user roles.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("user_roles")
  */
-#[ViewsFilter("user_roles")]
 class Roles extends ManyToOne {
+
+  /**
+   * The role storage.
+   *
+   * @var \Drupal\user\RoleStorageInterface
+   */
+  protected $roleStorage;
 
   /**
    * Constructs a Roles object.
@@ -26,23 +32,12 @@ class Roles extends ManyToOne {
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\user\RoleStorageInterface $roleStorage
+   * @param \Drupal\user\RoleStorageInterface $role_storage
    *   The role storage.
-   * @param \Psr\Log\LoggerInterface|null $logger
-   *   The logger service.
    */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    protected readonly RoleStorageInterface $roleStorage,
-    protected ?LoggerInterface $logger,
-  ) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RoleStorageInterface $role_storage) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    if (!$logger) {
-      @trigger_error('Calling ' . __METHOD__ . '() without the $logger argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3427368', E_USER_DEPRECATED);
-      $this->logger = \Drupal::service('logger.channel.default');
-    }
+    $this->roleStorage = $role_storage;
   }
 
   /**
@@ -53,29 +48,21 @@ class Roles extends ManyToOne {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity_type.manager')->getStorage('user_role'),
-      $container->get('logger.channel.default'),
+      $container->get('entity_type.manager')->getStorage('user_role')
     );
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function getValueOptions() {
-    if (!isset($this->valueOptions)) {
-      $roles = $this->roleStorage->loadMultiple();
-      unset($roles[RoleInterface::ANONYMOUS_ID]);
-      unset($roles[RoleInterface::AUTHENTICATED_ID]);
-      $this->valueOptions = array_map(fn(RoleInterface $role) => $role->label(), $roles);
-    }
+    $roles = $this->roleStorage->loadMultiple();
+    unset($roles[RoleInterface::ANONYMOUS_ID]);
+    unset($roles[RoleInterface::AUTHENTICATED_ID]);
+    $this->valueOptions = array_map(fn(RoleInterface $role) => $role->label(), $roles);
     return $this->valueOptions;
 
   }
 
   /**
    * Override empty and not empty operator labels to be clearer for user roles.
-   *
-   * @return array[]
    */
   public function operators() {
     $operators = parent::operators();
@@ -107,10 +94,7 @@ class Roles extends ManyToOne {
         $dependencies[$role->getConfigDependencyKey()][] = $role->getConfigDependencyName();
       }
       else {
-        $this->logger->warning("View %view depends on role %role, but the role does not exist.", [
-          '%view' => $this->view->id(),
-          '%role' => $role_id,
-        ]);
+        trigger_error("The {$role_id} role does not exist. You should review and fix the configuration of the {$this->view->id()} view.", E_USER_WARNING);
       }
     }
     return $dependencies;

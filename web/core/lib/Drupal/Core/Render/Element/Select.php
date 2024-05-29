@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -77,9 +76,10 @@ use Drupal\Core\Render\Element;
  *   ],
  * ];
  * @endcode
+ *
+ * @FormElement("select")
  */
-#[FormElement('select')]
-class Select extends FormElementBase {
+class Select extends FormElement {
 
   /**
    * {@inheritdoc}

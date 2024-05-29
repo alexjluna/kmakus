@@ -4,21 +4,19 @@ namespace Drupal\statistics\Plugin\migrate\destination;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-// cspell:ignore daycount totalcount
-
 /**
  * Destination for node counter.
+ *
+ * @MigrateDestination(
+ *   id = "node_counter",
+ *   destination_module = "statistics"
+ * )
  */
-#[MigrateDestination(
-  id: 'node_counter',
-  destination_module: 'statistics'
-)]
 class NodeCounter extends DestinationBase implements ContainerFactoryPluginInterface {
 
   /**

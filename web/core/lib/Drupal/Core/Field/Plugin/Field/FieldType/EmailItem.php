@@ -3,7 +3,6 @@
 namespace Drupal\Core\Field\Plugin\Field\FieldType;
 
 use Drupal\Component\Utility\Random;
-use Drupal\Core\Field\Attribute\FieldType;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
@@ -13,14 +12,15 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Defines the 'email' field type.
+ *
+ * @FieldType(
+ *   id = "email",
+ *   label = @Translation("Email"),
+ *   description = @Translation("Field to store an email address."),
+ *   default_widget = "email_default",
+ *   default_formatter = "basic_string"
+ * )
  */
-#[FieldType(
-  id: "email",
-  label: new TranslatableMarkup("Email"),
-  description: new TranslatableMarkup("Field to store an email address."),
-  default_widget: "email_default",
-  default_formatter: "basic_string"
-)]
 class EmailItem extends FieldItemBase {
 
   /**

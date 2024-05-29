@@ -2,8 +2,6 @@
 
 namespace Drupal\views\Plugin\views\join;
 
-use Drupal\views\Attribute\ViewsJoin;
-
 /**
  * Implementation for the "casted_int_field_join" join.
  *
@@ -13,8 +11,9 @@ use Drupal\views\Attribute\ViewsJoin;
  * are strict when comparing numbers and strings.
  *
  * @ingroup views_join_handlers
+ *
+ * @ViewsJoin("casted_int_field_join")
  */
-#[ViewsJoin("casted_int_field_join")]
 class CastedIntFieldJoin extends JoinPluginBase {
 
   /**

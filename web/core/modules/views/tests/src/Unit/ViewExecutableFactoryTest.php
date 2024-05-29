@@ -58,13 +58,6 @@ class ViewExecutableFactoryTest extends UnitTestCase {
   protected $routeProvider;
 
   /**
-   * The display plugin manager.
-   *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface
-   */
-  protected $displayPluginManager;
-
-  /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
@@ -77,10 +70,7 @@ class ViewExecutableFactoryTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $this->routeProvider = $this->createMock('Drupal\Core\Routing\RouteProviderInterface');
-    $this->displayPluginManager = $this->getMockBuilder('\Drupal\views\Plugin\ViewsPluginManager')
-      ->disableOriginalConstructor()
-      ->getMock();
-    $this->viewExecutableFactory = new ViewExecutableFactory($this->user, $this->requestStack, $this->viewsData, $this->routeProvider, $this->displayPluginManager);
+    $this->viewExecutableFactory = new ViewExecutableFactory($this->user, $this->requestStack, $this->viewsData, $this->routeProvider);
   }
 
   /**

@@ -240,9 +240,7 @@ class ThemeSettingsForm extends ConfigFormBase {
         '#title' => $this->t('Upload logo image'),
         '#description' => $this->t("If you don't have direct file access to the server, use this field to upload your logo."),
         '#upload_validators' => [
-          'FileExtension' => [
-            'extensions' => 'png gif jpg jpeg apng svg',
-          ],
+          'FileIsImage' => [],
         ],
       ];
     }

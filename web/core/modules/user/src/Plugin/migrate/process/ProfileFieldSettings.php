@@ -2,12 +2,15 @@
 
 namespace Drupal\user\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
-#[MigrateProcess('profile_field_settings')]
+/**
+ * @MigrateProcessPlugin(
+ *   id = "profile_field_settings"
+ * )
+ */
 class ProfileFieldSettings extends ProcessPluginBase {
 
   /**

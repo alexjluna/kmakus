@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\taxonomy\Kernel\Plugin\migrate\source\d6;
 
 use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
-// cspell:ignore objectid objectindex plid
+// cspell:ignore objectid objectindex
 
 /**
  * Tests D6 i18n vocabulary source plugin.
@@ -24,7 +22,7 @@ class VocabularyTranslationTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     $tests = [];
 
     // The source data.
@@ -119,7 +117,7 @@ class VocabularyTranslationTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $tests[0]['expected_data'] = [
+    $tests[0]['expected_results'] = [
       [
         'vid' => 1,
         'name' => 'vocabulary 1',

@@ -66,21 +66,4 @@ class CacheCollectorHelper extends CacheCollector {
     return $this->cacheMisses;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function normalizeLockName($cid) {
-    return parent::normalizeLockName($cid);
-  }
-
-  /**
-   * Setter for the cacheCreated property for use in unit tests.
-   *
-   * @param int $cache_created
-   *   A unix timestamp.
-   */
-  public function setCacheCreated(int $cache_created):void {
-    $this->cacheCreated = $cache_created;
-  }
-
 }

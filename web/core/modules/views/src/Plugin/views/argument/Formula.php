@@ -2,7 +2,6 @@
 
 namespace Drupal\views\Plugin\views\argument;
 
-use Drupal\views\Attribute\ViewsArgument;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 
@@ -15,10 +14,9 @@ use Drupal\views\ViewExecutable;
  * - formula: The formula to use for this handler.
  *
  * @ingroup views_argument_handlers
-  */
-#[ViewsArgument(
-  id: 'formula',
-)]
+ *
+ * @ViewsArgument("formula")
+ */
 class Formula extends ArgumentPluginBase {
 
   public $formula = NULL;

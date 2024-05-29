@@ -220,17 +220,7 @@ class ConfigManager implements ConfigManagerInterface {
     // Remove any matching configuration from collections.
     foreach ($this->activeStorage->getAllCollectionNames() as $collection) {
       $collection_storage = $this->activeStorage->createCollection($collection);
-      $overrider = $this->getConfigCollectionInfo()->getOverrideService($collection);
-      foreach ($collection_storage->listAll($name . '.') as $config_name) {
-        if ($overrider) {
-          $config = $overrider->createConfigObject($config_name, $collection);
-        }
-        else {
-          $config = new Config($config_name, $collection_storage, $this->eventDispatcher, $this->typedConfigManager);
-        }
-        $config->initWithData($collection_storage->read($config_name));
-        $config->delete();
-      }
+      $collection_storage->deleteAll($name . '.');
     }
 
     $schema_dir = $this->extensionPathResolver->getPath($type, $name) . '/' . InstallStorage::CONFIG_SCHEMA_DIRECTORY;
@@ -401,7 +391,7 @@ class ConfigManager implements ConfigManagerInterface {
   public function getConfigCollectionInfo() {
     if (!isset($this->configCollectionInfo)) {
       $this->configCollectionInfo = new ConfigCollectionInfo();
-      $this->eventDispatcher->dispatch($this->configCollectionInfo, ConfigCollectionEvents::COLLECTION_INFO);
+      $this->eventDispatcher->dispatch($this->configCollectionInfo, ConfigEvents::COLLECTION_INFO);
     }
     return $this->configCollectionInfo;
   }

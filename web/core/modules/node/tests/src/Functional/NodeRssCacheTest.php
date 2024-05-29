@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\filter\Entity\FilterFormat;
@@ -80,7 +78,7 @@ class NodeRssCacheTest extends NodeTestBase {
     // Render the teaser normally.
     $viewBuilder = $this->container->get('entity_type.manager')->getViewBuilder('node');
     $build = $viewBuilder->view($node, 'teaser');
-    $output = $this->container->get('renderer')->renderInIsolation($build);
+    $output = $this->container->get('renderer')->renderPlain($build);
 
     // Teaser must contain an "<article" tag from the stable9 theme.
     $this->assertStringContainsString('<article', (string) $output);

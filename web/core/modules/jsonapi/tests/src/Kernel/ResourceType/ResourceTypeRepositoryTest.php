@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Kernel\ResourceType;
 
 use Drupal\Core\Cache\Cache;
@@ -99,7 +97,7 @@ class ResourceTypeRepositoryTest extends JsonapiKernelTestBase {
    * @return array
    *   The data for the test method.
    */
-  public static function getProvider() {
+  public function getProvider() {
     return [
       ['node', 'article', 'Drupal\node\Entity\Node'],
       ['node', '42', 'Drupal\node\Entity\Node'],
@@ -149,7 +147,7 @@ class ResourceTypeRepositoryTest extends JsonapiKernelTestBase {
    * @return array
    *   The data for the test method.
    */
-  public static function getFieldsProvider() {
+  public function getFieldsProvider() {
     return [
       [['type', 'node_type']],
       [['id', 'node_id']],

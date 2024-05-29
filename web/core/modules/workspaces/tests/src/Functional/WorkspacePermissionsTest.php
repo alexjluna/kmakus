@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\workspaces\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -11,7 +9,6 @@ use Drupal\workspaces\Entity\Workspace;
  * Tests permission controls on workspaces.
  *
  * @group workspaces
- * @group #slow
  */
 class WorkspacePermissionsTest extends BrowserTestBase {
 

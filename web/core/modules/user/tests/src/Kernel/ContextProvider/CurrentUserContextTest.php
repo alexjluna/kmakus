@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Kernel\ContextProvider;
 
 use Drupal\Core\Session\AccountInterface;

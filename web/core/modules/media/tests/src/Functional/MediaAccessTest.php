@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media\Functional;
 
 use Drupal\field\Entity\FieldConfig;
@@ -15,7 +13,6 @@ use Drupal\user\RoleInterface;
  * Basic access tests for Media.
  *
  * @group media
- * @group #slow
  */
 class MediaAccessTest extends MediaFunctionalTestBase {
 
@@ -219,7 +216,8 @@ class MediaAccessTest extends MediaFunctionalTestBase {
 
     // Create a new role, which implicitly checks if the permission exists.
     $mediaOverviewRole = $this->createRole(['access content overview', 'access media overview']);
-    $this->nonAdminUser->addRole($mediaOverviewRole)->save();
+    $this->nonAdminUser->addRole($mediaOverviewRole);
+    $this->nonAdminUser->save();
 
     $this->drupalGet('admin/content');
     $assert_session->linkByHrefExists('/admin/content/media');

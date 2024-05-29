@@ -48,7 +48,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to test methods that take a single boolean argument.
    */
-  public static function providerSingleBooleanArgument() {
+  public function providerSingleBooleanArgument() {
     return [
       [TRUE],
       [FALSE],
@@ -283,7 +283,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testGetLimitValidationErrors() and self::testGetLimitValidationErrors().
    */
-  public static function providerLimitValidationErrors() {
+  public function providerLimitValidationErrors() {
     return [
       [NULL],
       [
@@ -322,7 +322,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testIsMethodType().
    */
-  public static function providerIsMethodType() {
+  public function providerIsMethodType() {
     return [
       [TRUE, 'GET'],
       [TRUE, 'POST'],
@@ -346,7 +346,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testSetMethod().
    */
-  public static function providerSetRequestMethod() {
+  public function providerSetRequestMethod() {
     return [
       ['GET'],
       ['POST'],
@@ -662,7 +662,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testSetTemporaryValue().
    */
-  public static function providerSetTemporaryValue() {
+  public function providerSetTemporaryValue() {
     return [
       ['FOO', 'BAR'],
       ['FOO', NULL],
@@ -700,7 +700,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testGetTemporaryValue().
    */
-  public static function providerGetTemporaryValue() {
+  public function providerGetTemporaryValue() {
     return [
       [TRUE, 'FOO', 'BAR'],
       [TRUE, 'FOO', NULL],
@@ -732,7 +732,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testHasTemporaryValue().
    */
-  public static function providerHasTemporaryValue() {
+  public function providerHasTemporaryValue() {
     return [
       [TRUE, 'FOO'],
       [FALSE, 'FOO'],
@@ -866,7 +866,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testLoadInclude().
    */
-  public static function providerLoadInclude() {
+  public function providerLoadInclude() {
     return [
       // Existing files.
       [__FILE__, 'foo', 'inc', 'foo'],
@@ -950,7 +950,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testSet().
    */
-  public static function providerSet(): array {
+  public function providerSet() {
     return [
       ['FOO', 'BAR'],
       ['FOO', NULL],
@@ -987,7 +987,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testGet().
    */
-  public static function providerGet(): array {
+  public function providerGet() {
     return [
       ['FOO', 'BAR'],
       ['FOO', NULL],
@@ -1017,7 +1017,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testHas().
    */
-  public static function providerHas(): array {
+  public function providerHas() {
     return [
       [TRUE, 'FOO'],
       [FALSE, 'FOO'],
@@ -1298,7 +1298,7 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testGetRedirect().
    */
-  public static function providerGetRedirect() {
+  public function providerGetRedirect() {
     return [
       [NULL],
       [FALSE],
@@ -1445,13 +1445,13 @@ class FormStateDecoratorBaseTest extends UnitTestCase {
   /**
    * Provides data to self::testPrepareCallback().
    */
-  public static function providerPrepareCallback(): array {
+  public function providerPrepareCallback() {
     $function = 'sleep';
     $shorthand_form_method = '::submit()';
     $closure = function () {};
     $static_method_string = __METHOD__;
     $static_method_array = [__CLASS__, __FUNCTION__];
-    $object_method_array = [new static(), __FUNCTION__];
+    $object_method_array = [$this, __FUNCTION__];
 
     return [
       // A shorthand form method is generally expanded to become a method on an

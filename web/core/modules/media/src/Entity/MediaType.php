@@ -61,7 +61,6 @@ use Drupal\media\MediaTypeInterface;
  *   },
  *   constraints = {
  *     "ImmutableProperties" = {"id", "source"},
- *     "MediaMappingsConstraint" = { },
  *   }
  * )
  */

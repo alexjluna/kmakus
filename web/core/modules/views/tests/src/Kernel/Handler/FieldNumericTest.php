@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Handler;
 
 use Drupal\Tests\views\Kernel\ViewsKernelTestBase;
@@ -49,7 +47,7 @@ class FieldNumericTest extends ViewsKernelTestBase {
    *   The data set containing field settings, values to set and expected
    *   values.
    */
-  public static function providerTestFieldNumeric() {
+  public function providerTestFieldNumeric() {
     return [
       'no-formatting' => [
         [],

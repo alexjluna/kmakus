@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Kernel;
 
 use Drupal\entity_test\Entity\EntityTestMulRevPub;
@@ -99,7 +97,7 @@ class ModerationInformationTest extends KernelTestBase {
   /**
    * Test cases for ::testIsDefaultRevisionPublished.
    */
-  public static function isDefaultRevisionPublishedTestCases() {
+  public function isDefaultRevisionPublishedTestCases() {
     return [
       'Draft to draft' => [
         'draft',

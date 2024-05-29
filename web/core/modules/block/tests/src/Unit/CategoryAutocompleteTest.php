@@ -61,7 +61,7 @@ class CategoryAutocompleteTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestAutocompleteSuggestions() {
+  public function providerTestAutocompleteSuggestions() {
     $test_parameters = [];
     $test_parameters[] = [
       'string' => 'Com',

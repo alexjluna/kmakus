@@ -72,7 +72,7 @@ class EntityFormTest extends UnitTestCase {
   /**
    * Provides test data for testFormId().
    */
-  public static function providerTestFormIds() {
+  public function providerTestFormIds() {
     return [
       [
         'node_article_form',

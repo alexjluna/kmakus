@@ -2,7 +2,6 @@
 
 namespace Drupal\node\Plugin\views\row;
 
-use Drupal\views\Attribute\ViewsRow;
 use Drupal\views\Plugin\views\row\EntityRow;
 
 /**
@@ -11,8 +10,11 @@ use Drupal\views\Plugin\views\row\EntityRow;
  * Most of the code on this object is in the theme function.
  *
  * @ingroup views_row_plugins
+ *
+ * @ViewsRow(
+ *   id = "entity:node",
+ * )
  */
-#[ViewsRow("entity:node")]
 class NodeRow extends EntityRow {
 
   /**

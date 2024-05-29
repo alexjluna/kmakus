@@ -41,7 +41,7 @@ class NormalizerBaseTest extends UnitTestCase {
    * @return array
    *   An array of provider data for testSupportsNormalization.
    */
-  public static function providerTestSupportsNormalization() {
+  public function providerTestSupportsNormalization() {
     return [
       // Something that is not an object should return FALSE immediately.
       [FALSE, []],

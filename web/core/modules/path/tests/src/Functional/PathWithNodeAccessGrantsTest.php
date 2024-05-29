@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\path\Functional;
 
 use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;

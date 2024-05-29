@@ -11,6 +11,13 @@ use Symfony\Component\Validator\ConstraintValidator;
 class EntityTestCompositeConstraintValidator extends ConstraintValidator {
 
   /**
+   * Validator 2.5 and upwards compatible execution context.
+   *
+   * @var \Symfony\Component\Validator\Context\ExecutionContextInterface
+   */
+  protected $context;
+
+  /**
    * {@inheritdoc}
    */
   public function validate($entity, Constraint $constraint) {

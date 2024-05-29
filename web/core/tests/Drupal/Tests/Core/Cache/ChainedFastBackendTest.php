@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\Core\Cache;
 
-use Drupal\Component\Datetime\Time;
 use Drupal\Core\Cache\ChainedFastBackend;
 use Drupal\Core\Cache\MemoryBackend;
 use Drupal\Tests\UnitTestCase;
@@ -50,7 +49,7 @@ class ChainedFastBackendTest extends UnitTestCase {
     $consistent_cache->expects($this->never())
       ->method('getMultiple');
 
-    $fast_cache = new MemoryBackend(new Time());
+    $fast_cache = new MemoryBackend();
     $fast_cache->set('foo', 'baz');
 
     $chained_fast_backend = new ChainedFastBackend(

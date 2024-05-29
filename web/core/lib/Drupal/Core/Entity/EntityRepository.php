@@ -5,7 +5,6 @@ namespace Drupal\Core\Entity;
 use Drupal\Core\Config\Entity\ConfigEntityTypeInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\Plugin\Context\ContextInterface;
 use Drupal\Core\Plugin\Context\ContextRepositoryInterface;
 use Drupal\Core\TypedData\TranslatableInterface as TranslatableDataInterface;
 
@@ -138,7 +137,7 @@ class EntityRepository implements EntityRepositoryInterface {
     $active = [];
 
     if (!isset($contexts)) {
-      $contexts = [];
+      $contexts = $this->contextRepository->getAvailableContexts();
     }
 
     // @todo Consider implementing a more performant version of this logic fully
@@ -187,19 +186,21 @@ class EntityRepository implements EntityRepositoryInterface {
     }
 
     if (!isset($contexts)) {
-      $contexts = [];
+      $contexts = $this->contextRepository->getAvailableContexts();
     }
 
-    $key = '@entity.repository:legacy_context_operation';
+    // @todo Consider deprecating the legacy context operation altogether in
+    //   https://www.drupal.org/node/3031124.
+    $legacy_context = [];
+    $key = static::CONTEXT_ID_LEGACY_CONTEXT_OPERATION;
     if (isset($contexts[$key])) {
-      @trigger_error('Providing an \Drupal\Core\Entity\EntityRepositoryInterface::CONTEXT_ID_LEGACY_CONTEXT_OPERATION context to EntityRepository::getCanonicalMultiple() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/node/3437685', E_USER_DEPRECATED);
-      $contexts['operation'] = $contexts[$key]->getContextValue();
+      $legacy_context['operation'] = $contexts[$key]->getContextValue();
     }
 
     $canonical = [];
     $langcode = $this->getContentLanguageFromContexts($contexts);
     foreach ($entities as $id => $entity) {
-      $canonical[$id] = $this->getTranslationFromContext($entity, $langcode, $contexts);
+      $canonical[$id] = $this->getTranslationFromContext($entity, $langcode, $legacy_context);
     }
 
     return $canonical;
@@ -208,33 +209,22 @@ class EntityRepository implements EntityRepositoryInterface {
   /**
    * Retrieves the current content language from the specified contexts.
    *
-   * This is a BC layer to support plugin context system identifiers, the
-   * langcode key should be used instead and is preferred when given.
-   *
-   * @param string[] $contexts
+   * @param \Drupal\Core\Plugin\Context\ContextInterface[] $contexts
    *   An array of context items.
    *
    * @return string|null
    *   A language code or NULL if no language context was provided.
-   *
-   * @internal
    */
   protected function getContentLanguageFromContexts(array $contexts) {
-
-    if (isset($contexts['langcode'])) {
-      return $contexts['langcode'];
-    }
-
     // Content language might not be configurable, in which case we need to fall
     // back to a configurable language type.
     foreach ([LanguageInterface::TYPE_CONTENT, LanguageInterface::TYPE_INTERFACE] as $language_type) {
       $context_id = '@language.current_language_context:' . $language_type;
-      if (isset($contexts[$context_id]) && $contexts[$context_id] instanceof ContextInterface) {
-        @trigger_error('Providing the language as ' . $context_id . ' context to EntityRepository is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use the langcode key instead. See https://www.drupal.org/node/3437685', E_USER_DEPRECATED);
+      if (isset($contexts[$context_id])) {
         return $contexts[$context_id]->getContextValue()->getId();
       }
     }
-    return $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+    return $this->languageManager->getDefaultLanguage()->getId();
   }
 
   /**

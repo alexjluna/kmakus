@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\menu_link_content\Kernel\Plugin\migrate\process;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -64,7 +62,7 @@ class LinkUriTest extends KernelTestBase {
    *   - The value array to pass to LinkUri::transform().
    *   - The expected path returned by LinkUri::transform().
    */
-  public static function providerTestRouted() {
+  public function providerTestRouted() {
     $tests = [];
 
     $value = 'http://example.com';
@@ -107,7 +105,7 @@ class LinkUriTest extends KernelTestBase {
    *   - The expected path returned by LinkUri::transform().
    *   - (optional) A URL object that the path validator prophecy will return.
    */
-  public static function providerTestNotRouted() {
+  public function providerTestNotRouted() {
     $tests = [];
 
     $message = 'The path "%s" failed validation.';
@@ -157,7 +155,7 @@ class LinkUriTest extends KernelTestBase {
    *   - The value array to pass to LinkUri::transform().
    *   - The expected path returned by LinkUri::transform().
    */
-  public static function providerTestDisablingRouteValidation() {
+  public function providerTestDisablingRouteValidation() {
     $tests = [];
 
     $value = 'node/1';

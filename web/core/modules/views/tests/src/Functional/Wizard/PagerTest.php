@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Functional\Wizard;
 
 /**
@@ -24,7 +22,7 @@ class PagerTest extends WizardTestBase {
     // conditions that are meaningful for the use of a pager.
     $this->drupalCreateContentType(['type' => 'page']);
     for ($i = 0; $i < 12; $i++) {
-      $this->drupalCreateNode(['created' => \Drupal::time()->getRequestTime() - $i]);
+      $this->drupalCreateNode(['created' => REQUEST_TIME - $i]);
     }
 
     // Make a View that uses a pager.

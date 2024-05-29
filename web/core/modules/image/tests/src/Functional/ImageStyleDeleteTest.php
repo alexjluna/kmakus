@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\image\Functional;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
@@ -26,7 +24,7 @@ class ImageStyleDeleteTest extends ImageFieldTestBase {
     parent::setUp();
     // Create an image field 'foo' having the image style 'medium' as widget
     // preview and as formatter.
-    $this->createImageField('foo', 'node', 'page', [], [], ['preview_image_style' => 'medium'], ['image_style' => 'medium']);
+    $this->createImageField('foo', 'page', [], [], ['preview_image_style' => 'medium'], ['image_style' => 'medium']);
   }
 
   /**

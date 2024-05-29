@@ -143,7 +143,7 @@ class PasswordVerifyTest extends UnitTestCase {
   /**
    * Provides the test matrix for testLongPassword().
    */
-  public static function providerLongPasswords() {
+  public function providerLongPasswords() {
     // '512 byte long password is allowed.'
     $passwords['allowed'] = [str_repeat('x', PasswordInterface::PASSWORD_MAX_LENGTH), TRUE];
     // 513 byte long password is not allowed.

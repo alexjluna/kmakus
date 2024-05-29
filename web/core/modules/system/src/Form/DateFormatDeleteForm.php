@@ -2,7 +2,6 @@
 
 namespace Drupal\system\Form;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityDeleteForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,15 +25,9 @@ class DateFormatDeleteForm extends EntityDeleteForm {
    *
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
-   * @param \Drupal\Component\Datetime\TimeInterface|null $time
-   *   The time service.
    */
-  public function __construct(DateFormatterInterface $date_formatter, protected ?TimeInterface $time = NULL) {
+  public function __construct(DateFormatterInterface $date_formatter) {
     $this->dateFormatter = $date_formatter;
-    if ($this->time === NULL) {
-      @trigger_error('Calling ' . __METHOD__ . ' without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3112298', E_USER_DEPRECATED);
-      $this->time = \Drupal::service('datetime.time');
-    }
   }
 
   /**
@@ -42,8 +35,7 @@ class DateFormatDeleteForm extends EntityDeleteForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('date.formatter'),
-      $container->get('datetime.time'),
+      $container->get('date.formatter')
     );
   }
 
@@ -53,7 +45,7 @@ class DateFormatDeleteForm extends EntityDeleteForm {
   public function getQuestion() {
     return $this->t('Are you sure you want to delete the format %name : %format?', [
       '%name' => $this->entity->label(),
-      '%format' => $this->dateFormatter->format($this->time->getRequestTime(), $this->entity->id()),
+      '%format' => $this->dateFormatter->format(REQUEST_TIME, $this->entity->id()),
     ]);
   }
 

@@ -2,18 +2,17 @@
 
 namespace Drupal\Core\Path\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Validation constraint for unique path alias values.
+ *
+ * @Constraint(
+ *   id = "UniquePathAlias",
+ *   label = @Translation("Unique path alias.", context = "Validation"),
+ * )
  */
-#[Constraint(
-  id: 'UniquePathAlias',
-  label: new TranslatableMarkup('Unique path alias.', [], ['context' => 'Validation'])
-)]
-class UniquePathAliasConstraint extends SymfonyConstraint {
+class UniquePathAliasConstraint extends Constraint {
 
   /**
    * The default violation message.

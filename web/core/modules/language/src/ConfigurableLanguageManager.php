@@ -405,7 +405,9 @@ class ConfigurableLanguageManager extends LanguageManager implements Configurabl
   public function getLanguageSwitchLinks($type, Url $url) {
     if ($this->negotiator) {
       foreach ($this->negotiator->getNegotiationMethods($type) as $method_id => $method) {
-        if (is_subclass_of($method['class'], LanguageSwitcherInterface::class)) {
+        $reflector = new \ReflectionClass($method['class']);
+
+        if ($reflector->implementsInterface('\Drupal\language\LanguageSwitcherInterface')) {
           $original_languages = $this->negotiatedLanguages;
           $result = $this->negotiator->getNegotiationMethodInstance($method_id)->getLanguageSwitchLinks($this->requestStack->getCurrentRequest(), $type, $url);
 

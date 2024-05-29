@@ -8,8 +8,6 @@ use Drupal\Core\Config\StorageTransformEvent;
 use Drupal\Core\State\StateInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-// cspell:ignore arrr
-
 /**
  * Class EventSubscriber.
  *

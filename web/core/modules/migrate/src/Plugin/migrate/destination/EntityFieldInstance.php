@@ -2,8 +2,6 @@
 
 namespace Drupal\migrate\Plugin\migrate\destination;
 
-use Drupal\migrate\Attribute\MigrateDestination;
-
 /**
  * Provides destination plugin for field_config configuration entities.
  *
@@ -42,8 +40,11 @@ use Drupal\migrate\Attribute\MigrateDestination;
  *
  * @see \Drupal\field\Entity\FieldConfig
  * @see \Drupal\field\Entity\FieldConfigBase
+ *
+ * @MigrateDestination(
+ *   id = "entity:field_config"
+ * )
  */
-#[MigrateDestination('entity:field_config')]
 class EntityFieldInstance extends EntityConfigBase {
 
   /**

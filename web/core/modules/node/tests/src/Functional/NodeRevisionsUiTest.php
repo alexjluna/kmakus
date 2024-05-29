@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Link;
@@ -105,7 +103,7 @@ class NodeRevisionsUiTest extends NodeTestBase {
       '#theme' => 'username',
       '#account' => $this->editor,
     ];
-    $editor = \Drupal::service('renderer')->renderInIsolation($username);
+    $editor = \Drupal::service('renderer')->renderPlain($username);
 
     // Get original node.
     $nodes[] = clone $node;

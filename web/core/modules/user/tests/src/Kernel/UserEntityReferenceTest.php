@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Kernel;
 
 use Drupal\field\Entity\FieldConfig;
@@ -69,13 +67,16 @@ class UserEntityReferenceTest extends EntityKernelTestBase {
 
     // cspell:ignore aabb aabbb aabbbb aabbbb
     $user1 = $this->createUser([], 'aabb');
-    $user1->addRole($this->role1->id())->save();
+    $user1->addRole($this->role1->id());
+    $user1->save();
 
     $user2 = $this->createUser([], 'aabbb');
-    $user2->addRole($this->role1->id())->save();
+    $user2->addRole($this->role1->id());
+    $user2->save();
 
     $user3 = $this->createUser([], 'aabbbb');
-    $user3->addRole($this->role2->id())->save();
+    $user3->addRole($this->role2->id());
+    $user3->save();
 
     /** @var \Drupal\Core\Entity\EntityAutocompleteMatcherInterface $autocomplete */
     $autocomplete = \Drupal::service('entity.autocomplete_matcher');

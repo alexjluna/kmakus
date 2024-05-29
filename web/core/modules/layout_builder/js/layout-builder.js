@@ -166,7 +166,6 @@
             draggable: '.js-layout-builder-block',
             ghostClass: 'ui-state-drop',
             group: 'builder-region',
-            filter: '.contextual',
             onEnd: (event) =>
               Drupal.layoutBuilderBlockUpdate(event.item, event.from, event.to),
           });
@@ -219,8 +218,7 @@
   };
 
   // After a dialog opens, highlight element that the dialog is acting on.
-  window.addEventListener('dialog:aftercreate', (e) => {
-    const $element = $(e.target);
+  $(window).on('dialog:aftercreate', (event, dialog, $element) => {
     if (Drupal.offCanvas.isOffCanvas($element)) {
       // Start by removing any existing highlighted elements.
       $('.is-layout-builder-highlighted').removeClass(
@@ -310,8 +308,7 @@
     });
   }
 
-  window.addEventListener('dialog:afterclose', (e) => {
-    const $element = $(e.target);
+  $(window).on('dialog:afterclose', (event, dialog, $element) => {
     if (Drupal.offCanvas.isOffCanvas($element)) {
       // Remove the highlight from all elements.
       $('.is-layout-builder-highlighted').removeClass(

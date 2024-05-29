@@ -2,8 +2,6 @@
 
 namespace Drupal\Core\Plugin;
 
-use Drupal\Core\Extension\Exception\UnknownExtensionException;
-use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
@@ -48,13 +46,13 @@ trait CategorizingPluginManagerTrait {
    *   machine-readable name passed.
    */
   protected function getProviderName($provider) {
-    try {
-      return $this->getModuleExtensionList()->getName($provider);
+    $list = $this->getModuleHandler()->getModuleList();
+    // If the module exists, return its human-readable name.
+    if (isset($list[$provider])) {
+      return $this->getModuleHandler()->getName($provider);
     }
-    catch (UnknownExtensionException $e) {
-      // Otherwise, return the machine name.
-      return $provider;
-    }
+    // Otherwise, return the machine name.
+    return $provider;
   }
 
   /**
@@ -62,35 +60,14 @@ trait CategorizingPluginManagerTrait {
    *
    * @return \Drupal\Core\Extension\ModuleHandlerInterface
    *   The module handler.
-   *
-   * @deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. There is no
-   *   replacement.
-   *
-   * @see https://www.drupal.org/node/3310017
    */
   public function getModuleHandler() {
-    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. There is no replacement. See https://www.drupal.org/node/3310017', E_USER_DEPRECATED);
     // If the class has an injected module handler, use it. Otherwise fall back
     // to fetch it from the service container.
     if (isset($this->moduleHandler)) {
       return $this->moduleHandler;
     }
     return \Drupal::moduleHandler();
-  }
-
-  /**
-   * Returns the module extension list used.
-   *
-   * @return \Drupal\Core\Extension\ModuleExtensionList
-   *   The module extension list.
-   */
-  protected function getModuleExtensionList(): ModuleExtensionList {
-    // If the class has an injected module extension list, use it. Otherwise
-    // fall back to fetch it from the service container.
-    if (isset($this->moduleExtensionList)) {
-      return $this->moduleExtensionList;
-    }
-    return \Drupal::service('extension.list.module');
   }
 
   /**

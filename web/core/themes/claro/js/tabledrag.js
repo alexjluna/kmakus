@@ -182,13 +182,10 @@
        * @return {string}
        *   A string representing a DOM fragment.
        */
-      tableDragHandle: (dragOrientation = 'drag') => {
-        const title =
-          dragOrientation === 'drag-y'
-            ? Drupal.t('Change order')
-            : Drupal.t('Move in any direction');
-        return `<a href="#" title="${title}" class="tabledrag-handle js-tabledrag-handle"></a>`;
-      },
+      tableDragHandle: () =>
+        `<a href="#" title="${Drupal.t(
+          'Drag to re-order',
+        )}" class="tabledrag-handle js-tabledrag-handle"></a>`,
 
       /**
        * The button for toggling table row weight visibility.

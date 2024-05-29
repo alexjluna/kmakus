@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Layout;
 
 use Drupal\Core\Layout\Icon\SvgIconBuilder;
@@ -34,7 +32,7 @@ class IconBuilderTest extends KernelTestBase {
     $this->assertSame($expected, $output);
   }
 
-  public static function providerTestBuild() {
+  public function providerTestBuild() {
     $data = [];
     $data['empty'][] = (new SvgIconBuilder());
     $data['empty'][] = [];

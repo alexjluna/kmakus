@@ -26,6 +26,7 @@
   cursor: pointer;
   border: none;
   background: transparent;
+  -webkit-appearance: none;
   appearance: none;
 }
 

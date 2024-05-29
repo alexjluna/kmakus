@@ -2,14 +2,11 @@
 
 namespace Drupal\datetime\Plugin\views\argument;
 
-use Drupal\views\Attribute\ViewsArgument;
-
 /**
  * Argument handler for a week.
+ *
+ * @ViewsArgument("datetime_week")
  */
-#[ViewsArgument(
-  id: 'datetime_week'
-)]
 class WeekDate extends Date {
 
   /**

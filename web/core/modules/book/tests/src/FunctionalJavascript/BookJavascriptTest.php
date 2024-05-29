@@ -13,7 +13,6 @@ use Drupal\node\Entity\Node;
  * Tests Book javascript functionality.
  *
  * @group book
- * @group legacy
  */
 class BookJavascriptTest extends WebDriverTestBase {
 

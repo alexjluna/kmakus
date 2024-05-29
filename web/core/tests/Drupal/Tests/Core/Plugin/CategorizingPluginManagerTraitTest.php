@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Drupal\Tests\Core\Plugin;
 
 use Drupal\Component\Plugin\CategorizingPluginManagerInterface;
-use Drupal\Core\Extension\Exception\UnknownExtensionException;
-use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\CategorizingPluginManagerTrait;
 use Drupal\Core\Plugin\DefaultPluginManager;
@@ -15,7 +13,6 @@ use Drupal\Tests\UnitTestCase;
 /**
  * @coversDefaultClass \Drupal\Core\Plugin\CategorizingPluginManagerTrait
  * @group Plugin
- * @runTestsInSeparateProcesses
  */
 class CategorizingPluginManagerTraitTest extends UnitTestCase {
 
@@ -36,16 +33,12 @@ class CategorizingPluginManagerTraitTest extends UnitTestCase {
     $module_handler->expects($this->any())
       ->method('getModuleList')
       ->willReturn(['node' => []]);
-    $module_extension_list = $this->createMock(ModuleExtensionList::class);
-    $module_extension_list->expects($this->any())
+    $module_handler->expects($this->any())
       ->method('getName')
-      ->willReturnCallback(function ($argument) {
-        if ($argument == 'node') {
-          return 'Node';
-        }
-        throw new UnknownExtensionException();
-      });
-    $this->pluginManager = new CategorizingPluginManager($module_handler, $module_extension_list);
+      ->with('node')
+      ->willReturn('Node');
+
+    $this->pluginManager = new CategorizingPluginManager($module_handler);
     $this->pluginManager->setStringTranslation($this->getStringTranslationStub());
   }
 
@@ -119,14 +112,11 @@ class CategorizingPluginManager extends DefaultPluginManager implements Categori
   /**
    * Replace the constructor so we can instantiate a stub.
    *
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit\Framework\MockObject\MockObject $module_handler
    *   The module handler.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $module_extension_list
-   *   The module extension list.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, ModuleExtensionList $module_extension_list) {
+  public function __construct(ModuleHandlerInterface $module_handler) {
     $this->moduleHandler = $module_handler;
-    $this->moduleExtensionList = $module_extension_list;
   }
 
   /**

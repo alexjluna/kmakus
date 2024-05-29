@@ -38,7 +38,7 @@ settings:
     ckeditor5_codeBlock:
       languages:
         -
-          label: 'Texto sin formato'
+          label: 'Plain text'
           language: plaintext
         -
           label: C
@@ -53,7 +53,7 @@ settings:
           label: CSS
           language: css
         -
-          label: Diferencias
+          label: Diff
           language: diff
         -
           label: HTML
@@ -99,7 +99,7 @@ image_upload:
   status: true
   scheme: public
   directory: inline-images
-  max_size: ''
+  max_size: null
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null

@@ -82,7 +82,7 @@ JS;
    *
    * @return string[][]
    */
-  public static function provider(): array {
+  public function provider(): array {
     return [
       'Language code both in Drupal and CKEditor' => [
         'langcode' => 'th',

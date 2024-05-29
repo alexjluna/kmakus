@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block_content\Functional;
 
 use Drupal\block_content\Entity\BlockContent;
@@ -53,7 +51,7 @@ class BlockContentRevisionsTest extends BlockContentTestBase {
       $block->setNewRevision(TRUE);
       $block->setRevisionLogMessage($this->randomMachineName(32));
       $block->setRevisionUser($this->adminUser);
-      $block->setRevisionCreationTime(time());
+      $block->setRevisionCreationTime(REQUEST_TIME);
       $logs[] = $block->getRevisionLogMessage();
       $block->save();
       $blocks[] = $block->getRevisionId();

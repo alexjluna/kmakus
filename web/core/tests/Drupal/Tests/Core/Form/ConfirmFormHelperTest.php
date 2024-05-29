@@ -119,7 +119,7 @@ class ConfirmFormHelperTest extends UnitTestCase {
   /**
    * Provides test data for testCancelLinkDestination().
    */
-  public static function providerTestCancelLinkDestination() {
+  public function providerTestCancelLinkDestination() {
     $data = [];
     $data[] = ['baz'];
     $data[] = ['/baz'];

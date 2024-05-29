@@ -2,9 +2,7 @@
 
 namespace Drupal\user\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Checks if the user's email address is provided if required.
@@ -12,12 +10,13 @@ use Symfony\Component\Validator\Constraint as SymfonyConstraint;
  * The user mail field is NOT required if account originally had no mail set
  * and the user performing the edit has 'administer users' permission.
  * This allows users without email address to be edited and deleted.
+ *
+ * @Constraint(
+ *   id = "UserMailRequired",
+ *   label = @Translation("User email required", context = "Validation")
+ * )
  */
-#[Constraint(
-  id: 'UserMailRequired',
-  label: new TranslatableMarkup('User email required', [], ['context' => 'Validation'])
-)]
-class UserMailRequired extends SymfonyConstraint {
+class UserMailRequired extends Constraint {
 
   /**
    * Violation message. Use the same message as FormValidator.

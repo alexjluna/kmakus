@@ -52,7 +52,7 @@ class StringItemTest extends UnitTestCase {
    * @return array
    *   Test cases.
    */
-  public static function providerMaxLength(): array {
+  public function providerMaxLength(): array {
     return [
       '32' => [32],
       '255' => [255],

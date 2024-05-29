@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\file\Kernel;
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\File\Exception\FileExistsException;
 use Drupal\Core\File\Exception\InvalidStreamWrapperException;
-use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileRepository;
@@ -116,7 +114,7 @@ class FileRepositoryTest extends FileManagedUnitTestBase {
     $existing = $this->createFile();
     $contents = $this->randomMachineName();
 
-    $result = $this->fileRepository->writeData($contents, $existing->getFileUri(), FileExists::Replace);
+    $result = $this->fileRepository->writeData($contents, $existing->getFileUri(), FileSystemInterface::EXISTS_REPLACE);
     $this->assertNotFalse($result, 'File saved successfully.');
 
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
@@ -148,7 +146,7 @@ class FileRepositoryTest extends FileManagedUnitTestBase {
 
     // Check the overwrite error.
     try {
-      $this->fileRepository->writeData('asdf', $existing->getFileUri(), FileExists::Error);
+      $this->fileRepository->writeData('asdf', $existing->getFileUri(), FileSystemInterface::EXISTS_ERROR);
       $this->fail('expected FileExistsException');
     }
     // FileExistsException is a subclass of FileException.
@@ -198,7 +196,7 @@ class FileRepositoryTest extends FileManagedUnitTestBase {
 
     $this->expectException(EntityStorageException::class);
     $target = $this->createFile();
-    $fileRepository->writeData('asdf', $target->getFileUri(), FileExists::Replace);
+    $fileRepository->writeData('asdf', $target->getFileUri(), FileSystemInterface::EXISTS_REPLACE);
   }
 
   /**

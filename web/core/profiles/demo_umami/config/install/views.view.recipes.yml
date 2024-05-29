@@ -75,7 +75,6 @@ display:
         type: mini
         options:
           offset: 0
-          pagination_heading_level: h4
           items_per_page: 12
           total_pages: null
           id: 0
@@ -247,7 +246,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      rendering_language: '***LANGUAGE_language_content***'
+      rendering_language: '***LANGUAGE_language_interface***'
       display_extenders: {  }
       path: recipes
       menu:

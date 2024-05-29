@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\menu_ui\Functional;
 
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -431,10 +429,7 @@ class MenuUiNodeTest extends BrowserTestBase {
    * @see menu_ui_get_menu_link_defaults()
    */
   public function testMainMenuIsPrioritized(): void {
-    $this->drupalLogin($this->drupalCreateUser([
-      'administer menu',
-      'edit any page content',
-    ]));
+    $this->drupalLogin($this->rootUser);
     $menu_name = $this->randomMachineName();
     $mainLinkTitle = $this->randomMachineName();
     $nonMainLinkTitle = $this->randomMachineName();

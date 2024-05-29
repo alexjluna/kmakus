@@ -7,7 +7,6 @@ use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Datetime\TimeZoneFormHelper;
 use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\RedundantEditableConfigNamesTrait;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,7 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @internal
  */
 class RegionalForm extends ConfigFormBase {
-  use RedundantEditableConfigNamesTrait;
 
   /**
    * The country manager.
@@ -63,6 +61,13 @@ class RegionalForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
+  protected function getEditableConfigNames() {
+    return ['system.date'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $countries = $this->countryManager->getList();
 
@@ -79,11 +84,7 @@ class RegionalForm extends ConfigFormBase {
       '#type' => 'select',
       '#title' => $this->t('Default country'),
       '#empty_value' => '',
-      '#config_target' => new ConfigTarget(
-        'system.date',
-        'country.default',
-        toConfig: fn(?string $value) => $value ?: NULL
-      ),
+      '#config_target' => 'system.date:country.default',
       '#options' => $countries,
       '#attributes' => ['class' => ['country-detect']],
     ];
@@ -118,13 +119,13 @@ class RegionalForm extends ConfigFormBase {
   /**
    * Prepares the saved timezone.default property to be displayed in the form.
    *
-   * @param string|null $value
+   * @param string $value
    *   The value saved in config.
    *
    * @return string
    *   The value of the form element.
    */
-  public static function loadDefaultTimeZone(?string $value): string {
+  public static function loadDefaultTimeZone(string $value): string {
     return $value ?: date_default_timezone_get();
   }
 

@@ -70,7 +70,7 @@ class MachineNameTest extends MigrateProcessTestCase {
    * @return array
    *   An array of test cases.
    */
-  public static function providerTestMachineNames(): array {
+  public function providerTestMachineNames(): array {
     return [
       // Tests the following transformations:
       // - non-alphanumeric character (including spaces) -> underscore,

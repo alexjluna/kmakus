@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\locale\Functional;
 
 use Drupal\Core\Database\Database;
 use Drupal\Core\Language\LanguageInterface;
 
-// cspell:ignore extraday lundi
+// cspell:ignore lundi
 
 /**
  * Tests for updating the interface translations of projects.

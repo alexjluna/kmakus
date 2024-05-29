@@ -2,10 +2,8 @@
 
 namespace Drupal\datetime_range\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\datetime\Plugin\Field\FieldFormatter\DateTimePlainFormatter;
 use Drupal\datetime_range\DateTimeRangeTrait;
 
@@ -14,14 +12,15 @@ use Drupal\datetime_range\DateTimeRangeTrait;
  *
  * This formatter renders the data range as a plain text string, with a
  * configurable separator using an ISO-like date format string.
+ *
+ * @FieldFormatter(
+ *   id = "daterange_plain",
+ *   label = @Translation("Plain"),
+ *   field_types = {
+ *     "daterange"
+ *   }
+ * )
  */
-#[FieldFormatter(
-  id: 'daterange_plain',
-  label: new TranslatableMarkup('Plain'),
-  field_types: [
-    'daterange',
-  ],
-)]
 class DateRangePlainFormatter extends DateTimePlainFormatter {
 
   use DateTimeRangeTrait;
@@ -30,7 +29,9 @@ class DateRangePlainFormatter extends DateTimePlainFormatter {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return static::dateTimeRangeDefaultSettings() + parent::defaultSettings();
+    return [
+      'separator' => '-',
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -48,7 +49,11 @@ class DateRangePlainFormatter extends DateTimePlainFormatter {
         $end_date = $item->end_date;
 
         if ($start_date->getTimestamp() !== $end_date->getTimestamp()) {
-          $elements[$delta] = $this->renderStartEnd($start_date, $separator, $end_date);
+          $elements[$delta] = [
+            'start_date' => $this->buildDate($start_date),
+            'separator' => ['#plain_text' => ' ' . $separator . ' '],
+            'end_date' => $this->buildDate($end_date),
+          ];
         }
         else {
           $elements[$delta] = $this->buildDate($start_date);
@@ -71,7 +76,14 @@ class DateRangePlainFormatter extends DateTimePlainFormatter {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $form = parent::settingsForm($form, $form_state);
-    $form = $this->dateTimeRangeSettingsForm($form);
+
+    $form['separator'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Date separator'),
+      '#description' => $this->t('The string to separate the start and end dates'),
+      '#default_value' => $this->getSetting('separator'),
+    ];
+
     return $form;
   }
 
@@ -79,7 +91,13 @@ class DateRangePlainFormatter extends DateTimePlainFormatter {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    return array_merge(parent::settingsSummary(), $this->dateTimeRangeSettingsSummary());
+    $summary = parent::settingsSummary();
+
+    if ($separator = $this->getSetting('separator')) {
+      $summary[] = $this->t('Separator: %separator', ['%separator' => $separator]);
+    }
+
+    return $summary;
   }
 
 }

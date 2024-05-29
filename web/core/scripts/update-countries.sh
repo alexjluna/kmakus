@@ -11,8 +11,6 @@
 
 use Drupal\Core\Locale\CountryManager;
 
-// cspell:ignore localenames
-
 // Determine DRUPAL_ROOT.
 $dir = dirname(__FILE__);
 while (!defined('DRUPAL_ROOT')) {
@@ -27,9 +25,10 @@ $uri = DRUPAL_ROOT . '/territories.json';
 
 if (!file_exists($uri)) {
   $usage = <<< USAGE
-- Download territories.json from
-  https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-localenames-full/main/en/territories.json
-  and place it in the Drupal root directory.
+- Choose the latest release data from http://cldr.unicode.org/index/downloads
+  and download the json.zip file.
+- Unzip the json.zip file and place the main/en/territories.json in the
+  Drupal root directory.
 - Run this script.
 USAGE;
   exit('CLDR data file not found. (' . $uri . ")\n\n" . $usage . "\n");

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\link\Functional\Views;
 
 use Drupal\field\Entity\FieldConfig;

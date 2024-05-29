@@ -1,4 +1,3 @@
-# cspell:ignore idconflict
 migrate_drupal_ui.upgrade:
   path: '/upgrade'
   defaults:

@@ -28,7 +28,7 @@ class PasswordTest extends UnitTestCase {
   /**
    * Data provider for testValueCallback().
    */
-  public static function providerTestValueCallback() {
+  public function providerTestValueCallback() {
     $data = [];
     $data[] = [NULL, FALSE];
     $data[] = [NULL, NULL];

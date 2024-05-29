@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel;
 
 /**
@@ -54,7 +52,7 @@ class MigrationPluginManagerTest extends MigrateTestBase {
   /**
    * Data provider for testCreateInstancesByTag.
    */
-  public static function providerCreateInstanceByTag() {
+  public function providerCreateInstanceByTag() {
     return [
       'get test' => [
         'test',

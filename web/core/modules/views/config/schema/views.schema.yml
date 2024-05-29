@@ -108,9 +108,6 @@ views.view.*:
           display_plugin:
             type: string
             label: 'Display plugin'
-            constraints:
-              PluginExists:
-                manager: plugin.manager.views.display
           position:
             type: integer
             label: 'Position'

@@ -67,7 +67,7 @@ class ReadOnlyStorageTest extends UnitTestCase {
    * @return array
    *   The data.
    */
-  public static function readMethodsProvider() {
+  public function readMethodsProvider() {
     $fixture = [
       StorageInterface::DEFAULT_COLLECTION => ['config.a', 'config.b', 'other.a'],
     ];

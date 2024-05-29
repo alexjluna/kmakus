@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate_drupal\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -18,8 +17,11 @@ use Drupal\migrate\Row;
  * returned. This keeps the behavior the same as the classic node migration.
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "node_complete_node_lookup"
+ * )
  */
-#[MigrateProcess('node_complete_node_lookup')]
 class NodeCompleteNodeLookup extends ProcessPluginBase {
 
   /**

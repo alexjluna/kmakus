@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\statistics\Functional\search;
 
 use Drupal\Core\Database\Database;
@@ -9,13 +7,10 @@ use Drupal\search\Entity\SearchPage;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\Traits\Core\CronRunTrait;
 
-// cspell:ignore daycount totalcount
-
 /**
  * Indexes content and tests ranking factors.
  *
  * @group statistics
- * @group legacy
  */
 class SearchRankingTest extends BrowserTestBase {
 

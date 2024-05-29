@@ -12,7 +12,6 @@
 
 namespace Twig\Node;
 
-use Twig\Attribute\YieldReady;
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Expression\ConstantExpression;
@@ -27,7 +26,6 @@ use Twig\Source;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-#[YieldReady]
 final class ModuleNode extends Node
 {
     public function __construct(Node $body, ?AbstractExpression $parent, Node $blocks, Node $macros, Node $traits, $embeddedTemplates, Source $source)
@@ -145,7 +143,6 @@ final class ModuleNode extends Node
                 ->write("use Twig\Environment;\n")
                 ->write("use Twig\Error\LoaderError;\n")
                 ->write("use Twig\Error\RuntimeError;\n")
-                ->write("use Twig\Extension\CoreExtension;\n")
                 ->write("use Twig\Extension\SandboxExtension;\n")
                 ->write("use Twig\Markup;\n")
                 ->write("use Twig\Sandbox\SecurityError;\n")
@@ -198,7 +195,7 @@ final class ModuleNode extends Node
                     ->raw(', ')
                     ->repr($node->getTemplateLine())
                     ->raw(");\n")
-                    ->write(sprintf("if (!\$_trait_%s->unwrap()->isTraitable()) {\n", $i))
+                    ->write(sprintf("if (!\$_trait_%s->isTraitable()) {\n", $i))
                     ->indent()
                     ->write("throw new RuntimeError('Template \"'.")
                     ->subcompile($trait->getNode('template'))
@@ -207,7 +204,7 @@ final class ModuleNode extends Node
                     ->raw(", \$this->source);\n")
                     ->outdent()
                     ->write("}\n")
-                    ->write(sprintf("\$_trait_%s_blocks = \$_trait_%s->unwrap()->getBlocks();\n\n", $i, $i))
+                    ->write(sprintf("\$_trait_%s_blocks = \$_trait_%s->getBlocks();\n\n", $i, $i))
                 ;
 
                 foreach ($trait->getNode('targets') as $key => $value) {
@@ -327,24 +324,15 @@ final class ModuleNode extends Node
                     ->repr($parent->getTemplateLine())
                     ->raw(");\n")
                 ;
-            }
-            $compiler->write('yield from ');
-
-            if ($parent instanceof ConstantExpression) {
-                $compiler->raw('$this->parent');
+                $compiler->write('$this->parent');
             } else {
-                $compiler->raw('$this->getParent($context)');
+                $compiler->write('$this->getParent($context)');
             }
-            $compiler->raw("->unwrap()->yield(\$context, array_merge(\$this->blocks, \$blocks));\n");
-        }
-
-        $compiler->subcompile($this->getNode('display_end'));
-
-        if (!$this->hasNode('parent')) {
-            $compiler->write("return; yield '';\n"); // ensure at least one yield call even for templates with no output
+            $compiler->raw("->display(\$context, array_merge(\$this->blocks, \$blocks));\n");
         }
 
         $compiler
+            ->subcompile($this->getNode('display_end'))
             ->outdent()
             ->write("}\n\n")
         ;
@@ -392,7 +380,7 @@ final class ModuleNode extends Node
         $traitable = !$this->hasNode('parent') && 0 === \count($this->getNode('macros'));
         if ($traitable) {
             if ($this->getNode('body') instanceof BodyNode) {
-                $nodes = $this->getNode('body')->getNode('0');
+                $nodes = $this->getNode('body')->getNode(0);
             } else {
                 $nodes = $this->getNode('body');
             }
@@ -429,7 +417,7 @@ final class ModuleNode extends Node
             ->write(" */\n")
             ->write("public function isTraitable()\n", "{\n")
             ->indent()
-            ->write("return false;\n")
+            ->write(sprintf("return %s;\n", $traitable ? 'true' : 'false'))
             ->outdent()
             ->write("}\n\n")
         ;
@@ -481,20 +469,5 @@ final class ModuleNode extends Node
         } else {
             throw new \LogicException('Trait templates can only be constant nodes.');
         }
-    }
-
-    private function hasNodeOutputNodes(Node $node): bool
-    {
-        if ($node instanceof NodeOutputInterface) {
-            return true;
-        }
-
-        foreach ($node as $child) {
-            if ($this->hasNodeOutputNodes($child)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

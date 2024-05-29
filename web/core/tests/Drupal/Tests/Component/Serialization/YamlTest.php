@@ -5,94 +5,175 @@ declare(strict_types=1);
 namespace Drupal\Tests\Component\Serialization;
 
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
+use Drupal\Component\Serialization\SerializationInterface;
 use Drupal\Component\Serialization\Yaml;
+use Drupal\Component\Serialization\YamlPecl;
+use Drupal\Component\Serialization\YamlSymfony;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Tests the Yaml serialization implementation.
- *
- * @group Drupal
- * @group Serialization
  * @coversDefaultClass \Drupal\Component\Serialization\Yaml
+ * @group Serialization
  */
-class YamlTest extends YamlTestBase {
+class YamlTest extends TestCase {
 
   /**
-   * Tests encoding and decoding basic data structures.
-   *
-   * @covers ::encode
-   * @covers ::decode
-   * @dataProvider providerEncodeDecodeTests
+   * @var \PHPUnit\Framework\MockObject\MockObject
    */
-  public function testEncodeDecode(array $data): void {
-    $this->assertSame($data, Yaml::decode(Yaml::encode($data)));
+  protected $mockParser;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    parent::setUp();
+    $this->mockParser = $this->getMockBuilder('\stdClass')
+      ->addMethods(['encode', 'decode', 'getFileExtension'])
+      ->getMock();
+    YamlParserProxy::setMock($this->mockParser);
   }
 
   /**
-   * Tests decoding YAML node anchors.
-   *
-   * @covers ::decode
-   * @dataProvider providerDecodeTests
+   * {@inheritdoc}
    */
-  public function testDecode($string, $data) {
-    $this->assertSame($data, Yaml::decode($string));
+  protected function tearDown(): void {
+    YamlParserProxy::setMock(NULL);
+    parent::tearDown();
   }
 
   /**
-   * Tests our encode settings.
-   *
-   * @covers ::encode
+   * @covers ::decode
    */
-  public function testEncode() {
-    // cSpell:disable
-    $this->assertSame('foo:
-  bar: \'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sapien ex, venenatis vitae nisi eu, posuere luctus dolor. Nullam convallis\'
-', Yaml::encode(['foo' => ['bar' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sapien ex, venenatis vitae nisi eu, posuere luctus dolor. Nullam convallis']]));
-    // cSpell:enable
+  public function testDecode() {
+    $this->mockParser
+      ->expects($this->once())
+      ->method('decode');
+    YamlStub::decode('test');
   }
 
   /**
    * @covers ::getFileExtension
    */
   public function testGetFileExtension() {
-    $this->assertSame('yml', Yaml::getFileExtension());
+    $this->mockParser
+      ->expects($this->never())
+      ->method('getFileExtension');
+    $this->assertEquals('yml', YamlStub::getFileExtension());
   }
 
   /**
-   * Tests that invalid YAML throws an exception.
+   * Tests all YAML files are decoded in the same way with Symfony and PECL.
    *
-   * @covers ::decode
+   * This test is a little bit slow but it tests that we do not have any bugs in
+   * our YAML that might not be decoded correctly in any of our implementations.
+   *
+   * @todo This should exist as an integration test not part of our unit tests.
+   *   https://www.drupal.org/node/2597730
+   *
+   * @requires extension yaml
+   * @dataProvider providerYamlFilesInCore
    */
-  public function testError() {
-    $this->expectException(InvalidDataTypeException::class);
-    Yaml::decode('foo: [ads');
+  public function testYamlFiles($file) {
+    $data = file_get_contents($file);
+    try {
+      $this->assertEquals(YamlSymfony::decode($data), YamlPecl::decode($data), $file);
+    }
+    catch (InvalidDataTypeException $e) {
+      // Provide file context to the failure so the exception message is useful.
+      $this->fail("Exception thrown parsing $file:\n" . $e->getMessage());
+    }
   }
 
   /**
-   * Ensures that php object support is disabled.
+   * Ensures that decoding php objects does not work in PECL.
    *
-   * @covers ::encode
+   * @requires extension yaml
+   *
+   * @see \Drupal\Tests\Component\Serialization\YamlTest::testObjectSupportDisabledSymfony()
    */
-  public function testEncodeObjectSupportDisabled() {
-    $this->expectException(InvalidDataTypeException::class);
-    $this->expectExceptionMessage('Object support when dumping a YAML file has been disabled.');
+  public function testObjectSupportDisabledPecl() {
     $object = new \stdClass();
     $object->foo = 'bar';
-    Yaml::encode([$object]);
+    // In core all Yaml encoding is done via Symfony and it does not support
+    // objects so in order to encode an object we have to use the PECL
+    // extension.
+    // @see \Drupal\Component\Serialization\Yaml::encode()
+    $yaml = YamlPecl::encode([$object]);
+    $this->assertEquals(['O:8:"stdClass":1:{s:3:"foo";s:3:"bar";}'], YamlPecl::decode($yaml));
   }
 
   /**
-   * Ensures that decoding PHP objects does not work in Symfony.
+   * Ensures that decoding php objects does not work in Symfony.
    *
-   * @covers ::decode
+   * @requires extension yaml
+   *
+   * @see \Drupal\Tests\Component\Serialization\YamlTest::testObjectSupportDisabledPecl()
    */
-  public function testDecodeObjectSupportDisabled() {
+  public function testObjectSupportDisabledSymfony() {
     $this->expectException(InvalidDataTypeException::class);
     $this->expectExceptionMessageMatches('/^Object support when parsing a YAML file has been disabled/');
-    $yaml = <<<YAML
-    obj: !php/object "O:8:\"stdClass\":1:{s:3:\"foo\";s:3:\"bar\";}"
-    YAML;
+    $object = new \stdClass();
+    $object->foo = 'bar';
+    // In core all Yaml encoding is done via Symfony and it does not support
+    // objects so in order to encode an object we have to use the PECL
+    // extension.
+    // @see \Drupal\Component\Serialization\Yaml::encode()
+    $yaml = YamlPecl::encode([$object]);
+    YamlSymfony::decode($yaml);
+  }
 
-    Yaml::decode($yaml);
+  /**
+   * Data provider that lists all YAML files in core.
+   */
+  public function providerYamlFilesInCore() {
+    $files = [];
+    $dirs = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../../../', \RecursiveDirectoryIterator::FOLLOW_SYMLINKS));
+    foreach ($dirs as $dir) {
+      $pathname = $dir->getPathname();
+      // Exclude core/node_modules.
+      if ($dir->getExtension() == 'yml' && !str_contains($pathname, '/../../../../../node_modules')) {
+        if (str_contains($dir->getRealPath(), 'invalid_file')) {
+          // There are some intentionally invalid files provided for testing
+          // library API behaviors, ignore them.
+          continue;
+        }
+        $files[] = [$dir->getRealPath()];
+      }
+    }
+    return $files;
+  }
+
+}
+
+class YamlStub extends Yaml {
+
+  public static function getSerializer() {
+    return '\Drupal\Tests\Component\Serialization\YamlParserProxy';
+  }
+
+}
+
+class YamlParserProxy implements SerializationInterface {
+
+  /**
+   * @var \Drupal\Component\Serialization\SerializationInterface
+   */
+  protected static $mock;
+
+  public static function setMock($mock) {
+    static::$mock = $mock;
+  }
+
+  public static function encode($data) {
+    return static::$mock->encode($data);
+  }
+
+  public static function decode($raw) {
+    return static::$mock->decode($raw);
+  }
+
+  public static function getFileExtension() {
+    return static::$mock->getFileExtension();
   }
 
 }

@@ -2,18 +2,17 @@
 
 namespace Drupal\media\Plugin\views\wizard;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\views\Attribute\ViewsWizard;
 use Drupal\views\Plugin\views\wizard\WizardPluginBase;
 
 /**
  * Provides Views creation wizard for Media.
+ *
+ * @ViewsWizard(
+ *   id = "media",
+ *   base_table = "media_field_data",
+ *   title = @Translation("Media")
+ * )
  */
-#[ViewsWizard(
-  id: 'media',
-  base_table: 'media_field_data',
-  title: new TranslatableMarkup('Media')
-)]
 class Media extends WizardPluginBase {
 
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Kernel\SecurityAdvisories;
 
 use Drupal\Core\Extension\Extension;
@@ -11,11 +9,11 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\KernelTests\KernelTestBase;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -91,7 +89,7 @@ class SecurityAdvisoriesFetcherTest extends KernelTestBase implements LoggerInte
   /**
    * Data provider for testShowAdvisories().
    */
-  public static function providerShowAdvisories(): array {
+  public function providerShowAdvisories(): array {
     return [
       'contrib:exact:non-psa' => [
         'feed_item' => [
@@ -259,7 +257,7 @@ class SecurityAdvisoriesFetcherTest extends KernelTestBase implements LoggerInte
   /**
    * Data provider for testIgnoreAdvisories().
    */
-  public static function providerIgnoreAdvisories(): array {
+  public function providerIgnoreAdvisories(): array {
     return [
       'contrib:not-exact:non-psa' => [
         'feed_item' => [
@@ -676,7 +674,7 @@ class SecurityAdvisoriesFetcherTest extends KernelTestBase implements LoggerInte
     try {
       $this->getAdvisories();
     }
-    catch (ClientExceptionInterface $exception) {
+    catch (TransferException $exception) {
       $this->assertSame("Server error: `GET https://updates.drupal.org/psa.json` resulted in a `500 Internal Server Error` response:\nHTTPS failed\n", $exception->getMessage());
       $exception_thrown = TRUE;
     }

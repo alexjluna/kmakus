@@ -52,7 +52,7 @@ class FieldConfigEditFormTest extends UnitTestCase {
   /**
    * Provides test cases with required and optional elements.
    */
-  public static function providerRequired(): \Generator {
+  public function providerRequired(): \Generator {
     yield 'required' => [
       [['#required' => TRUE]],
       TRUE,

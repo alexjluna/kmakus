@@ -184,7 +184,7 @@ trait NodeMigrateTypeTestTrait {
       foreach ($keys as $key) {
         unset($fields[$key]);
         unset($values[$key]);
-        if (str_contains($key, 'sourceid')) {
+        if (strstr($key, 'sourceid')) {
           $index_key = substr($key, -1) - 1;
           unset($indexes['source'][$index_key]);
         }

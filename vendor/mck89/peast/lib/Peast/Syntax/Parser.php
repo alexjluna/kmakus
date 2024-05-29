@@ -1609,14 +1609,9 @@ class Parser extends ParserAbstract
                 break;
             }
         }
-        //Check if it ends with a comma, then check if the comma is a trailing comma,
-        //in that case throw an error if the trailing comma feature is not enabled
         if ($hasComma &&
             !$this->features->trailingCommaFunctionCallDeclaration) {
-            $token = $this->scanner->getToken();
-            if ($token && $token->value === ")") {
-                $this->error();
-            }
+            $this->error();
         }
         return $list;
     }
@@ -2616,14 +2611,14 @@ class Parser extends ParserAbstract
             }
         }
 
-        //Handle the case where get, set and async are methods name and not the
-        //definition of a getter/setter or the start of an async function
-        if (($kind !== Node\MethodDefinition::KIND_METHOD || ($async && !$generator)) &&
+        //Handle the case where get and set are methods name and not the
+        //definition of a getter/setter
+        if ($kind !== Node\MethodDefinition::KIND_METHOD &&
             $this->scanner->consume("(")
         ) {
             $this->scanner->setState($state);
             $kind = Node\MethodDefinition::KIND_METHOD;
-            $error = $async = false;
+            $error = false;
         }
 
         if ($prop = $this->parseClassElementName()) {
@@ -2692,11 +2687,6 @@ class Parser extends ParserAbstract
                     return $this->completeNode($node);
                 }
             }
-        }
-        //Handle the case where "async" is a class field name
-        elseif ($this->features->classFields && $async && !$generator) {
-            $this->scanner->setState($state);
-            $error = $async = false;
         }
 
         if ($error) {

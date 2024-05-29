@@ -192,7 +192,7 @@ class SectionStorageManagerTest extends UnitTestCase {
   /**
    * Provides test data for ::testFindByContext().
    */
-  public static function providerTestFindByContext() {
+  public function providerTestFindByContext() {
     // Data provider values are:
     // - the result for the plugin's isApplicable() method to return.
     $data = [];

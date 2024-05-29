@@ -2,7 +2,6 @@
 
 namespace Drupal\field\Plugin\migrate\process\d6;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -11,8 +10,11 @@ use Drupal\migrate\Row;
 
 /**
  * Get the field settings.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "field_settings"
+ * )
  */
-#[MigrateProcess('field_settings')]
 class FieldSettings extends ProcessPluginBase {
 
   /**

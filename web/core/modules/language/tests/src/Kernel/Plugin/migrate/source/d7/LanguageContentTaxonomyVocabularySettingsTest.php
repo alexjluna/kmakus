@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\language\Kernel\Plugin\migrate\source\d7;
 
 use Drupal\Tests\taxonomy\Kernel\Plugin\migrate\source\d7\VocabularyTest;
@@ -23,7 +21,7 @@ class LanguageContentTaxonomyVocabularySettingsTest extends VocabularyTest {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     // Get the source data from parent.
     $tests = parent::providerSource();
 

@@ -40,7 +40,7 @@ class PathSetTranslatedTest extends MigrateProcessTestCase {
    * @return array
    *   The data.
    */
-  public static function transformDataProvider() {
+  public function transformDataProvider() {
     return [
       'non-node-path' => [
         'path' => '/non-node-path',

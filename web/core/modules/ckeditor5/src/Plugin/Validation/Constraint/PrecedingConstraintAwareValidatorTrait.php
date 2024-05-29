@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Plugin\Validation\Constraint;
 
-use Drupal\Core\Validation\ExecutionContext;
+use Drupal\Core\TypedData\Validation\ExecutionContext;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 

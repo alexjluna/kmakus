@@ -62,7 +62,7 @@ class DrupalDateTimeTest extends UnitTestCase {
    *
    * @see DrupalDateTimeTest::testDateDiff()
    */
-  public static function providerTestDateDiff() {
+  public function providerTestDateDiff() {
 
     $settings = ['langcode' => 'en'];
 
@@ -145,7 +145,7 @@ class DrupalDateTimeTest extends UnitTestCase {
    *
    * @see DateTimePlusTest::testInvalidDateDiff()
    */
-  public static function providerTestInvalidDateDiff() {
+  public function providerTestInvalidDateDiff() {
     $settings = ['langcode' => 'en'];
     $utc_tz = new \DateTimeZone('UTC');
     return [

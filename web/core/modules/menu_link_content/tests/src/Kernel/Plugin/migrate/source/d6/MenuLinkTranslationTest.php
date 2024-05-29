@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\menu_link_content\Kernel\Plugin\migrate\source\d6;
 
 use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
-// cspell:ignore mlid objectid objectindex plid
+// cspell:ignore objectid objectindex
 
 /**
  * Tests menu link translation source plugin.
@@ -24,7 +22,7 @@ class MenuLinkTranslationTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     $test = [];
     $test[0]['source_data']['menu_links'] = [
       [
@@ -205,7 +203,7 @@ class MenuLinkTranslationTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $test[0]['expected_data'] = [
+    $test[0]['expected_results'] = [
       [
         'menu_name' => 'menu-test-menu',
         'mlid' => 139,

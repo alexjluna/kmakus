@@ -64,7 +64,7 @@ class ClientFactoryTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestCreateFromOptions() {
+  public function providerTestCreateFromOptions() {
     return [
       [[], [], ['verify' => TRUE, 'timeout' => 30]],
       [['timeout' => 40], [], ['verify' => TRUE, 'timeout' => 40]],

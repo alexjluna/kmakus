@@ -59,14 +59,6 @@ interface RendererInterface {
    * @see \Drupal\Core\Render\RendererInterface::renderRoot()
    * @see \Drupal\Core\Render\RendererInterface::render()
    */
-  public function renderInIsolation(&$elements);
-
-  /**
-   * @deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use
-   *   \Drupal\Core\Render\RendererInterface::renderInIsolation() instead.
-   *
-   * @see https://www.drupal.org/node/3407994
-   */
   public function renderPlain(&$elements);
 
   /**
@@ -328,7 +320,7 @@ interface RendererInterface {
    *
    * @throws \LogicException
    *   When called outside of a render context (i.e. outside of a renderRoot(),
-   *   renderInIsolation() or executeInRenderContext() call).
+   *   renderPlain() or executeInRenderContext() call).
    * @throws \Exception
    *   If a #pre_render callback throws an exception, it is caught to mark the
    *   renderer as no longer being in a root render call, if any. Then the
@@ -358,7 +350,7 @@ interface RendererInterface {
    * Executes a callable within a render context.
    *
    * Only for very advanced use cases. Prefer using ::renderRoot() and
-   * ::renderInIsolation() instead.
+   * ::renderPlain() instead.
    *
    * All rendering must happen within a render context. Within a render context,
    * all bubbleable metadata is bubbled and hence tracked. Outside of a render

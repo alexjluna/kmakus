@@ -2,7 +2,6 @@
 
 namespace Drupal\Core\Template;
 
-use Twig\Attribute\YieldReady;
 use Twig\Compiler;
 use Twig\Error\SyntaxError;
 use Twig\Node\CheckToStringNode;
@@ -26,7 +25,6 @@ use Twig\Node\PrintNode;
  * @see https://twig-extensions.readthedocs.io/en/latest/i18n.html
  * @see https://github.com/fabpot/Twig-extensions
  */
-#[YieldReady]
 class TwigNodeTrans extends Node {
 
   /**
@@ -61,7 +59,7 @@ class TwigNodeTrans extends Node {
     }
 
     // Start writing with the function to be called.
-    $compiler->write('yield ' . (empty($plural) ? 't' : '\Drupal::translation()->formatPlural') . '(');
+    $compiler->write('echo ' . (empty($plural) ? 't' : '\Drupal::translation()->formatPlural') . '(');
 
     // Move the count to the beginning of the parameters list.
     if (!empty($plural)) {

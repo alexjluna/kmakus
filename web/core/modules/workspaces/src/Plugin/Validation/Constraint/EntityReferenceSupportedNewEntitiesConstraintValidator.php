@@ -4,7 +4,6 @@ namespace Drupal\workspaces\Plugin\Validation\Constraint;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\workspaces\WorkspaceInformationInterface;
 use Drupal\workspaces\WorkspaceManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraint;
@@ -30,19 +29,11 @@ class EntityReferenceSupportedNewEntitiesConstraintValidator extends ConstraintV
   protected $entityTypeManager;
 
   /**
-   * The workspace information service.
-   *
-   * @var \Drupal\workspaces\WorkspaceInformationInterface
-   */
-  protected $workspaceInfo;
-
-  /**
    * Creates a new EntityReferenceSupportedNewEntitiesConstraintValidator instance.
    */
-  public function __construct(WorkspaceManagerInterface $workspaceManager, EntityTypeManagerInterface $entityTypeManager, WorkspaceInformationInterface $workspace_information) {
+  public function __construct(WorkspaceManagerInterface $workspaceManager, EntityTypeManagerInterface $entityTypeManager) {
     $this->workspaceManager = $workspaceManager;
     $this->entityTypeManager = $entityTypeManager;
-    $this->workspaceInfo = $workspace_information;
   }
 
   /**
@@ -51,8 +42,7 @@ class EntityReferenceSupportedNewEntitiesConstraintValidator extends ConstraintV
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('workspaces.manager'),
-      $container->get('entity_type.manager'),
-      $container->get('workspaces.information')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -68,7 +58,7 @@ class EntityReferenceSupportedNewEntitiesConstraintValidator extends ConstraintV
     $target_entity_type_id = $value->getFieldDefinition()->getFieldStorageDefinition()->getSetting('target_type');
     $target_entity_type = $this->entityTypeManager->getDefinition($target_entity_type_id);
 
-    if ($value->hasNewEntity() && !$this->workspaceInfo->isEntityTypeSupported($target_entity_type)) {
+    if ($value->hasNewEntity() && !$this->workspaceManager->isEntityTypeSupported($target_entity_type)) {
       $this->context->addViolation($constraint->message, ['%collection_label' => $target_entity_type->getCollectionLabel()]);
     }
   }

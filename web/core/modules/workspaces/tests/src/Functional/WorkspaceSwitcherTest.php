@@ -1,11 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\workspaces\Functional;
 
-use Drupal\Core\Url;
-use Drupal\dynamic_page_cache\EventSubscriber\DynamicPageCacheSubscriber;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
 
@@ -22,12 +18,7 @@ class WorkspaceSwitcherTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = [
-    'block',
-    'dynamic_page_cache',
-    'toolbar',
-    'workspaces',
-  ];
+  protected static $modules = ['block', 'workspaces'];
 
   /**
    * {@inheritdoc}
@@ -57,13 +48,10 @@ class WorkspaceSwitcherTest extends BrowserTestBase {
    * Tests switching workspace via the switcher block and admin page.
    */
   public function testSwitchingWorkspaces() {
-    $this->createAndActivateWorkspaceThroughUi('Vultures', 'vultures');
-    $gravity = $this->createWorkspaceThroughUi('Gravity', 'gravity');
+    $vultures = $this->createWorkspaceThroughUi('Vultures', 'vultures');
+    $this->switchToWorkspace($vultures);
 
-    // Confirm the block shows on the front page.
-    $this->drupalGet('<front>');
-    $page = $this->getSession()->getPage();
-    $this->assertTrue($page->hasContent('Workspace switcher'));
+    $gravity = $this->createWorkspaceThroughUi('Gravity', 'gravity');
 
     $this->drupalGet('/admin/config/workflow/workspaces/manage/' . $gravity->id() . '/activate');
 
@@ -98,22 +86,6 @@ class WorkspaceSwitcherTest extends BrowserTestBase {
     // Check that WorkspaceCacheContext provides the cache context used to
     // support its functionality.
     $this->assertCacheContext('session');
-  }
-
-  /**
-   * Tests that the toolbar workspace switcher doesn't disable the page cache.
-   */
-  public function testToolbarSwitcherDynamicPageCache() {
-    $this->drupalLogin($this->drupalCreateUser([
-      'access toolbar',
-      'view any workspace',
-    ]));
-    // Front-page is visited right after login.
-    $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'MISS');
-    // Reload the page, it should be cached now.
-    $this->drupalGet(Url::fromRoute('<front>'));
-    $this->assertSession()->elementExists('css', '.workspaces-toolbar-tab');
-    $this->assertSession()->responseHeaderEquals(DynamicPageCacheSubscriber::HEADER, 'HIT');
   }
 
 }

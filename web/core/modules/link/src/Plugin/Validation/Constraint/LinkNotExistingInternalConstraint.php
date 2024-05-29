@@ -2,18 +2,17 @@
 
 namespace Drupal\link\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Defines a protocol validation constraint for links to broken internal URLs.
+ *
+ * @Constraint(
+ *   id = "LinkNotExistingInternal",
+ *   label = @Translation("No broken internal links", context = "Validation"),
+ * )
  */
-#[Constraint(
-  id: 'LinkNotExistingInternal',
-  label: new TranslatableMarkup('No broken internal links', [], ['context' => 'Validation'])
-)]
-class LinkNotExistingInternalConstraint extends SymfonyConstraint {
+class LinkNotExistingInternalConstraint extends Constraint {
 
   public $message = "The path '@uri' is invalid.";
 

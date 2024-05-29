@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Kernel\Normalizer;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -264,7 +262,7 @@ class RelationshipNormalizerTest extends JsonapiKernelTestBase {
   /**
    * Data provider for testNormalize.
    */
-  public static function normalizeProvider() {
+  public function normalizeProvider() {
     return [
       'single cardinality' => [
         ['user1'],

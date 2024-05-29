@@ -153,7 +153,7 @@ class DateTimeIso8601NormalizerTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestNormalize() {
+  public function providerTestNormalize() {
     return [
       // @see \Drupal\datetime\Plugin\Field\FieldType\DateTimeItem::DATETIME_TYPE_DATE
       'datetime field, configured to store only date: must be handled by DateTimeIso8601Normalizer' => [
@@ -197,7 +197,7 @@ class DateTimeIso8601NormalizerTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestDenormalizeValidFormats() {
+  public function providerTestDenormalizeValidFormats() {
     $data = [];
     $data['just a date'] = ['date-only', '2016-11-06', '2016-11-06'];
 

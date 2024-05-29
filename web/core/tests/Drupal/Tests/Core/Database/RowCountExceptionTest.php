@@ -24,7 +24,7 @@ class RowCountExceptionTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestExceptionMessage() {
+  public function providerTestExceptionMessage() {
     return [
       [static::DEFAULT_EXCEPTION_MESSAGE, ''],
       ['test', 'test'],

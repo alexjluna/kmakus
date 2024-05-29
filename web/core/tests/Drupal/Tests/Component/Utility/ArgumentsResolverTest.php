@@ -33,7 +33,7 @@ class ArgumentsResolverTest extends TestCase {
   /**
    * Provides test data to testGetArgument().
    */
-  public static function providerTestGetArgument() {
+  public function providerTestGetArgument() {
     $data = [];
 
     // Test an optional parameter with no provided value.
@@ -57,7 +57,7 @@ class ArgumentsResolverTest extends TestCase {
     ];
 
     // Test with a raw value that overrides the provided upcast value, since
-    // it is not type hinted.
+    // it is not typehinted.
     $scalars = ['foo' => 'baz'];
     $objects = ['foo' => new \stdClass()];
     $data[] = [
@@ -124,11 +124,11 @@ class ArgumentsResolverTest extends TestCase {
   }
 
   /**
-   * Tests getArgument() with a wildcard parameter with no type hint.
+   * Tests getArgument() with a wildcard parameter with no typehint.
    *
-   * Without the type hint, the wildcard object will not be passed to the callable.
+   * Without the typehint, the wildcard object will not be passed to the callable.
    */
-  public function testGetWildcardArgumentNoTypeHint() {
+  public function testGetWildcardArgumentNoTypehint() {
     $a = $this->getMockBuilder('\Drupal\Tests\Component\Utility\Test1Interface')->getMock();
     $wildcards = [$a];
     $resolver = new ArgumentsResolver([], [], $wildcards);
@@ -140,12 +140,12 @@ class ArgumentsResolverTest extends TestCase {
   }
 
   /**
-   * Tests getArgument() with a named parameter with no type hint and a value.
+   * Tests getArgument() with a named parameter with no typehint and a value.
    *
-   * Without the type hint, passing a value to a named parameter will still
+   * Without the typehint, passing a value to a named parameter will still
    * receive the provided value.
    */
-  public function testGetArgumentRouteNoTypeHintAndValue() {
+  public function testGetArgumentRouteNoTypehintAndValue() {
     $scalars = ['route' => 'foo'];
     $resolver = new ArgumentsResolver($scalars, [], []);
 
@@ -183,7 +183,7 @@ class ArgumentsResolverTest extends TestCase {
   /**
    * Provides test data to testHandleUnresolvedArgument().
    */
-  public static function providerTestHandleUnresolvedArgument() {
+  public function providerTestHandleUnresolvedArgument() {
     $data = [];
     $data[] = [function ($foo) {}];
     $data[] = [[new TestClass(), 'access']];

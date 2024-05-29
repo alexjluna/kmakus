@@ -95,7 +95,7 @@ class EntityTypeTest extends UnitTestCase {
   /**
    * Provides test data for testGet.
    */
-  public static function providerTestGet() {
+  public function providerTestGet() {
     return [
       [[], 'provider', NULL],
       [['provider' => ''], 'provider', ''],
@@ -109,7 +109,7 @@ class EntityTypeTest extends UnitTestCase {
   /**
    * Provides test data for testSet.
    */
-  public static function providerTestSet() {
+  public function providerTestSet() {
     return [
       ['provider', NULL],
       ['provider', ''],
@@ -123,7 +123,7 @@ class EntityTypeTest extends UnitTestCase {
   /**
    * Provides test data.
    */
-  public static function providerTestGetKeys() {
+  public function providerTestGetKeys() {
     return [
       [[], ['revision' => '', 'bundle' => '', 'langcode' => '']],
       [['id' => 'id'], ['id' => 'id', 'revision' => '', 'bundle' => '', 'langcode' => '']],
@@ -433,7 +433,7 @@ class EntityTypeTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetBundleLabel().
    */
-  public static function providerTestGetBundleLabel() {
+  public function providerTestGetBundleLabel() {
     return [
       [['label' => 'Entity Label Foo'], 'Entity Label Foo bundle'],
       [['bundle_label' => 'Bundle Label Bar'], 'Bundle Label Bar'],

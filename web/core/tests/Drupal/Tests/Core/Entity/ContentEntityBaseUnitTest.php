@@ -6,6 +6,7 @@ namespace Drupal\Tests\Core\Entity;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -16,7 +17,6 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\TypedData\TypedDataManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Core\Language\Language;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -36,13 +36,17 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
 
   /**
    * The entity under test.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityBase|\PHPUnit\Framework\MockObject\MockObject
    */
-  protected ContentEntityBaseMockableClass&MockObject $entity;
+  protected $entity;
 
   /**
    * An entity with no defined language to test.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityBase|\PHPUnit\Framework\MockObject\MockObject
    */
-  protected ContentEntityBaseMockableClass&MockObject $entityUnd;
+  protected $entityUnd;
 
   /**
    * The entity type used for testing.
@@ -212,15 +216,9 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
       ->with($this->entityTypeId, $this->bundle)
       ->willReturn($this->fieldDefinitions);
 
-    $this->entity = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
-      ->setConstructorArgs([$values, $this->entityTypeId, $this->bundle])
-      ->onlyMethods(['isNew'])
-      ->getMock();
+    $this->entity = $this->getMockForAbstractClass(ContentEntityBase::class, [$values, $this->entityTypeId, $this->bundle], '', TRUE, TRUE, TRUE, ['isNew']);
     $values['defaultLangcode'] = [LanguageInterface::LANGCODE_DEFAULT => LanguageInterface::LANGCODE_NOT_SPECIFIED];
-    $this->entityUnd = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
-      ->setConstructorArgs([$values, $this->entityTypeId, $this->bundle])
-      ->onlyMethods([])
-      ->getMock();
+    $this->entityUnd = $this->getMockForAbstractClass(ContentEntityBase::class, [$values, $this->entityTypeId, $this->bundle]);
   }
 
   /**
@@ -362,7 +360,7 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
    *   - A bool whether to provide a bundle-specific definition.
    *   - A bool whether to provide an entity type-specific definition.
    */
-  public static function providerTestTypedData(): array {
+  public function providerTestTypedData(): array {
     return [
       'Entity data definition derivative with entity type and bundle' => [
         TRUE,
@@ -412,10 +410,11 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
     \Drupal::setContainer($container);
 
     // Create a mock entity used to retrieve typed data.
-    $entity = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
-      ->setConstructorArgs([[], $this->entityTypeId, $this->bundle])
-      ->onlyMethods(['isNew'])
-      ->getMock();
+    $entity = $this->getMockForAbstractClass(ContentEntityBase::class, [
+      [],
+      $this->entityTypeId,
+      $this->bundle,
+    ], '', TRUE, TRUE, TRUE, ['isNew']);
 
     // Assert that the returned data type is an instance of EntityAdapter.
     $this->assertInstanceOf($expected, $entity->getTypedData());
@@ -535,7 +534,7 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
    *   - Language code for $activeLanguage.
    *   - Fields array for $fields.
    */
-  public static function providerGet() {
+  public function providerGet() {
     return [
       // Populated fields array.
       ['result', 'field_name', 'langcode', ['field_name' => ['langcode' => 'result']]],
@@ -552,10 +551,10 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
    */
   public function testGet($expected, $field_name, $active_langcode, $fields) {
     // Mock ContentEntityBase.
-    $mock_base = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $mock_base = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
       ->onlyMethods(['getTranslatedField'])
-      ->getMock();
+      ->getMockForAbstractClass();
 
     // Set up expectations for getTranslatedField() method. In get(),
     // getTranslatedField() is only called if the field name and language code
@@ -597,7 +596,7 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
    *     Drupal\Core\Field\FieldDefinitionInterface object will be mocked for
    *     each name.
    */
-  public static function providerGetFields() {
+  public function providerGetFields() {
     return [
       [[], FALSE, FALSE, []],
       [['field' => 'field', 'field2' => 'field2'], TRUE, FALSE, ['field', 'field2']],
@@ -612,10 +611,10 @@ class ContentEntityBaseUnitTest extends UnitTestCase {
    */
   public function testGetFields($expected, $include_computed, $is_computed, $field_definitions) {
     // Mock ContentEntityBase.
-    $mock_base = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $mock_base = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
       ->onlyMethods(['getFieldDefinitions', 'get'])
-      ->getMock();
+      ->getMockForAbstractClass();
 
     // Mock field definition objects for each element of $field_definitions.
     $mocked_field_definitions = [];

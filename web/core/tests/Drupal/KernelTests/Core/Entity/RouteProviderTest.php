@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\entity_test\Entity\EntityTestAdminRoutes;
@@ -33,11 +31,7 @@ class RouteProviderTest extends KernelTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    $permissions = [
-      'administer entity_test content',
-      'view test entity',
-    ];
-    $this->setUpCurrentUser(['uid' => 2], $permissions);
+    $this->setUpCurrentUser(['uid' => 1]);
 
     $this->installEntitySchema('entity_test_mul');
     $this->installEntitySchema('entity_test_admin_routes');

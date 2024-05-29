@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal\Kernel\d6;
 
 use Drupal\field\Plugin\migrate\source\d6\FieldInstance;
@@ -138,7 +136,7 @@ class FieldDiscoveryTest extends MigrateDrupal6TestBase {
    * @return array
    *   The data.
    */
-  public static function addAllFieldProcessesAltersData() {
+  public function addAllFieldProcessesAltersData() {
     return [
       'Field Formatter' => [
         'field_plugin_method' => 'alterFieldFormatterMigration',

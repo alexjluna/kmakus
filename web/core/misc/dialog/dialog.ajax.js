@@ -270,9 +270,7 @@
    * @param {object} [settings]
    *   Dialog settings.
    */
-  window.addEventListener('dialog:aftercreate', (event) => {
-    const $element = $(event.target);
-    const dialog = event.dialog;
+  $(window).on('dialog:aftercreate', (e, dialog, $element, settings) => {
     $element.on('click.dialog', '.dialog-cancel', (e) => {
       dialog.close('cancel');
       e.preventDefault();
@@ -290,31 +288,7 @@
    * @param {jQuery} $element
    *   jQuery collection of the dialog element.
    */
-  window.addEventListener('dialog:beforeclose', (e) => {
-    const $element = $(e.target);
+  $(window).on('dialog:beforeclose', (e, dialog, $element) => {
     $element.off('.dialog');
   });
-
-  /**
-   * Ajax command to open URL in a modal dialog.
-   *
-   * @param {Drupal.Ajax} [ajax]
-   *   An Ajax object.
-   * @param {object} response
-   *   The Ajax response.
-   */
-  Drupal.AjaxCommands.prototype.openModalDialogWithUrl = function (
-    ajax,
-    response,
-  ) {
-    const dialogOptions = response.dialogOptions || {};
-    const elementSettings = {
-      progress: { type: 'throbber' },
-      dialogType: 'modal',
-      dialog: dialogOptions,
-      url: response.url,
-      httpMethod: 'GET',
-    };
-    Drupal.ajax(elementSettings).execute();
-  };
 })(jQuery, Drupal, window.tabbable);

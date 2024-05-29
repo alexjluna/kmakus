@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Kernel;
 
 use Drupal\KernelTests\ConfigFormTestBase;
@@ -24,7 +22,6 @@ class UserAdminSettingsFormTest extends ConfigFormTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installConfig(['user']);
 
     $this->form = AccountSettingsForm::create($this->container);
     $this->values = [

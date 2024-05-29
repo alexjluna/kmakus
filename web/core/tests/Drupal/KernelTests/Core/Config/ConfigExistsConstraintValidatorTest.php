@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Config;
 
 use Drupal\Core\TypedData\DataDefinition;
@@ -25,23 +23,20 @@ class ConfigExistsConstraintValidatorTest extends KernelTestBase {
 
   /**
    * Tests the ConfigExists constraint validator.
-   *
-   * @testWith [{}, "system.site", "system.site"]
-   *           [{"prefix": "system."}, "site", "system.site"]
    */
-  public function testValidation(array $constraint_options, string $value, string $expected_config_name): void {
+  public function testValidation(): void {
     // Create a data definition that specifies the value must be a string with
     // the name of an existing piece of config.
     $definition = DataDefinition::create('string')
-      ->addConstraint('ConfigExists', $constraint_options);
+      ->addConstraint('ConfigExists');
 
     /** @var \Drupal\Core\TypedData\TypedDataManagerInterface $typed_data */
     $typed_data = $this->container->get('typed_data_manager');
-    $data = $typed_data->create($definition, $value);
+    $data = $typed_data->create($definition, 'system.site');
 
     $violations = $data->validate();
     $this->assertCount(1, $violations);
-    $this->assertSame("The '$expected_config_name' config does not exist.", (string) $violations->get(0)->getMessage());
+    $this->assertSame("The 'system.site' config does not exist.", (string) $violations->get(0)->getMessage());
 
     $this->installConfig('system');
     $this->assertCount(0, $data->validate());

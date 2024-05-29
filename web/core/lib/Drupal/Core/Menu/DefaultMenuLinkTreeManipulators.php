@@ -212,14 +212,22 @@ class DefaultMenuLinkTreeManipulators {
    *   The access result.
    */
   protected function menuLinkCheckAccess(MenuLinkInterface $instance) {
-    $url = $instance->getUrlObject();
-
-    if ($url->isRouted()) {
-      return $this->accessManager->checkNamedRoute($url->getRouteName(), $url->getRouteParameters(), $this->account, TRUE);
+    $access_result = NULL;
+    if ($this->account->hasPermission('link to any page')) {
+      $access_result = AccessResult::allowed();
     }
+    else {
+      $url = $instance->getUrlObject();
 
-    // Must be an external link.
-    return AccessResult::allowed();
+      // When no route name is specified, this must be an external link.
+      if (!$url->isRouted()) {
+        $access_result = AccessResult::allowed();
+      }
+      else {
+        $access_result = $this->accessManager->checkNamedRoute($url->getRouteName(), $url->getRouteParameters(), $this->account, TRUE);
+      }
+    }
+    return $access_result->cachePerPermissions();
   }
 
   /**

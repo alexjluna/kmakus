@@ -2,7 +2,6 @@
 
 namespace Drupal\comment\Plugin\views\field;
 
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Plugin\views\field\EntityField;
 use Drupal\views\ResultRow;
 
@@ -10,8 +9,9 @@ use Drupal\views\ResultRow;
  * Field handler to display the depth of a comment.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("comment_depth")
  */
-#[ViewsField("comment_depth")]
 class Depth extends EntityField {
 
   /**

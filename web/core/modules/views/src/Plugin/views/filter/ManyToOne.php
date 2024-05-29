@@ -3,7 +3,6 @@
 namespace Drupal\views\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ManyToOneHelper;
@@ -18,8 +17,9 @@ use Drupal\views\ManyToOneHelper;
  * to provide something that isn't just a select list.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("many_to_one")
  */
-#[ViewsFilter("many_to_one")]
 class ManyToOne extends InOperator {
 
   /**
@@ -55,9 +55,6 @@ class ManyToOne extends InOperator {
     return $options;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function operators() {
     $operators = [
       'or' => [

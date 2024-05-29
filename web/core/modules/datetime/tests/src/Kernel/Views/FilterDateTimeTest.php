@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\datetime\Kernel\Views;
 
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
@@ -40,7 +38,7 @@ class FilterDateTimeTest extends DateTimeHandlerTestBase {
   protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
-    static::$date = \Drupal::time()->getRequestTime() + 86400;
+    static::$date = REQUEST_TIME + 86400;
 
     // Set the timezone.
     date_default_timezone_set(static::$timezone);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests\Entity;
 
 use Drupal\Core\Entity\Controller\VersionHistoryController;

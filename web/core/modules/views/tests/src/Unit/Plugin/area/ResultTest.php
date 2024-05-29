@@ -9,7 +9,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\views\Entity\View;
 use Drupal\views\Plugin\views\pager\PagerPluginBase;
-use Drupal\views\Plugin\ViewsPluginManager;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\area\Result;
 use Drupal\views\ViewsData;
@@ -48,8 +47,7 @@ class ResultTest extends UnitTestCase {
     $user = $this->prophesize(AccountInterface::class)->reveal();
     $views_data = $this->prophesize(ViewsData::class)->reveal();
     $route_provider = $this->prophesize(RouteProviderInterface::class)->reveal();
-    $display_plugin_manager = $this->prophesize(ViewsPluginManager::class)->reveal();
-    $this->view = new ViewExecutable($storage->reveal(), $user, $views_data, $route_provider, $display_plugin_manager);
+    $this->view = new ViewExecutable($storage->reveal(), $user, $views_data, $route_provider);
 
     $this->resultHandler = new Result([], 'result', []);
     $this->resultHandler->view = $this->view;
@@ -94,7 +92,7 @@ class ResultTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestResultArea() {
+  public function providerTestResultArea() {
     return [
       ['@label', 'ResultTest'],
       ['@start', '1'],

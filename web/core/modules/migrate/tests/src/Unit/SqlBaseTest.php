@@ -85,7 +85,7 @@ class SqlBaseTest extends UnitTestCase {
    * @return array
    *   An array of data per test run.
    */
-  public static function sqlBaseTestProvider() {
+  public function sqlBaseTestProvider() {
     return [
       // Source ids are empty so mapJoinable() is false.
       [

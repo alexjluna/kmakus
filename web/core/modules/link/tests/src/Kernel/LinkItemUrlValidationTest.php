@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\link\Kernel;
 
 use Drupal\Tests\field\Kernel\FieldKernelTestBase;

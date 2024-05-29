@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_translation\Functional;
 
 use Drupal\Tests\content_translation\Traits\ContentTranslationTestTrait;
@@ -72,7 +70,7 @@ class ContentTranslationLanguageChangeTest extends NodeTestBase {
 
     $this->rebuildContainer();
 
-    $this->createImageField('field_image_field', 'node', 'article');
+    $this->createImageField('field_image_field', 'article');
   }
 
   /**

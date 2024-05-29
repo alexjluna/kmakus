@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\file\Kernel;
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\File\Exception\FileExistsException;
 use Drupal\Core\File\Exception\InvalidStreamWrapperException;
-use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileRepository;
 
@@ -47,7 +45,7 @@ class MoveTest extends FileManagedUnitTestBase {
 
     // Clone the object so we don't have to worry about the function changing
     // our reference copy.
-    $result = $this->fileRepository->move(clone $source, $desired_filepath, FileExists::Error);
+    $result = $this->fileRepository->move(clone $source, $desired_filepath, FileSystemInterface::EXISTS_ERROR);
 
     // Check the return status and that the contents changed.
     $this->assertNotFalse($result, 'File moved successfully.');
@@ -118,7 +116,7 @@ class MoveTest extends FileManagedUnitTestBase {
 
     // Clone the object so we don't have to worry about the function changing
     // our reference copy.
-    $result = $this->fileRepository->move(clone $source, $target->getFileUri(), FileExists::Replace);
+    $result = $this->fileRepository->move(clone $source, $target->getFileUri(), FileSystemInterface::EXISTS_REPLACE);
 
     // Look at the results.
     $this->assertEquals($contents, file_get_contents($result->getFileUri()), 'Contents of file were overwritten.');
@@ -151,7 +149,7 @@ class MoveTest extends FileManagedUnitTestBase {
     // Copy the file over itself. Clone the object so we don't have to worry
     // about the function changing our reference copy.
     try {
-      $this->fileRepository->move(clone $source, $source->getFileUri(), FileExists::Error);
+      $this->fileRepository->move(clone $source, $source->getFileUri(), FileSystemInterface::EXISTS_ERROR);
       $this->fail('expected FileExistsException');
     }
     catch (FileExistsException $e) {
@@ -182,7 +180,7 @@ class MoveTest extends FileManagedUnitTestBase {
     // Clone the object so we don't have to worry about the function changing
     // our reference copy.
     try {
-      $this->fileRepository->move(clone $source, $target->getFileUri(), FileExists::Error);
+      $this->fileRepository->move(clone $source, $target->getFileUri(), FileSystemInterface::EXISTS_ERROR);
       $this->fail('expected FileExistsException');
     }
     // FileExistsException is a subclass of FileException.
@@ -238,7 +236,7 @@ class MoveTest extends FileManagedUnitTestBase {
     $this->expectException(EntityStorageException::class);
     $source = $this->createFile();
     $target = $this->createFile();
-    $fileRepository->move($source, $target->getFileUri(), FileExists::Replace);
+    $fileRepository->move($source, $target->getFileUri(), FileSystemInterface::EXISTS_REPLACE);
 
   }
 

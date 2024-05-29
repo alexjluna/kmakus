@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\forum\Kernel\Migrate\d7;
 
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
@@ -10,7 +8,6 @@ use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
  * Tests migration of Forum's variables to configuration.
  *
  * @group forum
- * @group legacy
  */
 class MigrateForumSettingsTest extends MigrateDrupal7TestBase {
 

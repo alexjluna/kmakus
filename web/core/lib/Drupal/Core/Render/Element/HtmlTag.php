@@ -4,7 +4,6 @@ namespace Drupal\Core\Render\Element;
 
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Utility\Html as HtmlUtility;
-use Drupal\Core\Render\Attribute\RenderElement;
 use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Template\Attribute;
@@ -29,9 +28,10 @@ use Drupal\Core\Template\Attribute;
  *   '#value' => $this->t('Hello World'),
  * ];
  * @endcode
+ *
+ * @RenderElement("html_tag")
  */
-#[RenderElement('html_tag')]
-class HtmlTag extends RenderElementBase {
+class HtmlTag extends RenderElement {
 
   /**
    * Void elements do not contain values or closing tags.

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Database\Database;
@@ -13,7 +11,6 @@ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
  * Create a node and test saving it.
  *
  * @group node
- * @group #slow
  */
 class NodeCreationTest extends NodeTestBase {
 

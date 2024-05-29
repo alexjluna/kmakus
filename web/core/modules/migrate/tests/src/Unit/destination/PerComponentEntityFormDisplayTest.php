@@ -36,7 +36,7 @@ class PerComponentEntityFormDisplayTest extends MigrateTestCase {
     $entity->expects($this->once())
       ->method('setComponent')
       ->with('field_name_test', ['test setting'])
-      ->willReturnSelf();
+      ->will($this->returnSelf());
     $entity->expects($this->once())
       ->method('save')
       ->with();

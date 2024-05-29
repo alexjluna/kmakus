@@ -4,20 +4,19 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Styles can only be specified for HTML5 tags and extra classes.
  *
+ * @Constraint(
+ *   id = "StyleSensibleElement",
+ *   label = @Translation("Styles can only be specified for already supported tags.", context = "Validation"),
+ * )
+ *
  * @internal
  */
-#[Constraint(
-  id: 'StyleSensibleElement',
-  label: new TranslatableMarkup('Styles can only be specified for already supported tags.', [], ['context' => 'Validation'])
-)]
-class StyleSensibleElementConstraint extends SymfonyConstraint {
+class StyleSensibleElementConstraint extends Constraint {
 
   /**
    * When a style is defined for a non-HTML5 tag.

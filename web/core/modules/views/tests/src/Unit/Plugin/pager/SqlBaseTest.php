@@ -74,7 +74,7 @@ class SqlBaseTest extends UnitTestCase {
     ]);
     $this->view->expects($this->any())
       ->method('getRequest')
-      ->willReturn($request);
+      ->will($this->returnValue($request));
 
     $options = [];
     $this->pager->init($this->view, $this->display, $options);

@@ -8,9 +8,8 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
-use Drupal\Core\Render\Element\FormElementBase;
+use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
@@ -20,9 +19,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provides an AJAX/progress aware widget for uploading and saving a file.
+ *
+ * @FormElement("managed_file")
  */
-#[FormElement('managed_file')]
-class ManagedFile extends FormElementBase {
+class ManagedFile extends FormElement {
 
   /**
    * {@inheritdoc}
@@ -276,17 +276,19 @@ class ManagedFile extends FormElementBase {
     ];
 
     // Add progress bar support to the upload if possible.
-    if ($element['#progress_indicator'] == 'bar' && extension_loaded('uploadprogress')) {
+    if ($element['#progress_indicator'] == 'bar' && $implementation = file_progress_implementation()) {
       $upload_progress_key = mt_rand();
 
-      $element['UPLOAD_IDENTIFIER'] = [
-        '#type' => 'hidden',
-        '#value' => $upload_progress_key,
-        '#attributes' => ['class' => ['file-progress']],
-        // Uploadprogress extension requires this field to be at the top of
-        // the form.
-        '#weight' => -20,
-      ];
+      if ($implementation == 'uploadprogress') {
+        $element['UPLOAD_IDENTIFIER'] = [
+          '#type' => 'hidden',
+          '#value' => $upload_progress_key,
+          '#attributes' => ['class' => ['file-progress']],
+          // Uploadprogress extension requires this field to be at the top of
+          // the form.
+          '#weight' => -20,
+        ];
+      }
 
       // Add the upload progress callback.
       $element['upload_button']['#ajax']['progress']['url'] = Url::fromRoute('file.ajax_progress', ['key' => $upload_progress_key]);
@@ -337,7 +339,7 @@ class ManagedFile extends FormElementBase {
         if ($element['#multiple']) {
           $element['file_' . $delta]['selected'] = [
             '#type' => 'checkbox',
-            '#title' => \Drupal::service('renderer')->renderInIsolation($file_link),
+            '#title' => \Drupal::service('renderer')->renderPlain($file_link),
           ];
         }
         else {

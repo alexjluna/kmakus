@@ -7,7 +7,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
@@ -18,8 +17,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Migrate destination for search page.
+ *
+ * @MigrateDestination(
+ *   id = "entity:search_page"
+ * )
  */
-#[MigrateDestination('entity:search_page')]
 class EntitySearchPage extends EntityConfigBase {
 
   /**

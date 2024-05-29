@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\update\Functional;
 
 /**
@@ -61,12 +59,12 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
    *
    * These test cases rely on the following fixtures containing the following
    * releases:
-   * - drupal.sec.8.2.0_3.0-rc1.xml
+   * - drupal.sec.2.0_3.0-rc1.xml
    *   - 8.2.0
    *   - 8.3.0-rc1
-   * - drupal.sec.8.2.0.xml
+   * - drupal.sec.2.0.xml
    *   - 8.2.0
-   * - drupal.sec.8.2.0_9.0.0.xml
+   * - drupal.sec.2.0_9.0.0.xml
    *   - 8.2.0
    *   - 9.0.0
    * - drupal.sec.9.5.0.xml
@@ -76,7 +74,7 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
    *   - 10.4.0
    *   - 10.5.0
    */
-  public static function securityCoverageMessageProvider() {
+  public function securityCoverageMessageProvider() {
     $release_coverage_message = 'Visit the release cycle overview for more information on supported releases.';
     $coverage_ended_message = 'Coverage has ended';
     $update_asap_message = 'Update to a supported minor as soon as possible to continue receiving security updates.';
@@ -84,35 +82,35 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
     $test_cases = [
       '8.0.0, unsupported' => [
         'installed_version' => '8.0.0',
-        'fixture' => 'sec.8.2.0_8.3.0-rc1',
+        'fixture' => 'sec.2.0_3.0-rc1',
         'requirements_section_heading' => 'Errors found',
         'message' => "$coverage_ended_message $update_asap_message $release_coverage_message",
         'mock_date' => '',
       ],
       '8.1.0, supported with 3rc' => [
         'installed_version' => '8.1.0',
-        'fixture' => 'sec.8.2.0_8.3.0-rc1',
+        'fixture' => 'sec.2.0_3.0-rc1',
         'requirements_section_heading' => 'Warnings found',
         'message' => "Covered until 8.3.0 Update to 8.2 or higher soon to continue receiving security updates. $release_coverage_message",
         'mock_date' => '',
       ],
       '8.1.0, supported' => [
         'installed_version' => '8.1.0',
-        'fixture' => 'sec.8.2.0',
+        'fixture' => 'sec.2.0',
         'requirements_section_heading' => 'Warnings found',
         'message' => "Covered until 8.3.0 Update to 8.2 or higher soon to continue receiving security updates. $release_coverage_message",
         'mock_date' => '',
       ],
       '8.2.0, supported with 3rc' => [
         'installed_version' => '8.2.0',
-        'fixture' => 'sec.8.2.0_8.3.0-rc1',
+        'fixture' => 'sec.2.0_3.0-rc1',
         'requirements_section_heading' => 'Checked',
         'message' => "Covered until 8.4.0 $release_coverage_message",
         'mock_date' => '',
       ],
       '8.2.0, supported' => [
         'installed_version' => '8.2.0',
-        'fixture' => 'sec.8.2.0',
+        'fixture' => 'sec.2.0',
         'requirements_section_heading' => 'Checked',
         'message' => "Covered until 8.4.0 $release_coverage_message",
         'mock_date' => '',
@@ -120,14 +118,14 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
       // Ensure we don't show messages for pre-release or dev versions.
       '8.2.0-beta2, no message' => [
         'installed_version' => '8.2.0-beta2',
-        'fixture' => 'sec.8.2.0_8.3.0-rc1',
+        'fixture' => 'sec.2.0_3.0-rc1',
         'requirements_section_heading' => '',
         'message' => '',
         'mock_date' => '',
       ],
       '8.1.0-dev, no message' => [
         'installed_version' => '8.1.0-dev',
-        'fixture' => 'sec.8.2.0_8.3.0-rc1',
+        'fixture' => 'sec.2.0_3.0-rc1',
         'requirements_section_heading' => '',
         'message' => '',
         'mock_date' => '',
@@ -137,7 +135,7 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
       // CORE_MINORS_WITH_SECURITY_COVERAGE minors have been released.
       '8.0.0, 9 unsupported' => [
         'installed_version' => '8.0.0',
-        'fixture' => 'sec.8.2.0_9.0.0',
+        'fixture' => 'sec.2.0_9.0.0',
         'requirements_section_heading' => 'Errors found',
         'message' => "$coverage_ended_message $update_asap_message $release_coverage_message",
         'mock_date' => '',
@@ -147,7 +145,7 @@ class UpdateSemverCoreSecurityCoverageTest extends UpdateSemverCoreTestBase {
       // CORE_MINORS_WITH_SECURITY_COVERAGE minors have not been released.
       '8.2.0, 9 warning' => [
         'installed_version' => '8.2.0',
-        'fixture' => 'sec.8.2.0_9.0.0',
+        'fixture' => 'sec.2.0_9.0.0',
         'requirements_section_heading' => 'Warnings found',
         'message' => "Covered until 8.4.0 Update to 8.3 or higher soon to continue receiving security updates. $release_coverage_message",
         'mock_date' => '',

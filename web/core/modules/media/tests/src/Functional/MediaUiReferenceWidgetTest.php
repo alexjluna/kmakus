@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media\Functional;
 
 use Behat\Mink\Element\NodeElement;
@@ -52,7 +50,7 @@ class MediaUiReferenceWidgetTest extends MediaFunctionalTestBase {
    * @return array[]
    *   Test data. See testMediaReferenceWidget() for the child array structure.
    */
-  public static function providerTestMediaReferenceWidget() {
+  public function providerTestMediaReferenceWidget() {
     return [
       // Single-value fields with a single media type and the default widget:
       // - The user can create and list the media.

@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Plugin;
 
 use Drupal\Core\Database\Database;
 use Drupal\Tests\user\Traits\UserCreationTrait;
 use Drupal\views\Views;
-
-// cspell:ignore Kristiaan Silvie
 
 /**
  * Tests the base relationship handler.

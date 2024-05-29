@@ -137,12 +137,12 @@ class ExtensionListTest extends UnitTestCase {
   }
 
   /**
-   * @covers ::getPathNames
+   * @covers ::getPathnames
    */
-  public function testGetPathNames() {
+  public function testGetPathnames() {
     $test_extension_list = $this->setupTestExtensionList();
 
-    $filenames = $test_extension_list->getPathNames();
+    $filenames = $test_extension_list->getPathnames();
     $this->assertEquals([
       'test_name' => 'example/test_name/test_name.info.yml',
     ], $filenames);
@@ -189,7 +189,7 @@ class ExtensionListTest extends UnitTestCase {
     $this->assertEquals('example/test_name', $path);
     $pathname = $test_extension_list->getPathname('test_name');
     $this->assertEquals('example/test_name/test_name.info.yml', $pathname);
-    $filenames = $test_extension_list->getPathNames();
+    $filenames = $test_extension_list->getPathnames();
     $this->assertEquals([
       'test_name' => 'example/test_name/test_name.info.yml',
     ], $filenames);
@@ -201,7 +201,7 @@ class ExtensionListTest extends UnitTestCase {
     $this->assertEquals('example/test_name', $path);
     $pathname = $test_extension_list->getPathname('test_name');
     $this->assertEquals('example/test_name/test_name.info.yml', $pathname);
-    $filenames = $test_extension_list->getPathNames();
+    $filenames = $test_extension_list->getPathnames();
     $this->assertEquals([
       'test_name' => 'example/test_name/test_name.info.yml',
     ], $filenames);
@@ -220,7 +220,7 @@ class ExtensionListTest extends UnitTestCase {
   /**
    * DataProvider for testCheckIncompatibility().
    */
-  public static function providerCheckIncompatibility() {
+  public function providerCheckIncompatibility() {
     return [
       'core_incompatible true' => [
         [

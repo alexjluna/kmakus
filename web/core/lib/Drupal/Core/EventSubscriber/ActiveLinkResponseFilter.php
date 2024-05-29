@@ -14,9 +14,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 // cspell:ignore noemptytag
 /**
- * Subscribes to filter HTML responses, to set attributes on active links.
- *
- * Sets the 'is-active' class and sets the aria-current attribute to 'page'.
+ * Subscribes to filter HTML responses, to set the 'is-active' class on links.
  *
  * Only for anonymous users; for authenticated users, the active-link asset
  * library is loaded.
@@ -109,7 +107,7 @@ class ActiveLinkResponseFilter implements EventSubscriberInterface {
   }
 
   /**
-   * Sets the "is-active" class and aria-current attribute on relevant links.
+   * Sets the "is-active" class on relevant links.
    *
    * This is a PHP implementation of the drupal.active-link JavaScript library.
    *
@@ -146,7 +144,7 @@ class ActiveLinkResponseFilter implements EventSubscriberInterface {
     //    attribute.
     // 2. We are on the front page and a link has the special '<front>' value in
     //    its 'data-drupal-link-system-path' attribute.
-    while (str_contains(substr($html_markup, $offset), $search_key_current_path) || ($is_front && str_contains(substr($html_markup, $offset), $search_key_front))) {
+    while (strpos($html_markup, $search_key_current_path, $offset) !== FALSE || ($is_front && strpos($html_markup, $search_key_front, $offset) !== FALSE)) {
       $pos_current_path = strpos($html_markup, $search_key_current_path, $offset);
       // Only look for links with the special '<front>' system path if we are
       // actually on the front page.
@@ -218,14 +216,13 @@ class ActiveLinkResponseFilter implements EventSubscriberInterface {
       }
 
       // Only if the path, the language and the query match, we set the
-      // "is-active" class and add aria-current="page".
+      // "is-active" class.
       if ($add_active) {
         if (strlen($class) > 0) {
           $class .= ' ';
         }
         $class .= 'is-active';
         $node->setAttribute('class', $class);
-        $node->setAttribute('aria-current', 'page');
 
         // Get the updated tag.
         $updated_tag = $dom->saveXML($node, LIBXML_NOEMPTYTAG);

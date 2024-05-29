@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\ckeditor5\Functional;
 
 use Drupal\Component\Utility\Crypt;
-use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Test image upload access.
@@ -27,14 +25,8 @@ class ImageUploadAccessTest extends ImageUploadTest {
     $response = $this->uploadRequest($url, $test_image, 'test.jpg');
     $this->assertSame(404, $response->getStatusCode());
 
-    $editor = $this->createEditorWithUpload(['status' => FALSE]);
-
-    // Ensure that images cannot be uploaded when image upload is disabled.
-    $response = $this->uploadRequest($url, $test_image, 'test.jpg');
-    $this->assertSame(403, $response->getStatusCode());
-
-    $editor->setImageUploadSettings([
-      'status' => TRUE,
+    $editor = $this->createEditorWithUpload([
+      'status' => FALSE,
       'scheme' => 'public',
       'directory' => 'inline-images',
       'max_size' => '',
@@ -42,13 +34,20 @@ class ImageUploadAccessTest extends ImageUploadTest {
         'width' => 0,
         'height' => 0,
       ],
-    ])->save();
+    ]);
+
+    // Ensure that images cannot be uploaded when image upload is disabled.
+    $response = $this->uploadRequest($url, $test_image, 'test.jpg');
+    $this->assertSame(403, $response->getStatusCode());
+
+    $editor->setImageUploadSettings(['status' => TRUE] + $editor->getImageUploadSettings())
+      ->save();
     $response = $this->uploadRequest($url, $test_image, 'test.jpg');
     $this->assertSame(201, $response->getStatusCode());
 
     // Ensure lock failures are reported correctly.
     $d = 'public://inline-images/test.jpg';
-    $f = $this->container->get('file_system')->getDestinationFilename($d, FileExists::Rename);
+    $f = $this->container->get('file_system')->getDestinationFilename($d, FileSystemInterface::EXISTS_RENAME);
     $this->container->get('lock')
       ->acquire('file:ckeditor5:' . Crypt::hashBase64($f));
     $response = $this->uploadRequest($url, $test_image, 'test.jpg');

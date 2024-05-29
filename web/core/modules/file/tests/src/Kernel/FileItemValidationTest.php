@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\file\Kernel;
 
 use Drupal\entity_test\Entity\EntityTest;
@@ -130,7 +128,7 @@ class FileItemValidationTest extends KernelTestBase {
   /**
    * Provides a list of file types to test.
    */
-  public static function getFileTypes() {
+  public function getFileTypes() {
     return [['file'], ['image']];
   }
 

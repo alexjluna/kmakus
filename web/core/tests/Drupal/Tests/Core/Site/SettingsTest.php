@@ -101,7 +101,7 @@ class SettingsTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestGetHashSaltEmpty() {
+  public function providerTestGetHashSaltEmpty() {
     return [
       [[]],
       [['hash_salt' => '']],
@@ -220,7 +220,7 @@ class SettingsTest extends UnitTestCase {
    *
    * @see self::providerTestRealDeprecatedSettings()
    */
-  public static function providerTestFakeDeprecatedSettings(): array {
+  public function providerTestFakeDeprecatedSettings(): array {
 
     $only_legacy = [
       'deprecated_legacy' => 'old',
@@ -306,7 +306,7 @@ class SettingsTest extends UnitTestCase {
   /**
    * Provides data for testRealDeprecatedSettings().
    */
-  public static function providerTestRealDeprecatedSettings(): array {
+  public function providerTestRealDeprecatedSettings(): array {
     return [
       [
         'block_interest_cohort',
@@ -368,7 +368,7 @@ class SettingsTest extends UnitTestCase {
   /**
    * Provides data for testDatabaseInfoInitialization().
    */
-  public static function providerTestDatabaseInfoInitialization(): array {
+  public function providerTestDatabaseInfoInitialization(): array {
     return [
       ['mysql', NULL, NULL, 'Drupal\\mysql\\Driver\\Database\\mysql', 'core/modules/mysql/src/Driver/Database/mysql/'],
       ['mysql', '', NULL, 'Drupal\\mysql\\Driver\\Database\\mysql', 'core/modules/mysql/src/Driver/Database/mysql/'],

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\help\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
@@ -69,10 +67,7 @@ class HelpTest extends BrowserTestBase {
   public function testHelp() {
     // Log in the root user to ensure as many admin links appear as possible on
     // the module overview pages.
-    $this->drupalLogin($this->drupalCreateUser([
-      'access help pages',
-      'access administration pages',
-    ]));
+    $this->drupalLogin($this->rootUser);
     $this->verifyHelp();
 
     // Log in the regular user.
@@ -100,9 +95,8 @@ class HelpTest extends BrowserTestBase {
 
     // Ensure a module which does not provide a module overview page is handled
     // correctly.
-    $module_name = \Drupal::service('extension.list.module')->getName('help_test');
-    $this->clickLink($module_name);
-    $this->assertSession()->pageTextContains('No help is available for module ' . $module_name);
+    $this->clickLink(\Drupal::moduleHandler()->getName('help_test'));
+    $this->assertSession()->pageTextContains('No help is available for module ' . \Drupal::moduleHandler()->getName('help_test'));
 
     // Verify that the order of topics is alphabetical by displayed module
     // name, by checking the order of some modules, including some that would

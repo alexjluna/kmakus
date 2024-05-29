@@ -3,15 +3,15 @@
 namespace Drupal\block\Plugin\migrate\destination;
 
 use Drupal\Core\Config\Schema\SchemaIncompleteException;
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\migrate\destination\EntityConfigBase;
 use Drupal\migrate\Row;
 
 /**
- * Migrate destination for block entity.
+ * @MigrateDestination(
+ *   id = "entity:block"
+ * )
  */
-#[MigrateDestination('entity:block')]
 class EntityBlock extends EntityConfigBase {
 
   /**

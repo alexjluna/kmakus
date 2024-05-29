@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Field\Entity;
 
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -54,7 +52,7 @@ class BaseFieldOverrideTest extends KernelTestBase {
   /**
    * Test cases for ::testGetClass.
    */
-  public static function getClassTestCases() {
+  public function getClassTestCases() {
     return [
       'String (default class)' => [
         'string',

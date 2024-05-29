@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\Module;
 
 use Drupal\node\Entity\NodeType;
@@ -176,7 +174,7 @@ class PrepareUninstallTest extends BrowserTestBase {
 
     // Ensure a 404 is returned when accessing a non-existent entity type.
     $this->drupalGet('admin/modules/uninstall/entity/node');
-    $this->assertSession()->statusCodeEquals(403);
+    $this->assertSession()->statusCodeEquals(404);
 
     // Test an entity type which does not have any existing entities.
     $this->drupalGet('admin/modules/uninstall/entity/entity_test_no_label');

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_translation\Kernel\Migrate\d7;
 
 use Drupal\Core\Language\LanguageInterface;

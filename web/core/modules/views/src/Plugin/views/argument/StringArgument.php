@@ -5,7 +5,6 @@ namespace Drupal\views\Plugin\views\argument;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
-use Drupal\views\Attribute\ViewsArgument;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ManyToOneHelper;
@@ -17,10 +16,9 @@ use Drupal\views\ManyToOneHelper;
  * limits.
  *
  * @ingroup views_argument_handlers
-  */
-#[ViewsArgument(
-  id: 'string',
-)]
+ *
+ * @ViewsArgument("string")
+ */
 class StringArgument extends ArgumentPluginBase {
 
   /**

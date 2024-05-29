@@ -15,10 +15,6 @@ parameters:
     - .
     - ../composer
 
-  bootstrapFiles:
-    # Load aliases.
-    - lib/Drupal/Core/Serialization/Yaml.php
-
   excludePaths:
     # Skip sites directory.
     - ../sites

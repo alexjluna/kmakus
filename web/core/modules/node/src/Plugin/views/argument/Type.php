@@ -3,16 +3,14 @@
 namespace Drupal\node\Plugin\views\argument;
 
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\views\Attribute\ViewsArgument;
 use Drupal\views\Plugin\views\argument\StringArgument;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Argument handler to accept a node type.
+ *
+ * @ViewsArgument("node_type")
  */
-#[ViewsArgument(
-  id: 'node_type',
-)]
 class Type extends StringArgument {
 
   /**

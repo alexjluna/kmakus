@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\statistics\Functional\Views;
 
 use Drupal\Tests\views\Functional\ViewTestBase;
@@ -11,7 +9,6 @@ use Drupal\user\Entity\User;
  * Tests basic integration of views data from the statistics module.
  *
  * @group statistics
- * @group legacy
  * @see
  */
 class IntegrationTest extends ViewTestBase {

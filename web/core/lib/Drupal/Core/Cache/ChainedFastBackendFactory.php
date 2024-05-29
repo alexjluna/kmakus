@@ -4,7 +4,7 @@ namespace Drupal\Core\Cache;
 
 use Drupal\Core\Installer\InstallerKernel;
 use Drupal\Core\Site\Settings;
-use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Defines the chained fast cache backend factory.
@@ -12,6 +12,8 @@ use Psr\Container\ContainerInterface;
  * @see \Drupal\Core\Cache\ChainedFastBackend
  */
 class ChainedFastBackendFactory implements CacheFactoryInterface {
+
+  use ContainerAwareTrait;
 
   /**
    * The service name of the consistent backend factory.
@@ -26,18 +28,6 @@ class ChainedFastBackendFactory implements CacheFactoryInterface {
    * @var string
    */
   protected $fastServiceName;
-
-  /**
-   * The service container.
-   */
-  protected ContainerInterface $container;
-
-  /**
-   * Sets the service container.
-   */
-  public function setContainer(ContainerInterface $container): void {
-    $this->container = $container;
-  }
 
   /**
    * Constructs ChainedFastBackendFactory object.

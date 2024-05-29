@@ -49,7 +49,7 @@ class SortTest extends UnitTestCase {
   /**
    * Provides a suite of shortcut sort parameters and their expected expansions.
    */
-  public static function parameterProvider() {
+  public function parameterProvider() {
     return [
       ['lorem', [['path' => 'lorem', 'direction' => 'ASC', 'langcode' => NULL]]],
       [
@@ -93,7 +93,7 @@ class SortTest extends UnitTestCase {
   /**
    * Data provider for testCreateFromQueryParameterFail.
    */
-  public static function badParameterProvider() {
+  public function badParameterProvider() {
     return [
       [[['lorem']]],
       [''],

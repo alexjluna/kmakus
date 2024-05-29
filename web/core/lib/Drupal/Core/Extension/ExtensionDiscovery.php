@@ -234,18 +234,7 @@ class ExtensionDiscovery {
     if (!\Drupal::hasContainer() || !\Drupal::getContainer()->hasParameter('install_profile')) {
       return $this;
     }
-
-    $profile = \Drupal::installProfile();
-    // If $profile is FALSE then we need to add a fake directory as a profile
-    // directory in order to filter out profile provided modules. This ensures
-    // that, after uninstalling a profile, a site cannot install modules
-    // contained in an install profile. During installation $profile will be
-    // NULL, so we need to discover all modules and profiles.
-    if ($profile === FALSE) {
-      // cspell:ignore CNKDSIUSYFUISEFCB
-      $this->profileDirectories[] = '_does_not_exist_profile_CNKDSIUSYFUISEFCB';
-    }
-    elseif ($profile) {
+    if ($profile = \Drupal::installProfile()) {
       $this->profileDirectories[] = \Drupal::service('extension.list.profile')->getPath($profile);
     }
     return $this;

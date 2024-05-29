@@ -5,7 +5,6 @@ namespace Drupal\views\Plugin\views\filter;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\Core\Form\OptGroup;
@@ -18,9 +17,10 @@ use Drupal\Core\Form\OptGroup;
  * - options arguments: An array of arguments to pass to the options callback.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("in_operator")
  */
-#[ViewsFilter("in_operator")]
-class InOperator extends FilterPluginBase implements FilterOperatorsInterface {
+class InOperator extends FilterPluginBase {
 
   protected $valueFormType = 'checkboxes';
 
@@ -107,7 +107,11 @@ class InOperator extends FilterPluginBase implements FilterOperatorsInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Gets the operators.
+   *
+   * This kind of construct makes it relatively easy for a child class
+   * to add or remove functionality by overriding this function and
+   * adding/removing items from this array.
    */
   public function operators() {
     $operators = [

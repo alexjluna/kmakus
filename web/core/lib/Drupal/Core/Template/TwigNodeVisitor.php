@@ -7,7 +7,7 @@ use Twig\Node\Expression\FilterExpression;
 use Twig\Node\Expression\FunctionExpression;
 use Twig\Node\Node;
 use Twig\Node\PrintNode;
-use Twig\NodeVisitor\NodeVisitorInterface;
+use Twig\NodeVisitor\AbstractNodeVisitor;
 
 /**
  * Provides a TwigNodeVisitor to change the generated parse-tree.
@@ -18,7 +18,7 @@ use Twig\NodeVisitor\NodeVisitorInterface;
  *
  * @see twig_render
  */
-class TwigNodeVisitor implements NodeVisitorInterface {
+class TwigNodeVisitor extends AbstractNodeVisitor {
 
   /**
    * Tracks whether there is a render array aware filter active already.
@@ -28,14 +28,14 @@ class TwigNodeVisitor implements NodeVisitorInterface {
   /**
    * {@inheritdoc}
    */
-  public function enterNode(Node $node, Environment $env): Node {
+  protected function doEnterNode(Node $node, Environment $env) {
     return $node;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function leaveNode(Node $node, Environment $env): ?Node {
+  protected function doLeaveNode(Node $node, Environment $env) {
     // We use this to inject a call to render_var -> TwigExtension->renderVar()
     // before anything is printed.
     if ($node instanceof PrintNode) {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Theme;
 
 use Drupal\Component\Utility\Html;
@@ -57,7 +55,7 @@ class ThemeRenderAndAutoescapeTest extends KernelTestBase {
   /**
    * Provide test examples.
    */
-  public static function providerTestThemeRenderAndAutoescape() {
+  public function providerTestThemeRenderAndAutoescape() {
     return [
       'empty string unchanged' => ['', ''],
       'simple string unchanged' => ['ab', 'ab'],

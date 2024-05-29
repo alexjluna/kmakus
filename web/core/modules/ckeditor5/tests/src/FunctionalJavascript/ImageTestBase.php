@@ -450,14 +450,14 @@ abstract class ImageTestBase extends CKEditor5TestBase {
     $this->assertVisibleBalloon('.ck-text-alternative-form');
   }
 
-  public static function providerAltTextRequired(): array {
+  public function providerAltTextRequired(): array {
     return [
       'Restricted' => [FALSE],
       'Unrestricted' => [TRUE],
     ];
   }
 
-  public static function providerLinkability(): array {
+  public function providerLinkability(): array {
     return [
       'BLOCK image, restricted' => ['block', FALSE],
       'BLOCK image, unrestricted' => ['block', TRUE],
@@ -528,7 +528,7 @@ abstract class ImageTestBase extends CKEditor5TestBase {
     $this->assertFalse($drupal_media_element->hasAttribute('data-align'));
   }
 
-  public static function providerAlignment() {
+  public function providerAlignment() {
     return [
       'Block image' => ['block'],
       'Inline image' => ['inline'],
@@ -620,7 +620,7 @@ abstract class ImageTestBase extends CKEditor5TestBase {
    *
    * @return string[][]
    */
-  public static function providerWidth(): array {
+  public function providerWidth(): array {
     return [
       'Image resize with percent unit (only allowed in HTML 4)' => [
         'width' => '33%',
@@ -674,7 +674,7 @@ abstract class ImageTestBase extends CKEditor5TestBase {
    * @return array
    *   The test cases.
    */
-  public static function providerResize(): array {
+  public function providerResize(): array {
     return [
       'Image resize is enabled' => [
         'is_resize_enabled' => TRUE,

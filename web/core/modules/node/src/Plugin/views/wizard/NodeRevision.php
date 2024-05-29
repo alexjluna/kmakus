@@ -3,8 +3,6 @@
 namespace Drupal\node\Plugin\views\wizard;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\views\Attribute\ViewsWizard;
 use Drupal\views\Plugin\views\wizard\WizardPluginBase;
 
 /**
@@ -13,12 +11,13 @@ use Drupal\views\Plugin\views\wizard\WizardPluginBase;
 
 /**
  * Tests creating node revision views with the wizard.
+ *
+ * @ViewsWizard(
+ *   id = "node_revision",
+ *   base_table = "node_field_revision",
+ *   title = @Translation("Content revisions")
+ * )
  */
-#[ViewsWizard(
-  id: 'node_revision',
-  title: new TranslatableMarkup('Content revisions'),
-  base_table: 'node_field_revision'
-)]
 class NodeRevision extends WizardPluginBase {
 
   /**

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Field\FieldType;
 
 use Drupal\Core\Entity\EntityStorageException;

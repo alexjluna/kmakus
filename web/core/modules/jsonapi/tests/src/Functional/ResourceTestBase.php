@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Component\Serialization\Json;
@@ -43,7 +41,6 @@ use Drupal\jsonapi\ResourceResponse;
 use Drupal\path\Plugin\Field\FieldType\PathItem;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
-use Drupal\Tests\jsonapi\Traits\GetDocumentFromResponseTrait;
 use Drupal\user\Entity\Role;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\user\RoleInterface;
@@ -59,7 +56,6 @@ abstract class ResourceTestBase extends BrowserTestBase {
 
   use ResourceResponseTestTrait;
   use ContentModerationTestTrait;
-  use GetDocumentFromResponseTrait;
   use JsonApiRequestTestTrait;
 
   /**
@@ -434,19 +430,9 @@ abstract class ResourceTestBase extends BrowserTestBase {
     if ($label_key = $original->getEntityType()->getKey('label')) {
       $duplicate->set($label_key, $original->label() . '_' . $key);
     }
-
-    $id_key = $duplicate->getEntityType()->getKey('id');
-    $needs_manual_id = $duplicate instanceof ConfigEntityInterface && $id_key;
-
-    if ($duplicate instanceof FieldableEntityInterface && $id_key) {
-      $id_field = $duplicate->getFieldDefinition($id_key);
-      if ($id_field->getType() !== 'integer') {
-        $needs_manual_id = TRUE;
-      }
-    }
-
-    if ($needs_manual_id) {
-      $duplicate->set($id_key, $original->id() . '_' . $key);
+    if ($duplicate instanceof ConfigEntityInterface && $id_key = $duplicate->getEntityType()->getKey('id')) {
+      $id = $original->id();
+      $duplicate->set($id_key, $id . '_' . $key);
     }
     return $duplicate;
   }
@@ -730,7 +716,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
     else {
       $this->assertSame(['application/vnd.api+json'], $response->getHeader('Content-Type'));
       if ($expected_document !== FALSE) {
-        $response_document = $this->getDocumentFromResponse($response, FALSE);
+        $response_document = Json::decode((string) $response->getBody());
         if ($expected_document === NULL) {
           $this->assertNull($response_document);
         }
@@ -950,9 +936,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       $expected_403_cacheability = $this->getExpectedUnauthorizedAccessCacheability();
       $reason = $this->getExpectedUnauthorizedAccessMessage('GET');
       $message = trim("The current user is not allowed to GET the selected resource. $reason");
-      // MISS or UNCACHEABLE depends on data. It must not be HIT.
-      $dynamic_cache_header_value = !empty(array_intersect(['user', 'session'], $expected_403_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
-      $this->assertResourceErrorResponse(403, $message, $url, $response, '/data', $expected_403_cacheability->getCacheTags(), $expected_403_cacheability->getCacheContexts(), FALSE, $dynamic_cache_header_value);
+      $this->assertResourceErrorResponse(403, $message, $url, $response, '/data', $expected_403_cacheability->getCacheTags(), $expected_403_cacheability->getCacheContexts(), FALSE, 'MISS');
       $this->assertArrayNotHasKey('Link', $response->getHeaders());
     }
     else {
@@ -1103,7 +1087,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
     $expected_cacheability = $expected_response->getCacheableMetadata();
     $response = $this->request('HEAD', $collection_url, $request_options);
     // MISS or UNCACHEABLE depends on the collection data. It must not be HIT.
-    $dynamic_cache = $expected_cacheability->getCacheMaxAge() === 0 || !empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
+    $dynamic_cache = $expected_cacheability->getCacheMaxAge() === 0 ? 'UNCACHEABLE' : 'MISS';
     $this->assertResourceResponse(200, NULL, $response, $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, $dynamic_cache);
 
     // Different databases have different sort orders, so a sort is required so
@@ -1116,8 +1100,6 @@ abstract class ResourceTestBase extends BrowserTestBase {
     // self::getExpectedCollectionResponse().
     $expected_response = $this->getExpectedCollectionResponse($entity_collection, $collection_url->toString(), $request_options);
     $expected_cacheability = $expected_response->getCacheableMetadata();
-    // MISS or UNCACHEABLE depends on the collection data. It must not be HIT.
-    $dynamic_cache = $expected_cacheability->getCacheMaxAge() === 0 || !empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
     $expected_document = $expected_response->getResponseData();
     $response = $this->request('GET', $collection_url, $request_options);
     $this->assertResourceResponse(200, $expected_document, $response, $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, $dynamic_cache);
@@ -1127,8 +1109,6 @@ abstract class ResourceTestBase extends BrowserTestBase {
     // 200 for well-formed HEAD request.
     $expected_response = $this->getExpectedCollectionResponse($entity_collection, $collection_url->toString(), $request_options);
     $expected_cacheability = $expected_response->getCacheableMetadata();
-    // MISS or UNCACHEABLE depends on the collection data. It must not be HIT.
-    $dynamic_cache = $expected_cacheability->getCacheMaxAge() === 0 || !empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
     $response = $this->request('HEAD', $collection_url, $request_options);
     $this->assertResourceResponse(200, NULL, $response, $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, $dynamic_cache);
 
@@ -1405,7 +1385,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
         FALSE,
         $actual_response->getStatusCode() === 200
           ? ($expected_cacheability->getCacheMaxAge() === 0 ? 'UNCACHEABLE' : 'MISS')
-          : (!empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : FALSE)
+          : FALSE
       );
     }
   }
@@ -1440,9 +1420,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
         $expected_cacheability->getCacheTags(),
         $expected_cacheability->getCacheContexts(),
         FALSE,
-        empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts()))
-          ? $expected_resource_response->isSuccessful() ? 'MISS' : FALSE
-          : 'UNCACHEABLE'
+        $expected_resource_response->isSuccessful() ? 'MISS' : FALSE
       );
     }
   }
@@ -1629,8 +1607,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       $resource->set($relationship_field_name, [$target_resource]);
       $expected_document = $this->getExpectedGetRelationshipDocument($relationship_field_name, $resource);
       $response = $this->request('GET', $url, $request_options);
-      $document = $this->getDocumentFromResponse($response);
-      $this->assertSameDocument($expected_document, $document);
+      $this->assertSameDocument($expected_document, Json::decode((string) $response->getBody()));
 
       // Test DELETE: one existing relationship, removed.
       $request_options[RequestOptions::BODY] = Json::encode(['data' => [$target_identifier]]);
@@ -1639,8 +1616,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       $this->assertResourceResponse(204, NULL, $response);
       $expected_document = $this->getExpectedGetRelationshipDocument($relationship_field_name, $resource);
       $response = $this->request('GET', $url, $request_options);
-      $document = $this->getDocumentFromResponse($response);
-      $this->assertSameDocument($expected_document, $document);
+      $this->assertSameDocument($expected_document, Json::decode((string) $response->getBody()));
 
       // Test DELETE: no existing relationships, no op, success.
       $request_options[RequestOptions::BODY] = Json::encode(['data' => [$target_identifier]]);
@@ -1648,8 +1624,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       $this->assertResourceResponse(204, NULL, $response);
       $expected_document = $this->getExpectedGetRelationshipDocument($relationship_field_name, $resource);
       $response = $this->request('GET', $url, $request_options);
-      $document = $this->getDocumentFromResponse($response);
-      $this->assertSameDocument($expected_document, $document);
+      $this->assertSameDocument($expected_document, Json::decode((string) $response->getBody()));
 
       // Test PATCH: success, new value is different than existing value.
       $request_options[RequestOptions::BODY] = Json::encode([
@@ -1677,8 +1652,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       $resource->set($relationship_field_name, []);
       $expected_document = $this->getExpectedGetRelationshipDocument($relationship_field_name, $resource);
       $response = $this->request('GET', $url, $request_options);
-      $document = $this->getDocumentFromResponse($response);
-      $this->assertSameDocument($expected_document, $document);
+      $this->assertSameDocument($expected_document, Json::decode((string) $response->getBody()));
     }
     else {
       $request_options[RequestOptions::BODY] = Json::encode(['data' => [$target_identifier]]);
@@ -2112,7 +2086,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       // Assert that the entity was indeed created, and that the response body
       // contains the serialized created entity.
       $created_entity_document = $this->normalize($created_entity, $url);
-      $decoded_response_body = $this->getDocumentFromResponse($response);
+      $decoded_response_body = Json::decode((string) $response->getBody());
       $this->assertEquals($created_entity_document, $decoded_response_body);
       // Assert that the entity was indeed created using the POSTed values.
       foreach ($this->getPostDocument()['data']['attributes'] as $field_name => $field_normalization) {
@@ -2376,8 +2350,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
       }
     }
     $updated_entity_document = $this->normalize($updated_entity, $url);
-    $document = $this->getDocumentFromResponse($response);
-    $this->assertSame($updated_entity_document, $document);
+    $this->assertSame($updated_entity_document, Json::decode((string) $response->getBody()));
     $prior_revision_id = (int) $updated_entity->getRevisionId();
     // Assert that the entity was indeed created using the PATCHed values.
     foreach ($this->getPatchDocument()['data']['attributes'] as $field_name => $field_normalization) {
@@ -2899,9 +2872,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
     if ($result instanceof AccessResultReasonInterface && ($reason = $result->getReason()) && !empty($reason)) {
       $detail .= ' ' . $reason;
     }
-    // MISS or UNCACHEABLE depends on data. It must not be HIT.
-    $dynamic_cache = !empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
-    $this->assertResourceErrorResponse(403, $detail, $url, $actual_response, '/data', $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, $dynamic_cache);
+    $this->assertResourceErrorResponse(403, $detail, $url, $actual_response, '/data', $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, 'MISS');
 
     // Ensure that targeting a revision does not bypass access.
     $actual_response = $this->request('GET', $original_revision_id_url, $request_options);
@@ -2910,9 +2881,7 @@ abstract class ResourceTestBase extends BrowserTestBase {
     if ($result instanceof AccessResultReasonInterface && ($reason = $result->getReason()) && !empty($reason)) {
       $detail .= ' ' . $reason;
     }
-    // MISS or UNCACHEABLE depends on data. It must not be HIT.
-    $dynamic_cache = !empty(array_intersect(['user', 'session'], $expected_cacheability->getCacheContexts())) ? 'UNCACHEABLE' : 'MISS';
-    $this->assertResourceErrorResponse(403, $detail, $url, $actual_response, '/data', $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, $dynamic_cache);
+    $this->assertResourceErrorResponse(403, $detail, $url, $actual_response, '/data', $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), FALSE, 'MISS');
 
     $this->setUpRevisionAuthorization('GET');
 

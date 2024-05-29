@@ -361,7 +361,7 @@ class EntityFieldManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestGetBaseFieldDefinitionsTranslatableEntityTypeDefaultLangcode() {
+  public function providerTestGetBaseFieldDefinitionsTranslatableEntityTypeDefaultLangcode() {
     return [
       ['default_langcode'],
       ['custom_default_langcode_key'],
@@ -405,7 +405,7 @@ class EntityFieldManagerTest extends UnitTestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestGetBaseFieldDefinitionsTranslatableEntityTypeLangcode() {
+  public function providerTestGetBaseFieldDefinitionsTranslatableEntityTypeLangcode() {
     return [
       [FALSE, TRUE, TRUE],
       [TRUE, FALSE, TRUE],
@@ -911,7 +911,7 @@ abstract class EntityTypeManagerTestEntity implements \Iterator, ContentEntityIn
    * {@inheritdoc}
    */
   public static function bundleFieldDefinitions(EntityTypeInterface $entity_type, $bundle, array $base_field_definitions) {
-    return static::$bundleFieldDefinitions[$entity_type->id()][$bundle] ?? [];
+    return isset(static::$bundleFieldDefinitions[$entity_type->id()][$bundle]) ? static::$bundleFieldDefinitions[$entity_type->id()][$bundle] : [];
   }
 
 }

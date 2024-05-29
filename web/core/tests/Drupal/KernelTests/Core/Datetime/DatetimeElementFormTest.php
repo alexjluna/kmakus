@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Datetime;
 
 use Drupal\Component\Utility\Variable;
@@ -177,7 +175,7 @@ class DatetimeElementFormTest extends KernelTestBase implements FormInterface, T
    * @return string[][]
    *   Test cases.
    */
-  public static function providerUntrusted() : array {
+  public function providerUntrusted() : array {
     return [
       'untrusted date' => [
         'datetimeDateCallback',

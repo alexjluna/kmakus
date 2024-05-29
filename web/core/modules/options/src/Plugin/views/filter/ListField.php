@@ -2,7 +2,6 @@
 
 namespace Drupal\options\Plugin\views\filter;
 
-use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\FieldAPIHandlerTrait;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
@@ -12,8 +11,9 @@ use Drupal\views\ViewExecutable;
  * Filter handler which uses list-fields as options.
  *
  * @ingroup views_filter_handlers
+ *
+ * @ViewsFilter("list_field")
  */
-#[ViewsFilter("list_field")]
 class ListField extends ManyToOne {
 
   use FieldAPIHandlerTrait;

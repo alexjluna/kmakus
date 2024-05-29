@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Entity\EntityInterface;
@@ -211,7 +209,7 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
       $user = $this->drupalCreateUser();
       $values[$langcode] = [
         'uid' => $user->id(),
-        'created' => \Drupal::time()->getRequestTime() - mt_rand(0, 1000),
+        'created' => REQUEST_TIME - mt_rand(0, 1000),
         'sticky' => (bool) mt_rand(0, 1),
         'promote' => (bool) mt_rand(0, 1),
       ];
@@ -604,6 +602,7 @@ class NodeTranslationUITest extends ContentTranslationUITestBase {
   public function testUrlPrefixOnLanguageNeutralContent() {
     $this->drupalLogin($this->administrator);
     $neutral_langcodes = [
+      LanguageInterface::LANGCODE_NOT_APPLICABLE,
       LanguageInterface::LANGCODE_NOT_SPECIFIED,
     ];
     foreach ($neutral_langcodes as $langcode) {

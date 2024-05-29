@@ -5,13 +5,12 @@ namespace Drupal\Core\Extension;
 use Drupal\Component\Graph\Graph;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\DestructableInterface;
 use Drupal\Core\Extension\Exception\UnknownExtensionException;
 
 /**
  * Class that manages modules in a Drupal installation.
  */
-class ModuleHandler implements ModuleHandlerInterface, DestructableInterface {
+class ModuleHandler implements ModuleHandlerInterface {
 
   /**
    * List of loaded files.
@@ -330,13 +329,6 @@ class ModuleHandler implements ModuleHandlerInterface, DestructableInterface {
       $this->cacheBackend->set('module_implements', $this->implementations);
       $this->cacheNeedsWriting = FALSE;
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function destruct() {
-    $this->writeCache();
   }
 
   /**
@@ -725,7 +717,6 @@ class ModuleHandler implements ModuleHandlerInterface, DestructableInterface {
    * {@inheritdoc}
    */
   public function getName($module) {
-    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use \Drupal\Core\Extension\ModuleExtensionList::getName($module) instead. See https://www.drupal.org/node/3310017', E_USER_DEPRECATED);
     return \Drupal::service('extension.list.module')->getName($module);
   }
 

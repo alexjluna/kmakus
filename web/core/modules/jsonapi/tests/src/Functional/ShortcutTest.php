@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Functional;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -16,7 +15,6 @@ use GuzzleHttp\RequestOptions;
  * JSON:API integration test for the "Shortcut" content entity type.
  *
  * @group jsonapi
- * @group #slow
  */
 class ShortcutTest extends ResourceTestBase {
 
@@ -182,7 +180,7 @@ class ShortcutTest extends ResourceTestBase {
     // No results because the current user does not have access to shortcuts
     // not in the user's assigned set or the default set.
     $response = $this->request('GET', $collection_filter_url, $request_options);
-    $doc = $this->getDocumentFromResponse($response);
+    $doc = Json::decode((string) $response->getBody());
     $this->assertCount(0, $doc['data']);
 
     // Assign the alternate shortcut set to the current user.
@@ -191,7 +189,7 @@ class ShortcutTest extends ResourceTestBase {
     // 1 result because the alternate shortcut set is now assigned to the
     // current user.
     $response = $this->request('GET', $collection_filter_url, $request_options);
-    $doc = $this->getDocumentFromResponse($response);
+    $doc = Json::decode((string) $response->getBody());
     $this->assertCount(1, $doc['data']);
   }
 

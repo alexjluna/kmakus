@@ -4,7 +4,6 @@ namespace Drupal\views\Plugin\views\field;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Render\ViewsRenderPipelineMarkup;
 use Drupal\views\ResultRow;
 
@@ -12,8 +11,9 @@ use Drupal\views\ResultRow;
  * A handler to provide a field that is completely custom by the administrator.
  *
  * @ingroup views_field_handlers
+ *
+ * @ViewsField("custom")
  */
-#[ViewsField("custom")]
 class Custom extends FieldPluginBase {
 
   /**

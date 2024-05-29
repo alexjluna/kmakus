@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Extension;
 
 use Drupal\Core\Extension\ExtensionLifecycle;
@@ -42,7 +40,6 @@ class ModuleConfigureRouteTest extends KernelTestBase {
     parent::setUp();
     $this->routeProvider = \Drupal::service('router.route_provider');
     $this->moduleInfo = \Drupal::service('extension.list.module')->getList();
-    $this->installEntitySchema('path_alias');
   }
 
   /**

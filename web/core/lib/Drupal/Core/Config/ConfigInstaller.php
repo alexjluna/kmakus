@@ -63,7 +63,7 @@ class ConfigInstaller implements ConfigInstallerInterface {
   /**
    * The name of the currently active installation profile.
    *
-   * @var string|false|null
+   * @var string
    */
   protected $installProfile;
 

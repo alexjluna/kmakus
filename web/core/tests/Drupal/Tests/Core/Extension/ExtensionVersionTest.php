@@ -65,7 +65,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return mixed[][]
    *   Arrays of version information.
    */
-  public static function providerVersionInfos(): array {
+  public function providerVersionInfos(): array {
     // Data provider values are:
     // - The version number to test.
     // - Array of expected version information with the following keys:
@@ -263,7 +263,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return string[]
    *   The test cases for testInvalidVersionNumber().
    */
-  public static function providerInvalidVersionNumber(): array {
+  public function providerInvalidVersionNumber(): array {
     return static::createKeyedTestCases([
       '',
       '8',
@@ -306,7 +306,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return string[]
    *   The test cases for testInvalidVersionCorePrefix().
    */
-  public static function providerInvalidVersionCorePrefix(): array {
+  public function providerInvalidVersionCorePrefix(): array {
     return static::createKeyedTestCases([
       '6.x-1.0',
       '7.x-1.x',
@@ -335,7 +335,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return string[]
    *   The test cases for testInvalidBranchCorePrefix().
    */
-  public static function providerInvalidBranchCorePrefix(): array {
+  public function providerInvalidBranchCorePrefix(): array {
     return static::createKeyedTestCases([
       '6.x-1.',
       '7.x-1.',
@@ -368,7 +368,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return string[][]
    *   The test cases for testCreateFromSupportBranch().
    */
-  public static function providerCreateFromSupportBranch(): array {
+  public function providerCreateFromSupportBranch(): array {
     // Data provider values are:
     // - The version number to test.
     // - Array of expected version information with the following keys:
@@ -418,7 +418,7 @@ class ExtensionVersionTest extends UnitTestCase {
    * @return string[]
    *   The test cases for testInvalidBranch().
    */
-  public static function provideInvalidBranch(): array {
+  public function provideInvalidBranch(): array {
     return self::createKeyedTestCases([
       '8.x-1.0',
       '8.x-2.x',

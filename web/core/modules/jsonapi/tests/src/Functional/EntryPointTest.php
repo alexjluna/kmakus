@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Functional;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\jsonapi\Traits\GetDocumentFromResponseTrait;
 use Drupal\Tests\user\Traits\UserCreationTrait;
 use GuzzleHttp\RequestOptions;
 
@@ -19,7 +17,6 @@ use GuzzleHttp\RequestOptions;
  */
 class EntryPointTest extends BrowserTestBase {
 
-  use GetDocumentFromResponseTrait;
   use JsonApiRequestTestTrait;
   use UserCreationTrait;
 
@@ -44,7 +41,7 @@ class EntryPointTest extends BrowserTestBase {
     $request_options = [];
     $request_options[RequestOptions::HEADERS]['Accept'] = 'application/vnd.api+json';
     $response = $this->request('GET', Url::fromUri('base://jsonapi'), $request_options);
-    $document = $this->getDocumentFromResponse($response);
+    $document = Json::decode((string) $response->getBody());
     $expected_cache_contexts = [
       'url.site',
       'user.roles:authenticated',
@@ -62,7 +59,7 @@ class EntryPointTest extends BrowserTestBase {
     $user = $this->createUser();
     $request_options[RequestOptions::HEADERS]['Authorization'] = 'Basic ' . base64_encode($user->name->value . ':' . $user->passRaw);
     $response = $this->request('GET', Url::fromUri('base://jsonapi'), $request_options);
-    $document = $this->getDocumentFromResponse($response);
+    $document = Json::decode((string) $response->getBody());
     $this->assertArrayHasKey('meta', $document);
     $this->assertStringEndsWith('/jsonapi/user/user/' . $user->uuid(), $document['meta']['links']['me']['href']);
   }

@@ -49,7 +49,7 @@ class NullCoalesceTest extends MigrateProcessTestCase {
   /**
    * Provides Data for ::testTransform.
    */
-  public static function transformDataProvider() {
+  public function transformDataProvider() {
     return [
       'all null' => [
         'source' => [NULL, NULL, NULL],
@@ -103,7 +103,7 @@ class NullCoalesceTest extends MigrateProcessTestCase {
   /**
    * Provides Data for ::testTransformWithDefault.
    */
-  public static function transformWithDefaultProvider() {
+  public function transformWithDefaultProvider() {
     return [
       'default not used' => [
         'source' => [NULL, NULL, 'Test', 'Test 2'],

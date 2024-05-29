@@ -102,7 +102,7 @@ class ProjectInfo {
       }
       if (empty($status)) {
         // If we're processing uninstalled modules or themes, append a suffix.
-        $project_display_type .= '-uninstalled';
+        $project_display_type .= '-disabled';
       }
       if (!isset($projects[$project_name])) {
         // Only process this if we haven't done this project, since a single

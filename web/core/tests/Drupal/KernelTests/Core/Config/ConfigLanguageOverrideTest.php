@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Config;
 
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -78,9 +76,6 @@ class ConfigLanguageOverrideTest extends KernelTestBase {
     \Drupal::configFactory()->getEditable('config_test.foo')
       ->set('value', ['key' => 'original'])
       ->set('label', 'Original')
-      // `label` is translatable, hence a `langcode` is required.
-      // @see \Drupal\Core\Config\Plugin\Validation\Constraint\LangcodeRequiredIfTranslatableValuesConstraint
-      ->set('langcode', 'en')
       ->save();
     \Drupal::languageManager()
       ->getLanguageConfigOverride('de', 'config_test.foo')

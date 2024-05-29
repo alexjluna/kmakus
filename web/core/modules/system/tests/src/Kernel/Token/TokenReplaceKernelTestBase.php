@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Kernel\Token;
 
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;

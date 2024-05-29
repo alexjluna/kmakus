@@ -3,12 +3,11 @@
 namespace Drupal\taxonomy;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Entity\RevisionableEntityBundleInterface;
 
 /**
  * Provides an interface defining a taxonomy vocabulary entity.
  */
-interface VocabularyInterface extends ConfigEntityInterface, RevisionableEntityBundleInterface {
+interface VocabularyInterface extends ConfigEntityInterface {
 
   /**
    * Denotes that no term in the vocabulary has a parent.
@@ -32,13 +31,5 @@ interface VocabularyInterface extends ConfigEntityInterface, RevisionableEntityB
    *   The vocabulary description.
    */
   public function getDescription();
-
-  /**
-   * Sets whether a new revision should be created by default.
-   *
-   * @param bool $new_revision
-   *   TRUE if a new revision should be created by default.
-   */
-  public function setNewRevision($new_revision);
 
 }

@@ -217,7 +217,7 @@
  *
  * Configuration is divided into individual objects, each of which has a
  * unique name or key. Some modules will have only one configuration object,
- * typically called 'my_module.settings'; some modules will have many. Within
+ * typically called 'mymodule.settings'; some modules will have many. Within
  * a configuration object, configuration settings have data types (integer,
  * string, Boolean, etc.) and settings can also exist in a nested hierarchy,
  * known as a "mapping".
@@ -283,10 +283,10 @@
  * The first task in using the simple configuration API is to define the
  * configuration file structure, file name, and schema of your settings (see
  * @ref sec_yaml above). Once you have done that, you can retrieve the active
- * configuration object that corresponds to configuration file my_module.foo.yml
+ * configuration object that corresponds to configuration file mymodule.foo.yml
  * with a call to:
  * @code
- * $config = \Drupal::config('my_module.foo');
+ * $config = \Drupal::config('mymodule.foo');
  * @endcode
  *
  * This will be an object of class \Drupal\Core\Config\Config, which has methods
@@ -313,7 +313,7 @@
  * you will instead need to get the Config object by making a call to
  * getEditable() on the config factory:
  * @code
- * $config =\Drupal::service('config.factory')->getEditable('my_module.foo');
+ * $config =\Drupal::service('config.factory')->getEditable('mymodule.foo');
  * @endcode
  *
  * Individual configuration values can be changed or added using the set()
@@ -430,7 +430,7 @@
  *
  * Example:
  * @code
- * $cid = 'my_module_example:' . \Drupal::languageManager()->getCurrentLanguage()->getId();
+ * $cid = 'mymodule_example:' . \Drupal::languageManager()->getCurrentLanguage()->getId();
  *
  * $data = NULL;
  * if ($cache = \Drupal::cache()->get($cid)) {
@@ -1415,8 +1415,8 @@
  *   class and the parent (default) plugin manager service to inherit
  *   constructor arguments:
  *   @code
- *   plugin.manager.my_module:
- *     class: Drupal\my_module\MyPluginManager
+ *   plugin.manager.mymodule:
+ *     class: Drupal\mymodule\MyPluginManager
  *     parent: default_plugin_manager
  *   @endcode
  * - If your plugin is configurable, you will also need to define the
@@ -1699,7 +1699,7 @@
  *
  * Here is an example of a Form class:
  * @code
- * namespace Drupal\my_module\Form;
+ * namespace Drupal\mymodule\Form;
  *
  * use Drupal\Core\Form\FormBase;
  * use Drupal\Core\Form\FormStateInterface;
@@ -1737,7 +1737,7 @@
  * \Drupal::formBuilder()->getForm() should be used to handle retrieving,
  * processing, and displaying a rendered HTML form. Given the ExampleForm
  * defined above,
- * \Drupal::formBuilder()->getForm('Drupal\my_module\Form\ExampleForm') would
+ * \Drupal::formBuilder()->getForm('Drupal\mymodule\Form\ExampleForm') would
  * return the rendered HTML of the form defined by ExampleForm::buildForm(), or
  * call the validateForm() and submitForm(), methods depending on the current
  * processing state.
@@ -1750,7 +1750,7 @@
  * For example:
  * @code
  * $extra = '612-123-4567';
- * $form = \Drupal::formBuilder()->getForm('Drupal\my_module\Form\ExampleForm', $extra);
+ * $form = \Drupal::formBuilder()->getForm('Drupal\mymodule\Form\ExampleForm', $extra);
  * ...
  * public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL)
  *   $form['phone_number'] = array(
@@ -1772,7 +1772,7 @@
  *   path: '/example-form'
  *   defaults:
  *     _title: 'Example form'
- *     _form: '\Drupal\my_module\Form\ExampleForm'
+ *     _form: '\Drupal\mymodule\Form\ExampleForm'
  * @endcode
  *
  * The $form argument to form-related functions is a specialized render array
@@ -1923,17 +1923,17 @@
 function hook_cron() {
   // Short-running operation example, not using a queue:
   // Delete all expired records since the last cron run.
-  $expires = \Drupal::state()->get('my_module.last_check', 0);
+  $expires = \Drupal::state()->get('mymodule.last_check', 0);
   $request_time = \Drupal::time()->getRequestTime();
-  \Drupal::database()->delete('my_module_table')
+  \Drupal::database()->delete('mymodule_table')
     ->condition('expires', $expires, '>=')
     ->execute();
-  \Drupal::state()->set('my_module.last_check', $request_time);
+  \Drupal::state()->set('mymodule.last_check', $request_time);
 
   // Long-running operation example, leveraging a queue:
   // Queue news feeds for updates once their refresh interval has elapsed.
-  $queue = \Drupal::queue('my_module.feeds');
-  $ids = \Drupal::entityTypeManager()->getStorage('my_module_feed')->getFeedIdsToRefresh();
+  $queue = \Drupal::queue('mymodule.feeds');
+  $ids = \Drupal::entityTypeManager()->getStorage('mymodule_feed')->getFeedIdsToRefresh();
   foreach (Feed::loadMultiple($ids) as $feed) {
     if ($queue->createItem($feed)) {
       // Add timestamp to avoid queueing item more than once.
@@ -1941,7 +1941,7 @@ function hook_cron() {
       $feed->save();
     }
   }
-  $ids = \Drupal::entityQuery('my_module_feed')
+  $ids = \Drupal::entityQuery('mymodule_feed')
     ->accessCheck(FALSE)
     ->condition('queued', $request_time - (3600 * 6), '<')
     ->execute();
@@ -1963,7 +1963,7 @@ function hook_cron() {
  * @see hook_data_type_info()
  */
 function hook_data_type_info_alter(&$data_types) {
-  $data_types['email']['class'] = '\Drupal\my_module\Type\Email';
+  $data_types['email']['class'] = '\Drupal\mymodule\Type\Email';
 }
 
 /**
@@ -1984,7 +1984,7 @@ function hook_data_type_info_alter(&$data_types) {
 function hook_queue_info_alter(&$queues) {
   // This site has many feeds so let's spend 90 seconds on each cron run
   // updating feeds instead of the default 60.
-  $queues['my_module_feeds']['cron']['time'] = 90;
+  $queues['mymodule_feeds']['cron']['time'] = 90;
 }
 
 /**
@@ -1997,7 +1997,7 @@ function hook_condition_info_alter(array &$definitions) {
   // Add custom or modify existing condition definitions.
   if (isset($definitions['node_type']) && $definitions['node_type']['class'] == 'Drupal\node\Plugin\Condition\NodeType') {
     // If the node_type's class is unaltered, use a custom implementation.
-    $definitions['node_type']['class'] = 'Drupal\my_module\Plugin\Condition\NodeType';
+    $definitions['node_type']['class'] = 'Drupal\mymodule\Plugin\Condition\NodeType';
   }
 }
 
@@ -2167,7 +2167,7 @@ function hook_countries_alter(&$countries) {
  *   The array of display variant definitions, keyed by plugin ID.
  *
  * @see \Drupal\Core\Display\VariantManager
- * @see \Drupal\Core\Display\Attribute\DisplayVariant
+ * @see \Drupal\Core\Display\Annotation\DisplayVariant
  */
 function hook_display_variant_plugin_alter(array &$definitions) {
   $definitions['full_page']['admin_label'] = t('Block layout');
@@ -2297,10 +2297,10 @@ function hook_config_schema_info_alter(&$definitions) {
  *   The array of validation constraint definitions, keyed by plugin ID.
  *
  * @see \Drupal\Core\Validation\ConstraintManager
- * @see \Drupal\Core\Validation\Attribute\Constraint
+ * @see \Drupal\Core\Validation\Annotation\Constraint
  */
 function hook_validation_constraint_alter(array &$definitions) {
-  $definitions['Null']['class'] = '\Drupal\my_module\Plugin\Validation\Constraints\MyClass';
+  $definitions['Null']['class'] = '\Drupal\mymodule\Plugin\Validation\Constraints\MyClass';
 }
 
 /**
@@ -2463,7 +2463,7 @@ function hook_validation_constraint_alter(array &$definitions) {
  * @section sec_query Query parameters in Ajax requests
  * If a form uses an Ajax field, all the query parameters in the current request
  * will be also added to the Ajax POST requests along with an additional
- * 'ajax_form=1' parameter (See \Drupal\Core\Render\Element\RenderElementBase).
+ * 'ajax_form=1' parameter (See \Drupal\Core\Render\Element\RenderElement).
  * @code
  * $settings['options']['query'] += \Drupal::request()->query->all();
  * $settings['options']['query'][FormBuilderInterface::AJAX_FORM_REQUEST] = TRUE;
@@ -2643,8 +2643,8 @@ function hook_validation_constraint_alter(array &$definitions) {
  * @code
  * public function counter(Request $request) {
  *   $session = $request->getSession();
- *   $count = $session->get('my_module.counter', 0) + 1;
- *   $session->set('my_module.counter', $count);
+ *   $count = $session->get('mymodule.counter', 0) + 1;
+ *   $session->set('mymodule.counter', $count);
  *
  *   return [
  *     '#markup' => $this->t('Page Views: @count', ['@count' => $count]),
@@ -2656,7 +2656,7 @@ function hook_validation_constraint_alter(array &$definitions) {
  *
  * public function reset(Request $request) {
  *   $session = $request->getSession();
- *   $session->remove('my_module.counter');
+ *   $session->remove('mymodule.counter');
  * }
  * @endcode
  *

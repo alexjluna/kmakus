@@ -210,7 +210,7 @@ class SectionTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetThirdPartySettings().
    */
-  public static function providerTestGetThirdPartySettings() {
+  public function providerTestGetThirdPartySettings() {
     $data = [];
     $data[] = [
       'bad_judgement',
@@ -231,7 +231,7 @@ class SectionTest extends UnitTestCase {
    * @covers ::getThirdPartySetting
    * @dataProvider providerTestGetThirdPartySetting
    */
-  public function testGetThirdPartySetting(string $provider, string $key, ?string $expected, mixed $default = FALSE): void {
+  public function testGetThirdPartySetting($provider, $key, $expected, $default = FALSE) {
     if ($default) {
       $this->assertSame($expected, $this->section->getThirdPartySetting($provider, $key, $default));
     }
@@ -243,7 +243,7 @@ class SectionTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetThirdPartySetting().
    */
-  public static function providerTestGetThirdPartySetting(): array {
+  public function providerTestGetThirdPartySetting() {
     $data = [];
     $data[] = [
       'bad_judgement',
@@ -286,7 +286,7 @@ class SectionTest extends UnitTestCase {
   /**
    * Provides test data for ::testSetThirdPartySettings().
    */
-  public static function providerTestSetThirdPartySetting() {
+  public function providerTestSetThirdPartySetting() {
     $data = [];
     $data[] = [
       'bad_judgement',
@@ -330,7 +330,7 @@ class SectionTest extends UnitTestCase {
   /**
    * Provides test data for ::testUnsetThirdPartySetting().
    */
-  public static function providerTestUnsetThirdPartySetting() {
+  public function providerTestUnsetThirdPartySetting() {
     $data = [];
     $data['Key with values'] = [
       'bad_judgement',
@@ -399,7 +399,7 @@ class SectionTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetLayout().
    */
-  public static function providerTestGetLayout() {
+  public function providerTestGetLayout() {
     $data = [];
     $data['contexts'] = [['foo' => 'bar'], TRUE];
     $data['no contexts'] = [[], FALSE];

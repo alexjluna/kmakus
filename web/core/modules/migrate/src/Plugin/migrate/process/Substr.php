@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -61,8 +60,11 @@ use Drupal\migrate\MigrateException;
  * @endcode
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "substr"
+ * )
  */
-#[MigrateProcess('substr')]
 class Substr extends ProcessPluginBase {
 
   /**

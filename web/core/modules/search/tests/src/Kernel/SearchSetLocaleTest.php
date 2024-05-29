@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\search\Kernel;
 
 use Drupal\Core\Datetime\Entity\DateFormat;

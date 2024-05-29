@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Core\Language\Language;
@@ -102,7 +100,7 @@ class LanguageUrlRewritingTest extends BrowserTestBase {
     // If the rewritten URL has not a language prefix we pick a random prefix so
     // we can always check the prefixed URL.
     $prefixes = $this->config('language.negotiation')->get('url.prefixes');
-    $stored_prefix = $prefixes[$language->getId()] ?? $this->randomMachineName();
+    $stored_prefix = isset($prefixes[$language->getId()]) ? $prefixes[$language->getId()] : $this->randomMachineName();
     $this->assertNotEquals($prefix, $stored_prefix, $message);
     $prefix = $stored_prefix;
 

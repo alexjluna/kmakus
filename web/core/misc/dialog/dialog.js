@@ -5,14 +5,6 @@
  * @see http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html#the-dialog-element
  */
 
-class DrupalDialogEvent extends Event {
-  constructor(type, dialog, settings = null) {
-    super(`dialog:${type}`, { bubbles: true });
-    this.dialog = dialog;
-    this.settings = settings;
-  }
-}
-
 (function ($, Drupal, drupalSettings, bodyScrollLock) {
   /**
    * Default dialog options.
@@ -69,10 +61,7 @@ class DrupalDialogEvent extends Event {
    */
   Drupal.dialog = function (element, options) {
     let undef;
-
     const $element = $(element);
-    const domElement = $element.get(0);
-
     const dialog = {
       open: false,
       returnValue: undef,
@@ -81,33 +70,28 @@ class DrupalDialogEvent extends Event {
     function openDialog(settings) {
       settings = $.extend({}, drupalSettings.dialog, options, settings);
       // Trigger a global event to allow scripts to bind events to the dialog.
-      const event = new DrupalDialogEvent('beforecreate', dialog, settings);
-      domElement.dispatchEvent(event);
-      $element.dialog(event.settings);
+      $(window).trigger('dialog:beforecreate', [dialog, $element, settings]);
+      $element.dialog(settings);
       dialog.open = true;
 
       // Locks the body scroll only when it opens in modal.
       if (settings.modal) {
         // Locks the body when the dialog opens.
-        bodyScrollLock.lock(domElement);
+        bodyScrollLock.lock($element.get(0));
       }
 
-      domElement.dispatchEvent(
-        new DrupalDialogEvent('aftercreate', dialog, settings),
-      );
+      $(window).trigger('dialog:aftercreate', [dialog, $element, settings]);
     }
 
     function closeDialog(value) {
-      domElement.dispatchEvent(new DrupalDialogEvent('beforeclose', dialog));
-
+      $(window).trigger('dialog:beforeclose', [dialog, $element]);
       // Unlocks the body when the dialog closes.
       bodyScrollLock.clearBodyLocks();
 
       $element.dialog('close');
       dialog.returnValue = value;
       dialog.open = false;
-
-      domElement.dispatchEvent(new DrupalDialogEvent('afterclose', dialog));
+      $(window).trigger('dialog:afterclose', [dialog, $element]);
     }
 
     dialog.show = () => {

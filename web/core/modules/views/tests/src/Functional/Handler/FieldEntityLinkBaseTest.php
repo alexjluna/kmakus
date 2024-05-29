@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Functional\Handler;
 
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -26,7 +24,6 @@ class FieldEntityLinkBaseTest extends ViewTestBase {
    * {@inheritdoc}
    */
   protected static $modules = ['node', 'language'];
-
 
   /**
    * {@inheritdoc}
@@ -60,10 +57,7 @@ class FieldEntityLinkBaseTest extends ViewTestBase {
       $translation->save();
     }
 
-    $this->drupalLogin($this->createUser([
-      'delete any article content',
-      'edit any article content',
-    ]));
+    $this->drupalLogin($this->rootUser);
 
   }
 

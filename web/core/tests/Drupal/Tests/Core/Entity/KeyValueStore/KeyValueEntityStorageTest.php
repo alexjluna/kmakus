@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\Core\Entity\KeyValueStore;
 
-use Drupal\Component\Datetime\Time;
 use Drupal\Core\Cache\MemoryCache\MemoryCache;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -138,7 +137,7 @@ class KeyValueEntityStorageTest extends UnitTestCase {
       ->method('getCurrentLanguage')
       ->willReturn($language);
 
-    $this->entityStorage = new KeyValueEntityStorage($this->entityType, $this->keyValueStore, $this->uuidService, $this->languageManager, new MemoryCache(new Time()));
+    $this->entityStorage = new KeyValueEntityStorage($this->entityType, $this->keyValueStore, $this->uuidService, $this->languageManager, new MemoryCache());
     $this->entityStorage->setModuleHandler($this->moduleHandler);
 
     $container = new ContainerBuilder();

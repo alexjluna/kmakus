@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\Core\Language\LanguageInterface;
@@ -160,7 +158,7 @@ class EntityTranslationTest extends EntityLanguageTestBase {
     $langcode_key = $this->entityTypeManager->getDefinition($entity_type)->getKey('langcode');
     $default_langcode_key = $this->entityTypeManager->getDefinition($entity_type)->getKey('default_langcode');
     $name = $this->randomMachineName();
-    $uid = 2;
+    $uid = mt_rand(0, 127);
     $langcode = $this->langcodes[0];
 
     // Create a language neutral entity and check that properties are stored
@@ -208,8 +206,6 @@ class EntityTranslationTest extends EntityLanguageTestBase {
       if ($langcode != $default_langcode) {
         $properties[$langcode] = [
           'name' => [0 => $this->randomMachineName()],
-          // Note that the user ID here is intentionally random, which is not
-          // what we normally do in tests.
           'user_id' => [0 => mt_rand(128, 256)],
         ];
       }
@@ -597,7 +593,7 @@ class EntityTranslationTest extends EntityLanguageTestBase {
     $values = [];
     foreach ($this->langcodes as $langcode) {
       $values[$langcode]['name'] = $this->randomMachineName();
-      $values[$langcode]['user_id'] = 2;
+      $values[$langcode]['user_id'] = mt_rand(0, 127);
     }
 
     $default_langcode = $this->langcodes[0];

@@ -2,7 +2,6 @@
 
 namespace Drupal\user\Plugin\Validation\Constraint;
 
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\user\UserInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -16,15 +15,15 @@ class UserNameConstraintValidator extends ConstraintValidator {
    * {@inheritdoc}
    */
   public function validate($items, Constraint $constraint) {
-    if (empty($items) || ($items instanceof FieldItemListInterface && $items->isEmpty())) {
+    if (!isset($items) || !$items->value) {
       $this->context->addViolation($constraint->emptyMessage);
       return;
     }
-    $name = $items instanceof FieldItemListInterface ? $items->first()->value : $items;
+    $name = $items->first()->value;
     if (str_starts_with($name, ' ')) {
       $this->context->addViolation($constraint->spaceBeginMessage);
     }
-    if (str_ends_with($name, ' ')) {
+    if (substr($name, -1) == ' ') {
       $this->context->addViolation($constraint->spaceEndMessage);
     }
     if (str_contains($name, '  ')) {

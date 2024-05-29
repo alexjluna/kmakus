@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\field\Kernel;
 
 use Drupal\field\Entity\FieldConfig;
@@ -9,9 +7,9 @@ use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\field\Entity\FieldStorageConfig;
 
 /**
- * Tests multilingual fields logic.
+ * Tests multilanguage fields logic.
  *
- * The following tests will check the multilingual logic in field handling.
+ * The following tests will check the multilanguage logic in field handling.
  *
  * @group field
  */

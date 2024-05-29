@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Kernel;
 
 use Drupal\content_moderation\Permissions;
@@ -50,7 +48,7 @@ class ContentModerationPermissionsTest extends KernelTestBase {
    * @return array
    *   Content moderation permissions based test cases.
    */
-  public static function permissionsTestCases() {
+  public function permissionsTestCases() {
     return [
       'Simple Content Moderation Workflow' => [
         [

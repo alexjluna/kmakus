@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\locale\Functional;
 
 use Drupal\Core\Database\Database;
@@ -59,10 +57,10 @@ abstract class LocaleUpdateBase extends BrowserTestBase {
     parent::setUp();
 
     // Setup timestamps to identify old and new translation sources.
-    $this->timestampOld = \Drupal::time()->getRequestTime() - 300;
-    $this->timestampMedium = \Drupal::time()->getRequestTime() - 200;
-    $this->timestampNew = \Drupal::time()->getRequestTime() - 100;
-    $this->timestampNow = \Drupal::time()->getRequestTime();
+    $this->timestampOld = REQUEST_TIME - 300;
+    $this->timestampMedium = REQUEST_TIME - 200;
+    $this->timestampNew = REQUEST_TIME - 100;
+    $this->timestampNow = REQUEST_TIME;
 
     // Enable import of translations. By default this is disabled for automated
     // tests.
@@ -113,7 +111,7 @@ abstract class LocaleUpdateBase extends BrowserTestBase {
    *   in source and translations strings.
    */
   protected function makePoFile($path, $filename, $timestamp = NULL, array $translations = []) {
-    $timestamp = $timestamp ? $timestamp : \Drupal::time()->getRequestTime();
+    $timestamp = $timestamp ? $timestamp : REQUEST_TIME;
     $path = 'public://' . $path;
     $text = '';
     $po_header = <<<EOF

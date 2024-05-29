@@ -1,16 +1,16 @@
 /*!
- * jQuery UI Mouse 1.13.3
- * https://jqueryui.com
+ * jQuery UI Mouse 1.13.2
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: Mouse
 //>>group: Widgets
 //>>description: Abstracts mouse-based interactions to assist in creating certain widgets.
-//>>docs: https://api.jqueryui.com/mouse/
+//>>docs: http://api.jqueryui.com/mouse/
 
 ( function( factory ) {
 	"use strict";
@@ -38,7 +38,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 return $.widget( "ui.mouse", {
-	version: "1.13.3",
+	version: "1.13.2",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,

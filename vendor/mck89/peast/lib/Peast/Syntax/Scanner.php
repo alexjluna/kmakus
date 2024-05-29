@@ -976,35 +976,22 @@ class Scanner
     }
     
     /**
-     * Checks if the given position follows a slash.
+     * Checks if the consumed or the scanned position follow a slash.
      * 
-     * @param Position $position  Position to check
+     * @param Position $position  Additional position to check
      * 
      * @return bool
      */
-    protected function isAfterSlash($position)
+    protected function isAfterSlash($position = null)
     {
-        //Start from the previous index and loop until the begin of the file is reached
-        $idx = $position->getIndex() - 1;
-        while ($idx >= 0) {
-            //Get the char at the index to check
-            $char = $this->charAt($idx);
-            //If the char is actually a slash check that it's not a multiline comment closing slash
-            if ($char === "/") {
-                return $idx === 0 || $this->charAt($idx - 1) !== "*";
-            }
-            //Skip whitespaces but not line terminators since regexps can't be multiline
-            elseif (in_array($char, $this->whitespaces) && !in_array($char, $this->lineTerminators)) {
-                $idx--;
-            }
-            //If "/=" is found, return true, this is the only operator that needs a special treatment
-            //since it can be also the start of a regex
-            elseif ($char === "=" && $this->charAt($idx - 1) === "/") {
+        $consumedIndex = $this->getPosition()->getIndex();
+        $checkIndices = array($consumedIndex, $consumedIndex + 1);
+        if ($position) {
+            $checkIndices[] = $position->getIndex() - 1;
+        }
+        foreach ($checkIndices as $i) {
+            if ($i >= 0 && $this->charAt($i) === "/") {
                 return true;
-            }
-            //Different character, return
-            else {
-                break;
             }
         }
         return false;

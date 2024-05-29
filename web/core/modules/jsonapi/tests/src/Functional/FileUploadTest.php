@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Component\Render\PlainTextOutput;
@@ -18,7 +16,7 @@ use Drupal\user\Entity\User;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
-// cspell:ignore èxample msword
+// cspell:ignore èxample
 
 /**
  * Tests binary data file upload route.
@@ -149,45 +147,45 @@ class FileUploadTest extends ResourceTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testGetIndividual() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testGetIndividual() {}
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testPostIndividual() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testPostIndividual() {}
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testPatchIndividual() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testPatchIndividual() {}
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testDeleteIndividual() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testDeleteIndividual() {}
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testCollection() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testCollection() {}
 
   /**
    * {@inheritdoc}
+   *
+   * @requires module irrelevant_for_this_test
    */
-  public function testRelationships() {
-    $this->markTestSkipped('Irrelevant for this test');
-  }
+  public function testRelationships() {}
 
   /**
    * {@inheritdoc}
@@ -251,7 +249,7 @@ class FileUploadTest extends ResourceTestBase {
     // header with no 'file' prefix.
     $response = $this->fileRequest($uri, $this->testFileData, ['Content-Disposition' => 'filename="example.txt"']);
     $this->assertSame(201, $response->getStatusCode());
-    $expected = $this->getExpectedDocument(2, 'example_0.txt', TRUE);
+    $expected = $this->getExpectedDocument(2, 'example_0.txt');
     $this->assertResponseData($expected, $response);
 
     // Check the actual file data.
@@ -342,7 +340,7 @@ class FileUploadTest extends ResourceTestBase {
       'data' => [
         0 => $this->getExpectedDocument(1, 'existing.txt', TRUE, TRUE)['data'],
         1 => $this->getExpectedDocument(2, 'example.txt', TRUE, TRUE)['data'],
-        2 => $this->getExpectedDocument(3, 'example_0.txt', TRUE, TRUE)['data'],
+        2 => $this->getExpectedDocument(3, 'example_0.txt', FALSE, TRUE)['data'],
       ],
     ];
     $this->assertResponseData($expected, $response);
@@ -450,7 +448,7 @@ class FileUploadTest extends ResourceTestBase {
     $this->assertSame(201, $response->getStatusCode());
 
     // Loading expected normalized data for file 2, the duplicate file.
-    $expected = $this->getExpectedDocument(2, 'example_0.txt', TRUE);
+    $expected = $this->getExpectedDocument(2, 'example_0.txt');
     $this->assertResponseData($expected, $response);
 
     // Check the actual file data.
@@ -785,7 +783,6 @@ class FileUploadTest extends ResourceTestBase {
   protected function getExpectedDocument($fid = 1, $expected_filename = 'example.txt', $expected_as_filename = FALSE, $expected_status = FALSE) {
     $author = User::load($this->account->id());
     $file = File::load($fid);
-    $this->assertInstanceOf(File::class, $file);
     $self_url = Url::fromUri('base:/jsonapi/file/file/' . $file->uuid())->setAbsolute()->toString(TRUE)->getGeneratedUrl();
 
     return [
@@ -906,7 +903,7 @@ class FileUploadTest extends ResourceTestBase {
    */
   protected function assertResponseData(array $expected, ResponseInterface $response): void {
     static::recursiveKSort($expected);
-    $actual = $this->getDocumentFromResponse($response);
+    $actual = Json::decode((string) $response->getBody());
     static::recursiveKSort($actual);
 
     $this->assertSame($expected, $actual);

@@ -56,7 +56,7 @@ class FilteredPluginManagerTraitTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetFilteredDefinitions().
    */
-  public static function providerTestGetFilteredDefinitions() {
+  public function providerTestGetFilteredDefinitions() {
     $data = [];
     $data['populated context'] = [
       ['context1' => 'fake context'],

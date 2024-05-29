@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\migrate\Unit\process;
 
-use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\migrate\Plugin\migrate\process\FileCopy;
@@ -36,13 +35,13 @@ class FileCopyTest extends MigrateProcessTestCase {
   /**
    * Data provider for testFileProcessBaseConstructor.
    */
-  public static function providerFileProcessBaseConstructor() {
+  public function providerFileProcessBaseConstructor() {
     return [
-      [['file_exists' => 'replace'], FileExists::Replace],
-      [['file_exists' => 'rename'], FileExists::Rename],
-      [['file_exists' => 'use existing'], FileExists::Error],
-      [['file_exists' => 'foobar'], FileExists::Replace],
-      [[], FileExists::Replace],
+      [['file_exists' => 'replace'], FileSystemInterface::EXISTS_REPLACE],
+      [['file_exists' => 'rename'], FileSystemInterface::EXISTS_RENAME],
+      [['file_exists' => 'use existing'], FileSystemInterface::EXISTS_ERROR],
+      [['file_exists' => 'foobar'], FileSystemInterface::EXISTS_REPLACE],
+      [[], FileSystemInterface::EXISTS_REPLACE],
     ];
   }
 
@@ -51,12 +50,12 @@ class FileCopyTest extends MigrateProcessTestCase {
    *
    * @param array $configuration
    *   The plugin configuration.
-   * @param \Drupal\Core\File\FileExists $expected
+   * @param int $expected
    *   The expected value of the plugin configuration.
    *
    * @internal
    */
-  protected function assertPlugin(array $configuration, FileExists $expected): void {
+  protected function assertPlugin(array $configuration, int $expected): void {
     $stream_wrapper_manager = $this->prophesize(StreamWrapperManagerInterface::class)->reveal();
     $file_system = $this->prophesize(FileSystemInterface::class)->reveal();
     $download_plugin = $this->prophesize(MigrateProcessInterface::class)->reveal();

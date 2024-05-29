@@ -47,7 +47,7 @@ class MakeUniqueEntityFieldTest extends MigrateProcessTestCase {
       ->getMock();
     $this->entityQuery->expects($this->any())
       ->method('accessCheck')
-      ->willReturnSelf();
+      ->will($this->returnSelf());
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
 
     $storage = $this->createMock(EntityStorageInterface::class);
@@ -118,7 +118,7 @@ class MakeUniqueEntityFieldTest extends MigrateProcessTestCase {
   /**
    * Data provider for testMakeUniqueEntityField().
    */
-  public static function providerTestMakeUniqueEntityField() {
+  public function providerTestMakeUniqueEntityField() {
     return [
       // Tests no duplication.
       [0],

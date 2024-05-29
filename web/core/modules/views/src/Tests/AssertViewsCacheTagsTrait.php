@@ -6,8 +6,6 @@ use Drupal\Core\Cache\Cache;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ViewExecutable;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 trait AssertViewsCacheTagsTrait {
 
@@ -44,8 +42,7 @@ trait AssertViewsCacheTagsTrait {
     /** @var \Symfony\Component\HttpFoundation\RequestStack $request_stack */
     $request_stack = \Drupal::service('request_stack');
     $request = Request::createFromGlobals();
-    $request->server->set('REQUEST_TIME', \Drupal::time()->getRequestTime());
-    $request->setSession(new Session(new MockArraySessionStorage()));
+    $request->server->set('REQUEST_TIME', REQUEST_TIME);
     $view->setRequest($request);
     $request_stack->push($request);
     $renderer->renderRoot($build);
@@ -125,8 +122,7 @@ trait AssertViewsCacheTagsTrait {
     /** @var \Symfony\Component\HttpFoundation\RequestStack $request_stack */
     $request_stack = \Drupal::service('request_stack');
     $request = new Request();
-    $request->server->set('REQUEST_TIME', \Drupal::time()->getRequestTime());
-    $request->setSession(new Session(new MockArraySessionStorage()));
+    $request->server->set('REQUEST_TIME', REQUEST_TIME);
     $request_stack->push($request);
     $renderer->renderRoot($build);
 

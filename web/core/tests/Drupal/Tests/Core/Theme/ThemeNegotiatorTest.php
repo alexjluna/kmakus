@@ -220,7 +220,8 @@ class ThemeNegotiatorTest extends UnitTestCase {
    * @return \Drupal\Core\Theme\ThemeNegotiator
    */
   protected function createThemeNegotiator(array $negotiators) {
-    $resolver = new ClassResolver($this->container);
+    $resolver = new ClassResolver();
+    $resolver->setContainer($this->container);
     $theme_negotiator = new ThemeNegotiator($this->themeAccessCheck, $resolver, $negotiators);
     return $theme_negotiator;
   }

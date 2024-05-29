@@ -299,8 +299,10 @@ class SharedTempStore {
    * This method should be called when a value is set.
    */
   protected function ensureAnonymousSession() {
-    if ($this->currentUser->isAnonymous()) {
-      $this->requestStack->getSession()->set('core.tempstore.shared.owner', $this->owner);
+    // If this is being run from the CLI then the request will not have a
+    // session.
+    if ($this->currentUser->isAnonymous() && $this->requestStack->getCurrentRequest()->hasSession()) {
+      $this->requestStack->getCurrentRequest()->getSession()->set('core.tempstore.shared.owner', $this->owner);
     }
   }
 

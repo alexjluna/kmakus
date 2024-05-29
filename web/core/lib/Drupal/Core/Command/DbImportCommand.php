@@ -56,7 +56,7 @@ class DbImportCommand extends DbCommandBase {
   protected function runScript(Connection $connection, $script) {
     $old_key = Database::setActiveConnection($connection->getKey());
 
-    if (str_ends_with($script, '.gz')) {
+    if (substr($script, -3) == '.gz') {
       $script = "compress.zlib://$script";
     }
     try {

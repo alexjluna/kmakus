@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Functional\Plugin;
 
 use Drupal\Core\Cache\Cache;
@@ -129,7 +127,7 @@ class CacheTagTest extends ViewTestBase {
     $renderer = \Drupal::service('renderer');
     $view = Views::getView('test_tag_cache');
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Saving the view should invalidate the tags.
     $cache_plugin = $view->display_handler->getPlugin('cache');
@@ -143,7 +141,7 @@ class CacheTagTest extends ViewTestBase {
 
     $view->destroy();
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Test invalidating the nodes in this view invalidates the cache.
     $cache_plugin = $view->display_handler->getPlugin('cache');
@@ -157,7 +155,7 @@ class CacheTagTest extends ViewTestBase {
 
     $view->destroy();
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Test saving a node in this view invalidates the cache.
     $cache_plugin = $view->display_handler->getPlugin('cache');
@@ -172,7 +170,7 @@ class CacheTagTest extends ViewTestBase {
 
     $view->destroy();
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Test saving a node not in this view invalidates the cache too.
     $cache_plugin = $view->display_handler->getPlugin('cache');
@@ -186,7 +184,7 @@ class CacheTagTest extends ViewTestBase {
 
     $view->destroy();
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Test that invalidating a tag for a user, does not invalidate the cache,
     // as the user entity type will not be contained in the views cache tags.
@@ -205,7 +203,7 @@ class CacheTagTest extends ViewTestBase {
     // caching.
     \Drupal::service('cache_tags.invalidator')->invalidateTags($view->storage->getCacheTagsToInvalidate());
     $build = $view->buildRenderable();
-    $renderer->renderInIsolation($build);
+    $renderer->renderPlain($build);
 
     // Test the cacheFlush method invalidates the cache.
     $cache_plugin = $view->display_handler->getPlugin('cache');

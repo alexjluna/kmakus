@@ -6,11 +6,6 @@ use Drupal\Core\Menu\LocalTaskDefault;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-// cspell:ignore ragdoll
-
-/**
- * Defines a local task plugin with a dynamic title.
- */
 class TestTasksSettingsSub1 extends LocalTaskDefault {
 
   use StringTranslationTrait;

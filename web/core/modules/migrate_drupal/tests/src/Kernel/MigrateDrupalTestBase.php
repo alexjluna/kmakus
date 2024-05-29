@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal\Kernel;
 
 use Drupal\Core\Database\Database;
@@ -59,7 +57,7 @@ abstract class MigrateDrupalTestBase extends MigrateTestBase {
     $default_db = Database::getConnection()->getKey();
     Database::setActiveConnection($this->sourceDatabase->getKey());
 
-    if (str_ends_with($path, '.gz')) {
+    if (substr($path, -3) == '.gz') {
       $path = 'compress.zlib://' . $path;
     }
     require $path;

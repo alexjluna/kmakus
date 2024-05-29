@@ -2,10 +2,7 @@
 
 namespace Drupal\file\Upload;
 
-use Drupal\file\Validation\Constraint\UploadedFileConstraint;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Provides a bridge to Symfony UploadedFile.
@@ -40,7 +37,6 @@ class FormUploadedFile implements UploadedFileInterface {
    * {@inheritdoc}
    */
   public function isValid(): bool {
-    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use \Drupal\file\Validation\UploadedFileValidatorInterface::validate() instead. See https://www.drupal.org/node/3375456', E_USER_DEPRECATED);
     return $this->uploadedFile->isValid();
   }
 
@@ -48,7 +44,6 @@ class FormUploadedFile implements UploadedFileInterface {
    * {@inheritdoc}
    */
   public function getErrorMessage(): string {
-    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use \Drupal\file\Validation\UploadedFileValidatorInterface::validate() instead. See https://www.drupal.org/node/3375456', E_USER_DEPRECATED);
     return $this->uploadedFile->getErrorMessage();
   }
 
@@ -56,7 +51,6 @@ class FormUploadedFile implements UploadedFileInterface {
    * {@inheritdoc}
    */
   public function getError(): int {
-    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. Use \Drupal\file\Validation\UploadedFileValidatorInterface::validate() instead. See https://www.drupal.org/node/3375456', E_USER_DEPRECATED);
     return $this->uploadedFile->getError();
   }
 
@@ -86,14 +80,6 @@ class FormUploadedFile implements UploadedFileInterface {
    */
   public function getFilename(): string {
     return $this->uploadedFile->getFilename();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validate(ValidatorInterface $validator, array $options = []): ConstraintViolationListInterface {
-    $constraint = new UploadedFileConstraint($options);
-    return $validator->validate($this->uploadedFile, $constraint);
   }
 
 }

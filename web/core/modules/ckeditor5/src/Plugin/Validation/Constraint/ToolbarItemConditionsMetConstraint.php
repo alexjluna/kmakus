@@ -4,20 +4,19 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * A (placed) CKEditor 5 toolbar item's conditions must be met.
  *
+ * @Constraint(
+ *   id = "CKEditor5ToolbarItemConditionsMet",
+ *   label = @Translation("CKEditor 5 toolbar item conditions must be met", context = "Validation"),
+ * )
+ *
  * @internal
  */
-#[Constraint(
-  id: 'CKEditor5ToolbarItemConditionsMet',
-  label: new TranslatableMarkup('CKEditor 5 toolbar item conditions must be met', [], ['context' => 'Validation'])
-)]
-class ToolbarItemConditionsMetConstraint extends SymfonyConstraint {
+class ToolbarItemConditionsMetConstraint extends Constraint {
 
   /**
    * The violation message when the required image upload status is not set.

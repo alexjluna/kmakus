@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\filter\Functional;
 
 use Drupal\Component\Utility\Html;
@@ -17,7 +15,6 @@ use Drupal\user\RoleInterface;
  * Thoroughly test the administrative interface of the filter module.
  *
  * @group filter
- * @group #slow
  */
 class FilterAdminTest extends BrowserTestBase {
 

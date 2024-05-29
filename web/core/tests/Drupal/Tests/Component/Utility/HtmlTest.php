@@ -64,7 +64,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestCleanCssIdentifier() {
+  public function providerTestCleanCssIdentifier() {
     $id1 = 'abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789';
     $id2 = '¡¢£¤¥';
     $id3 = 'css__identifier__with__double__underscores';
@@ -77,7 +77,7 @@ class HtmlTest extends TestCase {
       [$id3, $id3],
       // Verify that invalid characters (including non-breaking space) are
       // stripped from the identifier.
-      ['invalid_identifier', 'invalid_ !"#$%&\'()*+,./:;<=>?@[\\]^`{|}~ identifier', []],
+      ['invalididentifier', 'invalid !"#$%&\'()*+,./:;<=>?@[\\]^`{|}~ identifier', []],
       // Verify that an identifier starting with a digit is replaced.
       ['_css_identifier', '1css_identifier', []],
       // Verify that an identifier starting with a hyphen followed by a digit is
@@ -132,7 +132,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestHtmlGetUniqueId() {
+  public function providerTestHtmlGetUniqueId() {
     // cSpell:disable
     $id = 'abcdefghijklmnopqrstuvwxyz-0123456789';
     return [
@@ -184,7 +184,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestHtmlGetUniqueIdWithAjaxIds() {
+  public function providerTestHtmlGetUniqueIdWithAjaxIds() {
     return [
       ['test-unique-id1--', 'test-unique-id1'],
       // Note, we truncate two hyphens at the end.
@@ -217,7 +217,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestHtmlGetId() {
+  public function providerTestHtmlGetId() {
     // cSpell:disable
     $id = 'abcdefghijklmnopqrstuvwxyz-0123456789';
     return [
@@ -249,7 +249,7 @@ class HtmlTest extends TestCase {
    *
    * @see testDecodeEntities()
    */
-  public static function providerDecodeEntities() {
+  public function providerDecodeEntities() {
     return [
       ['Drupal', 'Drupal'],
       ['<script>', '<script>'],
@@ -290,7 +290,7 @@ class HtmlTest extends TestCase {
    *
    * @see testEscape()
    */
-  public static function providerEscape() {
+  public function providerEscape() {
     return [
       ['Drupal', 'Drupal'],
       ['&lt;script&gt;', '<script>'],
@@ -364,7 +364,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestTransformRootRelativeUrlsToAbsolute() {
+  public function providerTestTransformRootRelativeUrlsToAbsolute() {
     $data = [];
 
     // Random generator.
@@ -409,7 +409,7 @@ class HtmlTest extends TestCase {
    * @return array
    *   Test data.
    */
-  public static function providerTestTransformRootRelativeUrlsToAbsoluteAssertion() {
+  public function providerTestTransformRootRelativeUrlsToAbsoluteAssertion() {
     return [
       'only relative path' => ['llama'],
       'only root-relative path' => ['/llama'],

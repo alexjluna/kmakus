@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d6;
 
 use Drupal\workflows\Entity\Workflow;

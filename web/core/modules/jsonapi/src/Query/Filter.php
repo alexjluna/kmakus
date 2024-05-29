@@ -101,10 +101,15 @@ class Filter {
    */
   protected function buildGroup(QueryInterface $query, EntityConditionGroup $condition_group) {
     // Create a condition group using the original query.
-    $group = match ($condition_group->conjunction()) {
-      'AND' => $query->andConditionGroup(),
-      'OR' => $query->orConditionGroup(),
-    };
+    switch ($condition_group->conjunction()) {
+      case 'AND':
+        $group = $query->andConditionGroup();
+        break;
+
+      case 'OR':
+        $group = $query->orConditionGroup();
+        break;
+    }
 
     // Get all children of the group.
     $members = $condition_group->members();

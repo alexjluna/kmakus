@@ -2,24 +2,22 @@
 
 namespace Drupal\views\Plugin\views\cache;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\views\Attribute\ViewsCache;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Simple caching of query results for Views displays.
  *
  * @ingroup views_cache_plugins
+ *
+ * @ViewsCache(
+ *   id = "time",
+ *   title = @Translation("Time-based"),
+ *   help = @Translation("Simple time-based caching of data.")
+ * )
  */
-#[ViewsCache(
-  id: 'time',
-  title: new TranslatableMarkup('Time-based'),
-  help: new TranslatableMarkup('Simple time-based caching of data.'),
-)]
 class Time extends CachePluginBase {
 
   /**
@@ -45,16 +43,11 @@ class Time extends CachePluginBase {
    *   The plugin implementation definition.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
-   * @param \Drupal\Component\Datetime\TimeInterface|null $time
-   *   The time service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, DateFormatterInterface $date_formatter, protected ?TimeInterface $time = NULL) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, DateFormatterInterface $date_formatter) {
     $this->dateFormatter = $date_formatter;
-    if (!$time) {
-      @trigger_error('Calling ' . __METHOD__ . ' without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3395991', E_USER_DEPRECATED);
-      $this->time = \Drupal::service('datetime.time');
-    }
+
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
@@ -65,8 +58,7 @@ class Time extends CachePluginBase {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('date.formatter'),
-      $container->get('datetime.time'),
+      $container->get('date.formatter')
     );
   }
 
@@ -152,7 +144,7 @@ class Time extends CachePluginBase {
   protected function cacheExpire($type) {
     $lifespan = $this->getLifespan($type);
     if ($lifespan) {
-      $cutoff = $this->time->getRequestTime() - $lifespan;
+      $cutoff = REQUEST_TIME - $lifespan;
       return $cutoff;
     }
     else {

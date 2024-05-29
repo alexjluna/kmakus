@@ -2,14 +2,11 @@
 
 namespace Drupal\views\Plugin\views\display;
 
-use Drupal\Component\Utility\Unicode;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsDisplay;
 use Drupal\views\Plugin\Block\ViewsBlock;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -18,19 +15,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ingroup views_display_plugins
  *
+ * @ViewsDisplay(
+ *   id = "block",
+ *   title = @Translation("Block"),
+ *   help = @Translation("Display the view as a block."),
+ *   theme = "views_view",
+ *   register_theme = FALSE,
+ *   uses_hook_block = TRUE,
+ *   contextual_links_locations = {"block"},
+ *   admin = @Translation("Block")
+ * )
+ *
  * @see \Drupal\views\Plugin\Block\ViewsBlock
  * @see \Drupal\views\Plugin\Derivative\ViewsBlock
  */
-#[ViewsDisplay(
-  id: "block",
-  title: new TranslatableMarkup("Block"),
-  help: new TranslatableMarkup("Display the view as a block."),
-  admin: new TranslatableMarkup("Block"),
-  theme: "views_view",
-  register_theme: FALSE,
-  uses_hook_block: TRUE,
-  contextual_links_locations: ["block"]
-)]
 class Block extends DisplayPluginBase {
 
   /**
@@ -164,12 +162,12 @@ class Block extends DisplayPluginBase {
     $options['block_description'] = [
       'category' => 'block',
       'title' => $this->t('Block name'),
-      'value' => Unicode::truncate($block_description, 24, FALSE, TRUE),
+      'value' => views_ui_truncate($block_description, 24),
     ];
     $options['block_category'] = [
       'category' => 'block',
       'title' => $this->t('Block category'),
-      'value' => Unicode::truncate($block_category, 24, FALSE, TRUE),
+      'value' => views_ui_truncate($block_category, 24),
     ];
 
     $filtered_allow = array_filter($this->getOption('allow'));

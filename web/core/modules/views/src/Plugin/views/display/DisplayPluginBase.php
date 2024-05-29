@@ -5,7 +5,6 @@ namespace Drupal\views\Plugin\views\display;
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheableMetadata;
@@ -128,13 +127,11 @@ abstract class DisplayPluginBase extends PluginBase implements DisplayPluginInte
   /**
    * Keeps track whether the display uses exposed filters.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public bool $has_exposed;
 
   /**
    * The default display.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public DisplayPluginInterface $default_display;
 
   /**
@@ -174,7 +171,7 @@ abstract class DisplayPluginBase extends PluginBase implements DisplayPluginInte
       foreach ($extenders as $extender) {
         /** @var \Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase $plugin */
         if ($plugin = $manager->createInstance($extender)) {
-          $extender_options = $display_extender_options[$plugin->getPluginId()] ?? [];
+          $extender_options = isset($display_extender_options[$plugin->getPluginId()]) ? $display_extender_options[$plugin->getPluginId()] : [];
           $plugin->init($this->view, $this, $extender_options);
           $this->extenders[$extender] = $plugin;
         }
@@ -1122,7 +1119,7 @@ abstract class DisplayPluginBase extends PluginBase implements DisplayPluginInte
       ];
     }
 
-    $display_comment = Unicode::truncate($this->getOption('display_comment'), 80, TRUE, TRUE);
+    $display_comment = views_ui_truncate($this->getOption('display_comment'), 80);
     $options['display_comment'] = [
       'category' => 'other',
       'title' => $this->t('Administrative comment'),
@@ -1138,7 +1135,7 @@ abstract class DisplayPluginBase extends PluginBase implements DisplayPluginInte
     $options['title'] = [
       'category' => 'title',
       'title' => $this->t('Title'),
-      'value' => Unicode::truncate($title, 32, FALSE, TRUE),
+      'value' => views_ui_truncate($title, 32),
       'desc' => $this->t('Change the title that this display will use.'),
     ];
 

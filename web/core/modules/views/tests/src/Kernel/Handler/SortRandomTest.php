@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Handler;
 
 use Drupal\Core\Cache\Cache;
@@ -124,7 +122,7 @@ class SortRandomTest extends ViewsKernelTestBase {
     $render_cache = \Drupal::service('render_cache');
 
     $original = $build = DisplayPluginBase::buildBasicRenderable($view_random->id(), 'default');
-    $result = $renderer->renderInIsolation($build);
+    $result = $renderer->renderPlain($build);
 
     $original['#cache'] += ['contexts' => []];
     $original['#cache']['contexts'] = Cache::mergeContexts($original['#cache']['contexts'], $this->container->getParameter('renderer.config')['required_cache_contexts']);
@@ -132,7 +130,7 @@ class SortRandomTest extends ViewsKernelTestBase {
     $this->assertFalse($render_cache->get($original), 'Ensure there is no render cache entry.');
 
     $build = DisplayPluginBase::buildBasicRenderable($view_random->id(), 'default');
-    $result2 = $renderer->renderInIsolation($build);
+    $result2 = $renderer->renderPlain($build);
 
     // Ensure that the random ordering works and don't produce the same result.
     // We use assertNotSame and cast values to strings since HTML tags are

@@ -4,19 +4,18 @@ declare(strict_types = 1);
 
 namespace Drupal\Core\Entity\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Checks if config entity properties have been changed.
+ *
+ * @Constraint(
+ *   id = "ImmutableProperties",
+ *   label = @Translation("Properties are unchanged", context = "Validation"),
+ *   type = { "entity" }
+ * )
  */
-#[Constraint(
-  id: 'ImmutableProperties',
-  label: new TranslatableMarkup('Properties are unchanged', [], ['context' => 'Validation']),
-  type: ['entity']
-)]
-class ImmutablePropertiesConstraint extends SymfonyConstraint {
+class ImmutablePropertiesConstraint extends Constraint {
 
   /**
    * The error message if an immutable property has been changed.
@@ -34,12 +33,6 @@ class ImmutablePropertiesConstraint extends SymfonyConstraint {
 
   /**
    * {@inheritdoc}
-   *
-   * @return ?string
-   *   Name of the default option.
-   *
-   * @todo Add method return type declaration.
-   * @see https://www.drupal.org/project/drupal/issues/3425150
    */
   public function getDefaultOption() {
     return 'properties';
@@ -47,12 +40,6 @@ class ImmutablePropertiesConstraint extends SymfonyConstraint {
 
   /**
    * {@inheritdoc}
-   *
-   * @return array
-   *   The names of the required options.
-   *
-   * @todo Add method return type declaration.
-   * @see https://www.drupal.org/project/drupal/issues/3425150
    */
   public function getRequiredOptions() {
     return ['properties'];

@@ -3,7 +3,6 @@
 namespace Drupal\block\Plugin\migrate\process;
 
 use Drupal\Core\Block\BlockPluginInterface;
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -11,9 +10,10 @@ use Drupal\migrate\Row;
 // cspell:ignore whois
 
 /**
- * Determines the block settings.
+ * @MigrateProcessPlugin(
+ *   id = "block_settings"
+ * )
  */
-#[MigrateProcess('block_settings')]
 class BlockSettings extends ProcessPluginBase {
 
   /**

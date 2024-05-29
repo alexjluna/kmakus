@@ -2,7 +2,6 @@
 
 namespace Drupal\responsive_image\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -10,8 +9,11 @@ use Drupal\migrate\Row;
 
 /**
  * Transforms image style mappings.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "image_style_mappings"
+ * )
  */
-#[MigrateProcess('image_style_mappings')]
 class ImageStyleMappings extends ProcessPluginBase {
 
   /**

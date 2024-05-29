@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\language\Functional;
 
-use Drupal\Core\Config\ConfigCollectionEvents;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\BrowserTestBase;
 
@@ -62,9 +59,8 @@ class LanguageConfigOverrideImportTest extends BrowserTestBase {
     $this->assertEquals('FR default site name', $override->get('name'));
     $this->drupalGet('fr');
     $this->assertSession()->pageTextContains('FR default site name');
-    $this->drupalLogin($this->drupalCreateUser([
-      'translate configuration',
-    ]));
+
+    $this->drupalLogin($this->rootUser);
     $this->drupalGet('admin/config/development/maintenance/translate/fr/edit');
     $this->assertSession()->pageTextContains('FR message: @site is currently under maintenance. We should be back shortly. Thank you for your patience');
   }
@@ -95,12 +91,7 @@ class LanguageConfigOverrideImportTest extends BrowserTestBase {
     // Test that no config save event has been fired during the import because
     // language configuration overrides do not fire events.
     $event_recorder = \Drupal::state()->get('config_events_test.event', FALSE);
-    $this->assertSame([
-      'event_name' => ConfigCollectionEvents::SAVE_IN_COLLECTION,
-      'current_config_data' => ['name' => 'FR default site name'],
-      'original_config_data' => [],
-      'raw_config_data' => ['name' => 'FR default site name'],
-    ], $event_recorder);
+    $this->assertFalse($event_recorder);
 
     $this->drupalGet('fr');
     $this->assertSession()->pageTextContains('FR default site name');

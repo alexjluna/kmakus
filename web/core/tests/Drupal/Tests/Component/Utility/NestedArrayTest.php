@@ -87,10 +87,6 @@ class NestedArrayTest extends TestCase {
     NestedArray::setValue($this->form, $this->parents, $new_value);
     $this->assertSame('New value', $this->form['details']['element']['#value'], 'Changed nested element value found.');
     $this->assertTrue($this->form['details']['element']['#required'], 'New nested element value found.');
-
-    $this->expectException(\LogicException::class);
-    $this->expectExceptionMessage('Cannot create key "child" on non-array value.');
-    NestedArray::setValue($this->form, ['details', 'element', '#value', 'child'], $new_value);
   }
 
   /**
@@ -268,7 +264,7 @@ class NestedArrayTest extends TestCase {
     $this->assertEquals($expected, NestedArray::filter($array, $callable));
   }
 
-  public static function providerTestFilter() {
+  public function providerTestFilter() {
     $data = [];
     $data['1d-array'] = [
       [0, 1, '', TRUE], NULL, [1 => 1, 3 => TRUE],

@@ -244,9 +244,7 @@ abstract class ViewsFormBase extends FormBase implements ViewsFormInterface {
       $display .= $output;
 
       $options = [
-        'classes' => [
-          'ui-dialog' => 'views-ui-dialog js-views-ui-dialog',
-        ],
+        'dialogClass' => 'views-ui-dialog js-views-ui-dialog',
         'width' => '75%',
       ];
 

@@ -5,4 +5,3 @@ name: Track changes import term
 vid: track_changes_import_term
 description: ''
 weight: 0
-new_revision: false

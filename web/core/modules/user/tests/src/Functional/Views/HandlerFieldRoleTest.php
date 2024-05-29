@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Functional\Views;
 
 use Drupal\Component\Utility\Html;
@@ -40,7 +38,9 @@ class HandlerFieldRoleTest extends UserTestBase {
 
     // Add roles to user 1.
     $user = User::load(1);
-    $user->addRole($role_name_a)->addRole($role_name_b)->save();
+    $user->addRole($role_name_a);
+    $user->addRole($role_name_b);
+    $user->save();
 
     $this->drupalLogin($this->createUser(['access user profiles']));
     $this->drupalGet('/test-views-handler-field-role');

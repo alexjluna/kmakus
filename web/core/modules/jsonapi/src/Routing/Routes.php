@@ -87,7 +87,7 @@ class Routes implements ContainerInjectionInterface {
       sprintf('The provided base path should contain a leading slash "/". Given: "%s".', $jsonapi_base_path)
     );
     assert(
-      !str_ends_with($jsonapi_base_path, '/'),
+      substr($jsonapi_base_path, -1) !== '/',
       sprintf('The provided base path should not contain a trailing slash "/". Given: "%s".', $jsonapi_base_path)
     );
     $this->jsonApiBasePath = $jsonapi_base_path;

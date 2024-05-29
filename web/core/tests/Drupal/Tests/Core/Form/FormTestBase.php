@@ -14,8 +14,6 @@ use Drupal\Core\Form\FormValidator;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 /**
  * Provides a base class for testing form functionality.
@@ -186,7 +184,6 @@ abstract class FormTestBase extends UnitTestCase {
     $this->account = $this->createMock('Drupal\Core\Session\AccountInterface');
     $this->themeManager = $this->createMock('Drupal\Core\Theme\ThemeManagerInterface');
     $this->request = Request::createFromGlobals();
-    $this->request->setSession(new Session(new MockArraySessionStorage()));
     $this->eventDispatcher = $this->createMock('Symfony\Contracts\EventDispatcher\EventDispatcherInterface');
     $this->requestStack = new RequestStack();
     $this->requestStack->push($this->request);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views_ui\Functional;
 
 use Drupal\Core\Menu\MenuTreeParameters;
@@ -13,7 +11,6 @@ use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
  * Tests the UI of generic display path plugin.
  *
  * @group views_ui
- * @group #slow
  * @see \Drupal\views\Plugin\views\display\PathPluginBase
  */
 class DisplayPathTest extends UITestBase {
@@ -219,7 +216,6 @@ class DisplayPathTest extends UITestBase {
       'administer menu',
       'link to any page',
       'access toolbar',
-      'access administration pages',
     ]);
     $this->drupalLogin($admin_user);
 

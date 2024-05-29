@@ -2,18 +2,17 @@
 
 namespace Drupal\file\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Supports validating file URIs.
+ *
+ * @Constraint(
+ *   id = "FileUriUnique",
+ *   label = @Translation("File URI", context = "Validation")
+ * )
  */
-#[Constraint(
-  id: 'FileUriUnique',
-  label: new TranslatableMarkup('File URI', [], ['context' => 'Validation'])
-)]
-class FileUriUnique extends SymfonyConstraint {
+class FileUriUnique extends Constraint {
 
   public $message = 'The file %value already exists. Enter a unique file URI.';
 

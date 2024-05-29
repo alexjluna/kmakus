@@ -27,10 +27,6 @@
      * @fires event:drupalEditorFeatureAdded
      */
     addedFeature(feature) {
-      Drupal.deprecationError({
-        message:
-          'Drupal.editorConfiguration.addedFeature is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
       $(document).trigger('drupalEditorFeatureAdded', feature);
     },
 
@@ -47,10 +43,6 @@
      * @fires event:drupalEditorFeatureRemoved
      */
     removedFeature(feature) {
-      Drupal.deprecationError({
-        message:
-          'Drupal.editorConfiguration.removedFeature is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
       $(document).trigger('drupalEditorFeatureRemoved', feature);
     },
 
@@ -70,10 +62,6 @@
      * @fires event:drupalEditorFeatureModified
      */
     modifiedFeature(feature) {
-      Drupal.deprecationError({
-        message:
-          'Drupal.editorConfiguration.modifiedFeature is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
       $(document).trigger('drupalEditorFeatureModified', feature);
     },
 
@@ -669,11 +657,6 @@
         return true;
       }
 
-      Drupal.deprecationError({
-        message:
-          'Drupal.editorConfiguration.featureIsAllowedByFilters is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
-
       // If any filter's current status forbids the editor feature, return
       // false.
       Drupal.filterConfiguration.update();
@@ -719,11 +702,6 @@
    * @see Drupal.EditorFeature
    */
   Drupal.EditorFeatureHTMLRule = function () {
-    Drupal.deprecationError({
-      message:
-        'Drupal.EditorFeatureHTMLRule is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     /**
      *
      * @type {Object}
@@ -790,11 +768,6 @@
    * @see Drupal.EditorFeatureHTMLRule
    */
   Drupal.EditorFeature = function (name) {
-    Drupal.deprecationError({
-      message:
-        'Drupal.EditorFeature is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     this.name = name;
     this.rules = [];
   };
@@ -806,11 +779,6 @@
    *   A text editor feature HTML rule.
    */
   Drupal.EditorFeature.prototype.addHTMLRule = function (rule) {
-    Drupal.deprecationError({
-      message:
-        'Drupal.EditorFeature.prototype.addHTMLRule is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     this.rules.push(rule);
   };
 
@@ -838,11 +806,6 @@
    * @see Drupal.FilterHTMLRule
    */
   Drupal.FilterStatus = function (name) {
-    Drupal.deprecationError({
-      message:
-        'Drupal.FilterStatus is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     /**
      *
      * @type {string}
@@ -869,11 +832,6 @@
    *   A text filter HTML rule.
    */
   Drupal.FilterStatus.prototype.addHTMLRule = function (rule) {
-    Drupal.deprecationError({
-      message:
-        'Drupal.FilterStatus.prototype.addHTMLRule is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     this.rules.push(rule);
   };
 
@@ -953,11 +911,6 @@
    * @see Drupal.FilterStatus
    */
   Drupal.FilterHTMLRule = function () {
-    Drupal.deprecationError({
-      message:
-        'Drupal.FilterHTMLRule is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     // Allow or forbid tags.
     this.tags = [];
     this.allow = null;
@@ -973,11 +926,6 @@
   };
 
   Drupal.FilterHTMLRule.prototype.clone = function () {
-    Drupal.deprecationError({
-      message:
-        'Drupal.FilterHTMLRule.prototype.clone is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-    });
-
     const clone = new Drupal.FilterHTMLRule();
     clone.tags = this.tags.slice(0);
     clone.allow = this.allow;
@@ -1036,11 +984,6 @@
      * up-to-date.
      */
     update() {
-      Drupal.deprecationError({
-        message:
-          'Drupal.filterConfiguration.update is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
-
       Object.keys(Drupal.filterConfiguration.statuses || {}).forEach(
         (filterID) => {
           // Update status.
@@ -1070,11 +1013,6 @@
    */
   Drupal.behaviors.initializeFilterConfiguration = {
     attach(context, settings) {
-      Drupal.deprecationError({
-        message:
-          'Drupal.behaviors.initializeFilterConfiguration is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. See https://www.drupal.org/node/3422372.',
-      });
-
       once(
         'filter-editor-status',
         '#filters-status-wrapper input.form-checkbox',

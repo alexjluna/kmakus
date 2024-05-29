@@ -58,7 +58,7 @@
       $(once('media-library-menu-item', $menu.find('a')))
         .on('keypress', (e) => {
           // The AJAX link has the button role, so we need to make sure the link
-          // is also triggered when pressing the space bar.
+          // is also triggered when pressing the spacebar.
           if (e.which === 32) {
             e.preventDefault();
             e.stopPropagation();
@@ -382,7 +382,7 @@
       if (!once('media-library-selection-info', 'html').length) {
         return;
       }
-      window.addEventListener('dialog:aftercreate', () => {
+      $(window).on('dialog:aftercreate', () => {
         // Since the dialog HTML is not part of the context, we can't use
         // context here.
         const $buttonPane = $(
@@ -410,7 +410,7 @@
       if (!once('media-library-clear-selection', 'html').length) {
         return;
       }
-      window.addEventListener('dialog:afterclose', () => {
+      $(window).on('dialog:afterclose', () => {
         Drupal.MediaLibrary.currentSelection = [];
       });
     },

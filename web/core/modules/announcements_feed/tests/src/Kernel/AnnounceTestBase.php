@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\announcements_feed\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Kernel\Migrate\d7;
 
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
@@ -24,7 +22,7 @@ class MigrateSystemConfigurationTest extends MigrateDrupal7TestBase {
         'requirements_warning' => 172800,
         'requirements_error' => 1209600,
       ],
-      'logging' => TRUE,
+      'logging' => 1,
     ],
     'system.date' => [
       'first_day' => 1,
@@ -120,7 +118,6 @@ class MigrateSystemConfigurationTest extends MigrateDrupal7TestBase {
       'admin_compact_mode' => TRUE,
       'weight_select_max' => 100,
       'default_langcode' => 'en',
-      'mail_notification' => NULL,
     ],
   ];
 

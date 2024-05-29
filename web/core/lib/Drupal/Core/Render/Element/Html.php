@@ -2,13 +2,12 @@
 
 namespace Drupal\Core\Render\Element;
 
-use Drupal\Core\Render\Attribute\RenderElement;
-
 /**
  * Provides a render element for an entire HTML page: <html> plus its children.
+ *
+ * @RenderElement("html")
  */
-#[RenderElement('html')]
-class Html extends RenderElementBase {
+class Html extends RenderElement {
 
   /**
    * {@inheritdoc}

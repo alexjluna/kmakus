@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\Tests\Core\Routing;
 
 use Drupal\Core\Routing\RouteMatch;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,7 @@ class RouteMatchTest extends RouteMatchTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static function getRouteMatch(string $name, Route $route, array $parameters, array $raw_parameters): RouteMatchInterface {
+  protected function getRouteMatch($name, Route $route, array $parameters, array $raw_parameters) {
     return new RouteMatch($name, $route, $parameters, $raw_parameters);
   }
 

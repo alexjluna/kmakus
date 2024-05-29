@@ -3,16 +3,12 @@
 namespace Drupal\Core\State;
 
 use Drupal\Core\Asset\AssetQueryString;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Cache\CacheCollector;
 use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
-use Drupal\Core\Lock\LockBackendInterface;
-use Drupal\Core\Site\Settings;
 
 /**
  * Provides the state system using a key value store.
  */
-class State extends CacheCollector implements StateInterface {
+class State implements StateInterface {
 
   /**
    * Information about all deprecated state, keyed by legacy state key.
@@ -38,32 +34,20 @@ class State extends CacheCollector implements StateInterface {
   protected $keyValueStore;
 
   /**
+   * Static state cache.
+   *
+   * @var array
+   */
+  protected $cache = [];
+
+  /**
    * Constructs a State object.
    *
    * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value_factory
    *   The key value store to use.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The cache backend.
-   * @param \Drupal\Core\Lock\LockBackendInterface $lock
-   *   The lock backend.
    */
-  public function __construct(KeyValueFactoryInterface $key_value_factory, CacheBackendInterface $cache = NULL, LockBackendInterface $lock = NULL) {
-    if (!$cache) {
-      @trigger_error('Calling  ' . __METHOD__ . '() without the $cache argument is deprecated in drupal:10.3.0 and is required in drupal:11.0.0. See https://www.drupal.org/node/3177901', E_USER_DEPRECATED);
-      $cache = \Drupal::cache('bootstrap');
-    }
-    if (!$lock) {
-      @trigger_error('Calling  ' . __METHOD__ . '() without the $lock argument is deprecated in drupal:10.3.0 and is required in drupal:11.0.0. See https://www.drupal.org/node/3177901', E_USER_DEPRECATED);
-      $lock = \Drupal::service('lock');
-    }
-    parent::__construct('state', $cache, $lock);
+  public function __construct(KeyValueFactoryInterface $key_value_factory) {
     $this->keyValueStore = $key_value_factory->get('state');
-
-    // For backward compatibility, allow to opt-out of state caching, if cache
-    // is not explicitly enabled, flag the cache as already loaded.
-    if (Settings::get('state_cache') !== TRUE) {
-      $this->cacheLoaded = TRUE;
-    }
   }
 
   /**
@@ -77,17 +61,8 @@ class State extends CacheCollector implements StateInterface {
       @trigger_error(self::$deprecatedState[$key]['message'], E_USER_DEPRECATED);
       $key = self::$deprecatedState[$key]['replacement'];
     }
-    return parent::get($key) ?? $default;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function resolveCacheMiss($key) {
-    $value = $this->keyValueStore->get($key);
-    $this->storage[$key] = $value;
-    $this->persist($key);
-    return $value;
+    $values = $this->getMultiple([$key]);
+    return $values[$key] ?? $default;
   }
 
   /**
@@ -95,8 +70,31 @@ class State extends CacheCollector implements StateInterface {
    */
   public function getMultiple(array $keys) {
     $values = [];
+    $load = [];
     foreach ($keys as $key) {
-      $values[$key] = $this->get($key);
+      // Check if we have a value in the cache.
+      if (isset($this->cache[$key])) {
+        $values[$key] = $this->cache[$key];
+      }
+      // Load the value if we don't have an explicit NULL value.
+      elseif (!array_key_exists($key, $this->cache)) {
+        $load[] = $key;
+      }
+    }
+
+    if ($load) {
+      $loaded_values = $this->keyValueStore->getMultiple($load);
+      foreach ($load as $key) {
+        // If we find a value, even one that is NULL, add it to the cache and
+        // return it.
+        if (\array_key_exists($key, $loaded_values)) {
+          $values[$key] = $loaded_values[$key];
+          $this->cache[$key] = $loaded_values[$key];
+        }
+        else {
+          $this->cache[$key] = NULL;
+        }
+      }
     }
 
     return $values;
@@ -111,76 +109,42 @@ class State extends CacheCollector implements StateInterface {
       @trigger_error(self::$deprecatedState[$key]['message'], E_USER_DEPRECATED);
       $key = self::$deprecatedState[$key]['replacement'];
     }
+    $this->cache[$key] = $value;
     $this->keyValueStore->set($key, $value);
-    // If another request had a cache miss before this request, and also hasn't
-    // written to cache yet, then it may already have read this value from the
-    // database and could write that value to the cache to the end of the
-    // request. To avoid this race condition, write to the cache immediately
-    // after calling parent::set(). This allows the race condition detection in
-    // CacheCollector::set() to work.
-    parent::set($key, $value);
-    $this->persist($key);
-    static::updateCache();
   }
 
   /**
    * {@inheritdoc}
    */
   public function setMultiple(array $data) {
-    $this->keyValueStore->setMultiple($data);
     foreach ($data as $key => $value) {
-      parent::set($key, $value);
-      $this->persist($key);
+      $this->cache[$key] = $value;
     }
+    $this->keyValueStore->setMultiple($data);
   }
 
   /**
    * {@inheritdoc}
    */
   public function delete($key) {
-    $this->keyValueStore->delete($key);
-    parent::delete($key);
+    $this->deleteMultiple([$key]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function deleteMultiple(array $keys) {
-    $this->keyValueStore->deleteMultiple($keys);
     foreach ($keys as $key) {
-      parent::delete($key);
+      unset($this->cache[$key]);
     }
+    $this->keyValueStore->deleteMultiple($keys);
   }
 
   /**
    * {@inheritdoc}
    */
   public function resetCache() {
-    $this->clear();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function updateCache($lock = TRUE) {
-    // For backward compatibility, allow to opt-out of state caching, if cache
-    // is not explicitly enabled, there is no need to update it.
-    if (Settings::get('state_cache') !== TRUE) {
-      return;
-    }
-    parent::updateCache($lock);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function invalidateCache() {
-    // For backward compatibility, allow to opt-out of state caching, if cache
-    // is not explicitly enabled, there is no need to invalidate it.
-    if (Settings::get('state_cache') !== TRUE) {
-      return;
-    }
-    parent::invalidateCache();
+    $this->cache = [];
   }
 
 }

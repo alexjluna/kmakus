@@ -1,4 +1,3 @@
-langcode: en
 test: English test
 test_multiple:
   string: 'A string'

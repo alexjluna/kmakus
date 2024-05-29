@@ -86,7 +86,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Data provider for testSetRouteOptionsWithStandardRoute.
    */
-  public static function providerTestSetRouteOptionsWithStandardRoute() {
+  public function providerTestSetRouteOptionsWithStandardRoute() {
     return [
       ['Drupal\Tests\Core\Entity\BasicControllerClass::exampleControllerMethod'],
       ['Drupal\Tests\Core\Entity\test_function_controller'],
@@ -116,7 +116,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Data provider for testSetRouteOptionsWithStandardRouteWithArgument.
    */
-  public static function providerTestSetRouteOptionsWithStandardRouteWithArgument() {
+  public function providerTestSetRouteOptionsWithStandardRouteWithArgument() {
     return [
       ['Drupal\Tests\Core\Entity\BasicControllerClass::exampleControllerMethodWithArgument'],
       ['Drupal\Tests\Core\Entity\test_function_controller_with_argument'],
@@ -146,7 +146,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Data provider for testSetRouteOptionsWithContentController.
    */
-  public static function providerTestSetRouteOptionsWithContentController() {
+  public function providerTestSetRouteOptionsWithContentController() {
     return [
       ['Drupal\Tests\Core\Entity\BasicControllerClass::exampleControllerMethodWithArgument'],
       ['Drupal\Tests\Core\Entity\test_function_controller_with_argument'],
@@ -179,7 +179,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Data provider for testSetRouteOptionsWithEntityTypeNoUpcasting.
    */
-  public static function providerTestSetRouteOptionsWithEntityTypeNoUpcasting() {
+  public function providerTestSetRouteOptionsWithEntityTypeNoUpcasting() {
     return [
       ['Drupal\Tests\Core\Entity\BasicControllerClass::exampleControllerWithEntityNoUpcasting'],
       ['Drupal\Tests\Core\Entity\test_function_controller_no_upcasting'],
@@ -213,7 +213,7 @@ class EntityResolverManagerTest extends UnitTestCase {
   /**
    * Data provider for testSetRouteOptionsWithEntityTypeUpcasting.
    */
-  public static function providerTestSetRouteOptionsWithEntityTypeUpcasting() {
+  public function providerTestSetRouteOptionsWithEntityTypeUpcasting() {
     return [
       ['Drupal\Tests\Core\Entity\BasicControllerClass::exampleControllerWithEntityUpcasting'],
       ['Drupal\Tests\Core\Entity\test_function_controller_entity_upcasting'],

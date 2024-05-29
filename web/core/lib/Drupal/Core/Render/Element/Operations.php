@@ -2,8 +2,6 @@
 
 namespace Drupal\Core\Render\Element;
 
-use Drupal\Core\Render\Attribute\RenderElement;
-
 /**
  * Provides a render element for a set of operations links.
  *
@@ -12,8 +10,9 @@ use Drupal\Core\Render\Attribute\RenderElement;
  * through a theme suggestion.
  *
  * @see \Drupal|Core\Render\Element\DropButton
+ *
+ * @RenderElement("operations")
  */
-#[RenderElement('operations')]
 class Operations extends Dropbutton {
 
   /**

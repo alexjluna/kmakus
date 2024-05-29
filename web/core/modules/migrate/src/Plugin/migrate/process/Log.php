@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -21,8 +20,11 @@ use Drupal\migrate\Row;
  * @endcode
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "log"
+ * )
  */
-#[MigrateProcess('log')]
 class Log extends ProcessPluginBase {
 
   /**

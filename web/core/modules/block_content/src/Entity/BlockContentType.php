@@ -74,20 +74,20 @@ class BlockContentType extends ConfigEntityBundleBase implements BlockContentTyp
    *
    * @var bool
    */
-  protected $revision = FALSE;
+  protected $revision;
 
   /**
    * The description of the block type.
    *
-   * @var string|null
+   * @var string
    */
-  protected $description = NULL;
+  protected $description;
 
   /**
    * {@inheritdoc}
    */
   public function getDescription() {
-    return $this->description ?? '';
+    return $this->description;
   }
 
   /**

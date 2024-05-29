@@ -74,7 +74,7 @@ class ModuleRouteSubscriberTest extends UnitTestCase {
   /**
    * Data provider for testRemoveRoute().
    */
-  public static function providerTestRemoveRoute() {
+  public function providerTestRemoveRoute() {
     return [
       ['enabled', ['_module_dependencies' => 'enabled'], FALSE],
       ['disabled', ['_module_dependencies' => 'disabled'], TRUE],

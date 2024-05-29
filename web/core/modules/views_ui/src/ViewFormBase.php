@@ -2,7 +2,6 @@
 
 namespace Drupal\views_ui;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -161,7 +160,7 @@ abstract class ViewFormBase extends EntityForm {
   public function getDisplayLabel(ViewUI $view, $display_id, $check_changed = TRUE) {
     $display = $view->get('display');
     $title = $display_id == 'default' ? $this->t('Default') : $display[$display_id]['display_title'];
-    $title = Unicode::truncate($title, 25, FALSE, TRUE);
+    $title = views_ui_truncate($title, 25);
 
     if ($check_changed && !empty($view->changed_display[$display_id])) {
       $changed = '*';

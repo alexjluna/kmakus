@@ -5,8 +5,7 @@ namespace Drupal\Core\TempStore\Element;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Render\Attribute\RenderElement;
-use Drupal\Core\Render\Element\RenderElementBase;
+use Drupal\Core\Render\Element\RenderElement;
 use Drupal\Core\Render\RendererInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -27,9 +26,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   '#url' => \Drupal\Core\Url::fromRoute('examples.break_lock_form'),
  * ];
  * @endcode
+ *
+ * @RenderElement("break_lock_link")
  */
-#[RenderElement('break_lock_link')]
-class BreakLockLink extends RenderElementBase implements ContainerFactoryPluginInterface {
+class BreakLockLink extends RenderElement implements ContainerFactoryPluginInterface {
 
   /**
    * The date formatter.

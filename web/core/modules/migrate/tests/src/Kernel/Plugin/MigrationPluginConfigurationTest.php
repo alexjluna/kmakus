@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate\Kernel\Plugin;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -41,7 +39,7 @@ class MigrationPluginConfigurationTest extends KernelTestBase {
   /**
    * Provide configuration data for testing.
    */
-  public static function mergeProvider() {
+  public function mergeProvider() {
     return [
       // Tests adding new configuration to a migration.
       [

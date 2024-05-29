@@ -3,8 +3,8 @@ status: true
 dependencies: {  }
 name: page
 type: page
-description: null
-help: null
+description: ''
+help: ''
 new_revision: false
 preview_mode: 1
 display_submitted: false

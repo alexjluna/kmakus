@@ -4,13 +4,10 @@ namespace Drupal\workspaces\EntityQuery;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\workspaces\WorkspaceInformationInterface;
 use Drupal\workspaces\WorkspaceManagerInterface;
 
 /**
  * Provides workspaces-specific helpers for altering entity queries.
- *
- * @internal
  */
 trait QueryTrait {
 
@@ -20,13 +17,6 @@ trait QueryTrait {
    * @var \Drupal\workspaces\WorkspaceManagerInterface
    */
   protected $workspaceManager;
-
-  /**
-   * The workspace information service.
-   *
-   * @var \Drupal\workspaces\WorkspaceInformationInterface
-   */
-  protected $workspaceInfo;
 
   /**
    * Constructs a Query object.
@@ -42,14 +32,11 @@ trait QueryTrait {
    *   List of potential namespaces of the classes belonging to this query.
    * @param \Drupal\workspaces\WorkspaceManagerInterface $workspace_manager
    *   The workspace manager.
-   * @param \Drupal\workspaces\WorkspaceInformationInterface $workspace_information
-   *   The workspace information service.
    */
-  public function __construct(EntityTypeInterface $entity_type, $conjunction, Connection $connection, array $namespaces, WorkspaceManagerInterface $workspace_manager, WorkspaceInformationInterface $workspace_information) {
+  public function __construct(EntityTypeInterface $entity_type, $conjunction, Connection $connection, array $namespaces, WorkspaceManagerInterface $workspace_manager) {
     parent::__construct($entity_type, $conjunction, $connection, $namespaces);
 
     $this->workspaceManager = $workspace_manager;
-    $this->workspaceInfo = $workspace_information;
   }
 
   /**
@@ -67,7 +54,7 @@ trait QueryTrait {
 
     // Only alter the query if the active workspace is not the default one and
     // the entity type is supported.
-    if ($this->workspaceInfo->isEntityTypeSupported($this->entityType) && $this->workspaceManager->hasActiveWorkspace()) {
+    if ($this->workspaceManager->isEntityTypeSupported($this->entityType) && $this->workspaceManager->hasActiveWorkspace()) {
       $active_workspace = $this->workspaceManager->getActiveWorkspace();
       $this->sqlQuery->addMetaData('active_workspace_id', $active_workspace->id());
       $this->sqlQuery->addMetaData('simple_query', FALSE);

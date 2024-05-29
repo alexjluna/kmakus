@@ -117,7 +117,7 @@ class FormValuesTest extends WebDriverTestBase {
   /**
    * Data provider for testSimpleAjaxFormValue.
    */
-  public static function formModeProvider() {
+  public function formModeProvider() {
     return [
       ['direct'],
       ['dialog'],

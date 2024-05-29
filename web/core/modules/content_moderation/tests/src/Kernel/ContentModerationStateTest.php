@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Kernel;
 
 use Drupal\content_moderation\Entity\ContentModerationState;
@@ -23,7 +21,6 @@ use Drupal\workflows\Entity\Workflow;
  * Tests links between a content entity and a content_moderation_state entity.
  *
  * @group content_moderation
- * @group #slow
  */
 class ContentModerationStateTest extends KernelTestBase {
 
@@ -97,7 +94,6 @@ class ContentModerationStateTest extends KernelTestBase {
     $this->installEntitySchema('block_content');
     $this->installEntitySchema('media');
     $this->installEntitySchema('file');
-    $this->installEntitySchema('taxonomy_term');
     $this->installEntitySchema('content_moderation_state');
     $this->installConfig('content_moderation');
     $this->installSchema('file', 'file_usage');
@@ -173,13 +169,10 @@ class ContentModerationStateTest extends KernelTestBase {
   /**
    * Test cases for basic moderation test.
    */
-  public static function basicModerationTestCases() {
+  public function basicModerationTestCases() {
     return [
       'Nodes' => [
         'node',
-      ],
-      'Taxonomy term' => [
-        'taxonomy_term',
       ],
       'Block content' => [
         'block_content',
@@ -305,7 +298,7 @@ class ContentModerationStateTest extends KernelTestBase {
       /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
       $entity = $this->createEntity($entity_type_id, 'published');
       $langcode = 'fr';
-      $translation = $entity->addTranslation($langcode, [$entity->getEntityType()->getKey('label') => 'French title test']);
+      $translation = $entity->addTranslation($langcode, ['title' => 'French title test']);
       // Make sure we add values for all of the required fields.
       if ($entity_type_id == 'block_content') {
         $translation->info = $this->randomString();
@@ -487,7 +480,7 @@ class ContentModerationStateTest extends KernelTestBase {
   /**
    * Test cases for ::testModerationWithSpecialLanguages().
    */
-  public static function moderationWithSpecialLanguagesTestCases() {
+  public function moderationWithSpecialLanguagesTestCases() {
     return [
       'Not specified to not specified' => [
         LanguageInterface::LANGCODE_NOT_SPECIFIED,
@@ -818,6 +811,16 @@ class ContentModerationStateTest extends KernelTestBase {
     if ($published !== NULL && $entity instanceof EntityPublishedInterface) {
       $this->assertSame($published, $entity->isPublished());
     }
+  }
+
+  /**
+   * Tests that the 'taxonomy_term' entity type cannot be moderated.
+   */
+  public function testTaxonomyTermEntityTypeModeration() {
+    /** @var \Drupal\content_moderation\ModerationInformationInterface $moderation_info */
+    $moderation_info = \Drupal::service('content_moderation.moderation_information');
+    $entity_type = \Drupal::entityTypeManager()->getDefinition('taxonomy_term');
+    $this->assertFalse($moderation_info->canModerateEntitiesOfEntityType($entity_type));
   }
 
 }

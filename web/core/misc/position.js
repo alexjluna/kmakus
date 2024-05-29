@@ -29,18 +29,15 @@
   const regexVertical = /top|center|bottom/;
   const regexOffset = /[+-]\d+(\.[\d]+)?%?/;
   const regexPosition = /^\w+/;
+  const regexPercent = /%$/;
   const _position = $.fn.position;
 
   function getOffsets(offsets, width, height) {
     return [
       parseFloat(offsets[0]) *
-        (typeof offsets[0] === 'string' && offsets[0].endsWith('%')
-          ? width / 100
-          : 1),
+        (regexPercent.test(offsets[0]) ? width / 100 : 1),
       parseFloat(offsets[1]) *
-        (typeof offsets[1] === 'string' && offsets[1].endsWith('%')
-          ? height / 100
-          : 1),
+        (regexPercent.test(offsets[1]) ? height / 100 : 1),
     ];
   }
 
@@ -57,7 +54,7 @@
         offset: { top: 0, left: 0 },
       };
     }
-    if (!!raw && raw === raw.window) {
+    if ($.isWindow(raw)) {
       return {
         width: elem.width(),
         height: elem.height(),
@@ -349,8 +346,7 @@
     },
     getWithinInfo(element) {
       const withinElement = $(element || window);
-      const isWindow =
-        !!withinElement[0] && withinElement[0] === withinElement[0].window;
+      const isWindow = $.isWindow(withinElement[0]);
       const isDocument = !!withinElement[0] && withinElement[0].nodeType === 9;
       const hasOffset = !isWindow && !isDocument;
       return {

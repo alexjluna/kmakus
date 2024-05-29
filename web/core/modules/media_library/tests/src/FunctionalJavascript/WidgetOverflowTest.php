@@ -174,7 +174,7 @@ class WidgetOverflowTest extends MediaLibraryTestBase {
    * @return array[]
    *   Sets of arguments to pass to the test method.
    */
-  public static function providerWidgetOverflow(): array {
+  public function providerWidgetOverflow(): array {
     return [
       'Save' => [NULL],
       'Save and insert' => ['insert'],

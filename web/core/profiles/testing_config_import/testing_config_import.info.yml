@@ -5,6 +5,5 @@ version: VERSION
 hidden: true
 install:
   - syslog
-  - testing_config_import_module
 themes:
   - stark

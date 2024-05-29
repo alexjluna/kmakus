@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\search\Kernel;
 
 use Drupal\Core\Database\Database;
@@ -9,8 +7,6 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\search\SearchIndexInterface;
 use Drupal\search\SearchQuery;
-
-// cspell:ignore cillum dolore enim veniam
 
 /**
  * Indexes content and queries it.

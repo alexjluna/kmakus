@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeListenerInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\workspaces\WorkspaceInformationInterface;
+use Drupal\workspaces\WorkspaceManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -35,11 +35,11 @@ class EntitySchemaSubscriber implements EntityTypeListenerInterface, EventSubscr
   protected $entityLastInstalledSchemaRepository;
 
   /**
-   * The workspace information service.
+   * The workspace manager.
    *
-   * @var \Drupal\workspaces\WorkspaceInformationInterface
+   * @var \Drupal\workspaces\WorkspaceManagerInterface
    */
-  protected $workspaceInfo;
+  protected $workspaceManager;
 
   /**
    * Constructs a new EntitySchemaSubscriber.
@@ -48,13 +48,13 @@ class EntitySchemaSubscriber implements EntityTypeListenerInterface, EventSubscr
    *   Definition update manager.
    * @param \Drupal\Core\Entity\EntityLastInstalledSchemaRepositoryInterface $entityLastInstalledSchemaRepository
    *   Last definitions.
-   * @param \Drupal\workspaces\WorkspaceInformationInterface $workspace_information
-   *   The workspace information service.
+   * @param \Drupal\workspaces\WorkspaceManagerInterface $workspace_manager
+   *   The workspace manager.
    */
-  public function __construct(EntityDefinitionUpdateManagerInterface $entityDefinitionUpdateManager, EntityLastInstalledSchemaRepositoryInterface $entityLastInstalledSchemaRepository, WorkspaceInformationInterface $workspace_information) {
+  public function __construct(EntityDefinitionUpdateManagerInterface $entityDefinitionUpdateManager, EntityLastInstalledSchemaRepositoryInterface $entityLastInstalledSchemaRepository, WorkspaceManagerInterface $workspace_manager) {
     $this->entityDefinitionUpdateManager = $entityDefinitionUpdateManager;
     $this->entityLastInstalledSchemaRepository = $entityLastInstalledSchemaRepository;
-    $this->workspaceInfo = $workspace_information;
+    $this->workspaceManager = $workspace_manager;
   }
 
   /**
@@ -70,7 +70,7 @@ class EntitySchemaSubscriber implements EntityTypeListenerInterface, EventSubscr
   public function onEntityTypeCreate(EntityTypeInterface $entity_type) {
     // If the entity type is supported by Workspaces, add the revision metadata
     // field.
-    if ($this->workspaceInfo->isEntityTypeSupported($entity_type)) {
+    if ($this->workspaceManager->isEntityTypeSupported($entity_type)) {
       $this->addRevisionMetadataField($entity_type);
     }
   }
@@ -88,13 +88,13 @@ class EntitySchemaSubscriber implements EntityTypeListenerInterface, EventSubscr
   public function onEntityTypeUpdate(EntityTypeInterface $entity_type, EntityTypeInterface $original) {
     // If the entity type is now supported by Workspaces, add the revision
     // metadata field.
-    if ($this->workspaceInfo->isEntityTypeSupported($entity_type) && !$this->workspaceInfo->isEntityTypeSupported($original)) {
+    if ($this->workspaceManager->isEntityTypeSupported($entity_type) && !$this->workspaceManager->isEntityTypeSupported($original)) {
       $this->addRevisionMetadataField($entity_type);
     }
 
     // If the entity type is no longer supported by Workspaces, remove the
     // revision metadata field.
-    if ($this->workspaceInfo->isEntityTypeSupported($original) && !$this->workspaceInfo->isEntityTypeSupported($entity_type)) {
+    if ($this->workspaceManager->isEntityTypeSupported($original) && !$this->workspaceManager->isEntityTypeSupported($entity_type)) {
       $revision_metadata_keys = $original->get('revision_metadata_keys');
       $field_storage_definition = $this->entityLastInstalledSchemaRepository->getLastInstalledFieldStorageDefinitions($entity_type->id())[$revision_metadata_keys['workspace']];
       $this->entityDefinitionUpdateManager->uninstallFieldStorageDefinition($field_storage_definition);

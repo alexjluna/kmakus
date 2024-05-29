@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\system\Functional\File;
 
 use Drupal\Component\FileSecurity\FileSecurity;
@@ -14,9 +12,6 @@ use Drupal\Tests\BrowserTestBase;
  */
 class FileSaveHtaccessLoggingTest extends BrowserTestBase {
 
-  /**
-   * {@inheritdoc}
-   */
   protected static $modules = ['dblog'];
 
   /**
@@ -37,8 +32,7 @@ class FileSaveHtaccessLoggingTest extends BrowserTestBase {
     /** @var \Drupal\Core\File\HtaccessWriterInterface $htaccess */
     $htaccess = \Drupal::service('file.htaccess_writer');
     $this->assertFalse($htaccess->write($private, TRUE));
-    $this->drupalLogin($this->drupalCreateUser(['access site reports']));
-
+    $this->drupalLogin($this->rootUser);
     $this->drupalGet('admin/reports/dblog');
     $this->clickLink("Security warning: Couldn't write .htaccess file.");
 

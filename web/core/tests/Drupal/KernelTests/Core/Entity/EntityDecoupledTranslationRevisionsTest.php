@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -111,7 +109,7 @@ class EntityDecoupledTranslationRevisionsTest extends EntityKernelTestBase {
   /**
    * Data provider for ::testDecoupledDefaultRevisions.
    */
-  public static function dataTestDecoupledPendingRevisions() {
+  public function dataTestDecoupledPendingRevisions() {
     $sets = [];
 
     $sets['Intermixed languages - No initial default translation'][] = [
@@ -213,7 +211,7 @@ class EntityDecoupledTranslationRevisionsTest extends EntityKernelTestBase {
   /**
    * Data provider for ::testUntranslatableFields.
    */
-  public static function dataTestUntranslatableFields() {
+  public function dataTestUntranslatableFields() {
     $sets = [];
 
     $sets['Default behavior - Untranslatable fields affect all revisions'] = [

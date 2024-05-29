@@ -64,7 +64,7 @@ class AuthenticationManagerTest extends UnitTestCase {
   /**
    * Provides data to self::testDefaultFilter().
    */
-  public static function providerTestDefaultFilter() {
+  public function providerTestDefaultFilter() {
     $data = [];
     // No route, cookie is global, should apply.
     $data[] = [TRUE, FALSE, [], 'cookie', TRUE];

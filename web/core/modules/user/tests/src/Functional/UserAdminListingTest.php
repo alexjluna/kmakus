@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\user\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -51,7 +49,9 @@ class UserAdminListingTest extends BrowserTestBase {
     $rid_2 = $this->drupalCreateRole([], 'custom_role_2', 'custom_role_2');
 
     $account = $this->drupalCreateUser();
-    $account->addRole($rid_1)->addRole($rid_2)->save();
+    $account->addRole($rid_1);
+    $account->addRole($rid_2);
+    $account->save();
     $accounts[$account->label()] = $account;
     $role_account_name = $account->label();
 

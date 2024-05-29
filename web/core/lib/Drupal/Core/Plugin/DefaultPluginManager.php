@@ -6,7 +6,6 @@ use Drupal\Component\Assertion\Inspector;
 use Drupal\Component\Plugin\Attribute\AttributeInterface;
 use Drupal\Component\Plugin\Definition\PluginDefinitionInterface;
 use Drupal\Component\Plugin\Discovery\CachedDiscoveryInterface;
-use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Cache\UseCacheBackendTrait;
@@ -68,13 +67,6 @@ class DefaultPluginManager extends PluginManagerBase implements PluginManagerInt
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
-
-  /**
-   * The module extension list.
-   *
-   * @var \Drupal\Core\Extension\ModuleExtensionList
-   */
-  protected ?ModuleExtensionList $moduleExtensionList;
 
   /**
    * A set of defaults to be referenced by $this->processDefinition().
@@ -198,7 +190,7 @@ class DefaultPluginManager extends PluginManagerBase implements PluginManagerInt
    *
    * @param string $alter_hook
    *   Name of the alter hook; for example, to invoke
-   *   hook_my_module_data_alter() pass in "my_module_data".
+   *   hook_mymodule_data_alter() pass in "mymodule_data".
    */
   protected function alterInfo($alter_hook) {
     $this->alterHook = $alter_hook;
@@ -228,9 +220,6 @@ class DefaultPluginManager extends PluginManagerBase implements PluginManagerInt
       else {
         $this->cacheBackend->delete($this->cacheKey);
       }
-    }
-    if ($this->discovery instanceof CachedDiscoveryInterface) {
-      $this->discovery->clearCachedDefinitions();
     }
     $this->definitions = NULL;
   }
@@ -266,9 +255,6 @@ class DefaultPluginManager extends PluginManagerBase implements PluginManagerInt
    * {@inheritdoc}
    */
   public function useCaches($use_caches = FALSE) {
-    if ($this->discovery instanceof CachedDiscoveryInterface) {
-      $this->discovery->useCaches($use_caches);
-    }
     $this->useCaches = $use_caches;
     if (!$use_caches) {
       $this->definitions = NULL;

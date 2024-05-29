@@ -5,7 +5,6 @@ namespace Drupal\Core\Render\Element;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Html as HtmlUtility;
 use Drupal\Core\Form\FormHelper;
-use Drupal\Core\Render\Attribute\RenderElement;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url as CoreUrl;
@@ -26,9 +25,10 @@ use Drupal\Core\Url as CoreUrl;
  *   '#url' => \Drupal\Core\Url::fromRoute('examples.description')
  * ];
  * @endcode
+ *
+ * @RenderElement("link")
  */
-#[RenderElement('link')]
-class Link extends RenderElementBase {
+class Link extends RenderElement {
 
   /**
    * {@inheritdoc}
@@ -133,6 +133,13 @@ class Link extends RenderElementBase {
    *     '#theme' => 'links__node__comment',
    *     '#links' => array(
    *       // An array of links associated with node comments, suitable for
+   *       // passing in to links.html.twig.
+   *     ),
+   *   ),
+   *   'statistics' => array(
+   *     '#theme' => 'links__node__statistics',
+   *     '#links' => array(
+   *       // An array of links associated with node statistics, suitable for
    *       // passing in to links.html.twig.
    *     ),
    *   ),

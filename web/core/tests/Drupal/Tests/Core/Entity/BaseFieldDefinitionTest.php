@@ -166,9 +166,8 @@ class BaseFieldDefinitionTest extends UnitTestCase {
     ];
     $expected_default_value = [$default_value];
     $definition->setDefaultValue($default_value);
-    $entity = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $entity = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
-      ->onlyMethods([])
       ->getMock();
     // Set the field item list class to be used to avoid requiring the typed
     // data manager to retrieve it.
@@ -215,9 +214,8 @@ class BaseFieldDefinitionTest extends UnitTestCase {
     ];
     $expected_default_value = [$default_value];
     $definition->setInitialValue($default_value);
-    $entity = $this->getMockBuilder(ContentEntityBaseMockableClass::class)
+    $entity = $this->getMockBuilder('Drupal\Core\Entity\ContentEntityBase')
       ->disableOriginalConstructor()
-      ->onlyMethods([])
       ->getMock();
     // Set the field item list class to be used to avoid requiring the typed
     // data manager to retrieve it.

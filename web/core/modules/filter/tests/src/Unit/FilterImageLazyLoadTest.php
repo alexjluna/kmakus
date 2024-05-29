@@ -46,39 +46,39 @@ final class FilterImageLazyLoadTest extends UnitTestCase {
    * @return array
    *   An array of test data.
    */
-  public static function providerHtml(): array {
+  public function providerHtml(): array {
     return [
       'lazy loading attribute already added' => [
-        'html' => '<p><img src="foo.png" loading="lazy"></p>',
-        'expected' => '<p><img src="foo.png" loading="lazy"></p>',
+        'input' => '<p><img src="foo.png" loading="lazy"></p>',
+        'output' => '<p><img src="foo.png" loading="lazy"></p>',
       ],
       'eager loading attribute already added' => [
-        'html' => '<p><img src="foo.png" loading="eager"/></p>',
-        'expected' => '<p><img src="foo.png" loading="eager"></p>',
+        'input' => '<p><img src="foo.png" loading="eager"/></p>',
+        'output' => '<p><img src="foo.png" loading="eager"></p>',
       ],
       'image dimensions provided' => [
-        'html' => '<p><img src="foo.png" width="200" height="200"/></p>',
-        'expected' => '<p><img src="foo.png" width="200" height="200" loading="lazy"></p>',
+        'input' => '<p><img src="foo.png" width="200" height="200"/></p>',
+        'output' => '<p><img src="foo.png" width="200" height="200" loading="lazy"></p>',
       ],
       'width image dimensions provided' => [
-        'html' => '<p><img src="foo.png" width="200"/></p>',
-        'expected' => '<p><img src="foo.png" width="200"></p>',
+        'input' => '<p><img src="foo.png" width="200"/></p>',
+        'output' => '<p><img src="foo.png" width="200"></p>',
       ],
       'height image dimensions provided' => [
-        'html' => '<p><img src="foo.png" height="200"/></p>',
-        'expected' => '<p><img src="foo.png" height="200"></p>',
+        'input' => '<p><img src="foo.png" height="200"/></p>',
+        'output' => '<p><img src="foo.png" height="200"></p>',
       ],
       'invalid loading attribute' => [
-        'html' => '<p><img src="foo.png" width="200" height="200" loading="foo"></p>',
-        'expected' => '<p><img src="foo.png" width="200" height="200" loading="lazy"></p>',
+        'input' => '<p><img src="foo.png" width="200" height="200" loading="foo"></p>',
+        'output' => '<p><img src="foo.png" width="200" height="200" loading="lazy"></p>',
       ],
       'no image tag' => [
-        'html' => '<p>Lorem ipsum...</p>',
-        'expected' => '<p>Lorem ipsum...</p>',
+        'input' => '<p>Lorem ipsum...</p>',
+        'output' => '<p>Lorem ipsum...</p>',
       ],
       'no image dimensions provided' => [
-        'html' => '<p><img src="foo.png"></p>',
-        'expected' => '<p><img src="foo.png"></p>',
+        'input' => '<p><img src="foo.png"></p>',
+        'output' => '<p><img src="foo.png"></p>',
       ],
     ];
   }

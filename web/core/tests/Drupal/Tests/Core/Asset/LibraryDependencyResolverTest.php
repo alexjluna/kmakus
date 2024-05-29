@@ -73,7 +73,7 @@ class LibraryDependencyResolverTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetLibrariesWithDependencies().
    */
-  public static function providerTestGetLibrariesWithDependencies() {
+  public function providerTestGetLibrariesWithDependencies() {
     return [
       // Empty list of libraries.
       [[], []],
@@ -125,7 +125,7 @@ class LibraryDependencyResolverTest extends UnitTestCase {
   /**
    * Provides test data for ::testGetMinimalRepresentativeSubset().
    */
-  public static function providerTestGetMinimalRepresentativeSubset() {
+  public function providerTestGetMinimalRepresentativeSubset() {
     return [
       // Empty list of libraries.
       [[], []],

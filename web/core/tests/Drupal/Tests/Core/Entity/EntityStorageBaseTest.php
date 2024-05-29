@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\Core\Entity;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Tests\UnitTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @coversDefaultClass \Drupal\Core\Entity\EntityStorageBase
@@ -23,23 +21,34 @@ class EntityStorageBaseTest extends UnitTestCase {
    * @return \Drupal\Core\Entity\EntityInterface|\PHPUnit\Framework\MockObject\MockObject
    *   The mocked entity.
    */
-  public function generateEntityInterface(string $id): EntityInterface&MockObject {
-    $mock_entity = $this->createMock(EntityInterface::class);
+  public function generateEntityInterface($id) {
+    $mock_entity = $this->createMock('\Drupal\Core\Entity\EntityInterface');
     $mock_entity->expects($this->any())
       ->method('id')
-      ->willReturn($id);
+      ->willReturn((string) $id);
     return $mock_entity;
   }
 
   /**
    * Data provider for testLoad().
+   *
+   * @return array
+   *   - Expected output of load().
+   *   - A fixture of entities to query against. Suitable return value for
+   *     loadMultiple().
+   *   - The ID we'll query.
    */
-  public static function providerLoad(): \Generator {
+  public function providerLoad() {
+    $data = [];
+
     // Data set for a matching value.
-    yield 'matching-value' => ['1', ['1' => '1'], '1'];
+    $entity = $this->generateEntityInterface('1');
+    $data['matching-value'] = [$entity, ['1' => $entity], '1'];
 
     // Data set for no matching value.
-    yield 'no-matching-value' => [NULL, [], '0'];
+    $data['no-matching-value'] = [NULL, [], '0'];
+
+    return $data;
   }
 
   /**
@@ -47,12 +56,7 @@ class EntityStorageBaseTest extends UnitTestCase {
    *
    * @dataProvider providerLoad
    */
-  public function testLoad(string|null $expected, array $entity_fixture, string $query): void {
-    if (!is_null($expected)) {
-      $expected = $this->generateEntityInterface($expected);
-    }
-    $entity_fixture = array_map([$this, 'generateEntityInterface'], $entity_fixture);
-
+  public function testLoad($expected, $entity_fixture, $query) {
     $mock_base = $this->getMockBuilder('\Drupal\Core\Entity\EntityStorageBase')
       ->disableOriginalConstructor()
       ->onlyMethods(['loadMultiple'])
@@ -69,26 +73,59 @@ class EntityStorageBaseTest extends UnitTestCase {
 
   /**
    * Data provider for testLoadMultiple.
+   *
+   * @return array
+   *   - The expected result.
+   *   - Results for doLoadMultiple(), called internally by loadMultiple().
+   *   - The query, an array of IDs.
    */
-  public static function providerLoadMultiple(): \Generator {
+  public function providerLoadMultiple() {
+    // Create a fixture of entity objects.
+    $fixture = [];
+    foreach (range(1, 10) as $index) {
+      $fixture[(string) $index] = $this->generateEntityInterface($index);
+    }
+
+    $data = [];
+
     // Data set for NULL ID parameter.
-    yield 'null-id-parameter' => [range(1, 10), range(1, 10), NULL];
+    $data['null-id-parameter'] = [$fixture, $fixture, NULL];
 
     // Data set for no results.
-    yield 'no-results' => [[], [], ['11']];
+    $data['no-results'] = [[], [], ['11']];
 
     // Data set for 0 results for multiple IDs.
-    yield 'no-results-multiple-ids' => [[], [], ['11', '12', '13']];
+    $data['no-results-multiple-ids'] = [[], [], ['11', '12', '13']];
 
     // Data set for 1 result for 1 ID.
-    yield '1-result-for-1-id' => [['1' => '1'], ['1' => '1'], ['1']];
+    $data['1-result-for-1-id'] = [
+      ['1' => $fixture['1']],
+      ['1' => $fixture['1']],
+      ['1'],
+    ];
 
     // Data set for results for all IDs.
     $ids = ['1', '2', '3'];
-    yield 'results-for-all-ids' => [$ids, $ids, $ids];
+    foreach ($ids as $id) {
+      $expectation[$id] = $fixture[$id];
+      $load_multiple[$id] = $fixture[$id];
+    }
+    $data['results-for-all-ids'] = [$expectation, $load_multiple, $ids];
 
     // Data set for partial results for multiple IDs.
-    yield 'partial-results-for-multiple-ids' => [$ids, $ids, array_merge($ids, ['11', '12'])];
+    $ids = ['1', '2', '3'];
+    foreach ($ids as $id) {
+      $expectation[$id] = $fixture[$id];
+      $load_multiple[$id] = $fixture[$id];
+    }
+    $ids = array_merge($ids, ['11', '12']);
+    $data['partial-results-for-multiple-ids'] = [
+      $expectation,
+      $load_multiple,
+      $ids,
+    ];
+
+    return $data;
   }
 
   /**
@@ -100,10 +137,7 @@ class EntityStorageBaseTest extends UnitTestCase {
    *
    * @dataProvider providerLoadMultiple
    */
-  public function testLoadMultiple(array $expected, array $load_multiple, array|null $query): void {
-    $expected = array_map([$this, 'generateEntityInterface'], $expected);
-    $load_multiple = array_map([$this, 'generateEntityInterface'], $load_multiple);
-
+  public function testLoadMultiple($expected, $load_multiple, $query) {
     // Make our EntityStorageBase mock.
     $mock_base = $this->getMockBuilder('\Drupal\Core\Entity\EntityStorageBase')
       ->disableOriginalConstructor()

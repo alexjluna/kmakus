@@ -24,7 +24,7 @@ class ConfigTest extends TestCase {
     ]);
   }
 
-  public static function provideGetMessageText() {
+  public function provideGetMessageText() {
     return [
       [[], []],
       [

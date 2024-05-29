@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -25,9 +24,10 @@ use Drupal\Core\Render\Element;
  *
  * @see \Drupal\Core\Render\Element\PasswordConfirm
  * @see \Drupal\Core\Render\Element\Textfield
+ *
+ * @FormElement("password")
  */
-#[FormElement('password')]
-class Password extends FormElementBase {
+class Password extends FormElement {
 
   /**
    * {@inheritdoc}

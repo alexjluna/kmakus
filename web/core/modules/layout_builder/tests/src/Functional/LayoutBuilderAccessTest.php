@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\layout_builder\Functional;
 
 use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
@@ -143,7 +141,7 @@ class LayoutBuilderAccessTest extends BrowserTestBase {
   /**
    * Provides test data for ::testAccessWithBundles().
    */
-  public static function providerTestAccessWithBundles() {
+  public function providerTestAccessWithBundles() {
     // Data provider values are:
     // - the permissions to grant to the user
     // - whether access is expected for the defaults
@@ -237,7 +235,7 @@ class LayoutBuilderAccessTest extends BrowserTestBase {
   /**
    * Provides test data for ::testAccessWithoutBundles().
    */
-  public static function providerTestAccessWithoutBundles() {
+  public function providerTestAccessWithoutBundles() {
     // Data provider values are:
     // - the permissions to grant to the user
     // - whether access is expected for the defaults

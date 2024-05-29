@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\menu_link_content\Kernel\Plugin\migrate\source\d7;
 
 use Drupal\Tests\migrate\Kernel\MigrateSqlSourceTestBase;
 
-// cspell:ignore mlid plid tsid
+// cspell:ignore tsid
 
 /**
  * Tests menu link localized translation source plugin.
@@ -24,7 +22,7 @@ class MenuLinkLocalizedTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function providerSource() {
+  public function providerSource() {
     $tests = [];
     $tests[0]['source_data']['menu_links'] = [
       [
@@ -149,7 +147,7 @@ class MenuLinkLocalizedTest extends MigrateSqlSourceTestBase {
       ],
     ];
 
-    $tests[0]['expected_data'] = [
+    $tests[0]['expected_results'] = [
       [
         'menu_name' => 'menu-test-menu',
         'mlid' => 130,

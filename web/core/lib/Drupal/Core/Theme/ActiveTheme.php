@@ -183,8 +183,7 @@ class ActiveTheme {
    * Returns an array of base theme extension objects keyed by name.
    *
    * The order starts with the base theme of $this and ends with the root of
-   * the dependency chain. For most use cases, parent themes are expected to
-   * be called first, so this order needs to be reversed with array_reverse()
+   * the dependency chain.
    *
    * @return \Drupal\Core\Extension\Extension[]
    */

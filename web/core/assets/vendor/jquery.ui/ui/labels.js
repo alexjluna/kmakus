@@ -1,16 +1,16 @@
 /*!
- * jQuery UI Labels 1.13.3
- * https://jqueryui.com
+ * jQuery UI Labels 1.13.2
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: labels
 //>>group: Core
 //>>description: Find all the labels associated with a given input
-//>>docs: https://api.jqueryui.com/labels/
+//>>docs: http://api.jqueryui.com/labels/
 
 ( function( factory ) {
 	"use strict";

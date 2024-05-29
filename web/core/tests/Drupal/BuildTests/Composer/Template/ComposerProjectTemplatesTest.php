@@ -67,7 +67,7 @@ class ComposerProjectTemplatesTest extends ComposerBuildTestBase {
     return $data;
   }
 
-  public static function provideTemplateCreateProject() {
+  public function provideTemplateCreateProject() {
     return [
       'recommended-project' => [
         'drupal/recommended-project',
@@ -121,12 +121,7 @@ class ComposerProjectTemplatesTest extends ComposerBuildTestBase {
         continue;
       }
 
-      // VersionParser::parseStability doesn't play nice with (mostly dev-)
-      // versions ending with the first seven characters of the commit ID as
-      // returned by "composer info". Let's strip those suffixes here.
-      $version = preg_replace('/ [0-9a-f]{7}$/i', '', $project['version']);
-
-      $project_stability = VersionParser::parseStability($version);
+      $project_stability = VersionParser::parseStability($project['version']);
       $project_stability_order_index = $stability_order_indexes[$project_stability];
 
       $project_stabilities[$project['name']] = $project_stability;
@@ -425,7 +420,7 @@ JSON;
       // Strip off "-dev";
       $version_towards = substr($version, 0, -4);
 
-      if (!str_ends_with($version_towards, '.0')) {
+      if (substr($version_towards, -2) !== '.0') {
         // If the current version is developing towards an x.y.z release where
         // z is not 0, it means that the x.y.0 has already been released, and
         // only stable changes are permitted on the branch.

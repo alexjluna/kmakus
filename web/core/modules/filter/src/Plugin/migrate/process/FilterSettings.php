@@ -2,7 +2,6 @@
 
 namespace Drupal\filter\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -11,11 +10,12 @@ use Drupal\migrate\Row;
  * Adds the default allowed attributes to filter_html's allowed_html setting.
  *
  * E.g. map '<a>' to '<a href hreflang dir>'.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "filter_settings",
+ *   handle_multiples = TRUE
+ * )
  */
-#[MigrateProcess(
-  id: "filter_settings",
-  handle_multiples: TRUE,
-)]
 class FilterSettings extends ProcessPluginBase {
 
   /**

@@ -44,7 +44,7 @@ class SortArrayTest extends TestCase {
    *
    * @see \Drupal\Tests\Component\Utility\SortArrayTest::testSortByWeightElement()
    */
-  public static function providerSortByWeightElement() {
+  public function providerSortByWeightElement() {
     $tests = [];
 
     // Weights set and equal.
@@ -120,7 +120,7 @@ class SortArrayTest extends TestCase {
    *
    * @see \Drupal\Tests\Component\Utility\SortArrayTest::testSortByWeightProperty()
    */
-  public static function providerSortByWeightProperty() {
+  public function providerSortByWeightProperty() {
     $tests = [];
 
     // Weights set and equal.
@@ -196,7 +196,7 @@ class SortArrayTest extends TestCase {
    *
    * @see \Drupal\Tests\Component\Utility\SortArrayTest::testSortByTitleElement()
    */
-  public static function providerSortByTitleElement() {
+  public function providerSortByTitleElement() {
     $tests = [];
 
     // Titles set and equal.
@@ -265,7 +265,7 @@ class SortArrayTest extends TestCase {
    *
    * @see \Drupal\Tests\Component\Utility\SortArrayTest::testSortByTitleProperty()
    */
-  public static function providerSortByTitleProperty() {
+  public function providerSortByTitleProperty() {
     $tests = [];
 
     // Titles set and equal.

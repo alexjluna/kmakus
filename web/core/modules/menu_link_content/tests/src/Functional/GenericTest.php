@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\menu_link_content\Functional;
 
 use Drupal\Tests\system\Functional\Module\GenericModuleTestBase;

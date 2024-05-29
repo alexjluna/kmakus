@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Html as HtmlUtility;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
@@ -50,8 +49,9 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * See https://www.drupal.org/node/945102 for a full explanation.
  *
  * @see \Drupal\Core\Render\Element\Table
+ *
+ * @FormElement("tableselect")
  */
-#[FormElement('tableselect')]
 class Tableselect extends Table {
 
   /**

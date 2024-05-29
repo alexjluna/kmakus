@@ -63,7 +63,7 @@ class ProjectReleaseTest extends UnitTestCase {
    * @return mixed
    *   Test cases for testCreateFromArray().
    */
-  public static function providerCreateFromArray(): array {
+  public function providerCreateFromArray(): array {
     return [
       'default valid' => [
         'data' => [],
@@ -151,7 +151,7 @@ class ProjectReleaseTest extends UnitTestCase {
   /**
    * Data provider for testCreateFromArrayMissingField().
    */
-  public static function providerCreateFromArrayMissingField(): array {
+  public function providerCreateFromArrayMissingField(): array {
     return [
       'status' => ['status'],
       'version' => ['version'],
@@ -188,7 +188,7 @@ class ProjectReleaseTest extends UnitTestCase {
   /**
    * Data provider for testCreateFromArrayInvalidField().
    */
-  public static function providerCreateFromArrayInvalidField(): array {
+  public function providerCreateFromArrayInvalidField(): array {
     return [
       'status other' => [
         'invalid_field' => 'status',

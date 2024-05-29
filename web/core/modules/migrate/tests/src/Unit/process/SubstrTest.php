@@ -41,7 +41,7 @@ class SubstrTest extends MigrateProcessTestCase {
   /**
    * Data provider for testSubstr().
    */
-  public static function providerTestSubstr() {
+  public function providerTestSubstr() {
     return [
       // Tests with valid start and length values.
       [0, 7, 'Captain'],

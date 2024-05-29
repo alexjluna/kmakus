@@ -87,7 +87,7 @@ class RoleAccessCheckTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\Core\Route\RouterRoleTest::testRoleAccess
    */
-  public static function roleAccessProvider() {
+  public function roleAccessProvider() {
     // Setup two different roles used in the test.
     $rid_1 = 'role_test_1';
     $rid_2 = 'role_test_2';

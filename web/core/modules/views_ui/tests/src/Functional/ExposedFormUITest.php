@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views_ui\Functional;
 
 use Drupal\views\Entity\View;
@@ -10,7 +8,6 @@ use Drupal\views\Entity\View;
  * Tests exposed forms UI functionality.
  *
  * @group views_ui
- * @group #slow
  */
 class ExposedFormUITest extends UITestBase {
 

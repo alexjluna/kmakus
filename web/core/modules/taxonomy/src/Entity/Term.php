@@ -32,12 +32,7 @@ use Drupal\user\StatusItem;
  *     "views_data" = "Drupal\taxonomy\TermViewsData",
  *     "form" = {
  *       "default" = "Drupal\taxonomy\TermForm",
- *       "delete" = "Drupal\taxonomy\Form\TermDeleteForm",
- *       "revision-delete" = \Drupal\Core\Entity\Form\RevisionDeleteForm::class,
- *       "revision-revert" = \Drupal\Core\Entity\Form\RevisionRevertForm::class,
- *     },
- *     "route_provider" = {
- *       "revision" = \Drupal\Core\Entity\Routing\RevisionHtmlRouteProvider::class,
+ *       "delete" = "Drupal\taxonomy\Form\TermDeleteForm"
  *     },
  *     "translation" = "Drupal\taxonomy\TermTranslationHandler"
  *   },
@@ -45,7 +40,6 @@ use Drupal\user\StatusItem;
  *   data_table = "taxonomy_term_field_data",
  *   revision_table = "taxonomy_term_revision",
  *   revision_data_table = "taxonomy_term_field_revision",
- *   show_revision_ui = TRUE,
  *   translatable = TRUE,
  *   entity_keys = {
  *     "id" = "tid",
@@ -69,10 +63,6 @@ use Drupal\user\StatusItem;
  *     "delete-form" = "/taxonomy/term/{taxonomy_term}/delete",
  *     "edit-form" = "/taxonomy/term/{taxonomy_term}/edit",
  *     "create" = "/taxonomy/term",
- *     "revision" = "/taxonomy/term/{taxonomy_term}/revision/{taxonomy_term_revision}/view",
- *     "revision-delete-form" = "/taxonomy/term/{taxonomy_term}/revision/{taxonomy_term_revision}/delete",
- *     "revision-revert-form" = "/taxonomy/term/{taxonomy_term}/revision/{taxonomy_term_revision}/revert",
- *     "version-history" = "/taxonomy/term/{taxonomy_term}/revisions",
  *   },
  *   permission_granularity = "bundle",
  *   collection_permission = "access taxonomy overview",
@@ -209,6 +199,12 @@ class Term extends EditorialContentEntityBase implements TermInterface {
       ->setDescription(t('The time that the term was last edited.'))
       ->setTranslatable(TRUE)
       ->setRevisionable(TRUE);
+
+    // @todo Keep this field hidden until we have a revision UI for terms.
+    // @see https://www.drupal.org/project/drupal/issues/2936995
+    $fields['revision_log_message']->setDisplayOptions('form', [
+      'region' => 'hidden',
+    ]);
 
     return $fields;
   }

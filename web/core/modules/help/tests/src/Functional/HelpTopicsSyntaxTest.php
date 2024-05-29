@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\help\Functional;
 
 use Drupal\Core\Extension\ExtensionLifecycle;
@@ -38,10 +36,7 @@ class HelpTopicsSyntaxTest extends BrowserTestBase {
    * Tests that all Core help topics can be rendered and have good syntax.
    */
   public function testHelpTopics() {
-    $this->drupalLogin($this->createUser([
-      'administer modules',
-      'access help pages',
-    ]));
+    $this->drupalLogin($this->rootUser);
 
     // Enable all modules and themes, so that all routes mentioned in topics
     // will be defined.
@@ -347,7 +342,7 @@ class HelpTopicsSyntaxTest extends BrowserTestBase {
       '#type' => 'inline_template',
       '#template' => $content . "\n{# " . rand() . " #}",
     ];
-    return (string) \Drupal::service('renderer')->renderInIsolation($build);
+    return (string) \Drupal::service('renderer')->renderPlain($build);
   }
 
 }

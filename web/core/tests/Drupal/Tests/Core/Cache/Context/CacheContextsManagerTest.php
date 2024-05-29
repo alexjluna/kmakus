@@ -66,7 +66,7 @@ class CacheContextsManagerTest extends UnitTestCase {
   /**
    * Provides a list of context token sets.
    */
-  public static function providerTestOptimizeTokens() {
+  public function providerTestOptimizeTokens() {
     return [
       [['a', 'x'], ['a', 'x']],
       [['a.b', 'x'], ['a.b', 'x']],
@@ -149,7 +149,7 @@ class CacheContextsManagerTest extends UnitTestCase {
   /**
    * Provides a list of invalid 'baz' cache contexts: the parameter is missing.
    */
-  public static function providerTestInvalidCalculatedContext() {
+  public function providerTestInvalidCalculatedContext() {
     return [
       ['baz'],
       ['baz:'],
@@ -200,7 +200,7 @@ class CacheContextsManagerTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function validateTokensProvider() {
+  public function validateTokensProvider() {
     return [
       [[], FALSE],
       [['foo'], FALSE],

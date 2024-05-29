@@ -2,20 +2,19 @@
 
 namespace Drupal\Core\Entity\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Entity Reference valid reference constraint.
  *
  * Verifies that referenced entities are valid.
+ *
+ * @Constraint(
+ *   id = "ValidReference",
+ *   label = @Translation("Entity Reference valid reference", context = "Validation")
+ * )
  */
-#[Constraint(
-  id: 'ValidReference',
-  label: new TranslatableMarkup('Entity Reference valid reference', [], ['context' => 'Validation'])
-)]
-class ValidReferenceConstraint extends SymfonyConstraint {
+class ValidReferenceConstraint extends Constraint {
 
   /**
    * The default violation message.

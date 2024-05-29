@@ -5,13 +5,16 @@
 
 @import "../base/media-queries.pcss.css";
 
-.view,
-.view-content {
-  display: grid;
-  gap: var(--sp2);
-  grid-template-rows: max-content;
+.view {
+  & > * {
+    margin-block-end: var(--sp2);
 
-  @media (--md) {
-    gap: var(--sp3);
+    &:last-child {
+      margin-block-end: 0;
+    }
+
+    @media (--md) {
+      margin-block-end: var(--sp3);
+    }
   }
 }

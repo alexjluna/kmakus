@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\mysql\Kernel\mysql\Plugin\views;
 
 use Drupal\Tests\views\Kernel\Plugin\CastedIntFieldJoinTestBase;

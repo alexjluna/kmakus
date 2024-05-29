@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Action;
 
 use Drupal\Core\Action\Plugin\Action\Derivative\EntityDeleteActionDeriver;

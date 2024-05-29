@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\media\Functional;
 
 use Drupal\Core\Entity\EntityInterface;
@@ -15,7 +13,6 @@ use Drupal\user\RoleInterface;
  * Tests the revisions of media entities.
  *
  * @group media
- * @group #slow
  */
 class MediaRevisionTest extends MediaFunctionalTestBase {
 

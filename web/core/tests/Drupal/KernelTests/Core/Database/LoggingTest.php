@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Database;
 
 use Drupal\Core\Database\Log;
@@ -188,7 +186,7 @@ class LoggingTest extends DatabaseTestBase {
    *
    * @see ::testContribDriverLog()
    */
-  public static function providerContribDriverLog() {
+  public function providerContribDriverLog() {
     $stack = [
       [
         'file' => '/var/www/core/lib/Drupal/Core/Database/Log.php',

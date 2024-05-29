@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Functional;
 
 use Drupal\Core\Session\AccountInterface;
@@ -49,7 +47,6 @@ abstract class ModerationStateTestBase extends BrowserTestBase {
     'use editorial transition archive',
     'use editorial transition archived_draft',
     'use editorial transition archived_published',
-    'administer taxonomy',
   ];
 
   /**
@@ -70,7 +67,6 @@ abstract class ModerationStateTestBase extends BrowserTestBase {
     'block_content',
     'node',
     'entity_test',
-    'taxonomy',
   ];
 
   /**

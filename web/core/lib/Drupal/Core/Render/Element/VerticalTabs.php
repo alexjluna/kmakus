@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Core\Render\Element;
 
 /**
@@ -45,9 +44,10 @@ use Drupal\Core\Render\Element;
  *   '#title' => $this->t('Publisher'),
  * );
  * @endcode
+ *
+ * @FormElement("vertical_tabs")
  */
-#[FormElement('vertical_tabs')]
-class VerticalTabs extends RenderElementBase {
+class VerticalTabs extends RenderElement {
 
   /**
    * {@inheritdoc}

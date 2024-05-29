@@ -39,7 +39,7 @@ class ConnectionTest extends UnitTestCase {
    *   - SQLite database URL
    *   - Expected database connection option
    */
-  public static function providerCreateConnectionOptionsFromUrl(): array {
+  public function providerCreateConnectionOptionsFromUrl(): array {
     $root = dirname(__DIR__, 8);
     return [
       'sqlite relative path' => ['sqlite://localhost/tmp/test', $root . '/tmp/test'],

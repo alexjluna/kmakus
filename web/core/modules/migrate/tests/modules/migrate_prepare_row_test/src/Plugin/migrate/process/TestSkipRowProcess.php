@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate_prepare_row_test\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\ProcessPluginBase;
@@ -10,8 +9,11 @@ use Drupal\migrate\Row;
 
 /**
  * Provides a testing process plugin that skips rows.
+ *
+ * @MigrateProcessPlugin(
+ *   id = "test_skip_row_process"
+ * )
  */
-#[MigrateProcess('test_skip_row_process')]
 class TestSkipRowProcess extends ProcessPluginBase {
 
   /**

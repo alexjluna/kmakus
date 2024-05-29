@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Component\Utility\Html as HtmlUtility;
 
 /**
@@ -32,9 +31,10 @@ use Drupal\Component\Utility\Html as HtmlUtility;
  * @see \Drupal\Core\Render\Element\Checkboxes
  * @see \Drupal\Core\Render\Element\Radio
  * @see \Drupal\Core\Render\Element\Select
+ *
+ * @FormElement("radios")
  */
-#[FormElement('radios')]
-class Radios extends FormElementBase {
+class Radios extends FormElement {
 
   use CompositeFormElementTrait;
 

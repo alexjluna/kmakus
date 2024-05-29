@@ -425,7 +425,6 @@ class MigrateExecutable implements MigrateExecutableInterface {
         }
         $break = FALSE;
         foreach ($value as $scalar_value) {
-          $plugin->reset();
           try {
             $new_value[] = $plugin->transform($scalar_value, $this, $row, $destination);
           }
@@ -438,9 +437,6 @@ class MigrateExecutable implements MigrateExecutableInterface {
             $message = sprintf("%s: %s", $plugin->getPluginId(), $e->getMessage());
             throw new MigrateException($message);
           }
-          if ($plugin->isPipelineStopped()) {
-            $break = TRUE;
-          }
         }
         $value = $new_value;
         if ($break) {
@@ -448,7 +444,6 @@ class MigrateExecutable implements MigrateExecutableInterface {
         }
       }
       else {
-        $plugin->reset();
         try {
           $value = $plugin->transform($value, $this, $row, $destination);
         }
@@ -461,9 +456,7 @@ class MigrateExecutable implements MigrateExecutableInterface {
           $message = sprintf("%s: %s", $plugin->getPluginId(), $e->getMessage());
           throw new MigrateException($message);
         }
-        if ($plugin->isPipelineStopped()) {
-          break;
-        }
+
         $multiple = $plugin->multiple();
       }
     }

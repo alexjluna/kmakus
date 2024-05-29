@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\shortcut\Functional;
 
 use Drupal\Tests\content_translation\Functional\ContentTranslationUITestBase;

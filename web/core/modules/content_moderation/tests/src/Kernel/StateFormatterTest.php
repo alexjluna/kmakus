@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\content_moderation\Kernel;
 
 use Drupal\Core\Render\RenderContext;
@@ -66,7 +64,7 @@ class StateFormatterTest extends KernelTestBase {
   /**
    * Test cases for testStateFieldFormatter().
    */
-  public static function formatterTestCases() {
+  public function formatterTestCases() {
     return [
       'Draft State' => [
         'draft',

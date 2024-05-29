@@ -7,6 +7,7 @@ use Drupal\contact\ContactFormInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Url;
 use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -32,6 +33,15 @@ class ContactController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('renderer')
+    );
+  }
+
+  /**
    * Presents the site-wide contact form.
    *
    * @param \Drupal\contact\ContactFormInterface $contact_form
@@ -50,13 +60,9 @@ class ContactController extends ControllerBase {
 
     // Use the default form if no form has been passed.
     if (empty($contact_form)) {
-      $default_form = $config->get('default_form');
-      // Load the default form, if configured.
-      if (!is_null($default_form)) {
-        $contact_form = $this->entityTypeManager()
-          ->getStorage('contact_form')
-          ->load($default_form);
-      }
+      $contact_form = $this->entityTypeManager()
+        ->getStorage('contact_form')
+        ->load($config->get('default_form'));
       // If there are no forms, do not display the form.
       if (empty($contact_form)) {
         if ($this->currentUser()->hasPermission('administer contact forms')) {

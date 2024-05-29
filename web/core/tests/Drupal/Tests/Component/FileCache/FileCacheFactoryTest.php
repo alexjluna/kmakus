@@ -98,8 +98,14 @@ class FileCacheFactoryTest extends TestCase {
   /**
    * Data provider for testGetConfigurationOverrides().
    */
-  public static function configurationDataProvider() {
+  public function configurationDataProvider() {
     $data = [];
+
+    // Get a unique FileCache class.
+    $file_cache = $this->getMockBuilder(FileCache::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $class = get_class($file_cache);
 
     // Test fallback configuration.
     $data['fallback-configuration'] = [
@@ -110,33 +116,33 @@ class FileCacheFactoryTest extends TestCase {
 
     // Test default configuration.
     $data['default-configuration'] = [
-      ['default' => ['class' => CustomFileCache::class]],
+      ['default' => ['class' => $class]],
       [],
-      CustomFileCache::class,
+      $class,
     ];
 
     // Test specific per collection setting.
     $data['collection-setting'] = [
-      ['test_foo_settings' => ['class' => CustomFileCache::class]],
+      ['test_foo_settings' => ['class' => $class]],
       [],
-      CustomFileCache::class,
+      $class,
     ];
 
     // Test default configuration plus specific per collection setting.
     $data['default-plus-collection-setting'] = [
       [
         'default' => ['class' => '\stdClass'],
-        'test_foo_settings' => ['class' => CustomFileCache::class],
+        'test_foo_settings' => ['class' => $class],
       ],
       [],
-      CustomFileCache::class,
+      $class,
     ];
 
     // Test default configuration plus class specific override.
     $data['default-plus-class-override'] = [
       ['default' => ['class' => '\stdClass']],
-      ['class' => CustomFileCache::class],
-      CustomFileCache::class,
+      ['class' => $class],
+      $class,
     ];
 
     // Test default configuration plus class specific override plus specific
@@ -144,10 +150,10 @@ class FileCacheFactoryTest extends TestCase {
     $data['default-plus-class-plus-collection-setting'] = [
       [
         'default' => ['class' => '\stdClass'],
-        'test_foo_settings' => ['class' => CustomFileCache::class],
+        'test_foo_settings' => ['class' => $class],
       ],
       ['class' => '\stdClass'],
-      CustomFileCache::class,
+      $class,
     ];
 
     return $data;
@@ -179,5 +185,3 @@ class FileCacheFactoryTest extends TestCase {
   }
 
 }
-
-class CustomFileCache extends FileCache {}

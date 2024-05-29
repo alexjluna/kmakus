@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -33,7 +31,7 @@ class ContentEntityStorageBaseTest extends KernelTestBase {
    *
    * @dataProvider providerTestCreate
    */
-  public function testCreate(string|array $bundle): void {
+  public function testCreate($bundle) {
     $storage = $this->container->get('entity_type.manager')->getStorage('entity_test');
 
     $entity = $storage->create(['type' => $bundle]);
@@ -43,10 +41,12 @@ class ContentEntityStorageBaseTest extends KernelTestBase {
   /**
    * Provides test data for testCreate().
    */
-  public static function providerTestCreate(): \Generator {
-    yield 'scalar' => ['bundle' => 'test_bundle'];
-    yield 'array keyed by delta' => ['bundle' => [0 => ['value' => 'test_bundle']]];
-    yield 'array keyed by main property name' => ['bundle' => ['value' => 'test_bundle']];
+  public function providerTestCreate() {
+    return [
+      ['scalar' => 'test_bundle'],
+      ['array keyed by delta' => [0 => ['value' => 'test_bundle']]],
+      ['array keyed by main property name' => ['value' => 'test_bundle']],
+    ];
   }
 
   /**

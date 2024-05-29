@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Config\Storage;
 
 use Drupal\config\StorageReplaceDataWrapper;
@@ -82,7 +80,7 @@ class StorageReplaceDataWrapperTest extends ConfigStorageTestBase {
    * @return array
    *   Returns an array of collection names.
    */
-  public static function providerCollections() {
+  public function providerCollections() {
     return [
       [StorageInterface::DEFAULT_COLLECTION],
       ['foo.bar'],

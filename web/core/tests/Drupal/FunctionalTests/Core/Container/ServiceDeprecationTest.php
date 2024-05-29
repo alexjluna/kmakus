@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests\Core\Container;
 
 use Drupal\Tests\BrowserTestBase;

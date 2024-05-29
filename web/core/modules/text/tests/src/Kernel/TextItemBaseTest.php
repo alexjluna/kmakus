@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\text\Kernel;
 
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -46,7 +44,7 @@ class TextItemBaseTest extends KernelTestBase {
   /**
    * Data provider for testTextFieldSampleValue.
    */
-  public static function providerTextFieldSampleValue() {
+  public function providerTextFieldSampleValue() {
     return [
       [
         1,

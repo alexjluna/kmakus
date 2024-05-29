@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\tour\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -10,7 +8,6 @@ use Drupal\KernelTests\KernelTestBase;
  * Tests the functionality of tour plugins.
  *
  * @group tour
- * @group legacy
  */
 class TourPluginTest extends KernelTestBase {
 

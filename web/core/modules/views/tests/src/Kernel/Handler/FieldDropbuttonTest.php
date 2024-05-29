@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Handler;
 
 use Drupal\Core\Render\RenderContext;
@@ -89,27 +87,26 @@ class FieldDropbuttonTest extends ViewsKernelTestBase {
     $admin = $this->createUser();
 
     // And three nodes.
-    $requestTime = \Drupal::time()->getRequestTime();
     $this->node1 = $this->createNode([
       'type' => 'bar',
       'title' => 'foo',
       'status' => 1,
       'uid' => $admin->id(),
-      'created' => $requestTime - 10,
+      'created' => REQUEST_TIME - 10,
     ]);
     $this->node2 = $this->createNode([
       'type' => 'foo',
       'title' => 'foo',
       'status' => 1,
       'uid' => $admin->id(),
-      'created' => $requestTime - 5,
+      'created' => REQUEST_TIME - 5,
     ]);
     $this->node3 = $this->createNode([
       'type' => 'bar',
       'title' => 'bars',
       'status' => 1,
       'uid' => $admin->id(),
-      'created' => $requestTime,
+      'created' => REQUEST_TIME,
     ]);
 
     // Now create a user with the ability to edit bar but not foo.

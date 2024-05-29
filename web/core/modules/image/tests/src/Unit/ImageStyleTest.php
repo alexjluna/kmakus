@@ -141,7 +141,7 @@ class ImageStyleTest extends UnitTestCase {
       ->getMock();
     $image_effect->expects($this->any())
       ->method('getDerivativeExtension')
-      ->willReturnArgument(0);
+      ->will($this->returnArgument(0));
 
     $image_style = $this->getImageStyleMock($image_effect_id, $image_effect);
     $this->assertEquals($image_style->buildUri('public://test.jpeg'), 'public://styles/' . $image_style->id() . '/public/test.jpeg');
@@ -184,7 +184,7 @@ class ImageStyleTest extends UnitTestCase {
       ->getMock();
     $image_effect->expects($this->any())
       ->method('getDerivativeExtension')
-      ->willReturnArgument(0);
+      ->will($this->returnArgument(0));
 
     $image_style = $this->getImageStyleMock($image_effect_id, $image_effect, ['getPrivateKey', 'getHashSalt']);
     $image_style->expects($this->any())

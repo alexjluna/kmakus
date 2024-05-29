@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Entity\Element;
 
 use Drupal\Core\Entity\Element\EntityAutocomplete;

@@ -2,19 +2,17 @@
 
 namespace Drupal\system\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\Core\ImageToolkit\Attribute\ImageToolkitOperation;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-
 /**
  * Defines GD2 resize operation.
+ *
+ * @ImageToolkitOperation(
+ *   id = "gd_resize",
+ *   toolkit = "gd",
+ *   operation = "resize",
+ *   label = @Translation("Resize"),
+ *   description = @Translation("Resizes an image to the given dimensions (ignoring aspect ratio).")
+ * )
  */
-#[ImageToolkitOperation(
-  id: "gd_resize",
-  toolkit: "gd",
-  operation: "resize",
-  label: new TranslatableMarkup("Resize"),
-  description: new TranslatableMarkup("Resizes an image to the given dimensions (ignoring aspect ratio).")
-)]
 class Resize extends GDImageToolkitOperationBase {
 
   /**

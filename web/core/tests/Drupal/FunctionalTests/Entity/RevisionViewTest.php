@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\FunctionalTests\Entity;
 
 use Drupal\Core\Entity\RevisionLogInterface;
@@ -108,7 +106,7 @@ class RevisionViewTest extends BrowserTestBase {
   /**
    * Data provider for testRevisionPage.
    */
-  public static function providerRevisionPage(): array {
+  public function providerRevisionPage(): array {
     return [
       ['entity_test_rev', 'Revision of revision 1, view revision'],
       ['entity_test_revlog', 'Revision of revision 1, view revision from Sun, 01/11/2009 - 16:00'],

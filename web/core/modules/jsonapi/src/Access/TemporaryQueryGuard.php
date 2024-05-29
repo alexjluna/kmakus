@@ -294,8 +294,7 @@ class TemporaryQueryGuard {
         // user's currently displayed shortcut set.
         // @see \Drupal\shortcut\ShortcutAccessControlHandler::checkAccess()
         if (!$current_user->hasPermission('administer shortcuts')) {
-          $shortcut_set_storage = \Drupal::entityTypeManager()->getStorage('shortcut_set');
-          $specific_condition = new EntityCondition('shortcut_set', $shortcut_set_storage->getDisplayedToUser($current_user)->id());
+          $specific_condition = new EntityCondition('shortcut_set', shortcut_current_displayed_set()->id());
           $cacheability->addCacheContexts(['user']);
           $cacheability->addCacheTags($entity_type->getListCacheTags());
         }

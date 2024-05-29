@@ -112,6 +112,12 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  layout_builder__layout:
+    type: null
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
     weight: 20
@@ -168,5 +174,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  layout_builder__layout: true
+hidden: {  }

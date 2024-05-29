@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\datetime\Kernel\Views;
 
 use Drupal\Component\Datetime\DateTimePlus;

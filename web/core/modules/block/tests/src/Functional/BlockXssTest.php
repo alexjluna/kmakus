@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block\Functional;
 
 use Drupal\block_content\Entity\BlockContent;
@@ -85,10 +83,7 @@ class BlockXssTest extends BrowserTestBase {
    * Tests various modules that provide blocks for XSS.
    */
   public function testBlockXss() {
-    $this->drupalLogin($this->drupalCreateUser([
-      'administer blocks',
-      'access administration pages',
-    ]));
+    $this->drupalLogin($this->rootUser);
 
     $this->doViewTest();
     $this->doMenuTest();

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\update\Kernel;
 
 use Drupal\Core\Link;
@@ -47,7 +45,7 @@ class UpdateReportTest extends KernelTestBase {
    * @return array
    *   Array of $variables for template_preprocess_update_report().
    */
-  public static function providerTemplatePreprocessUpdateReport() {
+  public function providerTemplatePreprocessUpdateReport() {
     return [
       '$variables with data not set' => [
         [],
@@ -62,7 +60,7 @@ class UpdateReportTest extends KernelTestBase {
   }
 
   /**
-   * Tests the error message when failing to fetch data without dblog installed.
+   * Tests the error message when failing to fetch data without dblog enabled.
    *
    * @see template_preprocess_update_fetch_error_message()
    */
@@ -84,7 +82,7 @@ class UpdateReportTest extends KernelTestBase {
   }
 
   /**
-   * Tests the error message when failing to fetch data with dblog installed.
+   * Tests the error message when failing to fetch data with dblog enabled.
    *
    * @see template_preprocess_update_fetch_error_message()
    */

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\editor\Functional\Rest;
 
 use Drupal\ckeditor5\Plugin\CKEditor5Plugin\Heading;
@@ -66,7 +64,7 @@ abstract class EditorResourceTestBase extends ConfigEntityResourceTestBase {
     ]);
     $camelids
       ->setImageUploadSettings([
-        'status' => TRUE,
+        'status' => FALSE,
         'scheme' => 'public',
         'directory' => 'inline-images',
         'max_size' => '',
@@ -96,10 +94,10 @@ abstract class EditorResourceTestBase extends ConfigEntityResourceTestBase {
       'editor' => 'ckeditor5',
       'format' => 'llama',
       'image_upload' => [
-        'status' => TRUE,
+        'status' => FALSE,
         'scheme' => 'public',
         'directory' => 'inline-images',
-        'max_size' => NULL,
+        'max_size' => '',
         'max_dimensions' => [
           'width' => NULL,
           'height' => NULL,

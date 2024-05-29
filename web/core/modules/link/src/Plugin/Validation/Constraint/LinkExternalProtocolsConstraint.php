@@ -2,18 +2,17 @@
 
 namespace Drupal\link\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * Defines a protocol validation constraint for links to external URLs.
+ *
+ * @Constraint(
+ *   id = "LinkExternalProtocols",
+ *   label = @Translation("No dangerous external protocols", context = "Validation"),
+ * )
  */
-#[Constraint(
-  id: 'LinkExternalProtocols',
-  label: new TranslatableMarkup('No dangerous external protocols', [], ['context' => 'Validation'])
-)]
-class LinkExternalProtocolsConstraint extends SymfonyConstraint {
+class LinkExternalProtocolsConstraint extends Constraint {
 
   public $message = "The path '@uri' is invalid.";
 

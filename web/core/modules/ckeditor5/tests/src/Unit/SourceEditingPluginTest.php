@@ -18,7 +18,7 @@ class SourceEditingPluginTest extends UnitTestCase {
   /**
    * Provides a list of configs to test.
    */
-  public static function providerGetDynamicPluginConfig(): array {
+  public function providerGetDynamicPluginConfig(): array {
     return [
       'Empty array of allowed tags' => [
         [

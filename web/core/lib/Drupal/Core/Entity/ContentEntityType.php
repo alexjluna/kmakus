@@ -12,7 +12,6 @@ class ContentEntityType extends EntityType implements ContentEntityTypeInterface
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   protected $revision_metadata_keys = [];
 
   /**

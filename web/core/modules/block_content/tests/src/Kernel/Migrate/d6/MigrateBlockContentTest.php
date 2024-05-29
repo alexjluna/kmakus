@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block_content\Kernel\Migrate\d6;
 
 use Drupal\block_content\Entity\BlockContent;
@@ -42,8 +40,7 @@ class MigrateBlockContentTest extends MigrateDrupal6TestBase {
     /** @var \Drupal\block_content\Entity\BlockContent $block */
     $block = BlockContent::load(1);
     $this->assertSame('My block 1', $block->label());
-    $requestTime = \Drupal::time()->getRequestTime();
-    $this->assertGreaterThanOrEqual($requestTime, (int) $block->getChangedTime());
+    $this->assertGreaterThanOrEqual(REQUEST_TIME, $block->getChangedTime());
     $this->assertLessThanOrEqual(time(), $block->getChangedTime());
     $this->assertSame('en', $block->language()->getId());
     $this->assertSame('<h3>My first content block body</h3>', $block->body->value);
@@ -51,8 +48,7 @@ class MigrateBlockContentTest extends MigrateDrupal6TestBase {
 
     $block = BlockContent::load(2);
     $this->assertSame('My block 2', $block->label());
-    $this->assertGreaterThanOrEqual($requestTime, (int) $block->getChangedTime());
-    $this->assertGreaterThanOrEqual($requestTime, (int) $block->getChangedTime());
+    $this->assertGreaterThanOrEqual(REQUEST_TIME, $block->getChangedTime());
     $this->assertLessThanOrEqual(time(), $block->getChangedTime());
     $this->assertSame('en', $block->language()->getId());
     $this->assertSame('<h3>My second content block body</h3>', $block->body->value);

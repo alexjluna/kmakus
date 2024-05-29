@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Theme;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -103,7 +101,7 @@ class FrontMatterTest extends KernelTestBase {
 
     // Ensure the proper metadata is returned.
     $metadata = $this->twig->getTemplateMetadata($name);
-    $this->assertEquals($yaml ?? [], $metadata);
+    $this->assertEquals($yaml === NULL ? [] : $yaml, $metadata);
 
     // Ensure the metadata is never rendered.
     $output = $this->twig->load($name)->render();

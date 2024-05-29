@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\comment\Kernel\Migrate\d7;
 
 use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
@@ -48,7 +46,7 @@ class CommentEntityTranslationCheckRequirementsTest extends MigrateDrupal7TestBa
    *
    * @return string[][]
    */
-  public static function providerTestCheckRequirements() {
+  public function providerTestCheckRequirements() {
     return [
       ['comment'],
       ['node'],

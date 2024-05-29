@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\taxonomy\Kernel;
 
 use Drupal\KernelTests\Core\Config\ConfigEntityValidationTestBase;
@@ -13,11 +11,6 @@ use Drupal\taxonomy\Entity\Vocabulary;
  * @group taxonomy
  */
 class VocabularyValidationTest extends ConfigEntityValidationTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static array $propertiesWithOptionalValues = ['description'];
 
   /**
    * {@inheritdoc}

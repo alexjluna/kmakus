@@ -12,7 +12,6 @@ use Drupal\Tests\UnitTestCase;
 /**
  * @coversDefaultClass \Drupal\book\BookManager
  * @group book
- * @group legacy
  */
 class BookManagerTest extends UnitTestCase {
 
@@ -105,7 +104,7 @@ class BookManagerTest extends UnitTestCase {
    * @return array
    *   The test data.
    */
-  public static function providerTestGetBookParents() {
+  public function providerTestGetBookParents() {
     $empty = [
       'p1' => 0,
       'p2' => 0,

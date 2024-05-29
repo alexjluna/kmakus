@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\block\Kernel\Migrate\d7;
 
 use Drupal\block\Entity\Block;
@@ -39,7 +37,6 @@ class MigrateBlockNoBlockContentTest extends MigrateDrupal7TestBase {
     $this->container->get('theme_installer')->install(['olivero', 'claro']);
 
     $this->installConfig(static::$modules);
-    $this->installEntitySchema('path_alias');
 
     // Set Olivero and Claro as the default public and admin theme.
     $config = $this->config('system.theme');

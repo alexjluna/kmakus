@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\image\Functional\ImageEffect;
 
-use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Tests\BrowserTestBase;
 
@@ -45,7 +43,7 @@ class ConvertTest extends BrowserTestBase {
 
     // Create a copy of a test image file in root.
     $test_uri = 'public://image-test-do.png';
-    \Drupal::service('file_system')->copy('core/tests/fixtures/files/image-test.png', $test_uri, FileExists::Replace);
+    \Drupal::service('file_system')->copy('core/tests/fixtures/files/image-test.png', $test_uri, FileSystemInterface::EXISTS_REPLACE);
     $this->assertFileExists($test_uri);
 
     // Execute the image style on the test image via a GET request.

@@ -10,6 +10,7 @@ use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -53,6 +54,17 @@ class BookController extends ControllerBase {
     $this->bookManager = $bookManager;
     $this->bookExport = $bookExport;
     $this->renderer = $renderer;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('book.manager'),
+      $container->get('book.export'),
+      $container->get('renderer')
+    );
   }
 
   /**

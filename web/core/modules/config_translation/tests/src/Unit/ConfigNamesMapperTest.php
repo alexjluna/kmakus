@@ -523,7 +523,7 @@ class ConfigNamesMapperTest extends UnitTestCase {
    *   hasConfigSchema() as the first value and the expected return value of
    *   ConfigNamesMapper::hasSchema() as the second value.
    */
-  public static function providerTestHasSchema() {
+  public function providerTestHasSchema() {
     return [
       [[TRUE], TRUE],
       [[FALSE], FALSE],
@@ -570,7 +570,7 @@ class ConfigNamesMapperTest extends UnitTestCase {
    *   hasTranslatable() as the first value and the expected return value of
    *   ConfigNamesMapper::hasTranslatable() as the second value.
    */
-  public static function providerTestHasTranslatable() {
+  public function providerTestHasTranslatable() {
     return [
       [[], FALSE],
       [[TRUE], TRUE],
@@ -621,7 +621,7 @@ class ConfigNamesMapperTest extends UnitTestCase {
    *   hasTranslation() as the first value and the expected return value of
    *   ConfigNamesMapper::hasTranslation() as the second value.
    */
-  public static function providerTestHasTranslation() {
+  public function providerTestHasTranslation() {
     return [
       [[TRUE], TRUE],
       [[FALSE], FALSE],

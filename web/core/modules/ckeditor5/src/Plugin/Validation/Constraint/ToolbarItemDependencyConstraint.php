@@ -4,20 +4,19 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Plugin\Validation\Constraint;
 
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\Validation\Attribute\Constraint;
-use Symfony\Component\Validator\Constraint as SymfonyConstraint;
+use Symfony\Component\Validator\Constraint;
 
 /**
  * A CKEditor 5 toolbar item.
  *
+ * @Constraint(
+ *   id = "CKEditor5ToolbarItemDependencyConstraint",
+ *   label = @Translation("CKEditor 5 toolbar item dependency", context = "Validation"),
+ * )
+ *
  * @internal
  */
-#[Constraint(
-  id: 'CKEditor5ToolbarItemDependencyConstraint',
-  label: new TranslatableMarkup('CKEditor 5 toolbar item dependency', [], ['context' => 'Validation'])
-)]
-class ToolbarItemDependencyConstraint extends SymfonyConstraint {
+class ToolbarItemDependencyConstraint extends Constraint {
 
   /**
    * The default violation message.

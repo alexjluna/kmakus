@@ -31,7 +31,7 @@ class DiffEngineTest extends TestCase {
    *   - An array of strings to change from.
    *   - An array of strings to change to.
    */
-  public static function provideTestDiff() {
+  public function provideTestDiff() {
     return [
       'empty' => [[], [], []],
       'add' => [[DiffOpAdd::class], [], ['a']],

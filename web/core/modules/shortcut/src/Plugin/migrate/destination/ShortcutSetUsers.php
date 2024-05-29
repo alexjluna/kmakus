@@ -2,7 +2,6 @@
 
 namespace Drupal\shortcut\Plugin\migrate\destination;
 
-use Drupal\migrate\Attribute\MigrateDestination;
 use Drupal\shortcut\ShortcutSetStorageInterface;
 use Drupal\user\Entity\User;
 use Drupal\migrate\Plugin\MigrationInterface;
@@ -12,9 +11,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 
 /**
- * Migration destination for shortcut_set_users.
+ * @MigrateDestination(
+ *   id = "shortcut_set_users"
+ * )
  */
-#[MigrateDestination('shortcut_set_users')]
 class ShortcutSetUsers extends DestinationBase implements ContainerFactoryPluginInterface {
 
   /**

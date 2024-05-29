@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\config\Functional;
 
 use Drupal\Core\Archiver\ArchiveTar;
@@ -41,6 +39,7 @@ class ConfigExportImportUITest extends BrowserTestBase {
    */
   protected $newSlogan;
 
+
   /**
    * Holds a content type.
    *
@@ -79,18 +78,11 @@ class ConfigExportImportUITest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    // Create a content type.
-    $this->contentType = $this->drupalCreateContentType(['type' => 'test']);
-
-    $this->drupalLogin($this->drupalCreateUser([
-      'export configuration',
-      'import configuration',
-      'synchronize configuration',
-      'access administration pages',
-      'administer site configuration',
-      'create test content',
-      'view the administration theme',
-    ]));
+    // The initial import must be done with uid 1 because if separately named
+    // roles are created then the role is lost after import. If the roles
+    // created have the same name then the sync will fail because they will
+    // have different UUIDs.
+    $this->drupalLogin($this->rootUser);
   }
 
   /**
@@ -109,6 +101,9 @@ class ConfigExportImportUITest extends BrowserTestBase {
       ->set('slogan', $this->newSlogan)
       ->save();
     $this->assertEquals($this->newSlogan, $this->config('system.site')->get('slogan'));
+
+    // Create a content type.
+    $this->contentType = $this->drupalCreateContentType();
 
     // Create a field.
     $this->fieldName = $this->randomMachineName();

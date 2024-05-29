@@ -112,7 +112,7 @@ class InstallTasksTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerNameAndMinimumVersion(): array {
+  public function providerNameAndMinimumVersion(): array {
     return [
       [
         TRUE,

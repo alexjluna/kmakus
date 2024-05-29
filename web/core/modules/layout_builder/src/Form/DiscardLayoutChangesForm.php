@@ -4,7 +4,6 @@ namespace Drupal\layout_builder\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\WorkspaceDynamicSafeFormInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\layout_builder\LayoutTempstoreRepositoryInterface;
 use Drupal\layout_builder\SectionStorageInterface;
@@ -16,9 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @internal
  *   Form classes are internal.
  */
-class DiscardLayoutChangesForm extends ConfirmFormBase implements WorkspaceDynamicSafeFormInterface {
-
-  use WorkspaceSafeFormTrait;
+class DiscardLayoutChangesForm extends ConfirmFormBase {
 
   /**
    * The layout tempstore repository.

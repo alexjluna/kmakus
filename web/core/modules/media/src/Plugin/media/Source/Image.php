@@ -9,8 +9,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldTypePluginManagerInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Image\ImageFactory;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\media\Attribute\MediaSource;
 use Drupal\media\MediaInterface;
 use Drupal\media\MediaTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -19,15 +17,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Image entity media source.
  *
  * @see \Drupal\Core\Image\ImageInterface
+ *
+ * @MediaSource(
+ *   id = "image",
+ *   label = @Translation("Image"),
+ *   description = @Translation("Use local images for reusable media."),
+ *   allowed_field_types = {"image"},
+ *   default_thumbnail_filename = "no-thumbnail.png",
+ *   thumbnail_alt_metadata_attribute = "thumbnail_alt_value"
+ * )
  */
-#[MediaSource(
-  id: "image",
-  label: new TranslatableMarkup("Image"),
-  description: new TranslatableMarkup("Use local images for reusable media."),
-  allowed_field_types: ["image"],
-  default_thumbnail_filename: "no-thumbnail.png",
-  thumbnail_alt_metadata_attribute: "thumbnail_alt_value"
-)]
 class Image extends File {
 
   /**

@@ -90,7 +90,7 @@ class PoStreamWriterTest extends TestCase {
    *   - Written content.
    *   - Content longer than 10 bytes.
    */
-  public static function providerWriteData() {
+  public function providerWriteData() {
     // cSpell:disable
     return [
       ['', '', FALSE],

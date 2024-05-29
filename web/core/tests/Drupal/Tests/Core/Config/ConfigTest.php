@@ -94,7 +94,7 @@ class ConfigTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\Core\Config\ConfigTest::testSetName()
    */
-  public static function setNameProvider() {
+  public function setNameProvider() {
     return [
       // Valid name with dot.
       [
@@ -276,8 +276,7 @@ class ConfigTest extends UnitTestCase {
     $this->config->set('testData', 1);
 
     // Attempt to treat the single value as a nested item.
-    $this->expectException(\LogicException::class);
-    $this->expectExceptionMessage('Cannot create key "illegalOffset" on non-array value.');
+    $this->expectError();
     $this->config->set('testData.illegalOffset', 1);
   }
 
@@ -401,7 +400,7 @@ class ConfigTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\Core\Config\ConfigTest::testMerge()
    */
-  public static function mergeDataProvider() {
+  public function mergeDataProvider() {
     return [
       [
         // Data.
@@ -436,7 +435,7 @@ class ConfigTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\Core\Config\ConfigTest::testValidateNameException()
    */
-  public static function validateNameProvider() {
+  public function validateNameProvider() {
     $return = [
       // Name missing namespace (dot).
       [
@@ -466,7 +465,7 @@ class ConfigTest extends UnitTestCase {
    * @see \Drupal\Tests\Core\Config\ConfigTest::testOverrideData()
    * @see \Drupal\Tests\Core\Config\ConfigTest::testDelete()
    */
-  public static function overrideDataProvider() {
+  public function overrideDataProvider() {
     $test_cases = [
       [
         // Original data.
@@ -540,7 +539,7 @@ class ConfigTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\Core\Config\ConfigTest::testClear()
    */
-  public static function simpleDataProvider() {
+  public function simpleDataProvider() {
     return [
       [
         [
@@ -561,7 +560,7 @@ class ConfigTest extends UnitTestCase {
    * @see \Drupal\Tests\Core\Config\ConfigTest::testInitWithData()
    * @see \Drupal\Tests\Core\Config\ConfigTest::testNestedClear()
    */
-  public static function nestedDataProvider() {
+  public function nestedDataProvider() {
     return [
       [
         [

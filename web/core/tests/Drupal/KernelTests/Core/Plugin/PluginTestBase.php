@@ -1,10 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Plugin;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Plugin\Context\EntityContextDefinition;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\plugin_test\Plugin\TestPluginManager;
@@ -48,7 +45,7 @@ abstract class PluginTestBase extends KernelTestBase {
     //   as derivatives and ReflectionFactory.
     $this->testPluginManager = new TestPluginManager();
     $this->mockBlockManager = new MockBlockManager();
-    $module_handler = new ModuleHandler($this->root, [], new MemoryBackend(\Drupal::service(TimeInterface::class)));
+    $module_handler = new ModuleHandler($this->root, [], new MemoryBackend());
     $this->defaultsTestPluginManager = new DefaultsTestPluginManager($module_handler);
 
     // The expected plugin definitions within each manager. Several tests assert

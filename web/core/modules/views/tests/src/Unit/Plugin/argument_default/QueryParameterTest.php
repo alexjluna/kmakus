@@ -44,7 +44,7 @@ class QueryParameterTest extends UnitTestCase {
    *   - second entry: the request object to test with.
    *   - third entry: the expected default argument value.
    */
-  public static function providerGetArgument() {
+  public function providerGetArgument() {
     $data = [];
 
     $data[] = [

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\rest\Kernel\EntityResource;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
@@ -96,10 +94,7 @@ class EntityResourceRestTestCoverageTest extends KernelTestBase {
         foreach ($info['class suffix'] as $postfix) {
           $class = str_replace(['PROVIDER', 'CLASS'], [$module_name, $class_name], $path . $postfix);
           $class_alternative = str_replace("\\Drupal\\Tests\\$module_name\\Functional", '\Drupal\FunctionalTests', $class);
-          // For entities defined in the system module with Jsonapi tests in
-          // another module.
-          $class_entity_in_system_alternative = str_replace(['PROVIDER', 'CLASS'], [$entity_type_id, $class_name], $path . $postfix);
-          if (class_exists($class) || class_exists($class_alternative) || class_exists($class_entity_in_system_alternative)) {
+          if (class_exists($class) || class_exists($class_alternative)) {
             continue;
           }
           $missing_tests[] = $postfix;
@@ -114,9 +109,7 @@ class EntityResourceRestTestCoverageTest extends KernelTestBase {
       }
 
       $config_entity = is_subclass_of($class_name_full, ConfigEntityInterface::class);
-      $config_test = is_subclass_of($class, ConfigEntityResourceTestBase::class)
-        || is_subclass_of($class_alternative, ConfigEntityResourceTestBase::class)
-        || is_subclass_of($class_entity_in_system_alternative, ConfigEntityResourceTestBase::class);
+      $config_test = is_subclass_of($class, ConfigEntityResourceTestBase::class) || is_subclass_of($class_alternative, ConfigEntityResourceTestBase::class);
       if ($config_entity && !$config_test) {
         $problems[] = "$entity_type_id: $class_name is a config entity, but the test is for content entities.";
       }

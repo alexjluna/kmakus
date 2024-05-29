@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\ckeditor5\Functional\Update;
 
 use Drupal\ckeditor5\HTMLRestrictions;
@@ -138,14 +136,7 @@ class CKEditor5UpdateImageToolbarItemTest extends UpdatePathTestBase {
       function (ConstraintViolation $v) {
         return (string) $v->getMessage();
       },
-      // @todo Fix stream wrappers not being available early enough in
-      //   https://www.drupal.org/project/drupal/issues/3416735. Then remove the
-      //   array_filter().
-      // @see \Drupal\Core\Config\Schema\SchemaCheckTrait::$ignoredPropertyPaths
-      array_filter(
-        iterator_to_array(CKEditor5::validatePair($editor_after, $filter_format_after)),
-        fn(ConstraintViolation $v) => $v->getMessage() != 'The file storage you selected is not a visible, readable and writable stream wrapper. Possible choices: <em class="placeholder"></em>.',
-      )
+      iterator_to_array(CKEditor5::validatePair($editor_after, $filter_format_after))
     ));
   }
 
@@ -155,7 +146,7 @@ class CKEditor5UpdateImageToolbarItemTest extends UpdatePathTestBase {
    * @return array
    *   The test cases.
    */
-  public static function provider(): array {
+  public function provider(): array {
     // There are 3 aspects that need to be verified, each can be true or false,
     // making for 8 test cases in total.
     $test_cases = [];

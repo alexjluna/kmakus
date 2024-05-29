@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\Core\Config\Entity;
 
-use Drupal\Component\Datetime\Time;
 use Drupal\Component\Uuid\UuidInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
@@ -140,7 +139,7 @@ class ConfigEntityStorageTest extends UnitTestCase {
     $entity_query_factory = $this->prophesize(QueryFactoryInterface::class);
     $entity_query_factory->get($entity_type, 'AND')->willReturn($this->entityQuery->reveal());
 
-    $this->entityStorage = new ConfigEntityStorage($entity_type, $this->configFactory->reveal(), $this->uuidService->reveal(), $this->languageManager->reveal(), new MemoryCache(new Time()));
+    $this->entityStorage = new ConfigEntityStorage($entity_type, $this->configFactory->reveal(), $this->uuidService->reveal(), $this->languageManager->reveal(), new MemoryCache());
     $this->entityStorage->setModuleHandler($this->moduleHandler->reveal());
 
     $entity_type_manager = $this->prophesize(EntityTypeManagerInterface::class);

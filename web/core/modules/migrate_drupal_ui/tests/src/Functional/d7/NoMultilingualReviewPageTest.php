@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d7;
 
 use Drupal\Tests\migrate_drupal_ui\Functional\NoMultilingualReviewPageTestBase;
@@ -27,6 +25,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
     'file',
     'language',
     'migrate_drupal_ui',
+    'statistics',
     'telephone',
   ];
 
@@ -103,6 +102,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'Search',
       'Search embedded form',
       'Shortcut',
+      'Statistics',
       'String translation',
       'Stylizer',
       'Synchronize translations',
@@ -165,7 +165,6 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'RDF',
       'References',
       'References UUID',
-      'Statistics',
       'Translation redirect',
       'Translation sets',
       'User mail translation',

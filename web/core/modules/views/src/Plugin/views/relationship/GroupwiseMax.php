@@ -4,7 +4,6 @@ namespace Drupal\views\Plugin\views\relationship;
 
 use Drupal\Core\Database\Query\AlterableInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Attribute\ViewsRelationship;
 use Drupal\views\Views;
 use Drupal\views\Entity\View;
 
@@ -57,14 +56,14 @@ use Drupal\views\Entity\View;
  * in the same way as node_comment_statistics.
  *
  * @ingroup views_relationship_handlers
+ *
+ * @ViewsRelationship("groupwise_max")
  */
-#[ViewsRelationship("groupwise_max")]
 class GroupwiseMax extends RelationshipPluginBase {
 
   /**
    * The namespace of the subquery.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public string $subquery_namespace;
 
   /**

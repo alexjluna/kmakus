@@ -15,7 +15,7 @@ class MarkupInterfaceComparator extends Comparator {
   /**
    * {@inheritdoc}
    */
-  public function accepts($expected, $actual): bool {
+  public function accepts($expected, $actual) {
     // If at least one argument is a MarkupInterface object, we take over and
     // convert to strings before comparing.
     return ($expected instanceof MarkupInterface && $actual instanceof MarkupInterface) ||
@@ -26,12 +26,9 @@ class MarkupInterfaceComparator extends Comparator {
   /**
    * {@inheritdoc}
    */
-  public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = FALSE, $ignoreCase = FALSE): void {
+  public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = FALSE, $ignoreCase = FALSE) {
     if (is_scalar($expected) && is_scalar($actual)) {
       throw new \LogicException(__METHOD__ . '() should not be called directly. Use TestCase::assertEquals() instead');
-    }
-    if (is_array($expected) || is_array($actual)) {
-      throw new \InvalidArgumentException('Expected and actual arguments passed to ' . __METHOD__ . '() must not be arrays');
     }
     $expected_safe = (string) $expected;
     $actual_safe = (string) $actual;

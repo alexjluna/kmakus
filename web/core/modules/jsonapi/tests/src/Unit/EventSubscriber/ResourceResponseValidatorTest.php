@@ -72,7 +72,7 @@ class ResourceResponseValidatorTest extends UnitTestCase {
    * @return array
    *   An array of test cases.
    */
-  public static function validateResponseProvider() {
+  public function validateResponseProvider() {
     $defaults = [
       'route_name' => 'jsonapi.node--article.individual',
       'resource_type' => new ResourceType('node', 'article', NULL),

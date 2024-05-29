@@ -10,7 +10,6 @@ use Drupal\FunctionalTests\Update\UpdatePathTestBase;
  * Tests adding editor_image_lazy_load filter to editor_file_reference.
  *
  * @group Update
- * @group #slow
  */
 class EditorAddLazyLoadImageFilterUpdateTest extends UpdatePathTestBase {
 

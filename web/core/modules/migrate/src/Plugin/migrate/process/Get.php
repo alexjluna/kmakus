@@ -2,7 +2,6 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
-use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -87,11 +86,12 @@ use Drupal\migrate\Row;
  * This should occur extremely rarely.
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
+ *
+ * @MigrateProcessPlugin(
+ *   id = "get",
+ *   handle_multiples = TRUE
+ * )
  */
-#[MigrateProcess(
-  id: "get",
-  handle_multiples: TRUE,
-)]
 class Get extends ProcessPluginBase {
 
   /**

@@ -2,7 +2,6 @@
 
 namespace Drupal\views\Plugin\views\sort;
 
-use Drupal\views\Attribute\ViewsSort;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\HandlerBase;
 use Drupal\views\ViewExecutable;
@@ -10,8 +9,9 @@ use Drupal\views\Views;
 
 /**
  * Handler for GROUP BY on simple numeric fields.
+ *
+ * @ViewsSort("groupby_numeric")
  */
-#[ViewsSort("groupby_numeric")]
 class GroupByNumeric extends SortPluginBase {
 
   /**

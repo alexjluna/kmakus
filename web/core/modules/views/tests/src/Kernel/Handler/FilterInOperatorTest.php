@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\views\Kernel\Handler;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -254,7 +252,7 @@ class FilterInOperatorTest extends ViewsKernelTestBase {
     $input_options = [
       'foo' => 'bar',
       'baz' => $this->t('qux'),
-      'foobar' => (object) ['option' => ['foobar' => 'dog']],
+      'quux' => (object) ['option' => ['quux' => 'corge']],
     ];
     $reduced_values = $operator->reduceValueOptions($input_options);
 

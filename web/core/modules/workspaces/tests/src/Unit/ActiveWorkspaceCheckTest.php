@@ -46,7 +46,7 @@ class ActiveWorkspaceCheckTest extends UnitTestCase {
    *
    * @return array
    */
-  public static function providerTestAccess() {
+  public function providerTestAccess() {
     return [
       [[], FALSE, FALSE],
       [[], TRUE, FALSE],

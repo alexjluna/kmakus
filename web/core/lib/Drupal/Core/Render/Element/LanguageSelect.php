@@ -3,7 +3,6 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Render\Attribute\FormElement;
 
 /**
  * Provides a form element for selecting a language.
@@ -13,9 +12,10 @@ use Drupal\Core\Render\Attribute\FormElement;
  * language_element_info_alter() to provide a proper language selector.
  *
  * @see language_element_info_alter()
+ *
+ * @FormElement("language_select")
  */
-#[FormElement('language_select')]
-class LanguageSelect extends FormElementBase {
+class LanguageSelect extends FormElement {
 
   /**
    * {@inheritdoc}

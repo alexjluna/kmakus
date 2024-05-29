@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\KernelTests\Core\Render\Element;
 
 use Drupal\KernelTests\KernelTestBase;

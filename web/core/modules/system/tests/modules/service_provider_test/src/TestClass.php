@@ -4,12 +4,16 @@ namespace Drupal\service_provider_test;
 
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\DestructableInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class TestClass implements EventSubscriberInterface, DestructableInterface {
+class TestClass implements EventSubscriberInterface, DestructableInterface, ContainerAwareInterface {
+
+  use ContainerAwareTrait;
 
   /**
    * The state keyvalue collection.
@@ -39,12 +43,11 @@ class TestClass implements EventSubscriberInterface, DestructableInterface {
    * Flags the response in case a rebuild indicator is used.
    */
   public function onKernelResponseTest(ResponseEvent $event) {
-    $container = \Drupal::getContainer();
-    if ($container->hasParameter('container_rebuild_indicator')) {
-      $event->getResponse()->headers->set('container_rebuild_indicator', $container->getParameter('container_rebuild_indicator'));
+    if ($this->container->hasParameter('container_rebuild_indicator')) {
+      $event->getResponse()->headers->set('container_rebuild_indicator', $this->container->getParameter('container_rebuild_indicator'));
     }
-    if ($container->hasParameter('container_rebuild_test_parameter')) {
-      $event->getResponse()->headers->set('container_rebuild_test_parameter', $container->getParameter('container_rebuild_test_parameter'));
+    if ($this->container->hasParameter('container_rebuild_test_parameter')) {
+      $event->getResponse()->headers->set('container_rebuild_test_parameter', $this->container->getParameter('container_rebuild_test_parameter'));
     }
   }
 

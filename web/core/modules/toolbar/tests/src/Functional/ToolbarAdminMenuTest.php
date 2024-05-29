@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\Tests\toolbar\Functional;
 
 use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
@@ -132,7 +130,8 @@ class ToolbarAdminMenuTest extends BrowserTestBase {
     $role = Role::load($this->createRole([]));
     $role->setIsAdmin(TRUE);
     $role->save();
-    $this->adminUser->addRole($role->id())->save();
+    $this->adminUser->addRole($role->id());
+    $this->adminUser->save();
 
     // Uninstall a module.
     $edit = [];

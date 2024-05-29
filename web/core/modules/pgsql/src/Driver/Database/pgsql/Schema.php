@@ -506,8 +506,8 @@ EOD;
   /**
    * {@inheritdoc}
    */
-  public function tableExists($table, $add_prefix = TRUE) {
-    $prefixInfo = $this->getPrefixInfo($table, $add_prefix);
+  public function tableExists($table) {
+    $prefixInfo = $this->getPrefixInfo($table, TRUE);
 
     return (bool) $this->connection->query("SELECT 1 FROM pg_tables WHERE schemaname = :schema AND tablename = :table", [':schema' => $prefixInfo['schema'], ':table' => $prefixInfo['table']])->fetchField();
   }
@@ -586,11 +586,7 @@ EOD;
         preg_match('/^' . preg_quote($table_name) . '__(.*)__' . preg_quote($index_type) . '/', $index->indexname, $matches);
         $index_name = $matches[1];
       }
-      // The renaming of an index will fail when the there exists an table with
-      // the same name as the renamed index.
-      if (!$this->tableExists($this->ensureIdentifiersLength($new_name, $index_name, $index_type), FALSE)) {
-        $this->connection->query('ALTER INDEX "' . $this->defaultSchema . '"."' . $index->indexname . '" RENAME TO ' . $this->ensureIdentifiersLength($new_name, $index_name, $index_type));
-      }
+      $this->connection->query('ALTER INDEX "' . $this->defaultSchema . '"."' . $index->indexname . '" RENAME TO ' . $this->ensureIdentifiersLength($new_name, $index_name, $index_type));
     }
 
     // Ensure the new table name does not include schema syntax.
@@ -883,13 +879,13 @@ EOD;
       ':table_name' => $full_name,
     ])->fetchAll();
     foreach ($result as $row) {
-      if (str_ends_with($row->index_name, '_pkey')) {
+      if (preg_match('/_pkey$/', $row->index_name)) {
         $index_schema['primary key'][] = $row->column_name;
       }
-      elseif (str_ends_with($row->index_name, '_key')) {
+      elseif (preg_match('/_key$/', $row->index_name)) {
         $index_schema['unique keys'][$row->index_name][] = $row->column_name;
       }
-      elseif (str_ends_with($row->index_name, '_idx')) {
+      elseif (preg_match('/_idx$/', $row->index_name)) {
         $index_schema['indexes'][$row->index_name][] = $row->column_name;
       }
     }

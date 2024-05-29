@@ -285,8 +285,8 @@ EOS;
    * @covers ::buildParameter
    * @covers ::buildMethodBody
    */
-  public function testBuildWithNullableSelfTypeHint() {
-    $class = 'Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypeHintSelf';
+  public function testBuildWithNullableSelfTypehint() {
+    $class = 'Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypehintSelf';
 
     $result = $this->proxyBuilder->build($class);
 
@@ -296,9 +296,9 @@ EOS;
 /**
  * {@inheritdoc}
  */
-public function typeHintSelf(?\Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypeHintSelf $parameter): ?\Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypeHintSelf
+public function typehintSelf(?\Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypehintSelf $parameter): ?\Drupal\Tests\Component\ProxyBuilder\TestServiceNullableTypehintSelf
 {
-    return $this->lazyLoadItself()->typeHintSelf($parameter);
+    return $this->lazyLoadItself()->typehintSelf($parameter);
 }
 
 EOS;
@@ -438,9 +438,9 @@ class TestServiceComplexMethod {
 
 }
 
-class TestServiceNullableTypeHintSelf {
+class TestServiceNullableTypehintSelf {
 
-  public function typeHintSelf(?self $parameter): ?self {
+  public function typehintSelf(?self $parameter): ?self {
     return NULL;
   }
 

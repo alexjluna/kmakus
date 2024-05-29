@@ -50,7 +50,7 @@ class FileExtensionConstraintValidatorTest extends FileValidatorTestBase {
    * @return array[][]
    *   The test cases.
    */
-  public static function providerTestFileValidateExtensionsOnUri(): array {
+  public function providerTestFileValidateExtensionsOnUri(): array {
     $temporary_txt_file_properties = [
       'filename' => 'asdf.txt',
       'uri' => 'temporary://asdf',
@@ -68,38 +68,38 @@ class FileExtensionConstraintValidatorTest extends FileValidatorTestBase {
     ];
     return [
       'Temporary txt validated with "asdf", "txt", "pork"' => [
-        'file_properties' => $temporary_txt_file_properties,
-        'extensions' => ['asdf', 'txt', 'pork'],
-        'expected_errors' => [],
+        'File properties' => $temporary_txt_file_properties,
+        'Allowed_extensions' => ['asdf', 'txt', 'pork'],
+        'Expected errors' => [],
       ],
       'Temporary txt validated with "exe" and "png"' => [
-        'file_properties' => $temporary_txt_file_properties,
-        'extensions' => ['exe', 'png'],
-        'expected_errors' => [
+        'File properties' => $temporary_txt_file_properties,
+        'Allowed_extensions' => ['exe', 'png'],
+        'Expected errors' => [
           'Only files with the following extensions are allowed: exe png.',
         ],
       ],
       'Permanent txt validated with "asdf", "txt", "pork"' => [
-        'file_properties' => $permanent_txt_file_properties,
-        'extensions' => ['asdf', 'txt', 'pork'],
-        'expected_errors' => [],
+        'File properties' => $permanent_txt_file_properties,
+        'Allowed_extensions' => ['asdf', 'txt', 'pork'],
+        'Expected errors' => [],
       ],
       'Permanent txt validated with "exe" and "png"' => [
-        'file_properties' => $permanent_txt_file_properties,
-        'extensions' => ['exe', 'png'],
-        'expected_errors' => [
+        'File properties' => $permanent_txt_file_properties,
+        'Allowed_extensions' => ['exe', 'png'],
+        'Expected errors' => [
           'Only files with the following extensions are allowed: exe png.',
         ],
       ],
       'Permanent png validated with "png", "gif", "jpg", "jpeg"' => [
-        'file_properties' => $permanent_png_file_properties,
-        'extensions' => ['png', 'gif', 'jpg', 'jpeg'],
-        'expected_errors' => [],
+        'File properties' => $permanent_png_file_properties,
+        'Allowed_extensions' => ['png', 'gif', 'jpg', 'jpeg'],
+        'Expected errors' => [],
       ],
       'Permanent png validated with "exe" and "txt"' => [
-        'file_properties' => $permanent_png_file_properties,
-        'extensions' => ['exe', 'txt'],
-        'expected_errors' => [
+        'File properties' => $permanent_png_file_properties,
+        'Allowed_extensions' => ['exe', 'txt'],
+        'Expected errors' => [
           'Only files with the following extensions are allowed: exe txt.',
         ],
       ],

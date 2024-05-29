@@ -4,7 +4,6 @@ namespace Drupal\Core\Entity\EntityReferenceSelection;
 
 use Drupal\Component\Plugin\FallbackPluginManagerInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Entity\Attribute\EntityReferenceSelection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -26,7 +25,7 @@ class SelectionPluginManager extends DefaultPluginManager implements SelectionPl
     $this->alterInfo('entity_reference_selection');
     $this->setCacheBackend($cache_backend, 'entity_reference_selection_plugins');
 
-    parent::__construct('Plugin/EntityReferenceSelection', $namespaces, $module_handler, 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface', EntityReferenceSelection::class, 'Drupal\Core\Entity\Annotation\EntityReferenceSelection');
+    parent::__construct('Plugin/EntityReferenceSelection', $namespaces, $module_handler, 'Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface', 'Drupal\Core\Entity\Annotation\EntityReferenceSelection');
   }
 
   /**
@@ -64,7 +63,8 @@ class SelectionPluginManager extends DefaultPluginManager implements SelectionPl
 
     // Sort the selection plugins by weight and select the best match.
     uasort($selection_handler_groups[$base_plugin_id], ['Drupal\Component\Utility\SortArray', 'sortByWeightElement']);
-    $plugin_id = array_key_last($selection_handler_groups[$base_plugin_id]);
+    end($selection_handler_groups[$base_plugin_id]);
+    $plugin_id = key($selection_handler_groups[$base_plugin_id]);
 
     return $plugin_id;
   }

@@ -51,7 +51,6 @@ trait FieldUiJSTestTrait {
       $field_card = $this->getFieldFromGroupJS($field_type);
     }
     $field_card?->click();
-    $page->findButton('Continue')->click();
     $field_label = $page->findField('edit-label');
     $this->assertTrue($field_label->isVisible());
     $field_label = $page->find('css', 'input[data-drupal-selector="edit-label"]');
@@ -141,12 +140,11 @@ trait FieldUiJSTestTrait {
     foreach ($groups as $group) {
       $group_field_card = $this->getSession()->getPage()->find('css', "[name='new_storage_type'][value='$group']")->getParent();
       $group_field_card->click();
-      $this->getSession()->getPage()->pressButton('Continue');
+      $this->assertSession()->assertWaitOnAjaxRequest();
       $field_card = $this->getSession()->getPage()->find('css', "[name='group_field_options_wrapper'][value='$field_type']");
       if ($field_card) {
         break;
       }
-      $this->getSession()->getPage()->pressButton('Back');
     }
     return $field_card->getParent();
   }
