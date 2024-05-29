@@ -24,7 +24,7 @@ final class LazyBuilders implements TrustedCallbackInterface {
    */
   public function __construct(
     protected ElementInfoManagerInterface $elementInfo,
-    protected InboxMessageStorageInterface $inboxMessageStorage
+    protected InboxMessageStorageInterface $inboxMessageStorage,
   ) {
   }
 

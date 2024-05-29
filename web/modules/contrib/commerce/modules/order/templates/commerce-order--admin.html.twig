@@ -18,20 +18,22 @@
  */
 #}
 
-{{ attach_library('commerce_order/form') }}
+{{ attach_library('commerce/form-layout') }}
 {% set order_state = order_entity.getState.getLabel %}
 
 <div class="layout-order-form clearfix">
-  <div class="layout-region layout-region-order-main">
-    {{ order.order_items }}
-    {{ order.total_price }}
+  <div class="layout-region layout-region--commerce-main">
+    <div class="layout-region__content">
+      {{ order.order_items }}
+      {{ order.total_price }}
 
-    {% if order.activity %}
-      <h2>{% trans %}Order activity{% endtrans %}</h2>
-      {{ order.activity }}
-    {% endif %}
+      {% if order.activity %}
+        <h2>{% trans %}Order activity{% endtrans %}</h2>
+        {{ order.activity }}
+      {% endif %}
+    </div>
   </div>
-  <div class="layout-region layout-region-order-secondary">
+  <div class="layout-region layout-region--commerce-secondary">
     <div class="entity-meta">
       <div class="entity-meta__header">
         <h3 class="entity-meta__title">

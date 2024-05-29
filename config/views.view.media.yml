@@ -1,5 +1,5 @@
 uuid: 9abf6d7d-b180-41c2-9ed7-30a1570093cf
-langcode: en
+langcode: es
 status: true
 dependencies:
   config:
@@ -11,9 +11,9 @@ dependencies:
 _core:
   default_config_hash: 27loqXfECE8tWznkMVYi7qOU8oCYFgn5MEysgZQQOV8
 id: media
-label: Media
+label: Multimedia
 module: views
-description: 'Find and manage media.'
+description: 'Buscar y administrar medios.'
 tag: ''
 base_table: media_field_data
 base_field: mid
@@ -24,7 +24,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Media
+      title: Multimedia
       fields:
         media_bulk_form:
           id: media_bulk_form
@@ -89,7 +89,7 @@ display:
           entity_type: media
           entity_field: thumbnail
           plugin_id: field
-          label: Thumbnail
+          label: Miniatura
           exclude: false
           alter:
             alter_text: false
@@ -157,7 +157,7 @@ display:
           entity_type: media
           entity_field: media
           plugin_id: field
-          label: 'Media name'
+          label: 'Nombre del elemento multimedia'
           exclude: false
           alter:
             alter_text: false
@@ -566,7 +566,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'No media available.'
+          content: 'No hay medios disponibles.'
           tokenize: false
       sorts:
         created:
@@ -603,7 +603,7 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Media name'
+            label: 'Nombre del elemento multimedia'
             description: ''
             use_operator: false
             operator: name_op
@@ -688,7 +688,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: 'True'
+            label: Verdad
             description: null
             use_operator: false
             operator: status_op
@@ -891,7 +891,7 @@ display:
       tags: {  }
   media_page_list:
     id: media_page_list
-    display_title: Media
+    display_title: Multimedia
     display_plugin: page
     position: 1
     display_options:
@@ -900,7 +900,7 @@ display:
       path: admin/content/media
       menu:
         type: tab
-        title: Media
+        title: Multimedia
         description: ''
         weight: 0
         expanded: false

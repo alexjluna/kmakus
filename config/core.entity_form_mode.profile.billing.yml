@@ -1,5 +1,5 @@
 uuid: f66105bb-4ae4-4afd-88e3-e97d5ee6251d
-langcode: en
+langcode: es
 status: true
 dependencies:
   module:
@@ -10,7 +10,7 @@ dependencies:
 _core:
   default_config_hash: yeGwCxbA5dBAS_3eBkfaVrbxkASEM357dkjPZShKiR4
 id: profile.billing
-label: Billing
+label: 'Dirección de Pago'
 description: ''
 targetEntityType: profile
 cache: true

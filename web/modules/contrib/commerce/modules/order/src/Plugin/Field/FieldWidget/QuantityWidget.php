@@ -106,7 +106,7 @@ class QuantityWidget extends NumberWidget {
 
     $decimal_part = explode('.', $this->getSetting('step'));
     $decimal_places = isset($decimal_part[1]) ? strlen($decimal_part[1]) : 0;
-    $element['value']['#default_value'] = number_format($element['value']['#default_value'], $decimal_places);
+    $element['value']['#default_value'] = number_format($element['value']['#default_value'], $decimal_places, '.', '');
     $element['value']['#step'] = $this->getSetting('step');
     $element['value']['#min'] = $this->getSetting('step');
     $element['#element_validate'][] = [static::class, 'validateElement'];

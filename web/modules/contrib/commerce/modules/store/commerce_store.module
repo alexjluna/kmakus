@@ -84,3 +84,12 @@ function template_preprocess_commerce_store(array &$variables) {
     $variables['store'][$key] = $variables['elements'][$key];
   }
 }
+
+/**
+ * Implements hook_field_group_content_element_keys_alter().
+ *
+ * Allow stores to render fields groups defined from Fields UI.
+ */
+function commerce_store_field_group_content_element_keys_alter(&$keys) {
+  $keys['commerce_store'] = 'store';
+}

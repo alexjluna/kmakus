@@ -176,6 +176,7 @@ class StoreDateTimeTest extends CommerceBrowserTestBase {
     ])->save();
 
     $this->drupalGet($entity->toUrl('canonical'));
+    // cspell:disable-next-line
     $this->assertSession()->pageTextContains('2019-10-31 12:15:30 AEDT');
 
     // Confirm that changing the timezone does not change the value.
@@ -188,6 +189,7 @@ class StoreDateTimeTest extends CommerceBrowserTestBase {
     // Confirm that the site timezone is used if there is no store.
     $this->store->delete();
     $this->drupalGet($entity->toUrl('canonical'));
+    // cspell:disable-next-line
     $this->assertSession()->pageTextContains('2019-10-31 12:15:30 AEDT');
 
     // Confirm that the "fallback" date format is used if the specified one

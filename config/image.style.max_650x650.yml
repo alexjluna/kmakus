@@ -1,5 +1,5 @@
 uuid: 448def5f-7e67-46b0-b120-203e3a352c5b
-langcode: en
+langcode: es
 status: true
 dependencies:
   enforced:
@@ -8,7 +8,7 @@ dependencies:
 _core:
   default_config_hash: 5_u-TI6Qt78YQWl3DxbMBYKuCScEXKSeXTm8Jyl3eds
 name: max_650x650
-label: 'Max 650x650'
+label: 'Máximo 650x650'
 effects:
   949c201a-77f5-48f6-ba00-be91eb1aad47:
     uuid: 949c201a-77f5-48f6-ba00-be91eb1aad47

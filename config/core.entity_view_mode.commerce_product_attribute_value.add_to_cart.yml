@@ -1,5 +1,5 @@
 uuid: 4497ab4e-71b7-4801-b936-e1f5a48d6368
-langcode: en
+langcode: es
 status: true
 dependencies:
   module:
@@ -7,7 +7,7 @@ dependencies:
 _core:
   default_config_hash: ry5RvX-mOnp2GQWzMqSYjPz-jKfP1nSo4Xo4kJCodlE
 id: commerce_product_attribute_value.add_to_cart
-label: 'Add to Cart Form'
+label: 'Formulario de Añadir al Carrito'
 description: ''
 targetEntityType: commerce_product_attribute_value
 cache: true

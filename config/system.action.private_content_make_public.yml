@@ -1,0 +1,13 @@
+uuid: 54b7e9ac-46da-4535-9811-290bb480e0b3
+langcode: es
+status: true
+dependencies:
+  module:
+    - private_content
+_core:
+  default_config_hash: 7oE3kBuBPLzTf-c9iLohjuwdEwoIGDPf6dp7dHnrndA
+id: private_content_make_public
+label: 'Make content public'
+type: node
+plugin: private_content_make_public
+configuration: {  }

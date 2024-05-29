@@ -1,5 +1,6 @@
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
+langcode: es
 module:
   address: 0
   admin_toolbar: 0
@@ -52,11 +53,13 @@ module:
   menu_link_content: 0
   menu_ui: 0
   mysql: 0
+  nextpre: 0
   node: 0
   options: 0
   page_cache: 0
   path: 0
   path_alias: 0
+  private_content: 0
   profile: 0
   redsys_button: 0
   responsive_image: 0

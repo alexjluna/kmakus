@@ -307,7 +307,9 @@ class Product extends CommerceContentEntityBase implements ProductInterface {
         continue;
       }
       foreach ($entity->variations as $item) {
-        $variations[$item->target_id] = $item->entity;
+        if ($item->entity) {
+          $variations[$item->target_id] = $item->entity;
+        }
       }
     }
     $variation_storage = \Drupal::service('entity_type.manager')->getStorage('commerce_product_variation');

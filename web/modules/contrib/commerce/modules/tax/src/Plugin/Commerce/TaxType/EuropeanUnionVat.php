@@ -8,6 +8,9 @@ use Drupal\commerce_tax\TaxZone;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\profile\Entity\ProfileInterface;
 
+// cspell:ignore Jungholz Heligoland Mittelberg Melilla Büsingen Lugano Campione
+// cspell:ignore Livigno
+
 /**
  * Provides the European Union VAT tax type.
  *

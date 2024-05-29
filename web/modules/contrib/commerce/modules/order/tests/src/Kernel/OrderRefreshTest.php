@@ -227,6 +227,13 @@ class OrderRefreshTest extends OrderKernelTestBase {
 
     $this->assertEquals($this->variation2->getTitle(), $order_item->label());
     $this->assertEquals($unit_price, $order_item->getUnitPrice());
+
+    $order_item->setTitle('Overwritten title', TRUE);
+    $order_refresh->refresh($this->order);
+    /** @var \Drupal\commerce_order\Entity\OrderItemInterface $order_item */
+    $order_item = $this->reloadEntity($order_item);
+
+    $this->assertEquals('Overwritten title', $order_item->label());
   }
 
   /**

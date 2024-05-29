@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,6 +38,10 @@ class InboxLocalAction extends DeriverBase implements ContainerDeriverInterface 
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
+    if (!Settings::get('commerce_dashboard_show_toolbar_link', TRUE)) {
+      return [];
+    }
+
     $this->derivatives = [];
     $params = new MenuTreeParameters();
     $params->setRoot('commerce.admin_commerce')

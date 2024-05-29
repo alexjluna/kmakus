@@ -1,5 +1,5 @@
 uuid: 0949040e-9886-48dd-a9c7-5f385549e65d
-langcode: en
+langcode: es
 status: true
 dependencies:
   config:
@@ -19,8 +19,8 @@ content:
     type: image
     label: visually_hidden
     settings:
-      image_style: large
       image_link: ''
+      image_style: large
       image_loading:
         attribute: lazy
     third_party_settings: {  }

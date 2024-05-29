@@ -1,5 +1,5 @@
 uuid: 8d1d004e-4e02-4324-8b0a-491ea08b1b4c
-langcode: en
+langcode: es
 status: true
 dependencies:
   enforced:
@@ -8,7 +8,7 @@ dependencies:
 _core:
   default_config_hash: HAJh3VFnKZmYvJF2Rsnc2HETYtffmXFcQr2FhVPmnSU
 name: max_325x325
-label: 'Max 325x325'
+label: 'Máximo 325x325'
 effects:
   cb842cc8-682f-42a6-bd05-5a1ac726f0d8:
     uuid: cb842cc8-682f-42a6-bd05-5a1ac726f0d8

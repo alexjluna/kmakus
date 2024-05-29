@@ -81,6 +81,7 @@ class EuropeanUnionVatTest extends OrderKernelTestBase {
     }
 
     $invalid_numbers = [
+      // cspell:disable-next-line
       'AT13585626', 'ATX13585626', 'BE0428', 'DEABCDEFGHI', 'DK135856279',
     ];
     foreach ($invalid_numbers as $number) {
@@ -90,7 +91,7 @@ class EuropeanUnionVatTest extends OrderKernelTestBase {
     // Confirm that a valid number without a prefix is not accepted.
     $this->assertFalse($this->plugin->validate('U13585626'));
 
-    // Confirm that numbers are treated as case sensitive.
+    // Confirm that numbers are treated as case-sensitive.
     $this->assertFalse($this->plugin->validate('atU13585626'));
     $this->assertFalse($this->plugin->validate('ATu13585626'));
   }
@@ -114,7 +115,9 @@ class EuropeanUnionVatTest extends OrderKernelTestBase {
 
     $valid_result = new \stdClass();
     $valid_result->valid = TRUE;
+    // cspell:disable-next-line
     $valid_result->name = 'SLRL ALTEA EXPERTISE COMPTABLE';
+    // cspell:disable-next-line
     $valid_result->address = '59 RUE DU MURIER';
 
     $parameters = [
@@ -149,7 +152,9 @@ class EuropeanUnionVatTest extends OrderKernelTestBase {
     $this->assertTrue($result->isSuccess());
     $this->assertEquals($request_time, $result->getTimestamp());
     $this->assertEquals([
+      // cspell:disable-next-line
       'name' => 'SLRL ALTEA EXPERTISE COMPTABLE',
+      // cspell:disable-next-line
       'address' => '59 RUE DU MURIER',
     ], $result->getData());
   }

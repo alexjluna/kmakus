@@ -407,3 +407,27 @@ function commerce_product_field_group_content_element_keys_alter(&$keys) {
   $keys['commerce_product'] = 'product';
   $keys['commerce_product_variation'] = 'product_variation';
 }
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function commerce_product_entity_operation_alter(array &$operations, EntityInterface $entity): void {
+  // For the 'commerce_product_attribute' entity type when the 'translate'
+  // operation does not exist we need to check if the user has access to manage
+  // translations.
+  if ($entity->getEntityTypeId() !== 'commerce_product_attribute'
+    || !$entity->hasLinkTemplate('config-translation-overview')
+    || isset($operations['translate'])
+  ) {
+    return;
+  }
+
+  $url = $entity->toUrl('config-translation-overview');
+  if ($url->access()) {
+    $operations['translate'] = [
+      'title' => t('Translate'),
+      'weight' => 50,
+      'url' => $url,
+    ];
+  }
+}

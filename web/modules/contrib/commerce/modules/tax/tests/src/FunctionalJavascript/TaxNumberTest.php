@@ -87,7 +87,9 @@ class TaxNumberTest extends CommerceWebDriverTestBase {
         'country_code' => 'RS',
         'postal_code' => '11000',
         'locality' => 'Belgrade',
+        // cspell:disable-next-line
         'address_line1' => 'Cetinjska 15',
+        // cspell:disable-next-line
         'given_name' => 'Dusan',
         'family_name' => 'Popov',
       ],

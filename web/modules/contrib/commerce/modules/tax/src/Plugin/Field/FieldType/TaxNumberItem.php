@@ -20,7 +20,7 @@ use Drupal\Core\TypedData\MapDataDefinition;
  *   id = "commerce_tax_number",
  *   label = @Translation("Tax number"),
  *   description = @Translation("Stores a tax number"),
- *   category = @Translation("Commerce"),
+ *   category = "commerce",
  *   default_formatter = "commerce_tax_number_default",
  *   default_widget = "commerce_tax_number_default",
  *   cardinality = 1,

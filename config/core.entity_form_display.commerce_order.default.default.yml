@@ -1,5 +1,5 @@
 uuid: 467db85d-3cf9-49ce-b974-965bbf72266c
-langcode: en
+langcode: es
 status: true
 dependencies:
   config:
@@ -17,29 +17,29 @@ content:
   adjustments:
     type: commerce_adjustment_default
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   billing_profile:
     type: commerce_billing_profile
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   order_items:
     type: inline_entity_form_complex
     weight: 1
+    region: content
     settings:
-      override_labels: true
-      label_singular: 'order item'
-      label_plural: 'order items'
-      allow_new: true
-      match_operator: CONTAINS
-      allow_existing: false
       form_mode: default
+      override_labels: true
+      label_singular: 'línea de pedido'
+      label_plural: 'líneas de pedido'
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
       removed_reference: delete
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   ip_address: true

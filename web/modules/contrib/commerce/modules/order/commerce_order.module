@@ -181,8 +181,8 @@ function template_preprocess_commerce_order(array &$variables) {
   }
 
   if ($billing_profile = $order->getBillingProfile()) {
-    $profile_view_bulder = \Drupal::entityTypeManager()->getViewBuilder('profile');
-    $variables['order']['billing_information'] = $profile_view_bulder->view($billing_profile, $view_mode);
+    $profile_view_builder = \Drupal::entityTypeManager()->getViewBuilder('profile');
+    $variables['order']['billing_information'] = $profile_view_builder->view($billing_profile, $view_mode);
   }
 
   $route_name = \Drupal::routeMatch()->getRouteName();

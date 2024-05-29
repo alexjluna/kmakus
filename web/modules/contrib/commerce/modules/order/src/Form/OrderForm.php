@@ -73,7 +73,6 @@ class OrderForm extends ContentEntityForm {
 
     $form['#tree'] = TRUE;
     $form['#theme'] = 'commerce_order_edit_form';
-    $form['#attached']['library'][] = 'commerce_order/form';
     // Changed must be sent to the client, for later overwrite error checking.
     $form['changed'] = [
       '#type' => 'hidden',

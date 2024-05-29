@@ -8,6 +8,8 @@ use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_product\Entity\ProductVariationType;
 use Drupal\language\Entity\ConfigurableLanguage;
 
+// cspell:ignore produit Magasin défaut
+
 /**
  * Tests orders and order items in a multilingual context.
  *

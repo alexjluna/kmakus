@@ -72,7 +72,7 @@ class OrderReceiptResendForm extends ContentEntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return $this->entity->toUrl('collection');
+    return $this->entity->toUrl();
   }
 
   /**
@@ -86,6 +86,8 @@ class OrderReceiptResendForm extends ContentEntityConfirmFormBase {
     if ($result) {
       $this->messenger()->addMessage($this->t('Order receipt resent.'));
     }
+
+    $form_state->setRedirectUrl($this->entity->toUrl());
   }
 
 }

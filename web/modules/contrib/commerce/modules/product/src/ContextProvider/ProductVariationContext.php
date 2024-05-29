@@ -67,7 +67,7 @@ class ProductVariationContext implements ContextProviderInterface {
   public function __construct(
     RouteMatchInterface $route_match,
     EntityTypeManagerInterface $entity_type_manager,
-    EntityTypeBundleInfoInterface $entity_type_bundle_info
+    EntityTypeBundleInfoInterface $entity_type_bundle_info,
   ) {
     $this->routeMatch = $route_match;
     $this->entityTypeManager = $entity_type_manager;

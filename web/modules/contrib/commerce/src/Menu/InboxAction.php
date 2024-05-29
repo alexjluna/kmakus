@@ -36,7 +36,7 @@ class InboxAction extends LocalActionDefault {
     $plugin_id,
     $plugin_definition,
     RouteProviderInterface $route_provider,
-    protected InboxMessageStorageInterface $inboxMessageStorage
+    protected InboxMessageStorageInterface $inboxMessageStorage,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $route_provider);
   }

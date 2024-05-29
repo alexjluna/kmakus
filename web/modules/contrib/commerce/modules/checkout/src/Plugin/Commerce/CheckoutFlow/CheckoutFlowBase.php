@@ -347,7 +347,7 @@ abstract class CheckoutFlowBase extends PluginBase implements CheckoutFlowInterf
     $form['guest_new_account'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Create a new account for an anonymous order'),
-      '#description' => $this->t('Creates a new user account on checkout completion if the customer specified a non-existent e-mail address.'),
+      '#description' => $this->t('Creates a new user account on checkout completion if the customer specified a non-existent email address.'),
       '#default_value' => $this->configuration['guest_new_account'],
     ];
     $form['guest_new_account_notify'] = [

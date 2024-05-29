@@ -1,0 +1,12 @@
+{
+  "name": "drupal/nextpre",
+  "description": "Next and previous link on detail page",
+  "type": "drupal-module",
+  "authors": [
+    {
+      "name": "Rohit Rajput (rohit-drupal)",
+      "homepage": "https://www.drupal.org/u/rohit-drupal",
+      "role": "Maintainer"
+    }
+  ]
+}

@@ -2,13 +2,13 @@ _core:
   default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
 langcode: es
 uuid: 578a5c59-2a0d-46a9-b73d-56852db47d24
-name: Kmakus
+name: Drupalizando
 mail: alejolumend@gmail.com
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node
+  front: /node/6
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: es

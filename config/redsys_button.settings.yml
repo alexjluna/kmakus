@@ -11,3 +11,4 @@ url_test: 'https://sis-t.redsys.es:25443/sis/realizarPago/utf-8'
 url_live: 'https://sis.redsys.es/sis/realizarPago/utf-8'
 signatureversion: HMAC_SHA256_V1
 language: '001'
+langcode: es

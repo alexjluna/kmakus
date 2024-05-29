@@ -1,9 +1,3 @@
-form:
-  version: VERSION
-  css:
-    theme:
-      css/promotion.form.css: {}
-
 coupon_redemption_form:
   version: VERSION
   js:

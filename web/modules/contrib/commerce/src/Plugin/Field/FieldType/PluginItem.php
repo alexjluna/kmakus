@@ -14,7 +14,7 @@ use Drupal\Core\TypedData\MapDataDefinition;
  *   id = "commerce_plugin_item",
  *   label = @Translation("Plugin"),
  *   description = @Translation("Stores configuration for a plugin."),
- *   category = @Translation("Commerce"),
+ *   category = "commerce",
  *   default_widget = "commerce_plugin_select",
  *   default_formatter = "commerce_plugin_item_default",
  *   deriver = "\Drupal\commerce\Plugin\Field\FieldType\PluginItemDeriver"

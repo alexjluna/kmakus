@@ -25,38 +25,38 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   comment:
     type: comment_default
-    label: above
+    label: hidden
     settings:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    weight: 110
+    weight: 4
     region: content
   field_image_post:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 111
+    weight: 0
     region: content
   field_tags:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 10
+    weight: 2
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 3
     region: content
 hidden:
   langcode: true

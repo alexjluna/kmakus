@@ -36,7 +36,7 @@ class PaymentOffsiteForm extends BasePaymentOffsiteForm {
       // Simulate an API call failing and throwing an exception, for test purposes.
       // See PaymentCheckoutTest::testFailedCheckoutWithOffsiteRedirectGet().
       if ($order->getBillingProfile()->get('address')->family_name == 'FAIL') {
-        throw new PaymentGatewayException('Could not get the redirect URL.');
+        throw PaymentGatewayException::createForPayment($payment, 'Could not get the redirect URL.');
       }
       $redirect_url = Url::fromRoute('commerce_payment_example.dummy_redirect_302', [], ['absolute' => TRUE])->toString();
     }

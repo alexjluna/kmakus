@@ -38,15 +38,23 @@ class OrderReceiptTest extends OrderKernelTestBase {
    */
   protected $translations = [
     'fr' => [
+      // cspell:disable-next-line
       'Order #@number confirmed' => 'Commande #@number confirmée',
+      // cspell:disable-next-line
       'Thank you for your order!' => 'Nous vous remercions de votre commande!',
+      // cspell:disable-next-line
       'Default store' => 'Magasin par défaut',
+      // cspell:disable-next-line
       'Cash on delivery' => 'Paiement à la livraison',
     ],
     'es' => [
+      // cspell:disable-next-line
       'Order #@number confirmed' => 'Pedido #@number confirmado',
+      // cspell:disable-next-line
       'Thank you for your order!' => '¡Gracias por su orden!',
+      // cspell:disable-next-line
       'Default store' => 'Tienda por defecto',
+      // cspell:disable-next-line
       'Cash on delivery' => 'Contra reembolso',
     ],
   ];

@@ -1,5 +1,5 @@
 uuid: faa281ec-e0c8-4143-9f36-a0157b6a3a0c
-langcode: en
+langcode: es
 status: true
 dependencies:
   module:
@@ -10,7 +10,7 @@ dependencies:
 _core:
   default_config_hash: Cj_fREZCx0NVDUfo3pDHFMUuCGTzoag_MUFspBxr3AQ
 id: commerce_order_delete_action
-label: 'Delete order'
+label: 'Borrar pedido'
 type: commerce_order
 plugin: 'entity:delete_action:commerce_order'
 configuration: {  }

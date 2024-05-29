@@ -84,7 +84,7 @@ class OrderCollectionFilterTest extends OrderKernelTestBase {
     int $expected_unfiltered_count,
     array $expected_unfiltered_uuids,
     int $expected_filtered_count,
-    array $expected_filtered_uuids
+    array $expected_filtered_uuids,
   ) {
     $user_ids = [
       'order_customer' => $this->testOrderCustomer->id(),

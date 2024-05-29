@@ -96,9 +96,17 @@ class OrderItem extends CommerceContentEntityBase implements OrderItemInterface 
   /**
    * {@inheritdoc}
    */
-  public function setTitle($title) {
+  public function setTitle($title, $override = FALSE) {
     $this->set('title', $title);
+    $this->set('overridden_title', $override);
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isTitleOverridden(): bool {
+    return (bool) $this->get('overridden_title')->value;
   }
 
   /**
@@ -411,6 +419,11 @@ class OrderItem extends CommerceContentEntityBase implements OrderItemInterface 
         'default_value' => '',
         'max_length' => 512,
       ]);
+
+    $fields['overridden_title'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Overridden title'))
+      ->setDescription(t('Whether the title is overridden.'))
+      ->setDefaultValue(FALSE);
 
     $fields['quantity'] = BaseFieldDefinition::create('decimal')
       ->setLabel(t('Quantity'))

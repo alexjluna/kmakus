@@ -5,6 +5,8 @@ namespace Drupal\Tests\commerce_product\Functional;
 use Drupal\commerce_product\Entity\ProductAttribute;
 use Drupal\views\Tests\ViewTestData;
 
+// cspell:ignore Couleur Bleu Rouge Noir
+
 /**
  * Tests translating product attributes and their values.
  *

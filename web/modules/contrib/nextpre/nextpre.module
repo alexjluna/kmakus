@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Nextpre module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function nextpre_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.nextpre':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Next and previous link module will allow the website visitors to jump on the next or previous post without going back to the main page to see all the posts. Drupal developers can use this module for particular content types. Suppose, there are many large content bundles, then the developer can apply the module for a specific bunch of content.') . '</p>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<ol>
+				    <li>Install module “Next and previous link”</li>
+				    <li>Go to the “Block Layout”. Eg:- Admin Menu >> structure >> block layout</li>
+				    <li>Go to the your block region.</li>
+				    <li>Click the "Place block" button and in the modal dialog click the 
+     					"Place block" button next to "Next Previous link".</li>
+				    <li>On the block configuration form you can choose the node bundle name to 
+     					filter and the next/previous labels the buttons will have.</li>
+				</ol>';
+      $output .= '<h3>' . t('For example') . '</h3>';
+      $output .= '<p>' . t('I have a "Blog" content type and in this blog 100 pages (Nodes). A visitor comes on the website and read blog number 56 (Node/56). We have to provide a next and previous link on the detail page to jump the next and previous blog.') . '</p>';
+      return $output;
+  }
+}

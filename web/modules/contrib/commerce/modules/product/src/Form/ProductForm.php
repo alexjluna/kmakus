@@ -83,7 +83,6 @@ class ProductForm extends ContentEntityForm {
 
     $form['#tree'] = TRUE;
     $form['#theme'] = ['commerce_product_form'];
-    $form['#attached']['library'][] = 'commerce_product/form';
     // Changed must be sent to the client, for later overwrite error checking.
     $form['changed'] = [
       '#type' => 'hidden',

@@ -12,6 +12,8 @@ use Drupal\commerce_tax\TaxableType;
 use Drupal\profile\Entity\Profile;
 use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
 
+// cspell:ignore Mittelberg Büsingen
+
 /**
  * @coversDefaultClass \Drupal\commerce_tax\Plugin\Commerce\TaxType\EuropeanUnionVat
  * @group commerce

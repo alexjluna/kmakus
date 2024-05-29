@@ -572,9 +572,9 @@ class DashboardMetricsForm extends FormBase {
     $query = $this->connection->select('commerce_order_item', 'coi');
     $query->addField('cpv', 'entity_id', 'product_id');
     $query->addExpression('SUM(coi.quantity)', 'count_sold');
-    $query->innerJoin('commerce_order__order_items', 'cooi', 'cooi.order_items_target_id = coi.order_item_id');
+    $query->innerJoin('commerce_order__order_items', 'commerce_order__order_items', 'commerce_order__order_items.order_items_target_id = coi.order_item_id');
     // Exclude canceled orders.
-    $query->innerJoin('commerce_order', 'co', 'co.order_id = cooi.entity_id AND co.state != :state', [
+    $query->innerJoin('commerce_order', 'co', 'co.order_id = commerce_order__order_items.entity_id AND co.state != :state', [
       ':state' => 'canceled',
     ]);
     $query->innerJoin('commerce_product__variations', 'cpv', 'cpv.variations_target_id = coi.purchased_entity');

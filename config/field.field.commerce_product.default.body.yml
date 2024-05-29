@@ -1,5 +1,5 @@
 uuid: 84326d24-0da6-41fa-9bf4-2347b49f82a9
-langcode: en
+langcode: es
 status: true
 dependencies:
   config:
@@ -13,7 +13,7 @@ id: commerce_product.default.body
 field_name: body
 entity_type: commerce_product
 bundle: default
-label: Body
+label: Cuerpo
 description: ''
 required: false
 translatable: true

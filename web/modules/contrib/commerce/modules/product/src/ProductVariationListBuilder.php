@@ -134,8 +134,12 @@ class ProductVariationListBuilder extends EntityListBuilder implements FormInter
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
+    $variation_type_storage = $this->entityTypeManager->getStorage('commerce_product_variation_type');
+    /** @var \Drupal\commerce_product\Entity\ProductVariationTypeInterface $variation_type */
+    $variation_type = $variation_type_storage->load($entity->bundle());
     /** @var \Drupal\commerce_product\Entity\ProductVariationInterface $entity */
-    if ($attribute_values = $entity->getAttributeValues()) {
+    if ($variation_type->shouldGenerateTitle() &&
+      $attribute_values = $entity->getAttributeValues()) {
       // The generated variation title includes the product title, which isn't
       // relevant in this context, the user only needs to see the attributes.
       $attribute_labels = EntityHelper::extractLabels($attribute_values);
@@ -151,8 +155,6 @@ class ProductVariationListBuilder extends EntityListBuilder implements FormInter
     $row['title'] = $title;
     $row['price'] = $entity->getPrice();
     $row['status'] = $entity->isPublished() ? $this->t('Published') : $this->t('Unpublished');
-    $variation_type_storage = $this->entityTypeManager->getStorage('commerce_product_variation_type');
-    $variation_type = $variation_type_storage->load($entity->bundle());
     $row['type'] = $variation_type->label();
     if ($this->hasTableDrag) {
       $row['weight'] = [

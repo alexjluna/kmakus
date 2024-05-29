@@ -19,8 +19,11 @@ class PaymentAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\commerce_payment\Entity\PaymentInterface $entity */
     $order = $entity->getOrder();
     $access = AccessResult::allowedIfHasPermission($account, $this->entityType->getAdminPermission())
-      ->andIf(AccessResult::allowedIf($order && $order->access('view', $account)))
       ->addCacheableDependency($entity);
+
+    if ($order) {
+      $access = $access->andIf(AccessResult::allowedIf($order->access('view', $account)));
+    }
 
     if ($operation == 'delete') {
       // @todo Add a payment gateway method for this check,

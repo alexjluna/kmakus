@@ -737,7 +737,7 @@ class CheckoutOrderTest extends CommerceBrowserTestBase {
   }
 
   /**
-   * Tests checkout behaviour after a cart update.
+   * Tests checkout behavior after a cart update.
    */
   public function testCheckoutFlowOnCartUpdate() {
     $this->drupalGet($this->product->toUrl());
@@ -883,7 +883,7 @@ class CheckoutOrderTest extends CommerceBrowserTestBase {
       'commerce_order' => 1,
       'user' => 0,
     ], ['absolute' => TRUE]);
-    // We have text seperated by <h1> and <p> tags, so they appear individually.
+    // We have text separated by <h1> and <p> tags, so they appear individually.
     $this->assertSession()->pageTextNotContains("Your order number is 1. Click here you view your order: {$expected_order_url->toString()}.");
     $this->assertSession()->pageTextContains('Your order number is 1.');
     $this->assertSession()->pageTextContains("Click here you view your order: {$expected_order_url->toString()}.");

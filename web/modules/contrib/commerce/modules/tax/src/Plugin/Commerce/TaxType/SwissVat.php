@@ -5,6 +5,8 @@ namespace Drupal\commerce_tax\Plugin\Commerce\TaxType;
 use Drupal\commerce_tax\TaxZone;
 use Drupal\Core\Form\FormStateInterface;
 
+// cspell:ignore Büsingen Lugano
+
 /**
  * Provides the Swiss VAT tax type.
  *

@@ -6,6 +6,8 @@ use Drupal\profile\Entity\Profile;
 use Drupal\profile\Entity\ProfileType;
 use Drupal\user\Entity\User;
 
+// cspell:ignore Cetinjska
+
 /**
  * Tests the address book.
  *

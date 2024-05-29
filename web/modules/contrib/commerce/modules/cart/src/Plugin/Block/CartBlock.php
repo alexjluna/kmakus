@@ -93,6 +93,7 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public function defaultConfiguration() {
     return [
       'dropdown' => TRUE,
+      'show_if_empty' => TRUE,
     ];
   }
 
@@ -109,6 +110,11 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
         $this->t('Yes'),
       ],
     ];
+    $form['commerce_show_if_empty'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Display block if the cart is empty'),
+      '#default_value' => (int) $this->configuration['show_if_empty'],
+    ];
 
     return $form;
   }
@@ -118,6 +124,7 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['dropdown'] = $form_state->getValue('commerce_cart_dropdown');
+    $this->configuration['show_if_empty'] = $form_state->getValue('commerce_show_if_empty');
   }
 
   /**
@@ -127,8 +134,8 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
    *   A render array.
    */
   public function build() {
-    $cachable_metadata = new CacheableMetadata();
-    $cachable_metadata->addCacheContexts(['user', 'session']);
+    $cacheable_metadata = new CacheableMetadata();
+    $cacheable_metadata->addCacheContexts(['user', 'session']);
 
     /** @var \Drupal\commerce_order\Entity\OrderInterface[] $carts */
     $carts = $this->cartProvider->getCarts();
@@ -148,7 +155,7 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
         foreach ($cart->getItems() as $order_item) {
           $count += (int) $order_item->getQuantity();
         }
-        $cachable_metadata->addCacheableDependency($cart);
+        $cacheable_metadata->addCacheableDependency($cart);
       }
     }
 
@@ -158,6 +165,14 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
       '#title' => $this->t('Cart'),
       '#url' => Url::fromRoute('commerce_cart.page'),
     ];
+
+    if (!$this->configuration['show_if_empty'] && $count === 0) {
+      return [
+        '#cache' => [
+          'contexts' => ['cart'],
+        ],
+      ];
+    }
 
     return [
       '#attached' => [
@@ -177,6 +192,7 @@ class CartBlock extends BlockBase implements ContainerFactoryPluginInterface {
       '#cache' => [
         'contexts' => ['cart'],
       ],
+      '#dropdown' => $this->configuration['dropdown'],
     ];
   }
 

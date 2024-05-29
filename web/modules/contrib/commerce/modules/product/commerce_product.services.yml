@@ -11,6 +11,7 @@ services:
     tags:
       - { name: access_check, applies_to: _product_variation_create_access }
 
+
   commerce_product.attribute_field_manager:
     class: Drupal\commerce_product\ProductAttributeFieldManager
     arguments: ['@entity_field.manager', '@entity_type.bundle.info', '@entity_type.manager', '@cache.data']

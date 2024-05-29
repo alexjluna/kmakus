@@ -561,7 +561,7 @@ abstract class PaymentGatewayBase extends PluginBase implements PaymentGatewayIn
       throw new \InvalidArgumentException('The provided payment has no payment method referenced.');
     }
     if ($payment_method->isExpired()) {
-      throw new HardDeclineException('The provided payment method has expired');
+      throw HardDeclineException::createForPayment($payment_method, 'The provided payment method has expired');
     }
   }
 

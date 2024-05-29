@@ -50,7 +50,7 @@ class InboxMessageFetcher implements InboxMessageFetcherInterface {
     protected InboxMessageStorageInterface $inboxMessageStorage,
     protected DateFormatterInterface $dateFormatter,
     protected StateInterface $state,
-    protected TimeInterface $time
+    protected TimeInterface $time,
   ) {
   }
 

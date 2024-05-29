@@ -57,8 +57,8 @@ class OrderLockingTest extends OrderKernelTestBase {
       'uid' => $this->user->id(),
       'store_id' => $this->store->id(),
     ]);
-    $contraint_violations = $order->validate()->getEntityViolations();
-    $this->assertEquals(0, $contraint_violations->count());
+    $constraint_violations = $order->validate()->getEntityViolations();
+    $this->assertEquals(0, $constraint_violations->count());
     $order->save();
     $this->assertEquals(1, $order->getVersion());
 
@@ -74,9 +74,9 @@ class OrderLockingTest extends OrderKernelTestBase {
       $this->assertEquals(2, $order->getVersion());
     })($order->id());
 
-    $contraint_violations = $order->validate()->getEntityViolations();
-    $this->assertEquals(1, $contraint_violations->count());
-    $entity_constraint_violation = $contraint_violations->get(0);
+    $constraint_violations = $order->validate()->getEntityViolations();
+    $this->assertEquals(1, $constraint_violations->count());
+    $entity_constraint_violation = $constraint_violations->get(0);
     $this->assertEquals('The order has either been modified by another user, or you have already submitted modifications. As a result, your changes cannot be saved.', $entity_constraint_violation->getMessage());
   }
 

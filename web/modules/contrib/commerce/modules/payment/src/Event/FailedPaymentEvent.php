@@ -37,7 +37,7 @@ class FailedPaymentEvent extends EventBase {
     protected OrderInterface $order,
     protected PaymentGatewayInterface $paymentGateway,
     protected PaymentGatewayException $gatewayException,
-    protected ?PaymentInterface $payment = NULL
+    protected ?PaymentInterface $payment = NULL,
   ) {
 
   }
@@ -67,14 +67,14 @@ class FailedPaymentEvent extends EventBase {
    * Gets the payment.
    */
   public function getPayment(): ?PaymentInterface {
-    return $this->payment;
+    return $this->payment ?? $this->gatewayException->getPayment();
   }
 
   /**
    * Gets the payment method.
    */
   public function getPaymentMethod(): ?PaymentMethodInterface {
-    return $this->paymentMethod ?? $this->payment?->getPaymentMethod();
+    return $this->paymentMethod ?? $this->payment?->getPaymentMethod() ?? $this->gatewayException->getPaymentMethod();
   }
 
   /**

@@ -194,7 +194,7 @@ class PaymentProcess extends CheckoutPaneBase {
         $this->t('We encountered an unexpected error processing your payment. Please try again later.');
       $this->messenger()->addError($message);
 
-      $event = new FailedPaymentEvent($this->order, $payment_gateway, $e, $payment);
+      $event = new FailedPaymentEvent($this->order, $payment_gateway, $e, $e->getPayment() ?? $payment);
       $this->eventDispatcher->dispatch($event, PaymentEvents::PAYMENT_FAILURE);
 
       $this->checkoutFlow->redirectToStep($error_step_id);

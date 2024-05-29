@@ -1,0 +1,25 @@
+uuid: 98e9adf6-68e8-4072-884c-c2689c455b81
+langcode: es
+status: true
+dependencies:
+  module:
+    - nextpre
+  theme:
+    - kmakus
+id: kmakus_nextpreviouslink
+theme: kmakus
+region: content
+weight: 0
+provider: null
+plugin: next_previous_block
+settings:
+  id: next_previous_block
+  label: 'Next Previous link'
+  label_display: '0'
+  provider: nextpre
+  content_type: article
+  previous_text: 'Post anterior'
+  next_text: 'Siguiente post'
+  previouslink_class: ''
+  nextlink_class: ''
+visibility: {  }

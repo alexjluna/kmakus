@@ -102,6 +102,9 @@ class PluginSelectWidget extends WidgetBase implements ContainerFactoryPluginInt
       $target_plugin_id = $items[$delta]->target_plugin_id;
       $target_plugin_configuration = $items[$delta]->target_plugin_configuration ?: [];
     }
+    elseif ($target_plugin_id === $items[$delta]->target_plugin_id) {
+      $target_plugin_configuration = $items[$delta]->target_plugin_configuration ?: [];
+    }
     // The element is required, default to the first plugin.
     if (!$target_plugin_id && $this->fieldDefinition->isRequired()) {
       $plugin_ids = array_keys($plugins);

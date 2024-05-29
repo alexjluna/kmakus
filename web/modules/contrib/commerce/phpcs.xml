@@ -27,6 +27,7 @@
     <!-- Complains about tests which don't need short descriptions. -->
     <exclude name="Drupal.Commenting.DocComment.MissingShort"/>
     <exclude name="Drupal.Commenting.DocComment.ShortNotCapital"/>
+    <exclude name="Drupal.Commenting.InlineComment.InvalidEndChar"/>
     <exclude name="Drupal.Commenting.DocComment.ShortSingleLine"/>
     <!-- Complains about constraint plugins. -->
     <exclude name="Drupal.Commenting.VariableComment"/>

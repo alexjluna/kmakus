@@ -465,6 +465,9 @@ class BuyXGetY extends OrderPromotionOfferBase {
         'source_id' => $promotion->id(),
         'included' => !empty($this->configuration['display_inclusive']),
       ]));
+
+      // Save reference to source order items tied to this offer #3443703.
+      $order_item->setData('buy_order_items', array_keys($buy_order_items));
     }
   }
 

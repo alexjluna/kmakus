@@ -1,5 +1,5 @@
 uuid: 5cfd22e1-6bab-4745-974e-f3329e32b15e
-langcode: en
+langcode: es
 status: true
 dependencies:
   config:
@@ -21,9 +21,9 @@ content:
   purchased_entity:
     type: commerce_product_variation_attributes
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   adjustments: true
   created: true

@@ -220,7 +220,7 @@ class ProductAttributesOverview extends FormatterBase implements ContainerFactor
       /** @var \Drupal\commerce_product\Entity\ProductAttributeValueInterface $attribute_value */
       $attribute_value = $variation->entity->getAttributeValue('attribute_' . $attribute->id());
       // If this attribute value has already been added, skip.
-      if (isset($build['#items'][$attribute_value->id()])) {
+      if (!$attribute_value || isset($build['#items'][$attribute_value->id()])) {
         continue;
       }
 
