@@ -1,0 +1,13 @@
+name: 'PayPal Subscriptions'
+description: 'Creates an option on the paypal gateway for subscriptions.'
+type: module
+package: Commerce (contrib)
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - commerce:commerce_payment
+  - commerce_paypal:commerce_paypal
+
+# Information added by Drupal.org packaging script on 2023-04-06
+version: '2.0.1'
+project: 'paypal_subscriptions'
+datestamp: 1680811598

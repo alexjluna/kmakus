@@ -20,6 +20,7 @@ module:
   commerce_order: 0
   commerce_payment: 0
   commerce_payment_example: 0
+  commerce_paypal: 0
   commerce_price: 0
   commerce_product: 0
   commerce_promotion: 0
@@ -59,6 +60,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  paypal_subscriptions: 0
   private_content: 0
   profile: 0
   redsys_button: 0

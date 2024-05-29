@@ -27,6 +27,7 @@
         "drupal/nextpre": "^9.0",
         "drupal/paragraphs": "^1.17",
         "drupal/pathauto": "^1.12",
+        "drupal/paypal_subscriptions": "^2.0",
         "drupal/private_content": "^2.1",
         "drupal/redsys_button": "^1.0",
         "drush/drush": "^12.5",

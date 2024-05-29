@@ -1,0 +1,27 @@
+{
+  "name": "drupal/paypal_subscriptions",
+  "description": "This module allows the user to create a recurring payment gateway through the express checkout method in PayPal.",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/paypal_subscriptions",
+  "authors": [
+    {
+      "name": "George Bonnici-Carter (GeorgeBC)",
+      "homepage": "https://www.drupal.org/u/georgebc",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Iicho Vuchkov (vuil)",
+      "homepage": "https://www.drupal.org/u/vuil",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/paypal_subscriptions"
+  },
+  "license": "GPL-2.0+",
+  "require": {
+    "drupal/core": "^8 || ^9 || ^10",
+    "drupal/commerce": "^1.0 || ^2.0",
+    "drupal/commerce_paypal": "^1.0"
+  }
+}
