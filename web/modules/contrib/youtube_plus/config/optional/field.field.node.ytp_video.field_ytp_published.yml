@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ytp_published
+    - node.type.ytp_video
+id: node.ytp_video.field_ytp_published
+field_name: field_ytp_published
+entity_type: node
+bundle: ytp_video
+label: Published
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

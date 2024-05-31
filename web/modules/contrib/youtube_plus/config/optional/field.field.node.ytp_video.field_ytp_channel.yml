@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ytp_channel
+    - node.type.ytp_video
+    - taxonomy.vocabulary.ytp_channels
+_core:
+  default_config_hash: CYWp5sSoZDgyaB79T5cRGADn5YpqnoHRpDsBvalwOpU
+id: node.ytp_video.field_ytp_channel
+field_name: field_ytp_channel
+entity_type: node
+bundle: ytp_video
+label: Channel
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ytp_channels: ytp_channels
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

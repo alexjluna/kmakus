@@ -1,0 +1,16 @@
+{
+  "name": "drupal/youtube_plus",
+  "description": "Youtube Plus synchronize multiple youtube account videos  ",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "extra": {
+    "drush": {
+      "services": {
+        "drush.services.yml": "^10"
+      }
+    }
+  },
+  "require": {
+    "google/apiclient": "^2.9"
+  }
+}

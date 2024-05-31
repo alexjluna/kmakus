@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_ytp_thumbnail_default
+    - taxonomy.vocabulary.ytp_channels
+  module:
+    - link
+_core:
+  default_config_hash: kKTHzw4Bp_2qE7RVwg_ReIOpizq5H_D5C0qMxwMYzEc
+id: taxonomy_term.ytp_channels.field_ytp_thumbnail_default
+field_name: field_ytp_thumbnail_default
+entity_type: taxonomy_term
+bundle: ytp_channels
+label: 'Default Thumbnail'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

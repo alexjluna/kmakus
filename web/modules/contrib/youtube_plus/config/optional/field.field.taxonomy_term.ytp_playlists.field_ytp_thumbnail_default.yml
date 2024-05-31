@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_ytp_thumbnail_default
+    - taxonomy.vocabulary.ytp_playlists
+  module:
+    - link
+_core:
+  default_config_hash: EMjmco_d4KklZjTgIVDc_8OZdOP437BaujR80sEJI2w
+id: taxonomy_term.ytp_playlists.field_ytp_thumbnail_default
+field_name: field_ytp_thumbnail_default
+entity_type: taxonomy_term
+bundle: ytp_playlists
+label: 'Default Thumbnail'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

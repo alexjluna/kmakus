@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_ytp_item_count
+    - taxonomy.vocabulary.ytp_channels
+_core:
+  default_config_hash: xiklId0XDhrLEM56gR8fZRgTUwyxsGWbYNXn0rFyfbc
+id: taxonomy_term.ytp_channels.field_ytp_item_count
+field_name: field_ytp_item_count
+entity_type: taxonomy_term
+bundle: ytp_channels
+label: 'Item Count'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

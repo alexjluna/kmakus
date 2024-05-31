@@ -1,0 +1,9 @@
+langcode: zxx
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: m_o2Y1ZeESwsfrXlpP3o5ObHUAkd6sLoR1OsSmIR7MA
+name: 'YouTube Plus: Playlists'
+vid: ytp_playlists
+description: 'Taxonomy term to hold information from the YouTube Plus imported playlists.'
+weight: 0

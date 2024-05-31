@@ -1,0 +1,4 @@
+'administer youtube plus':
+  title: 'Administer Youtube Plus'
+  description: 'Create Youtube Channels'
+  restrict access: true

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_ytp_channel_id
+    - taxonomy.vocabulary.ytp_channels
+_core:
+  default_config_hash: rhpOaK5uG8qLb01fiKXV3R4CiC3t6b6sr-MMsPIktQ4
+id: taxonomy_term.ytp_channels.field_ytp_channel_id
+field_name: field_ytp_channel_id
+entity_type: taxonomy_term
+bundle: ytp_channels
+label: 'Channel ID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

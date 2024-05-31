@@ -1,4 +1,0 @@
-services:
-  youtube_videos.youtube_api:
-    class: 'Drupal\youtube_videos\Service\YoutubeApiService'
-    arguments: ['@http_client', '@config.factory']

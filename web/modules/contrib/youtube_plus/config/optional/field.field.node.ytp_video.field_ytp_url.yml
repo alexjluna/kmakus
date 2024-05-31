@@ -1,0 +1,25 @@
+uuid: f940562f-5535-4d4e-a8d3-45d9c3c60393
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ytp_url
+    - node.type.ytp_video
+  module:
+    - link
+_core:
+  default_config_hash: s1ggacPAWfj6cIZygDQw2XualaPMqEZ9mRrKqUQ9IWE
+id: node.ytp_video.field_ytp_url
+field_name: field_ytp_url
+entity_type: node
+bundle: ytp_video
+label: URL
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link
