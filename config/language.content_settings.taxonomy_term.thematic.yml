@@ -1,0 +1,11 @@
+uuid: bc67ab05-e389-4c53-b8fc-30db4b466f44
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.thematic
+id: taxonomy_term.thematic
+target_entity_type_id: taxonomy_term
+target_bundle: thematic
+default_langcode: site_default
+language_alterable: false

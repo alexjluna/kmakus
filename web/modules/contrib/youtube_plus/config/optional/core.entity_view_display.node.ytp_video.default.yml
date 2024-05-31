@@ -1,0 +1,147 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.ytp_video.field_ytp_channel
+    - field.field.node.ytp_video.field_ytp_description
+    - field.field.node.ytp_video.field_ytp_playlists
+    - field.field.node.ytp_video.field_ytp_published
+    - field.field.node.ytp_video.field_ytp_thumbnail_default
+    - field.field.node.ytp_video.field_ytp_thumbnail_high
+    - field.field.node.ytp_video.field_ytp_thumbnail_maxres
+    - field.field.node.ytp_video.field_ytp_thumbnail_medium
+    - field.field.node.ytp_video.field_ytp_thumbnail_standard
+    - field.field.node.ytp_video.field_ytp_url
+    - field.field.node.ytp_video.field_ytp_video_id
+    - node.type.ytp_video
+  module:
+    - datetime
+    - link
+    - user
+_core:
+  default_config_hash: r76d0vA7dh8U-kSPmvCUVGibTsgsnKj6H5G_RYkFjrI
+id: node.ytp_video.default
+targetEntityType: node
+bundle: ytp_video
+mode: default
+content:
+  field_ytp_channel:
+    weight: 111
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_ytp_description:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_ytp_playlists:
+    weight: 110
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_ytp_published:
+    weight: 102
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_ytp_thumbnail_default:
+    weight: 103
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_thumbnail_high:
+    weight: 105
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_thumbnail_maxres:
+    weight: 107
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_thumbnail_medium:
+    weight: 104
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_thumbnail_standard:
+    weight: 106
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_url:
+    weight: 112
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_ytp_video_id:
+    weight: 108
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

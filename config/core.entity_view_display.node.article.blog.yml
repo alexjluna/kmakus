@@ -5,9 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.blog
     - field.field.node.article.body
-    - field.field.node.article.comment
     - field.field.node.article.field_image_post
     - field.field.node.article.field_tags
+    - field.field.node.article.field_thematic
     - node.type.article
   module:
     - private_content
@@ -35,8 +35,8 @@ content:
     weight: 0
     region: content
 hidden:
-  comment: true
   field_image_post: true
   field_tags: true
+  field_thematic: true
   langcode: true
   links: true

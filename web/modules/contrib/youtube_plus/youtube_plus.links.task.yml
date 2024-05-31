@@ -1,0 +1,10 @@
+entity.youtube_plus_channel.list:
+  title: Channels List
+  description: 'Youtube Plus Channels list.'
+  base_route: entity.youtube_plus_channel.list
+  route_name: entity.youtube_plus_channel.list
+youtube_plus.settings:
+  title: Settings
+  description: 'Youtube Plus Settings.'
+  base_route: entity.youtube_plus_channel.list
+  route_name: youtube_plus.settings

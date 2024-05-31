@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+_core:
+  default_config_hash: RuD8_p6YwkHNmJH-ZLMNbX6Nb6kz8YywJ_d_seKzgMQ
+id: taxonomy_term.field_ytp_item_count
+field_name: field_ytp_item_count
+entity_type: taxonomy_term
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * YouTube Plus module file.
+ */
+
+/**
+ * Implements hook_cron().
+ *
+ * Re-imports videos from all channels.
+ */
+function youtube_plus_cron($bypass = FALSE) {
+  // Import all channels on this site.
+  $entity_channels = \Drupal::service('entity_type.manager')->getStorage('youtube_plus_channel')->loadMultiple();
+  foreach ($entity_channels as $channel) {
+    \Drupal::service('youtube_plus.actions')->importChannel($channel);
+  }
+  \Drupal::messenger()->addMessage('All YouTube channels on this site have been imported.', 'status');
+}

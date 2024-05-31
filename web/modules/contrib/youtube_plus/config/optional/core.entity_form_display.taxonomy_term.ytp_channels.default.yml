@@ -1,0 +1,105 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ytp_channels.field_ytp_channel_id
+    - field.field.taxonomy_term.ytp_channels.field_ytp_custom_url
+    - field.field.taxonomy_term.ytp_channels.field_ytp_item_count
+    - field.field.taxonomy_term.ytp_channels.field_ytp_playlist_id
+    - field.field.taxonomy_term.ytp_channels.field_ytp_thumbnail_default
+    - field.field.taxonomy_term.ytp_channels.field_ytp_thumbnail_high
+    - field.field.taxonomy_term.ytp_channels.field_ytp_thumbnail_medium
+    - field.field.taxonomy_term.ytp_channels.field_ytp_url
+    - taxonomy.vocabulary.ytp_channels
+  module:
+    - link
+    - text
+_core:
+  default_config_hash: eo5kZ1zHGSLe3pQxjLM6dFO7uGr_OaAGPIjznrLEZ-Y
+id: taxonomy_term.ytp_channels.default
+targetEntityType: taxonomy_term
+bundle: ytp_channels
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_ytp_channel_id:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ytp_custom_url:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ytp_item_count:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_ytp_playlist_id:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ytp_thumbnail_default:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_ytp_thumbnail_high:
+    weight: 9
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_ytp_thumbnail_medium:
+    weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_ytp_url:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  path: true

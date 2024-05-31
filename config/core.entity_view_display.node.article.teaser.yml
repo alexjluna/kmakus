@@ -5,11 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
-    - field.field.node.article.comment
     - field.field.node.article.field_image_post
     - field.field.node.article.field_tags
+    - field.field.node.article.field_thematic
     - node.type.article
   module:
+    - private_content
     - text
     - user
 _core:
@@ -20,10 +21,10 @@ bundle: article
 mode: teaser
 content:
   body:
-    type: text_summary_or_trimmed
+    type: text_trimmed
     label: hidden
     settings:
-      trim_length: 600
+      trim_length: 200
     third_party_settings: {  }
     weight: 0
     region: content
@@ -36,9 +37,18 @@ content:
     weight: 10
     region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 100
     region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
-  comment: true
   field_image_post: true
+  field_thematic: true
   langcode: true

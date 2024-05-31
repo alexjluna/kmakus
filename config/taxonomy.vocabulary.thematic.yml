@@ -1,0 +1,8 @@
+uuid: 40ff2dc4-e71f-4c23-a755-299a467f0bb9
+langcode: es
+status: true
+dependencies: {  }
+name: Temática
+vid: thematic
+description: ''
+weight: 0

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - taxonomy
+_core:
+  default_config_hash: X5F77zKrrGPTPQGCEgGAxaBfPC4POq7ffEQOICqtmNc
+id: taxonomy_term.field_ytp_url
+field_name: field_ytp_url
+entity_type: taxonomy_term
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

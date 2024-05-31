@@ -9,7 +9,7 @@ dependencies:
 id: kmakus_nextpreviouslink
 theme: kmakus
 region: content
-weight: 0
+weight: 1
 provider: null
 plugin: next_previous_block
 settings:

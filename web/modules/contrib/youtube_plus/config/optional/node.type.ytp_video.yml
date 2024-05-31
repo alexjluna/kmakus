@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: FguNHae4fAVQuaP2QEtySkUZG7Lzu85jU4OaEgD5j0w
+name: 'YouTube Plus: Video'
+type: ytp_video
+description: 'Content type to hold information from the YouTube Plus imported videos.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

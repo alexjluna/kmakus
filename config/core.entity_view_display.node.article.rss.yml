@@ -5,11 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.rss
     - field.field.node.article.body
-    - field.field.node.article.comment
     - field.field.node.article.field_image_post
     - field.field.node.article.field_tags
+    - field.field.node.article.field_thematic
     - node.type.article
   module:
+    - private_content
     - user
 _core:
   default_config_hash: 2rIr6K5Q0UQ9khg0zE_CK-PtJH76UL-BDDZcZnZzwCc
@@ -21,9 +22,16 @@ content:
   links:
     weight: 100
     region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   body: true
-  comment: true
   field_image_post: true
   field_tags: true
+  field_thematic: true
   langcode: true

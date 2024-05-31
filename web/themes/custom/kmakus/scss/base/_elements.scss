@@ -7,18 +7,36 @@ body {
   line-height: 32px;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h2, h3, h4, h5, h6 {
+    font-family: "Nunito", sans-serif;
     font-style: normal;
-    font-weight: 700;
-    color: rgb(51, 51, 51);
-    line-height: 39px;
-    font-size: 29px;
+    font-weight: 500;
+    color: rgb(98, 98, 98);
+    line-height: 30px;
+    font-size: 25px;
   }
 
   h1 {
-    font-family: "Nunito", sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    line-height: 30px;
+    font-size: 30px;
   }
 
   h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(155, 131, 33)
+  }
+
+  .views-field-view-node a, #block-kmakus-nextpreviouslink a{
+    color: rgb(155, 131, 33)
+  }
+  .views-field-title a {
+    color: rgb(0, 0, 0);
   }
