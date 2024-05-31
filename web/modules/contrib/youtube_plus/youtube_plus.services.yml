@@ -1,4 +1,0 @@
-services:
-  youtube_plus.actions:
-    class: Drupal\youtube_plus\YouTubePlusService
-    arguments: ['@logger.factory', '@config.factory', '@entity_type.manager']

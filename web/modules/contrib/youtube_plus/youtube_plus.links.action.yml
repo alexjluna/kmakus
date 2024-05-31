@@ -1,5 +1,0 @@
-youtube_plus.link.tasks:
-  route_name: entity.youtube_plus_channel.add
-  title: Add channel
-  appears_on:
-    - entity.youtube_plus_channel.list

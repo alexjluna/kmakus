@@ -1,6 +1,0 @@
-services:
-  youtube_plus.commands:
-    class: \Drupal\youtube_plus\Commands\YoutubePlusCommands
-    arguments: ['@config.factory', '@entity_type.manager', '@youtube_plus.actions']
-    tags:
-      - { name: drush.command }

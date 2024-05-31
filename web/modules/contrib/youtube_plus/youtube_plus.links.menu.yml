@@ -1,5 +1,0 @@
-entity.youtube_plus_channel.list:
-  title: 'YouTube Plus'
-  description: 'List YouTube Plus importations.'
-  route_name: 'entity.youtube_plus_channel.list'
-  parent: 'system.admin_config_services'

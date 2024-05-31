@@ -1,9 +1,0 @@
-langcode: zxx
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: E76yeT1ccXw93nEa5eGiPGe-QNeVyQAV0DYCGzB7zk0
-name: 'YouTube Plus: Channels'
-vid: ytp_channels
-description: 'Taxonomy term to hold information from the YouTube Plus imported channels.'
-weight: 0
