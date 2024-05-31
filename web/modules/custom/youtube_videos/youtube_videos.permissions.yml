@@ -1,0 +1,4 @@
+access youtube videos content:
+  title: 'Access YouTube videos content'
+  description: 'View the YouTube videos content.'
+  restrict access: FALSE

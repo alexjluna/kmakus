@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Contains YouTube Videos module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+/**
+ * Implements hook_help().
+ */
+function youtube_videos_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.youtube_videos':
+      return '<p>' . t('This module fetches and displays videos from a YouTube channel.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function youtube_videos_theme() {
+  return [
+    'youtube_videos_grid' => [
+      'variables' => ['videos' => NULL],
+      'template' => 'youtube-videos-grid',
+    ],
+  ];
+}
+

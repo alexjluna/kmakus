@@ -1,0 +1,25 @@
+uuid: 3fa2789b-b53f-47c5-9d3a-5fec8d9d1cfb
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+    - youtube_videos
+  theme:
+    - kmakus
+id: kmakus_youtubevideosblock
+theme: kmakus
+region: content
+weight: -1
+provider: null
+plugin: youtube_videos_block
+settings:
+  id: youtube_videos_block
+  label: 'Vídeos interesantes de youtube'
+  label_display: visible
+  provider: youtube_videos
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

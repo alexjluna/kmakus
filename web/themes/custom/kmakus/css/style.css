@@ -42,6 +42,14 @@ a {
   color: rgb(0, 0, 0);
 }
 
+#block-kmakus-nextpreviouslink a {
+  padding: 10px;
+}
+
+#block-kmakus-youtubevideosblock {
+  margin-top: 80px;
+}
+
 header {
   font-family: "Poppins", sans-serif;
   font-size: 35px;

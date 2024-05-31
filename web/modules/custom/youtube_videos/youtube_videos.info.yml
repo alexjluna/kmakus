@@ -1,0 +1,8 @@
+name: 'YouTube Videos'
+type: module
+description: 'Fetch and display a list of videos from a specified YouTube channel.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:field
+  - drupal:filter

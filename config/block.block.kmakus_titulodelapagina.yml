@@ -9,7 +9,7 @@ dependencies:
 id: kmakus_titulodelapagina
 theme: kmakus
 region: content
-weight: -2
+weight: -3
 provider: null
 plugin: page_title_block
 settings:

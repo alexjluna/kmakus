@@ -1,0 +1,20 @@
+.youtube-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.youtube-video {
+  text-align: center;
+}
+
+.youtube-video img {
+  max-width: 100%;
+  height: auto;
+}
+
+.youtube-video p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #333;
+}
