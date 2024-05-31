@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.article.field_tags
     - node.type.article
   module:
+    - private_content
     - text
     - user
 _core:
@@ -26,17 +27,16 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_image_post:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
+  private:
+    type: private
+    label: above
+    settings: {  }
     third_party_settings: {  }
     weight: 0
     region: content
 hidden:
   comment: true
+  field_image_post: true
   field_tags: true
   langcode: true
   links: true
