@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05833e1b2b6e986838366140082c5449",
+    "content-hash": "461bfe8e98486addadb86b933309921a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1553,6 +1553,50 @@
                 "source": "https://git.drupalcode.org/project/backup_migrate",
                 "issues": "https://www.drupal.org/project/issues/backup_migrate",
                 "slack": "https://drupal.slack.com/messages/C7C4M4QJV/details/"
+            }
+        },
+        {
+            "name": "drupal/ckeditor5_open_new_tab",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor5_open_new_tab.git",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor5_open_new_tab-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "e405ca9b7c60e8441ca41ba10ac77308bd3f431d"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0",
+                    "datestamp": "1709372190",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "hungtrv99",
+                    "homepage": "https://www.drupal.org/user/3741144"
+                }
+            ],
+            "description": "Allow adding target with _blank to link in ckeditor5 link.",
+            "homepage": "https://www.drupal.org/project/ckeditor5_open_new_tab",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor5_open_new_tab"
             }
         },
         {

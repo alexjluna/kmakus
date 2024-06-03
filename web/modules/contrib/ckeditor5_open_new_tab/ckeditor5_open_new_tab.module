@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * This is the hook for ckeditor5_open_new_tab module.
+ */
+
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+
+/**
+ * Implement hook ckeditor5_plugin_info_alter().
+ *
+ */
+function ckeditor5_open_new_tab_ckeditor5_plugin_info_alter(array &$plugin_definitions) {
+  assert($plugin_definitions['ckeditor5_link'] instanceof CKEditor5PluginDefinition);
+  $link_plugin_definition = $plugin_definitions['ckeditor5_link']->toArray();
+  $link_plugin_definition['ckeditor5']['config']['link']['decorators'][] = [
+    'mode' => 'manual',
+    'label' => t('Open in new window'),
+    'attributes' => [
+      'target' => '_blank',
+    ],
+  ];
+  $plugin_definitions['ckeditor5_link'] = new CKEditor5PluginDefinition($link_plugin_definition);
+}

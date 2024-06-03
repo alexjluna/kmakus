@@ -12,6 +12,7 @@ module:
   block_content: 0
   breakpoint: 0
   ckeditor5: 0
+  ckeditor5_open_new_tab: 0
   comment: 0
   commerce: 0
   commerce_cart: 0

@@ -13,6 +13,11 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
+      - undo
+      - redo
+      - alignment
+      - indent
+      - outdent
       - bold
       - italic
       - strikethrough
@@ -31,10 +36,17 @@ settings:
       - horizontalLine
       - '|'
       - heading
+      - code
       - codeBlock
       - '|'
       - sourceEditing
   plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
     ckeditor5_codeBlock:
       languages:
         -
@@ -99,7 +111,7 @@ image_upload:
   status: true
   scheme: public
   directory: inline-images
-  max_size: null
+  max_size: ''
   max_dimensions:
-    width: null
-    height: null
+    width: 0
+    height: 0
