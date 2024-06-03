@@ -1,0 +1,25 @@
+uuid: d3203537-3673-4d9c-8683-da94ccc36ccc
+langcode: es
+status: true
+dependencies:
+  module:
+    - nextpre
+  theme:
+    - olivero
+id: olivero_nextpreviouslink
+theme: olivero
+region: content
+weight: -6
+provider: null
+plugin: next_previous_block
+settings:
+  id: next_previous_block
+  label: 'Next Previous link'
+  label_display: '0'
+  provider: nextpre
+  content_type: article
+  previous_text: 'Post anterior'
+  next_text: 'Siguiente post'
+  previouslink_class: ''
+  nextlink_class: ''
+visibility: {  }
