@@ -3,7 +3,7 @@
         'name' => 'drupal/recommended-project',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '25c531d4ca13f75b28271e83b65e38632337030a',
+        'reference' => '89a0d9efa9701cde55d96cfbe02fea2f1d90bc96',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -496,6 +496,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/eu_cookie_compliance' => array(
+            'pretty_version' => '1.24.0',
+            'version' => '1.24.0.0',
+            'reference' => '8.x-1.24',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/eu_cookie_compliance',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/field_nif_nie_cif' => array(
             'pretty_version' => '1.0.3',
             'version' => '1.0.3.0',
@@ -571,7 +580,7 @@
         'drupal/recommended-project' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '25c531d4ca13f75b28271e83b65e38632337030a',
+            'reference' => '89a0d9efa9701cde55d96cfbe02fea2f1d90bc96',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
