@@ -3,7 +3,7 @@
         'name' => 'drupal/recommended-project',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '89a0d9efa9701cde55d96cfbe02fea2f1d90bc96',
+        'reference' => '22e23cd6927a84f7eb284def5defd944d4f2ae79',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -523,6 +523,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/link_attributes' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '2.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/link_attributes',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/nextpre' => array(
             'pretty_version' => '9.0.3',
             'version' => '9.0.3.0',
@@ -580,7 +589,7 @@
         'drupal/recommended-project' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '89a0d9efa9701cde55d96cfbe02fea2f1d90bc96',
+            'reference' => '22e23cd6927a84f7eb284def5defd944d4f2ae79',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
