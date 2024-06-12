@@ -1,0 +1,4 @@
+services:
+  sdc_styleguide.demo_manager:
+    class: Drupal\sdc_styleguide\Service\SDCDemoManager
+    arguments: ['@plugin.manager.sdc']

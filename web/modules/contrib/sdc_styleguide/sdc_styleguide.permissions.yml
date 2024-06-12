@@ -1,0 +1,4 @@
+use sdc explorer:
+  title: 'Use the SDC Explorer '
+  description: 'Allows access to the SDC explorer page.'
+  restrict access: true

@@ -1,0 +1,6 @@
+tailwind:
+  js:
+    https://cdn.tailwindcss.com: { type: external }
+  dependencies:
+    - core/drupal
+    - core/once

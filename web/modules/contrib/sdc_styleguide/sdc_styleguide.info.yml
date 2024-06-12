@@ -1,0 +1,12 @@
+name: 'Single Directory Components Styleguide'
+type: module
+description: 'Adds a styleguide that loads all available Single Directory Components and allows previewing them with test data.'
+package: SDC
+core_version_requirement: ^10.1
+dependencies:
+  - drupal:sdc
+
+# Information added by Drupal.org packaging script on 2024-06-08
+version: '1.0.0-beta5'
+project: 'sdc_styleguide'
+datestamp: 1717875327

@@ -1,0 +1,9 @@
+.sdc-styleguide-welcome {
+  font-size: 2rem;
+  text-align: center;
+
+  & span {
+    display: block;
+    font-size: 3rem;
+  }
+}

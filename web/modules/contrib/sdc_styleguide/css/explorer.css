@@ -1,0 +1,71 @@
+.sdc-styleguide-page {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 25% 75%;
+}
+
+.sdc-styleguide-page__sidebar {
+  background: #161f50;
+  color: #FFF !important;
+  padding: 1rem;
+
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6,
+  & a {
+    color: inherit;
+  }
+}
+
+.sdc-styleguide-page__content {
+  padding: 1rem;
+}
+
+.sdc-styleguide-page__viewer-wrapper {
+  height: 100%;
+}
+
+.sdc-styleguide-viewer {
+  border: 2px dashed #161f50;
+  height: max(250px, 95%);
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: auto;
+  resize: both;
+}
+
+.sdc-styleguide-viewer__iframe {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.sdc-styleguide-explorer__group {
+  border-bottom: 1px solid currentColor;
+  margin: 0 0 1rem;
+  padding: 0 0 1rem;
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+.sdc-styleguide-explorer__group-title {
+  font-size: 24px;
+  line-height: 1.25em;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.sdc-styleguide-explorer__component {
+  padding: 0.5rem 1rem 0;
+}
+
+.sdc-styleguide-explorer__component-title {
+  font-size: 18px;
+  line-height: 1.25em;
+  margin: 0;
+  padding: 0;
+}

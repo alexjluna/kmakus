@@ -1,0 +1,23 @@
+global:
+  css:
+    theme:
+      css/global.css: { }
+
+explorer:
+  css:
+    layout:
+      css/explorer.css: { }
+  js:
+    js/explorer.js: { }
+  dependencies:
+    - core/drupal
+    - core/once
+    - sdc_styleguide/global
+
+welcome:
+  css:
+    layout:
+      css/welcome.css: { }
+
+  dependencies:
+    - sdc_styleguide/global

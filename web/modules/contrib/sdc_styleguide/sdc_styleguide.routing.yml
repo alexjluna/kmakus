@@ -1,0 +1,31 @@
+sdc_styleguide.explorer:
+  path: '/styleguide/explorer'
+  defaults:
+    _title: 'Styleguide'
+    _controller: '\Drupal\sdc_styleguide\Controller\StyleGuideController'
+  requirements:
+    _permission: 'use sdc explorer'
+
+sdc_styleguide.form:
+  path: '/styleguide/form/{componentId}'
+  defaults:
+    _title: 'Styleguide'
+    _controller: '\Drupal\sdc_styleguide\Controller\StyleGuideController::form'
+  requirements:
+    _permission: 'use sdc explorer'
+
+sdc_styleguide.welcome:
+  path: '/styleguide/welcome'
+  defaults:
+    _title: 'Styleguide'
+    _controller: '\Drupal\sdc_styleguide\Controller\StyleGuideController::welcome'
+  requirements:
+    _permission: 'use sdc explorer'
+
+sdc_styleguide.viewer:
+  path: '/styleguide/{group}/{component}/{demo}'
+  defaults:
+    _title: 'Styleguide'
+    _controller: '\Drupal\sdc_styleguide\Controller\StyleGuideController::view'
+  requirements:
+    _permission: 'use sdc explorer'

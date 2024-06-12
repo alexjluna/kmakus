@@ -1,0 +1,12 @@
+name: 'Single Directory Demo Components'
+type: module
+description: 'Adds a few demo components.'
+package: SDC - Demo
+core_version_requirement: ^10.1
+dependencies:
+  - sdc_styleguide:sdc_styleguide
+
+# Information added by Drupal.org packaging script on 2024-06-08
+version: '1.0.0-beta5'
+project: 'sdc_styleguide'
+datestamp: 1717875327

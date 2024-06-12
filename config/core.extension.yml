@@ -68,7 +68,10 @@ module:
   profile: 0
   redsys_button: 0
   responsive_image: 0
+  sdc: 0
+  sdc_styleguide: 0
   search: 0
+  serialization: 0
   shortcut: 0
   state_machine: 0
   system: 0

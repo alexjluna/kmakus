@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Single Directory Components Styleguide module.
+ */
+
+function sdc_styleguide_theme() {
+  return [
+    'page__styleguide' => [
+      'base hook' => 'page',
+      'render element' => 'component',
+      'override preprocess functions' => TRUE,
+    ],
+    'page__styleguide__explorer' => [
+      'base hook' => 'page',
+      'render element' => 'styleguide',
+      'override preprocess functions' => TRUE,
+    ],
+    'styleguide_welcome_message' => [
+      'variables' => [],
+    ],
+    'styleguide_component_viewer' => [
+      'variables' => [
+        'url' => NULL,
+      ],
+    ],
+  ];
+}
+
+function _sdc_styleguide_page_variables($set = NULL) {
+  static $variables = NULL;
+
+  if ($set) {
+    $variables = $set;
+  }
+
+  return $variables;
+}
+
+/**
+ * Implements preprocess_page__HOOK() for the `styleguide` section and the `explorer` variation.
+ */
+function sdc_styleguide_preprocess_page__styleguide__explorer(&$variables) {
+  $regions = _sdc_styleguide_page_variables();
+  foreach ($regions as $name => $value) {
+    $variables['page'][$name] = $value;
+  }
+}
+
+/**
+ * Implements preprocess_html__HOOK() for the `styleguide` section.
+ */
+function sdc_styleguide_preprocess_html__styleguide(&$variables) {
+  // Disables admin toolbar on the internal pages.
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (!in_array($route_name, ['sdc_styleguide.viewer', 'sdc_styleguide.welcome', 'sdc_styleguide.form'])) {
+    return;
+  }
+  if (!isset($variables['page_top']['toolbar'])) {
+    return;
+  }
+
+  $variables['page_top']['toolbar']['#access'] = FALSE;
+}

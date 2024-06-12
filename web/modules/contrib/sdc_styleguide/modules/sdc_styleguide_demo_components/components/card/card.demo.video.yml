@@ -1,0 +1,7 @@
+name: Card with Video
+description: This shows a card with a video
+properties:
+  title: Wanna learn about Drupal Starshot?
+  date: 2024-05-22 - 11:38pm
+slots:
+  media: '<iframe class="aspect-video w-full h-auto" width="1280" height="720" src="https://www.youtube.com/embed/UKmzaatxLko" title="What&#39;s new in Drupal (May 2024): Drupal Starshot and Project Browser" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'

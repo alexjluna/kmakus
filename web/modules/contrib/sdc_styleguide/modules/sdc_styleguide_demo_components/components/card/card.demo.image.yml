@@ -1,0 +1,7 @@
+name: Card with Image
+description: This shows a card with an image
+properties:
+  title: What is Drupal Starshot?
+  date: 2024-05-22 - 11:38pm
+slots:
+  media: '<img src="https://www.drupal.org/files/cta/graphic/Drupal%20Starshot%20Hero-Mint.png" alt="Drupal Starshot" width="1218" height="719" />'
