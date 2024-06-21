@@ -1,0 +1,18 @@
+.luna {
+  display: inline-block;
+  padding: 0.25rem;
+}
+
+.luna--color-primary {
+  background-color: var(--color--primary-50);
+  color: red;
+}
+
+.luna--color-secondary {
+  background-color: var(--color--gray-100);
+  color: var(--color-text-primary-medium);
+}
+
+.luna--dismissed {
+  display: none;
+}

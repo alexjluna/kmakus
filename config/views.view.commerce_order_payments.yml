@@ -741,7 +741,7 @@ display:
           admin_label: ''
           entity_type: commerce_payment
           entity_field: order_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: empty
           exception:
             value: all
@@ -768,6 +768,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: commerce_order
       filters: {  }
       style:
         type: table
