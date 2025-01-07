@@ -12,7 +12,6 @@ use Drupal\Core\Url;
  * JSON:API integration test for the "Block" config entity type.
  *
  * @group jsonapi
- * @group #slow
  */
 class BlockTest extends ConfigEntityResourceTestBase {
 
@@ -184,7 +183,7 @@ class BlockTest extends ConfigEntityResourceTestBase {
         'http_response',
         'user:2',
       ])
-      ->setCacheContexts(['url.site', 'user.roles']);
+      ->setCacheContexts(['url.query_args', 'url.site', 'user.roles']);
   }
 
   /**

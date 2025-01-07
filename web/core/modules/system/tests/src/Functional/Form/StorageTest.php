@@ -18,14 +18,11 @@ use Drupal\Tests\BrowserTestBase;
  * values are not lost due to a wrong form rebuild.
  *
  * @group Form
- * @group #slow
  */
 class StorageTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['form_test', 'dblog'];
 
@@ -191,7 +188,7 @@ class StorageTest extends BrowserTestBase {
     $build_id = $this->assertSession()->hiddenFieldExists('form_build_id')->getValue();
 
     // Try to poison the form cache.
-    $response = $this->drupalGet('form-test/form-storage-legacy/' . $build_id, ['query' => [MainContentViewSubscriber::WRAPPER_FORMAT => 'drupal_ajax']], ['X-Requested-With: XMLHttpRequest']);
+    $response = $this->drupalGet('form-test/form-storage-legacy/' . $build_id, ['query' => [MainContentViewSubscriber::WRAPPER_FORMAT => 'drupal_ajax']], ['X-Requested-With' => 'XMLHttpRequest']);
     $original = json_decode($response, TRUE);
 
     $this->assertEquals($original['form']['#build_id_old'], $build_id, 'Original build_id was recorded');
@@ -208,7 +205,7 @@ class StorageTest extends BrowserTestBase {
     $this->assertTrue($status, 'A watchdog message was logged by \Drupal::formBuilder()->setCache');
 
     // Ensure that the form state was not poisoned by the preceding call.
-    $response = $this->drupalGet('form-test/form-storage-legacy/' . $build_id, ['query' => [MainContentViewSubscriber::WRAPPER_FORMAT => 'drupal_ajax']], ['X-Requested-With: XMLHttpRequest']);
+    $response = $this->drupalGet('form-test/form-storage-legacy/' . $build_id, ['query' => [MainContentViewSubscriber::WRAPPER_FORMAT => 'drupal_ajax']], ['X-Requested-With' => 'XMLHttpRequest']);
     $original = json_decode($response, TRUE);
     $this->assertEquals($original['form']['#build_id_old'], $build_id, 'Original build_id was recorded');
     $this->assertNotEquals($original['form']['#build_id'], $build_id, 'New build_id was generated');

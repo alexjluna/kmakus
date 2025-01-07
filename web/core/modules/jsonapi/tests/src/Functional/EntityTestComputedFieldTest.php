@@ -13,7 +13,6 @@ use Drupal\user\Entity\User;
  * JSON:API integration test for the "EntityTestComputedField" content entity type.
  *
  * @group jsonapi
- * @group #slow
  */
 class EntityTestComputedFieldTest extends ResourceTestBase {
 
@@ -173,7 +172,7 @@ class EntityTestComputedFieldTest extends ResourceTestBase {
   protected function getExpectedCacheContexts(?array $sparse_fieldset = NULL) {
     $cache_contexts = parent::getExpectedCacheContexts($sparse_fieldset);
     if ($sparse_fieldset === NULL || in_array('computed_test_cacheable_string_field', $sparse_fieldset)) {
-      $cache_contexts = Cache::mergeContexts($cache_contexts, ['url.query_args:computed_test_cacheable_string_field']);
+      $cache_contexts = Cache::mergeContexts($cache_contexts, ['url.query_args']);
     }
 
     return $cache_contexts;

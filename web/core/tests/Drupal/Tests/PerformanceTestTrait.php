@@ -111,7 +111,6 @@ trait PerformanceTestTrait {
 
     $session = $this->getSession();
     $session->getDriver()->getWebDriverSession()->log('performance');
-    $collection = \Drupal::keyValue('performance_test');
     $collection->deleteAll();
     $return = $callable();
     $performance_data = $this->processChromeDriverPerformanceLogs($service_name);
@@ -473,7 +472,7 @@ trait PerformanceTestTrait {
       ResourceAttributes::SERVICE_NAME => $service_name,
       ResourceAttributes::SERVICE_INSTANCE_ID => 1,
       ResourceAttributes::SERVICE_VERSION => \Drupal::VERSION,
-      ResourceAttributes::DEPLOYMENT_ENVIRONMENT => 'local',
+      ResourceAttributes::DEPLOYMENT_ENVIRONMENT_NAME => 'local',
     ])));
 
     $otel_collector_headers = getenv('OTEL_COLLECTOR_HEADERS') ?: [];
