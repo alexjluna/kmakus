@@ -73,6 +73,7 @@ module:
   search: 0
   serialization: 0
   shortcut: 0
+  sitemap: 0
   state_machine: 0
   system: 0
   taxonomy: 0

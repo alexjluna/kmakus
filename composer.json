@@ -36,6 +36,7 @@
         "drupal/private_content": "^2.1",
         "drupal/redsys_button": "^1.0",
         "drupal/sdc_styleguide": "^1.0@beta",
+        "drupal/sitemap": "^2.0",
         "drupal/youtube_plus": "^1.0",
         "drush/drush": "^12.5",
         "vlucas/phpdotenv": "^5.6"
