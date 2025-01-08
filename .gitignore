@@ -1,9 +1,2 @@
 /web/sites/*/files
-/web/sites/*/private
-/web/sites/*/settings.php
-/web/sites/*/services.yml
-/web/sites/*/settings.local.php
-/web/sites/*/development.services.yml
-node_modules/
-.env
-/private/
+/.env
