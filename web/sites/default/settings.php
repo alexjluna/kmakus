@@ -26,12 +26,7 @@ $settings['file_scan_ignore_directories'] = [
 $settings['entity_update_batch_size'] = 50;
 $settings['entity_update_backup'] = TRUE;
 $settings['migrate_node_migrate_type_classic'] = FALSE;
-
-if ($_SERVER['ENVIRONMENT'] !== 'local') {
-  $isolationLevel = "SET SESSION transaction_isolation='READ-COMMITTED'";
-} else {
-  $isolationLevel = "SET SESSION tx_isolation='READ-COMMITTED'";
-}
+$isolationLevel = "SET SESSION transaction_isolation='READ-COMMITTED'";
 
 
 $databases['default']['default'] = [
